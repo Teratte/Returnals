@@ -3,12 +3,6 @@ using UnityEngine;
 public class MovementCharacter : MonoBehaviour
 {
     [SerializeField]
-    private float walkSpeed = 2.0f;
-    [SerializeField]
-    private float runSpeed = 5.0f;
-    [SerializeField]
-    private float moveSpeed = 4.0f;
-    [SerializeField]
     private float gravity = -9.81f;
     [SerializeField]
     private float jumpForce = 3.0f;
@@ -19,10 +13,12 @@ public class MovementCharacter : MonoBehaviour
 
     private CharacterController characterController;
     private Animator animator;
+    private Status status;
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
+        status = GetComponent<Status>();
     }
 
     private void Update()
@@ -37,13 +33,13 @@ public class MovementCharacter : MonoBehaviour
         animator.SetFloat("vertical", AxisV * offset);
 
         // 오브젝트의 이동 속도 설정 (Shift키를 누르지 않으면 walkSpeed, 누르면 runSpeed)
-        moveSpeed = Mathf.Lerp(walkSpeed, runSpeed, Input.GetAxis("Sprint"));
+        status.MoveSpeed = Mathf.Lerp(status.WalkSpeed, status.RunSpeed, Input.GetAxis("Sprint"));
 
         // 오브젝트의 이동 방향 설정
         Vector3 dir = mainCamera.rotation * new Vector3(AxisH, 0, AxisV);
         moveDirection = new Vector3(dir.x, moveDirection.y, dir.z);
 
-        characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
+        characterController.Move(moveDirection * status.MoveSpeed * Time.deltaTime);
 
 
         // Space 키를 눌렀을 때 플레이어가 바닥에 있으면 점프
