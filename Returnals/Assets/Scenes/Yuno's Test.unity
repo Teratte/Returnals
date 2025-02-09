@@ -6923,6 +6923,7 @@ GameObject:
   - component: {fileID: 1347631084}
   - component: {fileID: 1347631085}
   - component: {fileID: 1347631086}
+  - component: {fileID: 1347631087}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -6959,9 +6960,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d9190f0194c87f4c938ca5757ee4ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 2
-  runSpeed: 5
-  moveSpeed: 4
   gravity: -9.81
   jumpForce: 3
   mainCamera: {fileID: 868752171}
@@ -7003,8 +7001,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b58fdb4cdad1d489288b83acfc00f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerHP: 150
+  playerHP: 150
   recoverRate: 5
+  walkSpeed: 2
+  runSpeed: 5
+  moveSpeed: 4
+--- !u!114 &1347631087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347631079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83352d6675bada04ca844af4c40e1605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1359206539
 PrefabInstance:
   m_ObjectHideFlags: 0

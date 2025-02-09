@@ -21,7 +21,7 @@ public class MovementCharacter : MonoBehaviour
         status = GetComponent<Status>();
     }
 
-    private void Update()
+    public void UpdateMovement()
     {
         // 키 입력으로 x, z축 이동 방향 설정
         float AxisH = Input.GetAxisRaw("Horizontal");
@@ -56,5 +56,13 @@ public class MovementCharacter : MonoBehaviour
 
         // 현재 카메라가 바라보고 있는 전방 방향을 보도록 설정
         transform.rotation = Quaternion.Euler(0, mainCamera.eulerAngles.y, 0);
+    }
+
+    public void UpdateAttack()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            animator.SetTrigger("onAttack");
+        }
     }
 }
