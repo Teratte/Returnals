@@ -65,4 +65,13 @@ public class MovementCharacter : MonoBehaviour
             animator.SetTrigger("onAttack");
         }
     }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if(hit.gameObject.CompareTag("Eatable"))
+        {
+            Destroy(hit.gameObject);
+            Debug.Log(hit.gameObject.name);
+        }
+    }
 }
