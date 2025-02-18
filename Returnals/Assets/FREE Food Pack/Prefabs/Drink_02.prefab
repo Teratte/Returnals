@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23000013603468358}
   - component: {fileID: 332989440041743746}
   - component: {fileID: 934417856682509511}
+  - component: {fileID: 1379113705324276192}
   m_Layer: 0
   m_Name: Drink_02
   m_TagString: Eatable
@@ -107,7 +108,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.046073306
-  m_Center: {x: 0.0000003054738, y: 0.046073306, z: 0}
+  m_Center: {x: 0, y: 0.046073306, z: 0}
 --- !u!54 &934417856682509511
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -135,3 +136,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1379113705324276192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000011322177112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dcc920e77f1e574fb6924d2621c7b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemIndex: 4

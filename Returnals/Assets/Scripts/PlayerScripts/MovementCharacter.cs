@@ -3,6 +3,9 @@ using UnityEngine;
 public class MovementCharacter : MonoBehaviour
 {
     [SerializeField]
+    private UIInventory uiInventory;
+
+    [SerializeField]
     private float gravity = -9.81f;
     [SerializeField]
     private float jumpForce = 3.0f;
@@ -60,6 +63,8 @@ public class MovementCharacter : MonoBehaviour
 
     public void UpdateAttack()
     {
+        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) return;
+
         if(Input.GetMouseButtonDown(0))
         {
             animator.SetTrigger("onAttack");
@@ -70,6 +75,9 @@ public class MovementCharacter : MonoBehaviour
     {
         if(hit.gameObject.CompareTag("Eatable"))
         {
+            int index = hit.gameObject.GetComponent<EatableObject>().ItemIndex;
+            uiInventory.GetItem(index);
+
             Destroy(hit.gameObject);
             Debug.Log(hit.gameObject.name);
         }

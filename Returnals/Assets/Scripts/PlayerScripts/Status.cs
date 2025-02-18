@@ -23,7 +23,7 @@ public class Status : MonoBehaviour
 
     public float PlayerHP
     {
-        set => playerHP = value;
+        set => playerHP = Mathf.Clamp(value,0,maxHP);
         get => playerHP;
     }
     public float MaxHP => maxHP;
