@@ -28,7 +28,7 @@ public class UIItem : MonoBehaviour, IPointerClickHandler
 
     private void Awake()
     {
-        Count = 0;
+        Count = itemData.count;
     }
 
     public void OnPointerClick(PointerEventData eventData)

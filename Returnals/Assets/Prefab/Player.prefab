@@ -233,6 +233,7 @@ GameObject:
   - component: {fileID: 479268917506281501}
   - component: {fileID: 3787370336953940771}
   - component: {fileID: 9064713137086200526}
+  - component: {fileID: 5484401115132056337}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -271,6 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d9190f0194c87f4c938ca5757ee4ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiInventory: {fileID: 0}
   gravity: -9.81
   jumpForce: 3
   mainCamera: {fileID: 0}
@@ -334,6 +336,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recoverAbleTime: 3
+--- !u!136 &5484401115132056337
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3766800182807052027}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.25
+  m_Height: 1.6
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!1001 &3128933838571945204
 PrefabInstance:
   m_ObjectHideFlags: 0

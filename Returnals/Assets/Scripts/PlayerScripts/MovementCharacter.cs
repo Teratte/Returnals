@@ -71,15 +71,27 @@ public class MovementCharacter : MonoBehaviour
         }
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    //private void OnControllerColliderHit(ControllerColliderHit hit)
+    //{
+    //    if(hit.gameObject.CompareTag("Eatable"))
+    //    {
+    //        int index = hit.gameObject.GetComponent<EatableObject>().ItemIndex;
+    //        uiInventory.GetItem(index);
+
+    //        Destroy(hit.gameObject);
+    //        Debug.Log(hit.gameObject.name);
+    //    }
+    //}
+
+    private void OnCollisionEnter(Collision collision)
     {
-        if(hit.gameObject.CompareTag("Eatable"))
+        if(collision.gameObject.CompareTag("Eatable"))
         {
-            int index = hit.gameObject.GetComponent<EatableObject>().ItemIndex;
+            int index = collision.gameObject.GetComponent<EatableObject>().ItemIndex;
             uiInventory.GetItem(index);
 
-            Destroy(hit.gameObject);
-            Debug.Log(hit.gameObject.name);
+            Destroy(collision.gameObject);
+            Debug.Log(collision.gameObject.name);
         }
     }
 }
