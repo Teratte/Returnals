@@ -4,6 +4,8 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField]
     private Transform target;   // 카메라가 쫓아다니는 대상
+    [SerializeField]
+    private Transform aimTarget;    // 에임 조준 시 카메라 이동 장소
 
     private float distance;     // 목표와의 거리
 
@@ -43,6 +45,12 @@ public class CameraController : MonoBehaviour
 
         // 카메라의 위치 = 플레이어의 위치에서 카메라의 전방 방향을 기준으로 뒤로 distance만큼 떨어진 거리
         transform.position = target.position + transform.rotation * Vector3.back * distance;
+
+        if(Input.GetMouseButton(1))
+        {
+            transform.position = aimTarget.position;
+            transform.rotation = aimTarget.rotation;
+        }
     }
 
     void UpdateRotate()

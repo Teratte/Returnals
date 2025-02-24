@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MovementCharacter : MonoBehaviour
+public class MovementYurowmCharacter : MonoBehaviour
 {
     [SerializeField]
     private UIInventory uiInventory;
@@ -20,7 +20,7 @@ public class MovementCharacter : MonoBehaviour
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
-        animator = GetComponentInChildren<Animator>();
+        animator = GetComponent<Animator>();
         status = GetComponent<Status>();
     }
 
@@ -32,8 +32,14 @@ public class MovementCharacter : MonoBehaviour
 
         float offset = 0.5f + Input.GetAxis("Sprint") * 0.5f;
 
-        animator.SetFloat("horizontal", AxisH * offset);
-        animator.SetFloat("vertical", AxisV * offset);
+        if(AxisH != 0 || AxisV != 0)
+        {
+            animator.SetFloat("Speed", offset);
+        }
+        else
+        {
+            animator.SetFloat("Speed", 0.0f);
+        }
 
         // 오브젝트의 이동 속도 설정 (Shift키를 누르지 않으면 walkSpeed, 누르면 runSpeed)
         status.MoveSpeed = Mathf.Lerp(status.WalkSpeed, status.RunSpeed, Input.GetAxis("Sprint"));
@@ -48,7 +54,7 @@ public class MovementCharacter : MonoBehaviour
         // Space 키를 눌렀을 때 플레이어가 바닥에 있으면 점프
         if (Input.GetKeyDown(KeyCode.Space) && characterController.isGrounded == true)
         {
-            animator.SetTrigger("onJump");
+            animator.SetTrigger("Jump");
             moveDirection.y = jumpForce;
         }
 
@@ -56,6 +62,8 @@ public class MovementCharacter : MonoBehaviour
         {
             moveDirection.y += gravity * Time.deltaTime;
         }
+
+        animator.SetBool("Aiming", Input.GetMouseButton(1));
 
         // 현재 카메라가 바라보고 있는 전방 방향을 보도록 설정
         transform.rotation = Quaternion.Euler(0, mainCamera.eulerAngles.y, 0);
@@ -67,9 +75,21 @@ public class MovementCharacter : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0))
         {
-            animator.SetTrigger("onAttack");
+            animator.SetTrigger("Attack");
         }
     }
+
+    //private void OnControllerColliderHit(ControllerColliderHit hit)
+    //{
+    //    if(hit.gameObject.CompareTag("Eatable"))
+    //    {
+    //        int index = hit.gameObject.GetComponent<EatableObject>().ItemIndex;
+    //        uiInventory.GetItem(index);
+
+    //        Destroy(hit.gameObject);
+    //        Debug.Log(hit.gameObject.name);
+    //    }
+    //}
 
     private void OnCollisionEnter(Collision collision)
     {
