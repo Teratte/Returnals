@@ -44,6 +44,19 @@ public class Gun : MonoBehaviour
         bulletLineRenderer.enabled = false;
     }
 
+    private void Update()
+    {
+        if(Input.GetMouseButton(1) && Input.GetMouseButtonDown(0))
+        {
+            Fire();
+        }
+
+        if(Input.GetButtonDown("Reload"))
+        {
+            Reload();
+        }
+    }
+
     private void OnEnable()
     {
         // 총 상태 초기화

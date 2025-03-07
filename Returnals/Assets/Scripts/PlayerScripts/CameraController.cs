@@ -30,11 +30,11 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
-        {
-            UpdateRotate();
-        }
-        //UpdateRotate();
+        //if (Input.GetMouseButton(0))
+        //{
+        //    UpdateRotate();
+        //}
+        UpdateRotate();
         UpdateZoom();
     }
 

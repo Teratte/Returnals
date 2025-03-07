@@ -21,8 +21,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        character.UpdateMovement();
-        character.UpdateAttack();
+        //character.UpdateMovement();
+        //character.UpdateAttack();
 
         if(isNotAttack && status.PlayerHP < status.MaxHP)
         {
@@ -42,6 +42,19 @@ public class PlayerController : MonoBehaviour
             {
                 isRecover = false;
             }
+        }
+
+        if(Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.Tab))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            character.UpdateMovement();
+            character.UpdateAttack();
         }
 
         status.PlayerHP = Mathf.Clamp(status.PlayerHP,0,status.MaxHP);
