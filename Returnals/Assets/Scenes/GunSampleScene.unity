@@ -38,12 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -879,6 +879,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1353,7 +1354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6378568352725158030, guid: c440606a264293448b9cb5a50a0b703f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 500
+      value: 1284
       objectReference: {fileID: 0}
     - target: {fileID: 6378568352725158030, guid: c440606a264293448b9cb5a50a0b703f, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1634,6 +1635,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1949,7 +1951,6 @@ CharacterController:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2676,8 +2677,12 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
+  m_ForceVisible: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+  m_LightUnit: 1
+  m_LuxAtDistance: 1
+  m_EnableSpotReflector: 1
 --- !u!4 &462212025
 Transform:
   m_ObjectHideFlags: 0
@@ -3421,6 +3426,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4096,7 +4102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6378568352725158030, guid: c440606a264293448b9cb5a50a0b703f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 360
+      value: 920
       objectReference: {fileID: 0}
     - target: {fileID: 6378568352725158030, guid: c440606a264293448b9cb5a50a0b703f, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -10897,7 +10903,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 800, y: 800}
+  m_SizeDelta: {x: 1920, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1685523193
 MonoBehaviour:
@@ -12153,6 +12159,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -12720,7 +12727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6378568352725158030, guid: c440606a264293448b9cb5a50a0b703f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 220
+      value: 556
       objectReference: {fileID: 0}
     - target: {fileID: 6378568352725158030, guid: c440606a264293448b9cb5a50a0b703f, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -13786,7 +13793,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6378568352725158030, guid: c440606a264293448b9cb5a50a0b703f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 640
+      value: 1648
       objectReference: {fileID: 0}
     - target: {fileID: 6378568352725158030, guid: c440606a264293448b9cb5a50a0b703f, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -14057,7 +14064,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6378568352725158030, guid: c440606a264293448b9cb5a50a0b703f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 80
+      value: 192
       objectReference: {fileID: 0}
     - target: {fileID: 6378568352725158030, guid: c440606a264293448b9cb5a50a0b703f, type: 3}
       propertyPath: m_AnchoredPosition.y
