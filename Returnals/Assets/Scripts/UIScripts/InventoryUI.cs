@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
+    public static InventoryUI Instance { get; private set; }
     public static bool inventoryActivated = false;
 
     [SerializeField]
@@ -13,8 +14,11 @@ public class InventoryUI : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
         slots = slotsParent.GetComponentsInChildren<Slot>();
         InventoryObject.SetActive(false);
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()

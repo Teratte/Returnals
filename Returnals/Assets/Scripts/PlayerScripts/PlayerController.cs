@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -55,6 +54,11 @@ public class PlayerController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             character.UpdateMovement();
             character.UpdateAttack();
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SceneManager.LoadScene("GunSampleScene");
         }
 
         status.PlayerHP = Mathf.Clamp(status.PlayerHP,0,status.MaxHP);
