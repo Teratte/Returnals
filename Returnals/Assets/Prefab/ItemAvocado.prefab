@@ -51,7 +51,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34b4a58dfbd7dcf49ab2966611da98f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiInventory: {fileID: 0}
   textItemCount: {fileID: 5338762674919342134}
+  itemData:
+    icon: {fileID: 0}
+    name: 
+    count: 0
+    details: 
+    hpRecover: 0
 --- !u!1 &1584698738542857632
 GameObject:
   m_ObjectHideFlags: 0

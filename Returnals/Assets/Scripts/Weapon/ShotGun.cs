@@ -23,26 +23,36 @@ public class ShotGun : MonoBehaviour
         RaycastHit hit_2;
         RaycastHit hit_3;
 
-        Instantiate(muzzle, fireTr.position, fireTr.localRotation);
+        muzzle.gameObject.transform.position = fireTr.position;
+        muzzle.gameObject.transform.rotation = fireTr.rotation;
+        muzzle.Play();
 
         if (Physics.Raycast(fireTr.position, fireTr.forward, out hit, distance))
         {
-            Instantiate(impact, hit.point, Quaternion.LookRotation(hit.normal));
+            impact.gameObject.transform.position = hit.point;
+            impact.gameObject.transform.rotation = hit.transform.localRotation;
+            impact.Play();
         }
 
         if (Physics.Raycast(fireTr.position, fireTr.forward + new Vector3(-.2f, 0.0f, 0.0f), out hit_1, distance))
         {
-            Instantiate(impact, hit_1.point, Quaternion.LookRotation(hit_1.normal));
+            impact.gameObject.transform.position = hit_1.point;
+            impact.gameObject.transform.rotation = hit_1.transform.localRotation;
+            impact.Play();
         }
 
         if (Physics.Raycast(fireTr.position, fireTr.forward + new Vector3(0.0f, .1f, 0.0f), out hit_2, distance))
         {
-            Instantiate(impact, hit_2.point, Quaternion.LookRotation(hit_2.normal));
+            impact.gameObject.transform.position = hit_2.point;
+            impact.gameObject.transform.rotation = hit_2.transform.localRotation;
+            impact.Play();
         }
 
         if (Physics.Raycast(fireTr.position, fireTr.forward + new Vector3(0.0f, -.1f, 0.0f), out hit_3, distance))
         {
-            Instantiate(impact, hit_3.point, Quaternion.LookRotation(hit_3.normal));
+            impact.gameObject.transform.position = hit_3.point;
+            impact.gameObject.transform.rotation = hit_3.transform.localRotation;
+            impact.Play();
         }
     }
 }
