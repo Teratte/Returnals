@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ShotGun : MonoBehaviour
@@ -6,53 +7,83 @@ public class ShotGun : MonoBehaviour
     private Transform fireTr;
     [SerializeField]
     private float distance = 15.0f;
+    [SerializeField]
+    private float inaccuracyDitance = 5.0f;
+    [SerializeField]
+    private int bulletsPerShot = 6;
+    [SerializeField]
+    private GameObject laser;
+    [SerializeField]
+    private float waitTime = 1.5f;
+    [SerializeField]
+    private float fadeDuration = 0.3f;
+
+    private float lastFireTime = 0.0f;
 
     public ParticleSystem muzzle;
-    public ParticleSystem impact;
+    public GameObject impact;
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && Time.time >= lastFireTime + waitTime)
             Shoot();
     }
 
     private void Shoot()
     {
-        RaycastHit hit;
-        RaycastHit hit_1;
-        RaycastHit hit_2;
-        RaycastHit hit_3;
-
         muzzle.gameObject.transform.position = fireTr.position;
         muzzle.gameObject.transform.rotation = fireTr.rotation;
         muzzle.Play();
 
-        if (Physics.Raycast(fireTr.position, fireTr.forward, out hit, distance))
+        for(int i = 0;i < bulletsPerShot; i++)
         {
-            impact.gameObject.transform.position = hit.point;
-            impact.gameObject.transform.rotation = hit.transform.localRotation;
-            impact.Play();
+            RaycastHit hit;
+            Vector3 shootingDir = GetShootingDirection();
+            if(Physics.Raycast(fireTr.position, shootingDir, out hit, distance))
+            {
+                Instantiate(impact, hit.point, hit.transform.rotation); 
+                CreateLaser(hit.point);
+            }
+            else
+            {
+                CreateLaser(fireTr.position + shootingDir * distance);
+            }
         }
 
-        if (Physics.Raycast(fireTr.position, fireTr.forward + new Vector3(-.2f, 0.0f, 0.0f), out hit_1, distance))
+        lastFireTime = Time.time;
+    }
+
+    Vector3 GetShootingDirection()
+    {
+        Vector3 targetPos = fireTr.position + fireTr.forward * distance;
+        targetPos = new Vector3(
+            targetPos.x + Random.Range(-inaccuracyDitance, inaccuracyDitance),
+            targetPos.y + Random.Range(-inaccuracyDitance, inaccuracyDitance),
+            targetPos.z + Random.Range(-inaccuracyDitance, inaccuracyDitance)
+            );
+
+        Vector3 direction = targetPos - fireTr.position;
+        return direction.normalized;
+    }
+
+    void CreateLaser(Vector3 end)
+    {
+        LineRenderer lr = Instantiate(laser).GetComponent<LineRenderer>();
+        lr.SetPositions(new Vector3[2] { fireTr.position, end });
+        StartCoroutine(FadeLaser(lr));
+    }
+
+    IEnumerator FadeLaser(LineRenderer lr)
+    {
+        float alpha = 1;
+        while(alpha > 0)
         {
-            impact.gameObject.transform.position = hit_1.point;
-            impact.gameObject.transform.rotation = hit_1.transform.localRotation;
-            impact.Play();
+            alpha -= Time.deltaTime / fadeDuration;
+            lr.startColor = new Color(lr.startColor.r, lr.startColor.g, lr.startColor.b, alpha);
+            lr.endColor = new Color(lr.endColor.r, lr.endColor.g, lr.endColor.b, alpha);
+            yield return null;
         }
 
-        if (Physics.Raycast(fireTr.position, fireTr.forward + new Vector3(0.0f, .1f, 0.0f), out hit_2, distance))
-        {
-            impact.gameObject.transform.position = hit_2.point;
-            impact.gameObject.transform.rotation = hit_2.transform.localRotation;
-            impact.Play();
-        }
-
-        if (Physics.Raycast(fireTr.position, fireTr.forward + new Vector3(0.0f, -.1f, 0.0f), out hit_3, distance))
-        {
-            impact.gameObject.transform.position = hit_3.point;
-            impact.gameObject.transform.rotation = hit_3.transform.localRotation;
-            impact.Play();
-        }
+        Destroy(lr.gameObject);
     }
 }

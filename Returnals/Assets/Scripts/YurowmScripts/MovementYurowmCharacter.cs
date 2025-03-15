@@ -3,7 +3,7 @@ using UnityEngine;
 public class MovementYurowmCharacter : MonoBehaviour
 {
     [SerializeField]
-    private UIInventory uiInventory;
+    private InventoryUI inventoryUI;
 
     [SerializeField]
     private float gravity = -9.81f;
@@ -91,12 +91,12 @@ public class MovementYurowmCharacter : MonoBehaviour
     //    }
     //}
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if(collision.gameObject.CompareTag("Eatable"))
         {
             int index = collision.gameObject.GetComponent<EatableObject>().ItemIndex;
-            uiInventory.GetItem(index);
+            inventoryUI.AcquireItem(collision.gameObject.GetComponent<EatableObject>().item);
 
             Destroy(collision.gameObject);
             Debug.Log(collision.gameObject.name);
