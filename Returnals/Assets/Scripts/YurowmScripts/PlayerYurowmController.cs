@@ -16,7 +16,7 @@ public class PlayerYurowmController : MonoBehaviour
     float notAttackTime = 0.0f;
     [SerializeField]
     private float recoverAbleTime = 3.0f;
-    bool isRecover = false;
+    bool isRecover = true;  // 완전히 회복된 상태
 
     private void Awake()
     {
@@ -42,16 +42,21 @@ public class PlayerYurowmController : MonoBehaviour
         if (notAttackTime >= recoverAbleTime)
         {
             notAttackTime = 0.0f;
-            isRecover = true;
+            isRecover = false;
         }
 
-        if(isRecover &&  status.PlayerHP < status.MaxHP)
+        if(!isRecover &&  status.PlayerHP < status.MaxHP)
         {
             status.PlayerHP += Time.deltaTime * 5.0f;
             if(status.PlayerHP >= status.MaxHP)
             {
-                isRecover = false;
+                isRecover = true;
             }
+        }
+
+        if(status.PlayerHP >= status.MaxHP)
+        {
+            isRecover = true;
         }
 
         status.PlayerHP = Mathf.Clamp(status.PlayerHP,0,status.MaxHP);

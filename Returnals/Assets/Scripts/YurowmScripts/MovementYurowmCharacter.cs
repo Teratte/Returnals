@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class MovementYurowmCharacter : MonoBehaviour
@@ -17,8 +18,11 @@ public class MovementYurowmCharacter : MonoBehaviour
     private CharacterController characterController;
     private Animator animator;
     private Status status;
+
+    //private Gun gun;
     private void Awake()
     {
+        //gun = GetComponentInChildren<Gun>();   
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         status = GetComponent<Status>();
