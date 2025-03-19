@@ -9,7 +9,7 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField]
     private Transform rightGunBone; // 오른손으로 총 드는 위치
     [SerializeField]
-    private Transform leftGunBone;  // 왼손으로 총 드는 위치
+    private GameObject gunPrefabParent; // 총이 위치할 곳
     public Arsenal[] arsenal;
 
     private void Awake()
@@ -47,8 +47,6 @@ public class PlayerAnimator : MonoBehaviour
             {
                 if (rightGunBone.childCount > 0)
                     Destroy(rightGunBone.GetChild(0).gameObject);
-                if (leftGunBone.childCount > 0)
-                    Destroy(leftGunBone.GetChild(0).gameObject);
                 if (hand.rightGun != null)
                 {
                     GameObject newRightGun = (GameObject)Instantiate(hand.rightGun, rightGunBone.position, rightGunBone.rotation);
@@ -56,13 +54,7 @@ public class PlayerAnimator : MonoBehaviour
                     newRightGun.transform.localPosition = new Vector3(-0.253f, 0.0194f, 0.0072f);
                     newRightGun.transform.localRotation = Quaternion.Euler(0, -90, 0);
                 }
-                if (hand.leftGun != null)
-                {
-                    GameObject newLeftGun = (GameObject)Instantiate(hand.leftGun);
-                    newLeftGun.transform.parent = leftGunBone;
-                    newLeftGun.transform.localPosition = Vector3.zero;
-                    newLeftGun.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                }
+
                 animator.runtimeAnimatorController = hand.controller;
                 return;
             }
@@ -74,7 +66,6 @@ public class PlayerAnimator : MonoBehaviour
     {
         public string name;
         public GameObject rightGun;
-        public GameObject leftGun;
         public RuntimeAnimatorController controller;
     }
 }
