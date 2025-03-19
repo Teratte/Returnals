@@ -19,3 +19,5 @@ MonoBehaviour:
   magCapacity: 100
   timeBetFire: 0.12
   reloadTime: 2
+  distance: 15
+  gunType: 2

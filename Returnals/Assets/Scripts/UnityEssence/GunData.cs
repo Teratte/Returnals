@@ -15,4 +15,17 @@ public class GunData : ScriptableObject
     public float reloadTime = 1.8f; // 재장전 소요 시간
 
     public float distance = 15.0f;  // 사정거리
+
+    public GunType gunType;         // 총 타입
+
+    public enum GunType
+    {
+        Handgun,
+        Shotgun,
+        Machinegun,
+        Sniper,
+        AssaultRifle,
+        SmallMachineGun,
+        Knife
+    }
 }

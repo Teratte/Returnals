@@ -32,26 +32,11 @@ public class PlayerAnimator : MonoBehaviour
 
     private void ChangeWeapon()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SetArsenal(arsenal[0].name);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SetArsenal(arsenal[1].name);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            SetArsenal(arsenal[2].name);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            SetArsenal(arsenal[3].name);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            SetArsenal(arsenal[4].name);
-        }
+        if (!Input.anyKeyDown) return;
+
+        int inputIndex = 0;
+        if (int.TryParse(Input.inputString, out inputIndex) && (inputIndex > 0 && inputIndex < 5))
+            SetArsenal(arsenal[inputIndex - 1].name);
     }
 
     public void SetArsenal(string name)
