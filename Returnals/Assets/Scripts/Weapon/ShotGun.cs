@@ -48,7 +48,7 @@ public class ShotGun : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
             Fire();
 
         if (Input.GetButtonDown("Reload"))

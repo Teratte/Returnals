@@ -55,12 +55,6 @@ public class PlayerController : MonoBehaviour
             character.UpdateMovement();
             character.UpdateAttack();
         }
-
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SceneManager.LoadScene("GunSampleScene");
-        }
-
         status.PlayerHP = Mathf.Clamp(status.PlayerHP,0,status.MaxHP);
     }
 }
