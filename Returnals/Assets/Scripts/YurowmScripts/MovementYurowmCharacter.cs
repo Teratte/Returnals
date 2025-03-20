@@ -1,9 +1,10 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class MovementYurowmCharacter : MonoBehaviour
 {
     [SerializeField]
-    private UIInventory uiInventory;
+    private InventoryUI inventoryUI;
 
     [SerializeField]
     private float gravity = -9.81f;
@@ -17,8 +18,11 @@ public class MovementYurowmCharacter : MonoBehaviour
     private CharacterController characterController;
     private Animator animator;
     private Status status;
+
+    //private Gun gun;
     private void Awake()
     {
+        //gun = GetComponentInChildren<Gun>();   
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         status = GetComponent<Status>();
@@ -91,12 +95,12 @@ public class MovementYurowmCharacter : MonoBehaviour
     //    }
     //}
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if(collision.gameObject.CompareTag("Eatable"))
         {
             int index = collision.gameObject.GetComponent<EatableObject>().ItemIndex;
-            uiInventory.GetItem(index);
+            inventoryUI.AcquireItem(collision.gameObject.GetComponent<EatableObject>().item);
 
             Destroy(collision.gameObject);
             Debug.Log(collision.gameObject.name);

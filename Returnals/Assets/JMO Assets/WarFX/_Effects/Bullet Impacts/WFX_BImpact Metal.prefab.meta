@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f4934f9fdd7ca2043b1756aad07aba73
+labels:
+- warfx
+- particles
+- desktop
+- bullet impact
+AssetOrigin:
+  serializedVersion: 1
+  productId: 5669
+  packageName: War FX
+  packageVersion: 1.8.04
+  assetPath: Assets/JMO Assets/WarFX/_Effects/Bullet Impacts/WFX_BImpact Metal.prefab
+  uploadId: 301034

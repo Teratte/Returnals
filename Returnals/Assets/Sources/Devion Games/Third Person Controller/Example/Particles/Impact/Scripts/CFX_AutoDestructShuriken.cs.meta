@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c5ddada1e6535de4aa7f713299538ff4
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 5669
+  packageName: War FX
+  packageVersion: 1.8.04
+  assetPath: Assets/Sources/Devion Games/Third Person Controller/Example/Particles/Impact/Scripts/CFX_AutoDestructShuriken.cs
+  uploadId: 301034

@@ -12,6 +12,9 @@ public class Gun : MonoBehaviour
         Reloading // 재장전 중
     }
 
+    [SerializeField]
+    private GameObject Impact;
+
     public State state { get; private set; } // 현재 총의 상태
 
     public Transform fireTransform; // 탄알이 발사될 위치
@@ -42,13 +45,15 @@ public class Gun : MonoBehaviour
         bulletLineRenderer.positionCount = 2;
         // 라인 렌더러를 비활성화
         bulletLineRenderer.enabled = false;
+
+        fireDistance = gunData.distance;
     }
 
     private void Update()
     {
         if(Input.GetMouseButtonDown(0))
         {
-            Fire();
+            StartCoroutine(Fire());
         }
 
         if(Input.GetButtonDown("Reload"))
@@ -72,9 +77,9 @@ public class Gun : MonoBehaviour
     }
 
     // 발사 시도
-    public void Fire()
+    public IEnumerator Fire()
     {
-        Debug.Log("Fire");
+        yield return new WaitForSeconds(0.01f);
         // 현재 상태가 발사 가능한 상태
         // && 마지막 총 발사 시점에서 gunData.timeBetFire 이상의 시간이 지남.
         if (state == State.Ready && Time.time >= lastFireTime + gunData.timeBetFire)
@@ -97,8 +102,9 @@ public class Gun : MonoBehaviour
         // 레이캐스트(시작 지점, 방향, 충돌 정보 컨테이너, 사정거리)
         if(Physics.Raycast(fireTransform.position, fireTransform.forward, out hit, fireDistance))
         {
-            // 레이가 어떤 물체와 충돌한 경우,
+            Instantiate(Impact, hit.point, hit.transform.rotation);
 
+            // 레이가 어떤 물체와 충돌한 경우,
             // 충돌한 상대방으로부터 IDamageable 오브젝트 가져오기 시도
             IDamageable target = hit.collider.gameObject.GetComponent<IDamageable>();
 
@@ -134,6 +140,7 @@ public class Gun : MonoBehaviour
     // 발사 이펙트와 소리를 재생하고 탄알 궤적을 그림
     private IEnumerator ShotEffect(Vector3 hitPosition)
     {
+        muzzleFlashEffect.transform.position = fireTransform.position;
         // 총구 화염 효과 재생
         muzzleFlashEffect.Play();
         // 탄피 배출 효과 재생
@@ -197,9 +204,6 @@ public class Gun : MonoBehaviour
         ammoRemain -= ammoToFill;
 
         // 총의 상태를 발사 준비 상태로 변경
-        state = State.Ready;
-
-        // 총의 현재 상태를 발사 준비된 상태로 변경
         state = State.Ready;
     }
 }

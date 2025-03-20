@@ -13,4 +13,6 @@ public class GunData : ScriptableObject
 
     public float timeBetFire = 0.12f; // 총알 발사 간격
     public float reloadTime = 1.8f; // 재장전 소요 시간
+
+    public float distance = 15.0f;  // 사정거리
 }
