@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotClip: {fileID: 8300000, guid: b82a66dab749415458d1f6600c997095, type: 3}
   reloadClip: {fileID: 8300000, guid: 9eca29ee7f8209e419470fcd586aec21, type: 3}
-  damage: 25
-  startAmmoRemain: 25
-  magCapacity: 5
-  timeBetFire: 0.5
-  reloadTime: 1.8
-  distance: 10
+  damage: 15
+  startAmmoRemain: 0
+  magCapacity: 10
+  timeBetFire: 0.1
+  reloadTime: 1
+  distance: 0
+  gunType: 0

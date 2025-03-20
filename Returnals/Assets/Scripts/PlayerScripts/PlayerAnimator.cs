@@ -1,4 +1,6 @@
+using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class PlayerAnimator : MonoBehaviour
 {
@@ -9,20 +11,14 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField]
     private Transform rightGunBone; // 오른손으로 총 드는 위치
     [SerializeField]
-    private GameObject gunPrefabParent; // 총이 위치할 곳
-    public Arsenal[] arsenal;
+    private GameObject weaponPrefabParent; // 총이 위치할 곳
+    public GameObject[] holdingWeapons;
+    [SerializeField]
+    private RuntimeAnimatorController[] controllers;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-
-        if (arsenal.Length > 0)
-            SetArsenal(arsenal[0].name);
-    }
-
-    public void OnAttackCollision()
-    {
-        attackCollision.SetActive(true);
     }
 
     private void Update()
@@ -32,40 +28,32 @@ public class PlayerAnimator : MonoBehaviour
 
     private void ChangeWeapon()
     {
-        if (!Input.anyKeyDown) return;
-
         int inputIndex = 0;
-        if (int.TryParse(Input.inputString, out inputIndex) && (inputIndex > 0 && inputIndex < 5))
-            SetArsenal(arsenal[inputIndex - 1].name);
+        if (int.TryParse(Input.inputString, out inputIndex) && (inputIndex > 0 && inputIndex < holdingWeapons.Length))
+            SetArsenal(inputIndex);
     }
 
-    public void SetArsenal(string name)
+    public void SetArsenal(int number)
     {
-        foreach (Arsenal hand in arsenal)
+        if (rightGunBone.childCount > 0)
+            Destroy(rightGunBone.GetChild(0).gameObject);
+        GameObject newRightGun = Instantiate(holdingWeapons[number - 1], rightGunBone.position, rightGunBone.rotation);
+        newRightGun.transform.parent = rightGunBone;
+        newRightGun.transform.localPosition = new Vector3(-0.253f, 0.0194f, 0.0072f);
+        newRightGun.transform.localRotation = Quaternion.Euler(0, -90, 0);
+
+
+        if (newRightGun.GetComponent<WeaponBase>().WeaponSetting.weaponType == WeaponType.Handgun)
         {
-            if (hand.name == name)
-            {
-                if (rightGunBone.childCount > 0)
-                    Destroy(rightGunBone.GetChild(0).gameObject);
-                if (hand.rightGun != null)
-                {
-                    GameObject newRightGun = (GameObject)Instantiate(hand.rightGun, rightGunBone.position, rightGunBone.rotation);
-                    newRightGun.transform.parent = rightGunBone;
-                    newRightGun.transform.localPosition = new Vector3(-0.253f, 0.0194f, 0.0072f);
-                    newRightGun.transform.localRotation = Quaternion.Euler(0, -90, 0);
-                }
-
-                animator.runtimeAnimatorController = hand.controller;
-                return;
-            }
+            animator.runtimeAnimatorController = controllers[0];
         }
-    }
-
-    [System.Serializable]
-    public struct Arsenal
-    {
-        public string name;
-        public GameObject rightGun;
-        public RuntimeAnimatorController controller;
+        else if(newRightGun.GetComponent<WeaponBase>().WeaponSetting.weaponType == WeaponType.Shotgun)
+        {
+            animator.runtimeAnimatorController= controllers[1];
+        }
+        else if (newRightGun.GetComponent<WeaponBase>().WeaponSetting.weaponType == WeaponType.HeavyWeapon)
+        {
+            animator.runtimeAnimatorController = controllers[1];
+        }
     }
 }
