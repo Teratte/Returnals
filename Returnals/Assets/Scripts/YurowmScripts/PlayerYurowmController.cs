@@ -122,6 +122,10 @@ public class PlayerYurowmController : MonoBehaviour
         {
             SetArsenal(arsenal[3].name);
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            SetArsenal(arsenal[4].name);
+        }
     }
 
     [System.Serializable]

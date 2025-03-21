@@ -20,3 +20,4 @@ MonoBehaviour:
   timeBetFire: 1.5
   reloadTime: 2
   distance: 8
+  gunType: 1

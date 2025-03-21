@@ -13,7 +13,7 @@ public class PlayerHealth : LivingEntity {
     private Animator playerAnimator; // 플레이어의 애니메이터
 
     private PlayerMovement playerMovement; // 플레이어 움직임 컴포넌트
-    private PlayerShooter playerShooter; // 플레이어 슈터 컴포넌트
+    //private PlayerShooter playerShooter; // 플레이어 슈터 컴포넌트
 
     private void Awake() {
         // 사용할 컴포넌트를 가져오기
