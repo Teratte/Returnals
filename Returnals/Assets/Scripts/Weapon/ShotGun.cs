@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ShotGun : MonoBehaviour
+public class Shotgun : WeaponBase
 {
     [SerializeField]
     private Transform fireTr;   // 발사 위치
@@ -11,97 +11,137 @@ public class ShotGun : MonoBehaviour
     private float inaccuracyDitance = 3.0f; // 분산 정도
     [SerializeField]
     private int bulletsPerShot = 6; // 발사 시 분산되는 탄알 수
-    [SerializeField]    
-    private GameObject laser;       // 총이 날아가는 경로 레이저
     [SerializeField]
-    private float fadeDuration = 0.3f;  // 레이저 사라지는 시간
+    private GameObject laser;       // 탄환 궤적
+
     [SerializeField]
-    private GunData shotgunData;
-    private int currAmmo;   // 현재 탄알
-    private int maxAmmo;    // 전체 탄창
+    private AudioClip fireClip;
+    [SerializeField]
+    private AudioClip reloadClip;
 
-    public enum State
+    private float fadeDuration = 0.3f;
+    public ParticleSystem muzzle;   // 총구 이펙트
+    public GameObject impact;       // 히트 이펙트
+
+    Camera mainCamera;
+
+    private void Awake()
     {
-        Ready,
-        Empty,
-        Reloading
-    }
-
-    public State state { get; private set; }    // 현재 총 상태
-
-    private AudioSource audioSource;    // 오디오 재생기
-
-    private float lastFireTime = 0.0f;  // 마지막 발사 시점
-
-    public ParticleSystem muzzle;
-    public GameObject impact;
-
-    private void OnEnable()
-    {
-        audioSource = GetComponent<AudioSource>();
-        currAmmo = shotgunData.magCapacity;
-        maxAmmo = shotgunData.startAmmoRemain;
-        lastFireTime = 0.0f;
-        state = State.Ready;
-        distance = shotgunData.distance;
+        base.Setup();
+        mainCamera = Camera.main;
     }
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1") && Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
-            Fire();
+        if (Input.GetButtonDown("Fire1"))
+            StartWeaponAction();
 
         if (Input.GetButtonDown("Reload"))
             Reload();
     }
 
-    private void Fire()
+    public override void StartWeaponAction(int type = 0)
     {
-        if (state == State.Ready && Time.time >= lastFireTime + shotgunData.timeBetFire)
-            Shoot();
+        if(type == 0)
+        {
+            if(weaponSetting.isAutomaticAttack == true)
+            {
+                StartCoroutine("OnAttackLoop");
+            }
+            else
+            {
+                OnAttack();
+            }
+        }
     }
 
-    private void Shoot()
+    public override void StopWeaponAction(int type = 0)
     {
-        muzzle.gameObject.transform.position = fireTr.position;
-        muzzle.gameObject.transform.rotation = fireTr.rotation;
-        muzzle.Play();
-
-        audioSource.PlayOneShot(shotgunData.shotClip);
-
-        for(int i = 0;i < bulletsPerShot; i++)
+        if(type == 0)
         {
-            RaycastHit hit;
-            Vector3 shootingDir = GetShootingDirection();
-            if(Physics.Raycast(fireTr.position, shootingDir, out hit, distance))
+            StopCoroutine("OnAttackLoop");
+        }
+    }
+
+    private void OnAttack()
+    {
+        if (Time.time >= lastAttackTime + weaponSetting.fireRate)
+        {
+            lastAttackTime = Time.time;
+            if (currentAmmo <= 0)
+                return;
+
+            weaponSetting.currentAmmo--;
+            PlaySound(fireClip);
+            ShotEffect();
+            TwoStepRayCast();
+        }
+    }
+
+    private void TwoStepRayCast()
+    {
+        // 카메라에서 나올 레이저
+        Ray ray;
+        // 레이캐스트에 의한 충돌 정보를 저장하는 컨테이너
+        RaycastHit hit;
+        // 탄알이 맞은 곳을 저장할 변수
+        Vector3 hitPosition = Vector3.zero;
+
+        ray = mainCamera.ViewportPointToRay(new Vector2(0.5f, 0.65f));
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            hitPosition = hit.point;
+        }
+        else
+        {
+            hitPosition = ray.origin + ray.direction * weaponSetting.distance;
+        }
+
+        Vector3 attackDirection = (hitPosition - fireTr.position).normalized;
+        // 레이캐스트(시작 지점, 방향, 충돌 정보 컨테이너, 사정거리)
+        for (int i = 0; i < bulletsPerShot; i++)
+        {
+            Vector3 shootingDir = GetShootingDirection(attackDirection);
+            if (Physics.Raycast(fireTr.position, shootingDir, out hit))
             {
-                Instantiate(impact, hit.point, hit.transform.rotation); 
+                Instantiate(impact, hit.point, hit.transform.rotation);
                 CreateLaser(hit.point);
+
+                // 레이가 어떤 물체와 충돌한 경우,
+                // 충돌한 상대방으로부터 IDamageable 오브젝트 가져오기 시도
+                IDamageable target = hit.collider.gameObject.GetComponent<IDamageable>();
+
+                // 상대방으로부터 IDamageable 오브젝트를 가져오는 데 성공했다면
+                if (target != null)
+                {
+                    // 상대방의 OnDamage 함수를 실행시켜 상대방에 데미지 추가
+                    target.OnDamage(weaponSetting.damage, hit.point, hit.normal);
+                }
             }
             else
             {
                 CreateLaser(fireTr.position + shootingDir * distance);
             }
         }
-        currAmmo--;
-
-        if(currAmmo <= 0)
-        {
-            state = State.Empty;
-        }
-        lastFireTime = Time.time;
+    }
+    private void ShotEffect()
+    {
+        muzzle.gameObject.transform.position = fireTr.position;
+        muzzle.gameObject.transform.rotation = fireTr.rotation;
+        muzzle.Play();
     }
 
-    Vector3 GetShootingDirection()
+    Vector3 GetShootingDirection(Vector3 _direction)
     {
-        Vector3 targetPos = fireTr.position + fireTr.forward * distance;
-        targetPos = new Vector3(
-            targetPos.x + Random.Range(-inaccuracyDitance, inaccuracyDitance),
-            targetPos.y + Random.Range(-inaccuracyDitance, inaccuracyDitance),
-            targetPos.z + Random.Range(-inaccuracyDitance, inaccuracyDitance)
+        _direction *= weaponSetting.distance;
+        _direction = new Vector3(
+            _direction.x + Random.Range(-inaccuracyDitance, inaccuracyDitance),
+            _direction.y + Random.Range(-inaccuracyDitance, inaccuracyDitance),
+            _direction.z + Random.Range(-inaccuracyDitance, inaccuracyDitance)
             );
 
-        Vector3 direction = targetPos - fireTr.position;
+        Vector3 direction = _direction - fireTr.position;
         return direction.normalized;
     }
 
@@ -126,30 +166,51 @@ public class ShotGun : MonoBehaviour
         Destroy(lr.gameObject);
     }
 
-    private void Reload()
+    public override void StartReload()
     {
-        if (state == State.Reloading || maxAmmo <= 0 || currAmmo >= shotgunData.magCapacity)
+        if (isReload == true)
             return;
 
-        StartCoroutine(ReloadingRoutine());
+        StopWeaponAction();
+        Reload();
     }
 
-    private IEnumerator ReloadingRoutine()
+    public void Reload()
     {
-        state = State.Reloading;
-
-        audioSource.PlayOneShot(shotgunData.reloadClip);    // 재장전 사운드 재생
-        yield return new WaitForSeconds(shotgunData.reloadTime);
-
-        int ammoToFill = shotgunData.magCapacity - currAmmo;    // 채울 탄알 계산
-
-        if(ammoToFill >= maxAmmo)   // 남은 탄창이 채울 탄알 이하일 경우
+        if (weaponSetting.maxAmmo <= 0 || weaponSetting.currentAmmo >= weaponSetting.maxCapacity)
         {
-            ammoToFill = maxAmmo;   // 남은 탄창을 채울 탄알로 계산
+            // 이미 재장전 중이거나 남은 탄알이 없거나
+            // 탄창에 탄알이 이미 가득한 경우 재장전 불가능
+            return;
         }
 
-        currAmmo += ammoToFill;     // 장전
-        maxAmmo -= ammoToFill;      // 탄창에서 장전할 탄알만큼 감소
-        state = State.Ready;        // 발사 준비 완료
+        StartCoroutine(ReloadRoutine());
+    }
+
+    private IEnumerator ReloadRoutine()
+    {
+        isReload = true;
+        // 재장전 사운드 재생
+        audioSource.PlayOneShot(reloadClip);
+
+        // 재장전 소요 시간 만큼 처리 쉬기
+        yield return new WaitForSeconds(weaponSetting.reloadTime);
+
+        // 탄창에 채울 탄알 계산
+        int ammoToFill = weaponSetting.maxCapacity - weaponSetting.currentAmmo;
+
+        // 탄창에 채워야 할 탄알이 남은 탄알보다 많다면
+        // 채워야 할 탄알 수를 남은 탄알 수에 맞춰 줄임
+        if (weaponSetting.maxAmmo <= ammoToFill)
+        {
+            ammoToFill = weaponSetting.maxAmmo;
+        }
+
+        // 탄창을 채움
+        weaponSetting.currentAmmo += ammoToFill;
+        // 남은 탄알에서 탄창에 채운만큼 탄알을 뺌
+
+        // 총의 상태를 발사 준비 상태로 변경
+        isReload = false;
     }
 }

@@ -2,7 +2,7 @@
 using UnityEngine;
 
 // 총을 구현
-public class Handgun : WeaponBase
+public class Sniper : WeaponBase
 {
     [SerializeField]
     private GameObject Impact;

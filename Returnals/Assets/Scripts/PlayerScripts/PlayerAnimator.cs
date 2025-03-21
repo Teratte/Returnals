@@ -1,6 +1,4 @@
-using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class PlayerAnimator : MonoBehaviour
 {
@@ -19,6 +17,7 @@ public class PlayerAnimator : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        SetArsenal(1);
     }
 
     private void Update()
@@ -29,7 +28,7 @@ public class PlayerAnimator : MonoBehaviour
     private void ChangeWeapon()
     {
         int inputIndex = 0;
-        if (int.TryParse(Input.inputString, out inputIndex) && (inputIndex > 0 && inputIndex < holdingWeapons.Length))
+        if (int.TryParse(Input.inputString, out inputIndex) && (inputIndex > 0 && inputIndex <= holdingWeapons.Length))
             SetArsenal(inputIndex);
     }
 
@@ -53,7 +52,19 @@ public class PlayerAnimator : MonoBehaviour
         }
         else if (newRightGun.GetComponent<WeaponBase>().WeaponSetting.weaponType == WeaponType.HeavyWeapon)
         {
-            animator.runtimeAnimatorController = controllers[1];
+            animator.runtimeAnimatorController = controllers[2];
+        }
+        else if (newRightGun.GetComponent<WeaponBase>().WeaponSetting.weaponType == WeaponType.SmallMachinegun)
+        {
+            animator.runtimeAnimatorController = controllers[3];
+        }
+        else if (newRightGun.GetComponent<WeaponBase>().WeaponSetting.weaponType == WeaponType.Sniper)
+        {
+            animator.runtimeAnimatorController = controllers[4];
+        }
+        else if (newRightGun.GetComponent<WeaponBase>().WeaponSetting.weaponType == WeaponType.AssaultRifle)
+        {
+            animator.runtimeAnimatorController = controllers[5];
         }
     }
 }

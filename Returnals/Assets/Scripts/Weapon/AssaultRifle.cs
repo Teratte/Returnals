@@ -1,8 +1,7 @@
-ï»¿using System.Collections;
 using UnityEngine;
+using System.Collections;
 
-// ì´ì„ êµ¬í˜„
-public class Handgun : WeaponBase
+public class AssaultRifle: WeaponBase
 {
     [SerializeField]
     private GameObject Impact;
@@ -10,11 +9,13 @@ public class Handgun : WeaponBase
     private AudioClip fireClip;
     [SerializeField]
     private AudioClip reloadClip;
+    [SerializeField]
+    private float inaccuracyDitance = 0.2f;
 
-    public Transform fireTransform; // íƒ„ì•Œì´ ë°œì‚¬ë  ìœ„ì¹˜
+    public Transform fireTransform; // Åº¾ËÀÌ ¹ß»çµÉ À§Ä¡
 
-    public ParticleSystem muzzleFlashEffect; // ì´êµ¬ í™”ì—¼ íš¨ê³¼
-    public ParticleSystem shellEjectEffect; // íƒ„í”¼ ë°°ì¶œ íš¨ê³¼
+    public ParticleSystem muzzleFlashEffect; // ÃÑ±¸ È­¿° È¿°ú
+    public ParticleSystem shellEjectEffect; // ÅºÇÇ ¹èÃâ È¿°ú
 
     private Camera mainCamera;
     private void Awake()
@@ -25,12 +26,16 @@ public class Handgun : WeaponBase
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             StartWeaponAction(0);
         }
+        else if(Input.GetMouseButtonUp(0))
+        {
+            StopWeaponAction(0);
+        }
 
-        if(Input.GetButtonDown("Reload"))
+        if (Input.GetButtonDown("Reload"))
         {
             StartReload();
         }
@@ -38,9 +43,9 @@ public class Handgun : WeaponBase
 
     public override void StartWeaponAction(int type = 0)
     {
-        if(type == 0)
+        if (type == 0)
         {
-            if(weaponSetting.isAutomaticAttack == true)
+            if (weaponSetting.isAutomaticAttack == true)
             {
                 StartCoroutine("OnAttackLoop");
             }
@@ -53,7 +58,7 @@ public class Handgun : WeaponBase
 
     public override void StopWeaponAction(int type = 0)
     {
-        if(type == 0)
+        if (type == 0)
         {
             StopCoroutine("OnAttackLoop");
         }
@@ -61,7 +66,7 @@ public class Handgun : WeaponBase
 
     private IEnumerator OnAttackLoop()
     {
-        while(true)
+        while (true)
         {
             OnAttack();
 
@@ -69,75 +74,88 @@ public class Handgun : WeaponBase
         }
     }
 
-    // ë°œì‚¬ ì‹œë„
+    // ¹ß»ç ½Ãµµ
     public void OnAttack()
     {
-        // í˜„ì¬ ìƒíƒœê°€ ë°œì‚¬ ê°€ëŠ¥í•œ ìƒíƒœ
-        // && ë§ˆì§€ë§‰ ì´ ë°œì‚¬ ì‹œì ì—ì„œ gunData.timeBetFire ì´ìƒì˜ ì‹œê°„ì´ ì§€ë‚¨.
+        // ÇöÀç »óÅÂ°¡ ¹ß»ç °¡´ÉÇÑ »óÅÂ
+        // && ¸¶Áö¸· ÃÑ ¹ß»ç ½ÃÁ¡¿¡¼­ gunData.timeBetFire ÀÌ»óÀÇ ½Ã°£ÀÌ Áö³².
         if (Time.time >= lastAttackTime + weaponSetting.fireRate)
         {
-            // ë§ˆì§€ë§‰ ì´ ë°œì‚¬ ì‹œì  ê°±ì‹ 
+            // ¸¶Áö¸· ÃÑ ¹ß»ç ½ÃÁ¡ °»½Å
             lastAttackTime = Time.time;
-            // ë‚¨ì€ íƒ„ì•Œì´ ì—†ìœ¼ë©´ ë°œì‚¬ ë¶ˆê°€ëŠ¥
+            // ³²Àº Åº¾ËÀÌ ¾øÀ¸¸é ¹ß»ç ºÒ°¡´É
             if (weaponSetting.currentAmmo <= 0)
                 return;
             weaponSetting.currentAmmo--;
-            // ë°œì‚¬ ì´í™íŠ¸ ì¬ìƒ
+            // ¹ß»ç ÀÌÆåÆ® Àç»ı
             ShotEffect();
-            // ë°œì‚¬ ì‚¬ìš´ë“œ ì¬ìƒ
+            // ¹ß»ç »ç¿îµå Àç»ı
             PlaySound(fireClip);
-            // ì‹¤ì œ ë°œì‚¬ ì²˜ë¦¬ ì‹¤í–‰
+            // ½ÇÁ¦ ¹ß»ç Ã³¸® ½ÇÇà
             TwoStepRayCast();
         }
     }
 
-    // ì‹¤ì œ ë°œì‚¬ ì²˜ë¦¬
+    // ½ÇÁ¦ ¹ß»ç Ã³¸®
     private void TwoStepRayCast()
     {
-        // ì¹´ë©”ë¼ì—ì„œ ë‚˜ì˜¬ ë ˆì´ì €
+        // Ä«¸Ş¶ó¿¡¼­ ³ª¿Ã ·¹ÀÌÀú
         Ray ray;
-        // ë ˆì´ìºìŠ¤íŠ¸ì— ì˜í•œ ì¶©ëŒ ì •ë³´ë¥¼ ì €ì¥í•˜ëŠ” ì»¨í…Œì´ë„ˆ
+        // ·¹ÀÌÄ³½ºÆ®¿¡ ÀÇÇÑ Ãæµ¹ Á¤º¸¸¦ ÀúÀåÇÏ´Â ÄÁÅ×ÀÌ³Ê
         RaycastHit hit;
-        // íƒ„ì•Œì´ ë§ì€ ê³³ì„ ì €ì¥í•  ë³€ìˆ˜
+        // Åº¾ËÀÌ ¸ÂÀº °÷À» ÀúÀåÇÒ º¯¼ö
         Vector3 hitPosition = Vector3.zero;
 
         ray = mainCamera.ViewportPointToRay(new Vector2(0.5f, 0.65f));
 
-        if(Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit))
         {
             hitPosition = hit.point;
-        } 
+        }
         else
         {
             hitPosition = ray.origin + ray.direction * weaponSetting.distance;
         }
 
         Vector3 attackDirection = (hitPosition - fireTransform.position).normalized;
-        // ë ˆì´ìºìŠ¤íŠ¸(ì‹œì‘ ì§€ì , ë°©í–¥, ì¶©ëŒ ì •ë³´ ì»¨í…Œì´ë„ˆ, ì‚¬ì •ê±°ë¦¬)
-        if(Physics.Raycast(fireTransform.position, attackDirection, out hit))
+        // ·¹ÀÌÄ³½ºÆ®(½ÃÀÛ ÁöÁ¡, ¹æÇâ, Ãæµ¹ Á¤º¸ ÄÁÅ×ÀÌ³Ê, »çÁ¤°Å¸®)
+        if (Physics.Raycast(fireTransform.position, GetShootingDirection(attackDirection), out hit))
         {
             Instantiate(Impact, hit.point, hit.transform.rotation);
 
-            // ë ˆì´ê°€ ì–´ë–¤ ë¬¼ì²´ì™€ ì¶©ëŒí•œ ê²½ìš°,
-            // ì¶©ëŒí•œ ìƒëŒ€ë°©ìœ¼ë¡œë¶€í„° IDamageable ì˜¤ë¸Œì íŠ¸ ê°€ì ¸ì˜¤ê¸° ì‹œë„
+            // ·¹ÀÌ°¡ ¾î¶² ¹°Ã¼¿Í Ãæµ¹ÇÑ °æ¿ì,
+            // Ãæµ¹ÇÑ »ó´ë¹æÀ¸·ÎºÎÅÍ IDamageable ¿ÀºêÁ§Æ® °¡Á®¿À±â ½Ãµµ
             IDamageable target = hit.collider.gameObject.GetComponent<IDamageable>();
 
-            // ìƒëŒ€ë°©ìœ¼ë¡œë¶€í„° IDamageable ì˜¤ë¸Œì íŠ¸ë¥¼ ê°€ì ¸ì˜¤ëŠ” ë° ì„±ê³µí–ˆë‹¤ë©´
-            if(target != null )
+            // »ó´ë¹æÀ¸·ÎºÎÅÍ IDamageable ¿ÀºêÁ§Æ®¸¦ °¡Á®¿À´Â µ¥ ¼º°øÇß´Ù¸é
+            if (target != null)
             {
-                // ìƒëŒ€ë°©ì˜ OnDamage í•¨ìˆ˜ë¥¼ ì‹¤í–‰ì‹œì¼œ ìƒëŒ€ë°©ì— ë°ë¯¸ì§€ ì¶”ê°€
+                // »ó´ë¹æÀÇ OnDamage ÇÔ¼ö¸¦ ½ÇÇà½ÃÄÑ »ó´ë¹æ¿¡ µ¥¹ÌÁö Ãß°¡
                 target.OnDamage(weaponSetting.damage, hit.point, hit.normal);
             }
         }
     }
 
-    // ë°œì‚¬ ì´í™íŠ¸ì™€ ì†Œë¦¬ë¥¼ ì¬ìƒí•˜ê³  íƒ„ì•Œ ê¶¤ì ì„ ê·¸ë¦¼
+    Vector3 GetShootingDirection(Vector3 _direction)
+    {
+        _direction *= weaponSetting.distance;
+        _direction = new Vector3(
+            _direction.x + Random.Range(-inaccuracyDitance, inaccuracyDitance),
+            _direction.y + Random.Range(-inaccuracyDitance, inaccuracyDitance),
+            _direction.z + Random.Range(-inaccuracyDitance, inaccuracyDitance)
+            );
+
+        Vector3 direction = _direction - fireTransform.position;
+        return direction.normalized;
+    }
+
+    // ¹ß»ç ÀÌÆåÆ®¿Í ¼Ò¸®¸¦ Àç»ıÇÏ°í Åº¾Ë ±ËÀûÀ» ±×¸²
     private void ShotEffect()
     {
         muzzleFlashEffect.transform.position = fireTransform.position;
-        // ì´êµ¬ í™”ì—¼ íš¨ê³¼ ì¬ìƒ
+        // ÃÑ±¸ È­¿° È¿°ú Àç»ı
         muzzleFlashEffect.Play();
-        // íƒ„í”¼ ë°°ì¶œ íš¨ê³¼ ì¬ìƒ
+        // ÅºÇÇ ¹èÃâ È¿°ú Àç»ı
         shellEjectEffect.Play();
     }
 
@@ -146,50 +164,50 @@ public class Handgun : WeaponBase
         if (isReload == true)
             return;
 
-        // ì¥ì „ ì¤‘ ë¬´ê¸° ì•¡ì…˜ ì¬ìƒ ì¤‘ì§€
+        // ÀåÀü Áß ¹«±â ¾×¼Ç Àç»ı ÁßÁö
         StopWeaponAction();
 
         Reload();
     }
 
-    // ì¬ì¥ì „ ì‹œë„
+    // ÀçÀåÀü ½Ãµµ
     public void Reload()
     {
-        if(weaponSetting.maxAmmo <= 0 || weaponSetting.currentAmmo >= weaponSetting.maxCapacity)
+        if (weaponSetting.maxAmmo <= 0 || weaponSetting.currentAmmo >= weaponSetting.maxCapacity)
         {
-            // ì´ë¯¸ ì¬ì¥ì „ ì¤‘ì´ê±°ë‚˜ ë‚¨ì€ íƒ„ì•Œì´ ì—†ê±°ë‚˜
-            // íƒ„ì°½ì— íƒ„ì•Œì´ ì´ë¯¸ ê°€ë“í•œ ê²½ìš° ì¬ì¥ì „ ë¶ˆê°€ëŠ¥
+            // ÀÌ¹Ì ÀçÀåÀü ÁßÀÌ°Å³ª ³²Àº Åº¾ËÀÌ ¾ø°Å³ª
+            // ÅºÃ¢¿¡ Åº¾ËÀÌ ÀÌ¹Ì °¡µæÇÑ °æ¿ì ÀçÀåÀü ºÒ°¡´É
             return;
         }
 
         StartCoroutine(ReloadRoutine());
     }
 
-    // ì‹¤ì œ ì¬ì¥ì „ ì²˜ë¦¬ë¥¼ ì§„í–‰
+    // ½ÇÁ¦ ÀçÀåÀü Ã³¸®¸¦ ÁøÇà
     private IEnumerator ReloadRoutine()
     {
         isReload = true;
-        // ì¬ì¥ì „ ì‚¬ìš´ë“œ ì¬ìƒ
+        // ÀçÀåÀü »ç¿îµå Àç»ı
         audioSource.PlayOneShot(reloadClip);
 
-        // ì¬ì¥ì „ ì†Œìš” ì‹œê°„ ë§Œí¼ ì²˜ë¦¬ ì‰¬ê¸°
+        // ÀçÀåÀü ¼Ò¿ä ½Ã°£ ¸¸Å­ Ã³¸® ½¬±â
         yield return new WaitForSeconds(weaponSetting.reloadTime);
 
-        // íƒ„ì°½ì— ì±„ìš¸ íƒ„ì•Œ ê³„ì‚°
+        // ÅºÃ¢¿¡ Ã¤¿ï Åº¾Ë °è»ê
         int ammoToFill = weaponSetting.maxCapacity - weaponSetting.currentAmmo;
 
-        // íƒ„ì°½ì— ì±„ì›Œì•¼ í•  íƒ„ì•Œì´ ë‚¨ì€ íƒ„ì•Œë³´ë‹¤ ë§ë‹¤ë©´
-        // ì±„ì›Œì•¼ í•  íƒ„ì•Œ ìˆ˜ë¥¼ ë‚¨ì€ íƒ„ì•Œ ìˆ˜ì— ë§ì¶° ì¤„ì„
+        // ÅºÃ¢¿¡ Ã¤¿ö¾ß ÇÒ Åº¾ËÀÌ ³²Àº Åº¾Ëº¸´Ù ¸¹´Ù¸é
+        // Ã¤¿ö¾ß ÇÒ Åº¾Ë ¼ö¸¦ ³²Àº Åº¾Ë ¼ö¿¡ ¸ÂÃç ÁÙÀÓ
         if (weaponSetting.maxAmmo <= ammoToFill)
         {
             ammoToFill = weaponSetting.maxAmmo;
         }
 
-        // íƒ„ì°½ì„ ì±„ì›€
+        // ÅºÃ¢À» Ã¤¿ò
         weaponSetting.currentAmmo += ammoToFill;
-        // ë‚¨ì€ íƒ„ì•Œì—ì„œ íƒ„ì°½ì— ì±„ìš´ë§Œí¼ íƒ„ì•Œì„ ëºŒ
+        // ³²Àº Åº¾Ë¿¡¼­ ÅºÃ¢¿¡ Ã¤¿î¸¸Å­ Åº¾ËÀ» »­
 
-        // ì´ì˜ ìƒíƒœë¥¼ ë°œì‚¬ ì¤€ë¹„ ìƒíƒœë¡œ ë³€ê²½
+        // ÃÑÀÇ »óÅÂ¸¦ ¹ß»ç ÁØºñ »óÅÂ·Î º¯°æ
         isReload = false;
     }
 }
