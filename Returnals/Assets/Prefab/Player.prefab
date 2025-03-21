@@ -331,7 +331,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.8, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!114 &3787370336953940771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -487,10 +487,13 @@ MonoBehaviour:
   rightGunBone: {fileID: 4276586462201143438}
   weaponPrefabParent: {fileID: 740163380459305199}
   holdingWeapons:
-  - {fileID: 4115301380646426663, guid: b6ddb5cedd75ac741966c5f8e57b696f, type: 3}
   - {fileID: 299691107153604375, guid: fd137f48dee1dd446a59966078b4b772, type: 3}
-  - {fileID: 684161438172492668, guid: 0adf61a16068ca64aa8126389fcf44dd, type: 3}
+  - {fileID: 289003456829574244, guid: c3a27a4d231b90248beae25cabaf1025, type: 3}
+  - {fileID: 4115301380646426663, guid: b6ddb5cedd75ac741966c5f8e57b696f, type: 3}
   controllers:
   - {fileID: 9100000, guid: 0fd3b20fc2774c14f9e42b2b3b1fcd8c, type: 2}
   - {fileID: 9100000, guid: a1b4a8e888dc406429024958f8e32447, type: 2}
+  - {fileID: 9100000, guid: fab6e36b78f248544b9de7e11728ed3f, type: 2}
+  - {fileID: 9100000, guid: 98d5dd7dca811484f89cce2645937bc3, type: 2}
   - {fileID: 9100000, guid: 5539409bd71a757479d852f56258f2af, type: 2}
+  - {fileID: 9100000, guid: 8b90a3161ec910c489c68d9033f9a64e, type: 2}

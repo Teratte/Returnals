@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject attackCollision;
     private Animator animator;
 
     [SerializeField]
@@ -11,8 +9,6 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField]
     private GameObject weaponPrefabParent; // 총이 위치할 곳
     public GameObject[] holdingWeapons;
-    [SerializeField]
-    private RuntimeAnimatorController[] controllers;
 
     private void Awake()
     {
@@ -41,30 +37,6 @@ public class PlayerAnimator : MonoBehaviour
         newRightGun.transform.localPosition = new Vector3(-0.253f, 0.0194f, 0.0072f);
         newRightGun.transform.localRotation = Quaternion.Euler(0, -90, 0);
 
-
-        if (newRightGun.GetComponent<WeaponBase>().WeaponSetting.weaponType == WeaponType.Handgun)
-        {
-            animator.runtimeAnimatorController = controllers[0];
-        }
-        else if(newRightGun.GetComponent<WeaponBase>().WeaponSetting.weaponType == WeaponType.Shotgun)
-        {
-            animator.runtimeAnimatorController= controllers[1];
-        }
-        else if (newRightGun.GetComponent<WeaponBase>().WeaponSetting.weaponType == WeaponType.HeavyWeapon)
-        {
-            animator.runtimeAnimatorController = controllers[2];
-        }
-        else if (newRightGun.GetComponent<WeaponBase>().WeaponSetting.weaponType == WeaponType.SmallMachinegun)
-        {
-            animator.runtimeAnimatorController = controllers[3];
-        }
-        else if (newRightGun.GetComponent<WeaponBase>().WeaponSetting.weaponType == WeaponType.Sniper)
-        {
-            animator.runtimeAnimatorController = controllers[4];
-        }
-        else if (newRightGun.GetComponent<WeaponBase>().WeaponSetting.weaponType == WeaponType.AssaultRifle)
-        {
-            animator.runtimeAnimatorController = controllers[5];
-        }
+        animator.runtimeAnimatorController = newRightGun.GetComponent<WeaponBase>().RuntimeAnimatorController;
     }
 }

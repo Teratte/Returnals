@@ -158,6 +158,7 @@ MonoBehaviour:
     maxCapacity: 10
     isAutomaticAttack: 0
     damage: 15
+  runtimeAnimatorController: {fileID: 9100000, guid: 0fd3b20fc2774c14f9e42b2b3b1fcd8c, type: 2}
   Impact: {fileID: 100002, guid: 99c73c92ac40473459640b165473206f, type: 3}
   fireClip: {fileID: 8300000, guid: 8521dc921224ebf44b860f57a87408a5, type: 3}
   reloadClip: {fileID: 8300000, guid: 9eca29ee7f8209e419470fcd586aec21, type: 3}

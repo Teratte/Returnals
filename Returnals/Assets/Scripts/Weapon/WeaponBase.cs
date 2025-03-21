@@ -7,6 +7,8 @@ public abstract class WeaponBase : MonoBehaviour
     protected WeaponType weaponType;        // 무기 종류
     [SerializeField]
     protected WeaponSetting weaponSetting;  // 무기 설정
+    [SerializeField]
+    protected RuntimeAnimatorController runtimeAnimatorController;
 
     protected float lastAttackTime = 0;     // 마지막 발사 시간 체크
     protected bool isReload = false;        // 재장전 중인지 체크
@@ -17,6 +19,7 @@ public abstract class WeaponBase : MonoBehaviour
     public int currentAmmo => weaponSetting.currentAmmo;
     public int maxAmmo => weaponSetting.maxAmmo;
     public WeaponSetting WeaponSetting => weaponSetting;
+    public RuntimeAnimatorController RuntimeAnimatorController => runtimeAnimatorController;
 
     public abstract void StartWeaponAction(int type = 0);
     public abstract void StopWeaponAction(int type = 0);
