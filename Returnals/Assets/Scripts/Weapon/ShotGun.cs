@@ -31,15 +31,6 @@ public class Shotgun : WeaponBase
         mainCamera = Camera.main;
     }
 
-    private void Update()
-    {
-        if (Input.GetButtonDown("Fire1"))
-            StartWeaponAction();
-
-        if (Input.GetButtonDown("Reload"))
-            Reload();
-    }
-
     public override void StartWeaponAction(int type = 0)
     {
         if(type == 0)

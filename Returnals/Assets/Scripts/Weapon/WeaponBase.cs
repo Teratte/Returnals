@@ -4,11 +4,12 @@ public abstract class WeaponBase : MonoBehaviour
 {
     [Header("WeaponBase")]
     [SerializeField]
-    protected WeaponType weaponType;        // 무기 종류
+    protected WeaponList weaponlist;        // 무기 종류
     [SerializeField]
     protected WeaponSetting weaponSetting;  // 무기 설정
     [SerializeField]
     protected RuntimeAnimatorController runtimeAnimatorController;
+    public Transform leftHandle;
 
     protected float lastAttackTime = 0;     // 마지막 발사 시간 체크
     protected bool isReload = false;        // 재장전 중인지 체크
@@ -20,6 +21,7 @@ public abstract class WeaponBase : MonoBehaviour
     public int maxAmmo => weaponSetting.maxAmmo;
     public WeaponSetting WeaponSetting => weaponSetting;
     public RuntimeAnimatorController RuntimeAnimatorController => runtimeAnimatorController;
+    public bool IsReload => isReload;
 
     public abstract void StartWeaponAction(int type = 0);
     public abstract void StopWeaponAction(int type = 0);
@@ -34,5 +36,12 @@ public abstract class WeaponBase : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         weaponSetting.currentAmmo = weaponSetting.maxCapacity;
+    }
+
+    public enum WeaponList
+    {
+        Main,
+        Support,
+        Gazet
     }
 }

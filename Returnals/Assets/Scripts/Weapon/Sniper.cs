@@ -23,19 +23,6 @@ public class Sniper : WeaponBase
         mainCamera = Camera.main;
     }
 
-    private void Update()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            StartWeaponAction(0);
-        }
-
-        if(Input.GetButtonDown("Reload"))
-        {
-            StartReload();
-        }
-    }
-
     public override void StartWeaponAction(int type = 0)
     {
         if(type == 0)

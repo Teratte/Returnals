@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
@@ -8,8 +9,8 @@ public class PlayerAnimator : MonoBehaviour
     private Transform rightGunBone; // 오른손으로 총 드는 위치
     [SerializeField]
     private GameObject weaponPrefabParent; // 총이 위치할 곳
-    public GameObject[] holdingWeapons;
-
+    public List<GameObject> holdingWeapons;
+    private WeaponBase weapon;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -19,24 +20,79 @@ public class PlayerAnimator : MonoBehaviour
     private void Update()
     {
         ChangeWeapon();
+        if(weapon != null)
+        {
+            if(!weapon.IsReload)
+            {
+                if (weapon.WeaponSetting.isAutomaticAttack)
+                {
+                    if (Input.GetMouseButton(0) && Input.GetAxis("Sprint") == 0)
+                    {
+                        weapon.StartWeaponAction(0);
+                        animator.SetTrigger("onAttack");
+                    }
+                }
+                else
+                {
+                    if (Input.GetMouseButtonDown(0) && Input.GetAxis("Sprint") == 0)
+                    {
+                        weapon.StartWeaponAction(0);
+                        animator.SetTrigger("onAttack");
+                    }
+                }
+            }
+
+            if(Input.GetMouseButtonUp(0))
+                weapon.StopWeaponAction(0);
+
+            if (Input.GetButtonDown("Reload"))
+            {
+                weapon.StartReload();
+            }
+        }
     }
 
     private void ChangeWeapon()
     {
         int inputIndex = 0;
-        if (int.TryParse(Input.inputString, out inputIndex) && (inputIndex > 0 && inputIndex <= holdingWeapons.Length))
+        if (int.TryParse(Input.inputString, out inputIndex) && (inputIndex > 0 && inputIndex <= holdingWeapons.Count))
             SetArsenal(inputIndex);
+    }
+
+    public void UpdateAttack()
+    {
+        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) return;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            animator.SetTrigger("onAttack");
+        }
     }
 
     public void SetArsenal(int number)
     {
         if (rightGunBone.childCount > 0)
             Destroy(rightGunBone.GetChild(0).gameObject);
-        GameObject newRightGun = Instantiate(holdingWeapons[number - 1], rightGunBone.position, rightGunBone.rotation);
+        GameObject newRightGun = Instantiate(holdingWeapons[number - 1], rightGunBone.position, Quaternion.identity);
         newRightGun.transform.parent = rightGunBone;
-        newRightGun.transform.localPosition = new Vector3(-0.253f, 0.0194f, 0.0072f);
         newRightGun.transform.localRotation = Quaternion.Euler(0, -90, 0);
 
-        animator.runtimeAnimatorController = newRightGun.GetComponent<WeaponBase>().RuntimeAnimatorController;
+        weapon = newRightGun.GetComponent<WeaponBase>();
+        if(weapon != null)
+        {
+            animator.runtimeAnimatorController = weapon.RuntimeAnimatorController;
+        }
+    }
+
+    private void OnAnimatorIK(int layerIndex)
+    {
+        if(weapon != null)
+        {
+            // IK를 사용하여 왼손의 위치와 회전을 총의 왼쪽 손잡이에 맞춤
+            animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1.0f);
+            animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1.0f);
+
+            animator.SetIKPosition(AvatarIKGoal.LeftHand, weapon.leftHandle.position);
+        }
     }
 }
