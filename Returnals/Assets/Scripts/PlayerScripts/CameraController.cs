@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     private float xAxisSpeed = 400.0f;  // x축 회전 속도
     private float yAxisSpeed = 1000.0f; // y축 회전 속도
     private float xAxisLimitMin = 5.0f; // 회전 가능한 x축 최소 각도
-    private float xAxisLimitMax = 80.0f;// 회전 가능한 x축 최대 각도
+    private float xAxisLimitMax = 20.0f;// 회전 가능한 x축 최대 각도
     private float x, y;
 
     private float distanceMin = 2.0f;   // target과 카메라의 최소 거리
@@ -28,10 +28,6 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.GetMouseButton(0))
-        //{
-        //    UpdateRotate();
-        //}
         UpdateRotate();
         UpdateZoom();
     }

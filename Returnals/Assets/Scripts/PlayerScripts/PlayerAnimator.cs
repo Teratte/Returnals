@@ -26,7 +26,7 @@ public class PlayerAnimator : MonoBehaviour
             {
                 if (weapon.WeaponSetting.isAutomaticAttack)
                 {
-                    if (Input.GetMouseButton(0) && Input.GetAxis("Sprint") == 0)
+                    if (Input.GetMouseButton(0) && Input.GetAxis("Sprint") == 0 && weapon.currentAmmo > 0)
                     {
                         weapon.StartWeaponAction(0);
                         animator.SetTrigger("onAttack");
@@ -34,7 +34,7 @@ public class PlayerAnimator : MonoBehaviour
                 }
                 else
                 {
-                    if (Input.GetMouseButtonDown(0) && Input.GetAxis("Sprint") == 0)
+                    if (Input.GetMouseButtonDown(0) && Input.GetAxis("Sprint") == 0 && weapon.currentAmmo > 0)
                     {
                         weapon.StartWeaponAction(0);
                         animator.SetTrigger("onAttack");
@@ -43,7 +43,9 @@ public class PlayerAnimator : MonoBehaviour
             }
 
             if(Input.GetMouseButtonUp(0))
+            {
                 weapon.StopWeaponAction(0);
+            }
 
             if (Input.GetButtonDown("Reload"))
             {
