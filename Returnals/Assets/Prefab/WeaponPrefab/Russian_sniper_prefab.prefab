@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1542200689791425900
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2280822011059624951}
+  m_Layer: 0
+  m_Name: LeftHandle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2280822011059624951
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1542200689791425900}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.0311, z: 0.3374}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1173536713048328219}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5940644659006079374
 GameObject:
   m_ObjectHideFlags: 0
@@ -34,6 +65,7 @@ Transform:
   - {fileID: 2951936028671269136}
   - {fileID: 6879706194818943105}
   - {fileID: 8691135519476257615}
+  - {fileID: 2280822011059624951}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6001155010917179078
@@ -48,7 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e0b3bfc32e28274cbcc2cc72e922fc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 4
+  weaponlist: 0
   weaponSetting:
     weaponName: M40
     weaponType: 4
@@ -60,6 +92,8 @@ MonoBehaviour:
     maxCapacity: 5
     isAutomaticAttack: 0
     damage: 300
+  runtimeAnimatorController: {fileID: 9100000, guid: 5539409bd71a757479d852f56258f2af, type: 2}
+  leftHandle: {fileID: 2280822011059624951}
   Impact: {fileID: 100002, guid: 99c73c92ac40473459640b165473206f, type: 3}
   fireClip: {fileID: 8300000, guid: 8521dc921224ebf44b860f57a87408a5, type: 3}
   reloadClip: {fileID: 8300000, guid: 9eca29ee7f8209e419470fcd586aec21, type: 3}
@@ -280,7 +314,7 @@ Transform:
   m_GameObject: {fileID: 9004739828525034404}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0157, y: 0.059, z: 0.654}
+  m_LocalPosition: {x: -0.0122, y: 0.0573, z: 0.9153}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -308,7 +342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 940fdf892d907034fb694a9b20734576, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.2988
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 940fdf892d907034fb694a9b20734576, type: 3}
       propertyPath: m_LocalRotation.w

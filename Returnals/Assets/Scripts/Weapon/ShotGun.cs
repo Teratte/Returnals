@@ -31,15 +31,6 @@ public class Shotgun : WeaponBase
         mainCamera = Camera.main;
     }
 
-    private void Update()
-    {
-        if (Input.GetButtonDown("Fire1"))
-            StartWeaponAction();
-
-        if (Input.GetButtonDown("Reload"))
-            Reload();
-    }
-
     public override void StartWeaponAction(int type = 0)
     {
         if(type == 0)
@@ -87,7 +78,7 @@ public class Shotgun : WeaponBase
         // 탄알이 맞은 곳을 저장할 변수
         Vector3 hitPosition = Vector3.zero;
 
-        ray = mainCamera.ViewportPointToRay(new Vector2(0.5f, 0.65f));
+        ray = mainCamera.ViewportPointToRay(new Vector2(0.5f, 0.6f));
 
         if (Physics.Raycast(ray, out hit))
         {

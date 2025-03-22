@@ -6898,13 +6898,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 868752168}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.10452846, y: 0, z: 0, w: 0.9945219}
-  m_LocalPosition: {x: 0.83, y: 1.9, z: -1.8}
+  m_LocalRotation: {x: 0.005759512, y: 0, z: 0, w: 0.99998343}
+  m_LocalPosition: {x: 0.6, y: 1.7, z: -1.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 12, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.66, y: 0, z: 0}
 --- !u!114 &868752172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8610,7 +8610,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 170}
+  m_AnchoredPosition: {x: 0, y: 90}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1027934416
@@ -8633,7 +8633,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bc027e2bcafa22b45842d71f601394aa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 26b295fa519e7094cab95fcab2d5728b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -17338,10 +17338,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 479268917506281501, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
-      propertyPath: m_Center.y
-      value: 0.9
-      objectReference: {fileID: 0}
     - target: {fileID: 2063890794844617783, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
       propertyPath: mainCamera
       value: 
@@ -17358,46 +17354,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 8322803238904740949, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
-      propertyPath: controllers.Array.size
-      value: 6
+    - target: {fileID: 4060342249873972132, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.6
       objectReference: {fileID: 0}
-    - target: {fileID: 8322803238904740949, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
-      propertyPath: 'controllers.Array.data[2]'
-      value: 
-      objectReference: {fileID: 9100000, guid: fab6e36b78f248544b9de7e11728ed3f, type: 2}
-    - target: {fileID: 8322803238904740949, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
-      propertyPath: 'controllers.Array.data[3]'
-      value: 
-      objectReference: {fileID: 9100000, guid: 98d5dd7dca811484f89cce2645937bc3, type: 2}
-    - target: {fileID: 8322803238904740949, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
-      propertyPath: 'controllers.Array.data[4]'
-      value: 
-      objectReference: {fileID: 9100000, guid: 5539409bd71a757479d852f56258f2af, type: 2}
-    - target: {fileID: 8322803238904740949, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
-      propertyPath: 'controllers.Array.data[5]'
-      value: 
-      objectReference: {fileID: 9100000, guid: 8b90a3161ec910c489c68d9033f9a64e, type: 2}
-    - target: {fileID: 8322803238904740949, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
-      propertyPath: holdingWeapons.Array.size
-      value: 3
+    - target: {fileID: 4060342249873972132, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8322803238904740949, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
-      propertyPath: 'holdingWeapons.Array.data[0]'
+    - target: {fileID: 4060342249873972132, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4276586462201143438, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 4276586462201143438, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4276586462201143438, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0119
+      objectReference: {fileID: 0}
+    - target: {fileID: 7682045693090172635, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
+      propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 299691107153604375, guid: fd137f48dee1dd446a59966078b4b772, type: 3}
-    - target: {fileID: 8322803238904740949, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
-      propertyPath: 'holdingWeapons.Array.data[1]'
-      value: 
-      objectReference: {fileID: 289003456829574244, guid: c3a27a4d231b90248beae25cabaf1025, type: 3}
-    - target: {fileID: 8322803238904740949, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
-      propertyPath: 'holdingWeapons.Array.data[2]'
-      value: 
-      objectReference: {fileID: 4115301380646426663, guid: b6ddb5cedd75ac741966c5f8e57b696f, type: 3}
-    - target: {fileID: 8322803238904740949, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
-      propertyPath: 'holdingWeapons.Array.data[3]'
-      value: 
-      objectReference: {fileID: 5940644659006079374, guid: 17eb81f5e4bc6d64d90344e9239f19fc, type: 3}
+      objectReference: {fileID: 9100000, guid: 147f98da89bbf784c9156cacae550e4f, type: 2}
     - target: {fileID: 9171868947698613781, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

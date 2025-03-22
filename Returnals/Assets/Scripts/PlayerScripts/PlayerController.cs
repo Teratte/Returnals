@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             character.UpdateMovement();
-            character.UpdateAttack();
         }
         status.PlayerHP = Mathf.Clamp(status.PlayerHP,0,status.MaxHP);
     }

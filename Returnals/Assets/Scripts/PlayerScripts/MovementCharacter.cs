@@ -61,16 +61,6 @@ public class MovementCharacter : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, mainCamera.eulerAngles.y, 0);
     }
 
-    public void UpdateAttack()
-    {
-        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) return;
-
-        if(Input.GetMouseButtonDown(0))
-        {
-            animator.SetTrigger("onAttack");
-        }
-    }
-
     private void OnTriggerEnter(Collider collision)
     {
         if(collision.gameObject.CompareTag("Eatable"))

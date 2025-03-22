@@ -23,19 +23,6 @@ public class Sniper : WeaponBase
         mainCamera = Camera.main;
     }
 
-    private void Update()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            StartWeaponAction(0);
-        }
-
-        if(Input.GetButtonDown("Reload"))
-        {
-            StartReload();
-        }
-    }
-
     public override void StartWeaponAction(int type = 0)
     {
         if(type == 0)
@@ -101,7 +88,7 @@ public class Sniper : WeaponBase
         // 탄알이 맞은 곳을 저장할 변수
         Vector3 hitPosition = Vector3.zero;
 
-        ray = mainCamera.ViewportPointToRay(new Vector2(0.5f, 0.65f));
+        ray = mainCamera.ViewportPointToRay(new Vector2(0.5f, 0.6f));
 
         if(Physics.Raycast(ray, out hit))
         {
