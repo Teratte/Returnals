@@ -7,13 +7,20 @@ public class PlayerAnimator : MonoBehaviour
 
     [SerializeField]
     private Transform rightGunBone; // 오른손으로 총 드는 위치
-    [SerializeField]
-    private GameObject weaponPrefabParent; // 총이 위치할 곳
     public List<GameObject> holdingWeapons;
     private WeaponBase weapon;
+
+    public WeaponBase Weapon => weapon;
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        for(int i = 0;i < holdingWeapons.Count;i++)
+        {
+            GameObject newRightGun = Instantiate(holdingWeapons[i], rightGunBone.position, Quaternion.identity);
+            newRightGun.transform.parent = rightGunBone;
+            newRightGun.transform.localRotation = Quaternion.Euler(0, -90, 0);
+            newRightGun.SetActive(false);
+        }
         SetArsenal(1);
     }
 
@@ -26,7 +33,7 @@ public class PlayerAnimator : MonoBehaviour
             {
                 if (weapon.WeaponSetting.isAutomaticAttack)
                 {
-                    if (Input.GetMouseButton(0) && Input.GetAxis("Sprint") == 0 && weapon.currentAmmo > 0)
+                    if (Input.GetMouseButton(0) && Input.GetAxis("Sprint") == 0 && weapon.CurrentAmmo > 0)
                     {
                         weapon.StartWeaponAction(0);
                         animator.SetTrigger("onAttack");
@@ -34,7 +41,7 @@ public class PlayerAnimator : MonoBehaviour
                 }
                 else
                 {
-                    if (Input.GetMouseButtonDown(0) && Input.GetAxis("Sprint") == 0 && weapon.currentAmmo > 0)
+                    if (Input.GetMouseButtonDown(0) && Input.GetAxis("Sprint") == 0 && weapon.CurrentAmmo > 0)
                     {
                         weapon.StartWeaponAction(0);
                         animator.SetTrigger("onAttack");
@@ -57,7 +64,7 @@ public class PlayerAnimator : MonoBehaviour
     private void ChangeWeapon()
     {
         int inputIndex = 0;
-        if (int.TryParse(Input.inputString, out inputIndex) && (inputIndex > 0 && inputIndex <= holdingWeapons.Count))
+        if (int.TryParse(Input.inputString, out inputIndex) && (inputIndex > 0 && inputIndex <= holdingWeapons.Count) && !weapon.IsReload)
             SetArsenal(inputIndex);
     }
 
@@ -73,13 +80,13 @@ public class PlayerAnimator : MonoBehaviour
 
     public void SetArsenal(int number)
     {
-        if (rightGunBone.childCount > 0)
-            Destroy(rightGunBone.GetChild(0).gameObject);
-        GameObject newRightGun = Instantiate(holdingWeapons[number - 1], rightGunBone.position, Quaternion.identity);
-        newRightGun.transform.parent = rightGunBone;
-        newRightGun.transform.localRotation = Quaternion.Euler(0, -90, 0);
+        for(int i = 0;i < holdingWeapons.Count;i++)
+        {
+            rightGunBone.GetChild(i).gameObject.SetActive(false);
+        }
+        rightGunBone.GetChild(number - 1).gameObject.SetActive(true);
 
-        weapon = newRightGun.GetComponent<WeaponBase>();
+        weapon = rightGunBone.GetChild(number - 1).gameObject.GetComponent<WeaponBase>();
         if(weapon != null)
         {
             animator.runtimeAnimatorController = weapon.RuntimeAnimatorController;

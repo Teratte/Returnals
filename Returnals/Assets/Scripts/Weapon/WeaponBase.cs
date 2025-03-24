@@ -17,8 +17,8 @@ public abstract class WeaponBase : MonoBehaviour
     protected AudioSource audioSource;      // 사운드 재생 컴포넌트
 
     public string weaponName => weaponSetting.weaponName;
-    public int currentAmmo => weaponSetting.currentAmmo;
-    public int maxAmmo => weaponSetting.maxAmmo;
+    public int CurrentAmmo => weaponSetting.currentAmmo;
+    public int MaxAmmo => weaponSetting.maxAmmo;
     public WeaponSetting WeaponSetting => weaponSetting;
     public RuntimeAnimatorController RuntimeAnimatorController => runtimeAnimatorController;
     public bool IsReload => isReload;
