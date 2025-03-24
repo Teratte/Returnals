@@ -11,14 +11,18 @@ public class InventoryUI : MonoBehaviour
     private GameObject slotsParent;
     [SerializeField]
     private TextMeshProUGUI timer;
+    [SerializeField]
+    private TextMeshProUGUI ammoText;
 
     private Slot[] slots;
+    private PlayerAnimator playerAnimator;
 
     public Slot[] Slots => slots;
 
     private void Awake()
     {
         slots = slotsParent.GetComponentsInChildren<Slot>();
+        playerAnimator = FindObjectOfType<PlayerAnimator>();
         InventoryObject.SetActive(false);
     }
 
@@ -36,6 +40,7 @@ public class InventoryUI : MonoBehaviour
         }
 
         timer.text = $"{(int)GameManager.instance.Timer}";
+        ammoText.text = $"{playerAnimator.Weapon.CurrentAmmo} / {playerAnimator.Weapon.MaxAmmo}";
     }
 
     public void AcquireItem(Item _item, int _count = 1)

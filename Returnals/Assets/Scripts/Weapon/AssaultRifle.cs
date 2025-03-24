@@ -189,7 +189,7 @@ public class AssaultRifle: WeaponBase
         // 탄창을 채움
         weaponSetting.currentAmmo += ammoToFill;
         // 남은 탄알에서 탄창에 채운만큼 탄알을 뺌
-
+        weaponSetting.maxAmmo -= ammoToFill;
         // 총의 상태를 발사 준비 상태로 변경
         isReload = false;
     }
