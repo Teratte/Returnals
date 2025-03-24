@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 740163380459305199}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.09, y: 0.02, z: 0.0119}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 1544634393423167917}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.83, y: 0.8, z: 0}
+  m_LocalPosition: {x: 0.6, y: 1, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -346,10 +346,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHP: 150
   maxHP: 150
-  playerStamina: 100
-  maxStamina: 100
+  playerStamina: 50
+  maxStamina: 50
   recoverRateHP: 5
-  recoverRateStamina: 1
+  recoverRateStamina: 5
   walkSpeed: 2
   runSpeed: 5
   moveSpeed: 4
@@ -483,17 +483,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84019dd21eba32841a61ba5810b3af56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCollision: {fileID: 1593739268297353644}
   rightGunBone: {fileID: 4276586462201143438}
-  weaponPrefabParent: {fileID: 740163380459305199}
   holdingWeapons:
   - {fileID: 299691107153604375, guid: fd137f48dee1dd446a59966078b4b772, type: 3}
   - {fileID: 289003456829574244, guid: c3a27a4d231b90248beae25cabaf1025, type: 3}
   - {fileID: 4115301380646426663, guid: b6ddb5cedd75ac741966c5f8e57b696f, type: 3}
-  controllers:
-  - {fileID: 9100000, guid: 0fd3b20fc2774c14f9e42b2b3b1fcd8c, type: 2}
-  - {fileID: 9100000, guid: a1b4a8e888dc406429024958f8e32447, type: 2}
-  - {fileID: 9100000, guid: fab6e36b78f248544b9de7e11728ed3f, type: 2}
-  - {fileID: 9100000, guid: 98d5dd7dca811484f89cce2645937bc3, type: 2}
-  - {fileID: 9100000, guid: 5539409bd71a757479d852f56258f2af, type: 2}
-  - {fileID: 9100000, guid: 8b90a3161ec910c489c68d9033f9a64e, type: 2}
