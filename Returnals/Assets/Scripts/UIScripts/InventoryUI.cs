@@ -1,24 +1,25 @@
+using TMPro;
 using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
-    public static InventoryUI Instance { get; private set; }
     public static bool inventoryActivated = false;
 
     [SerializeField]
     private GameObject InventoryObject;
     [SerializeField]
     private GameObject slotsParent;
+    [SerializeField]
+    private TextMeshProUGUI timer;
 
     private Slot[] slots;
 
+    public Slot[] Slots => slots;
+
     private void Awake()
     {
-        Instance = this;
         slots = slotsParent.GetComponentsInChildren<Slot>();
         InventoryObject.SetActive(false);
-
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
@@ -33,6 +34,8 @@ public class InventoryUI : MonoBehaviour
             inventoryActivated = false;
             InventoryObject.SetActive(false);
         }
+
+        timer.text = $"{(int)GameManager.instance.Timer}";
     }
 
     public void AcquireItem(Item _item, int _count = 1)

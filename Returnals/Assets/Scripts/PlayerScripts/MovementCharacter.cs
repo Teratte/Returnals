@@ -17,6 +17,7 @@ public class MovementCharacter : MonoBehaviour
     private CharacterController characterController;
     private Animator animator;
     private Status status;
+
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
@@ -30,13 +31,19 @@ public class MovementCharacter : MonoBehaviour
         float AxisH = Input.GetAxisRaw("Horizontal");
         float AxisV = Input.GetAxisRaw("Vertical");
 
+        // 오브젝트의 이동 속도 설정 (Shift키를 누르지 않으면 walkSpeed, 누르면 runSpeed)
+        status.MoveSpeed = Mathf.Lerp(status.WalkSpeed, status.RunSpeed, Input.GetAxis("Sprint"));
+
         float offset = 0.5f + Input.GetAxis("Sprint") * 0.5f;
+
+        if(status.PlayerStamina <= 0)
+        {
+            status.MoveSpeed = status.WalkSpeed;
+            offset = 0.5f;
+        }
 
         animator.SetFloat("horizontal", AxisH * offset);
         animator.SetFloat("vertical", AxisV * offset);
-
-        // 오브젝트의 이동 속도 설정 (Shift키를 누르지 않으면 walkSpeed, 누르면 runSpeed)
-        status.MoveSpeed = Mathf.Lerp(status.WalkSpeed, status.RunSpeed, Input.GetAxis("Sprint"));
 
         // 오브젝트의 이동 방향 설정
         Vector3 dir = mainCamera.rotation * new Vector3(AxisH, 0, AxisV);
