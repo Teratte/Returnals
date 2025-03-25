@@ -581,7 +581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   availableScenes:
-  - GunSampleScene
+  - Yuno's Test
   returnScene: Tera'_Test
 --- !u!4 &170348850
 Transform:
@@ -4254,7 +4254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f630e4aeb02a334b883af3705dc8948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  status: {fileID: 0}
+  status: {fileID: 470343094}
   textStamina: {fileID: 1167255331}
 --- !u!114 &1234620417
 MonoBehaviour:
