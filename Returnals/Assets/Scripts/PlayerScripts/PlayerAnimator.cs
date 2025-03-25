@@ -17,8 +17,9 @@ public class PlayerAnimator : MonoBehaviour
         for(int i = 0;i < holdingWeapons.Count;i++)
         {
             GameObject newRightGun = Instantiate(holdingWeapons[i], rightGunBone.position, Quaternion.identity);
+            
             newRightGun.transform.parent = rightGunBone;
-            newRightGun.transform.localRotation = Quaternion.Euler(0, -90, 0);
+            newRightGun.transform.localRotation = Quaternion.Euler(0, -90, -90);
             newRightGun.SetActive(false);
         }
         SetArsenal(1);
