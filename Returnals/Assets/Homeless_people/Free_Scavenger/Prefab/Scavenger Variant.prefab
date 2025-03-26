@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 5847322003281657032}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.076, y: 0.022, z: 0.027}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -121,9 +121,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightGunBone: {fileID: 9215443821071232372}
   holdingWeapons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 684161438172492668, guid: 0adf61a16068ca64aa8126389fcf44dd, type: 3}
+  - {fileID: 289003456829574244, guid: c3a27a4d231b90248beae25cabaf1025, type: 3}
+  - {fileID: 4115301380646426663, guid: b6ddb5cedd75ac741966c5f8e57b696f, type: 3}
 --- !u!4 &7634123097710296406 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 87343285990306657, guid: 2c22d296d434cf54380cc9acfb2c7305, type: 3}

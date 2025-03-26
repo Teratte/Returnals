@@ -28,9 +28,23 @@ public class PlayerAnimator : MonoBehaviour
     private void Update()
     {
         ChangeWeapon();
-        if(weapon != null)
+        UpdateAttack();
+    }
+
+    private void ChangeWeapon()
+    {
+        int inputIndex = 0;
+        if (int.TryParse(Input.inputString, out inputIndex) && (inputIndex > 0 && inputIndex <= holdingWeapons.Count) && !weapon.IsReload)
+            SetArsenal(inputIndex);
+    }
+
+    public void UpdateAttack()
+    {
+        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) return;
+
+        if (weapon != null)
         {
-            if(!weapon.IsReload)
+            if (!weapon.IsReload)
             {
                 if (weapon.WeaponSetting.isAutomaticAttack)
                 {
@@ -50,7 +64,7 @@ public class PlayerAnimator : MonoBehaviour
                 }
             }
 
-            if(Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0))
             {
                 weapon.StopWeaponAction(0);
             }
@@ -59,23 +73,6 @@ public class PlayerAnimator : MonoBehaviour
             {
                 weapon.StartReload();
             }
-        }
-    }
-
-    private void ChangeWeapon()
-    {
-        int inputIndex = 0;
-        if (int.TryParse(Input.inputString, out inputIndex) && (inputIndex > 0 && inputIndex <= holdingWeapons.Count) && !weapon.IsReload)
-            SetArsenal(inputIndex);
-    }
-
-    public void UpdateAttack()
-    {
-        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) return;
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            animator.SetTrigger("onAttack");
         }
     }
 
