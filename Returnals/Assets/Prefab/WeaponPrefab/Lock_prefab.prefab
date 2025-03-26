@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 377321277160601277}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0024, y: -0.0713, z: -0.094}
+  m_LocalPosition: {x: -0.0293, y: -0.058000006, z: -0.044}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -66,6 +66,7 @@ Transform:
   - {fileID: 7105503417882830733}
   - {fileID: 5779043509381287353}
   - {fileID: 8197919948460952314}
+  - {fileID: 1316213225439065313}
   - {fileID: 7300774343669999594}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -192,12 +193,44 @@ MonoBehaviour:
     damage: 15
   runtimeAnimatorController: {fileID: 9100000, guid: 0fd3b20fc2774c14f9e42b2b3b1fcd8c, type: 2}
   leftHandle: {fileID: 7300774343669999594}
+  rightHandle: {fileID: 1316213225439065313}
   Impact: {fileID: 100002, guid: 99c73c92ac40473459640b165473206f, type: 3}
   fireClip: {fileID: 8300000, guid: 8521dc921224ebf44b860f57a87408a5, type: 3}
   reloadClip: {fileID: 8300000, guid: 9eca29ee7f8209e419470fcd586aec21, type: 3}
   fireTransform: {fileID: 8197919948460952314}
   muzzleFlashEffect: {fileID: 6929504620534478471}
   shellEjectEffect: {fileID: 1388553676300989329}
+--- !u!1 &6291374537681688497
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1316213225439065313}
+  m_Layer: 0
+  m_Name: RightHandle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1316213225439065313
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6291374537681688497}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0496, y: -0.0102, z: -0.0913}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1433376874190242317}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9045245325422405756
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,15 +359,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 1e2f6fcc2d82dd54091f5e9a3989672b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.0237
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 1e2f6fcc2d82dd54091f5e9a3989672b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.0188
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 1e2f6fcc2d82dd54091f5e9a3989672b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.0983
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 1e2f6fcc2d82dd54091f5e9a3989672b, type: 3}
       propertyPath: m_LocalRotation.w

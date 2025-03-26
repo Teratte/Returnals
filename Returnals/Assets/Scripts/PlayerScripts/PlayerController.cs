@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         //character.UpdateMovement();
-        //character.UpdateAttack();
 
         if(isNotAttack && status.PlayerHP < status.MaxHP)
         {

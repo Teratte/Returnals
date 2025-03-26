@@ -17350,46 +17350,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3787370336953940771, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
-      propertyPath: maxStamina
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 3787370336953940771, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
-      propertyPath: playerStamina
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 3787370336953940771, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
-      propertyPath: recoverRateStamina
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4060342249873972132, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4060342249873972132, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4060342249873972132, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4276586462201143438, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.09
-      objectReference: {fileID: 0}
-    - target: {fileID: 4276586462201143438, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 4276586462201143438, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.0119
-      objectReference: {fileID: 0}
-    - target: {fileID: 7682045693090172635, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 147f98da89bbf784c9156cacae550e4f, type: 2}
     - target: {fileID: 9171868947698613781, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
