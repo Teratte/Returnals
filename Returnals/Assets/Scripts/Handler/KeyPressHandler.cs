@@ -25,8 +25,20 @@ public class KeyPressHandler : MonoBehaviour
     {
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.F))
         {
-            SceneManagerScript.Instance.LoadRandomScene(); // 씬 이동 실행
-            GameManager.instance.isGameStart = true;
+            if (gameObject.name == "Truck")
+            {
+                SceneManagerScript.Instance.LoadRandomScene(); // 씬 이동 실행
+            }
+            else if (gameObject.name == "Table")
+            {
+                DoTableInteraction();
+            }
         }
+    }
+
+    private void DoTableInteraction()
+    {
+        Debug.Log("Table과 상호작용 실행됨.");
+        // 테이블과의 상호작용 로직 추가
     }
 }
