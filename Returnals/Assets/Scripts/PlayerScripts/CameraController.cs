@@ -28,6 +28,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) return;
         UpdateRotate();
         UpdateZoom();
     }

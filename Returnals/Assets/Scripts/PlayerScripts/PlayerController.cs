@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.Tab))
+        if(Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.Tab) || UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;

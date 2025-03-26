@@ -6,7 +6,7 @@ public class InventoryUI : MonoBehaviour
     public static bool inventoryActivated = false;
 
     [SerializeField]
-    private GameObject InventoryObject;
+    private GameObject InventoryObject; // 인벤토리 창
     [SerializeField]
     private GameObject slotsParent;
     [SerializeField]
@@ -28,6 +28,7 @@ public class InventoryUI : MonoBehaviour
 
     private void Update()
     {
+        // 인벤토리 창 열기
         if (Input.GetKey(KeyCode.Tab))
         {
             inventoryActivated = true;
