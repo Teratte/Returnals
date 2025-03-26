@@ -28,6 +28,7 @@ public class KeyPressHandler : MonoBehaviour
             if (gameObject.name == "Truck")
             {
                 SceneManagerScript.Instance.LoadRandomScene(); // æ¿ ¿Ãµø Ω««‡
+                GameManager.instance.isGameStart = true;
             }
             else if (gameObject.name == "Table")
             {
