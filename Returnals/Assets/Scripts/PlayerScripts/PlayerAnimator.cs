@@ -22,7 +22,8 @@ public class PlayerAnimator : MonoBehaviour
             newRightGun.transform.localRotation = Quaternion.Euler(0, -90, -90);
             newRightGun.SetActive(false);
         }
-        SetArsenal(1);
+        if (GameManager.instance.isGameStart)
+            SetArsenal(1);
     }
 
     private void Update()

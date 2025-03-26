@@ -39,8 +39,11 @@ public class InventoryUI : MonoBehaviour
             InventoryObject.SetActive(false);
         }
 
-        timer.text = $"{(int)GameManager.instance.Timer}";
-        ammoText.text = $"{playerAnimator.Weapon.CurrentAmmo} / {playerAnimator.Weapon.MaxAmmo}";
+        if(GameManager.instance.isGameStart)
+        {
+            timer.text = $"{(int)GameManager.instance.Timer}";
+            ammoText.text = $"{playerAnimator.Weapon.CurrentAmmo} / {playerAnimator.Weapon.MaxAmmo}";
+        }
     }
 
     public void AcquireItem(Item _item, int _count = 1)

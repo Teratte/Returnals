@@ -26,6 +26,7 @@ public class KeyPressHandler : MonoBehaviour
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.F))
         {
             SceneManagerScript.Instance.LoadRandomScene(); // æ¿ ¿Ãµø Ω««‡
+            GameManager.instance.isGameStart = true;
         }
     }
 }
