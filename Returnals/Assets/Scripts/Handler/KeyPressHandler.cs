@@ -6,7 +6,9 @@ public class KeyPressHandler : MonoBehaviour
     private bool isPlayerNearby = false;
 
     [SerializeField]
-    private GameObject gameStartPanel;
+    private GameObject weaponSelectPanel;
+    [SerializeField]
+    private GameObject startPanel;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -32,7 +34,7 @@ public class KeyPressHandler : MonoBehaviour
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                gameStartPanel.SetActive(true);
+                weaponSelectPanel.SetActive(true);
             }
             else if (gameObject.name == "Table")
             {
@@ -47,11 +49,18 @@ public class KeyPressHandler : MonoBehaviour
         GameManager.instance.isGameStart = true;
     }
 
+    public void ActivePanel()
+    {
+        weaponSelectPanel.SetActive(false);
+        startPanel.SetActive(true);
+    }
+
     public void Continue()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        gameStartPanel.SetActive(false);
+        weaponSelectPanel.SetActive(false);
+        startPanel.SetActive(false);
     }
 
     private void DoTableInteraction()
