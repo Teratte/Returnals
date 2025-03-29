@@ -10,7 +10,7 @@ public class AssaultRifle: WeaponBase
     [SerializeField]
     private AudioClip reloadClip;
     [SerializeField]
-    private float inaccuracyDitance = 0.2f;
+    private float inaccuracyDitance = 0.02f;
 
     public Transform fireTransform; // 탄알이 발사될 위치
 
@@ -89,7 +89,7 @@ public class AssaultRifle: WeaponBase
         // 탄알이 맞은 곳을 저장할 변수
         Vector3 hitPosition = Vector3.zero;
 
-        ray = mainCamera.ViewportPointToRay(new Vector2(0.5f, 0.6f));
+        ray = mainCamera.ViewportPointToRay(new Vector2(0.5f, 0.58f));
 
         if (Physics.Raycast(ray, out hit))
         {

@@ -78,7 +78,7 @@ public class Shotgun : WeaponBase
         // 탄알이 맞은 곳을 저장할 변수
         Vector3 hitPosition = Vector3.zero;
 
-        ray = mainCamera.ViewportPointToRay(new Vector2(0.5f, 0.6f));
+        ray = mainCamera.ViewportPointToRay(new Vector2(0.5f, 0.58f));
 
         if (Physics.Raycast(ray, out hit))
         {
