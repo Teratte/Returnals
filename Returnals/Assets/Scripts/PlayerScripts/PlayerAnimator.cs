@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
@@ -7,17 +6,20 @@ public class PlayerAnimator : MonoBehaviour
 
     [SerializeField]
     private Transform rightGunBone; // 오른손으로 총 드는 위치
-    public List<GameObject> holdingWeapons;
     private WeaponBase weapon;
 
     public WeaponBase Weapon => weapon;
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        for(int i = 0;i < holdingWeapons.Count;i++)
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < GameManager.instance.holdingWeaponPrefabs.Count; i++)
         {
-            GameObject newRightGun = Instantiate(holdingWeapons[i], rightGunBone.position, Quaternion.identity);
-            
+            GameObject newRightGun = Instantiate(GameManager.instance.holdingWeaponPrefabs[i], rightGunBone.position, Quaternion.identity);
+
             newRightGun.transform.parent = rightGunBone;
             newRightGun.transform.localRotation = Quaternion.Euler(0, -90, -90);
             newRightGun.SetActive(false);
@@ -35,7 +37,7 @@ public class PlayerAnimator : MonoBehaviour
     private void ChangeWeapon()
     {
         int inputIndex = 0;
-        if (int.TryParse(Input.inputString, out inputIndex) && (inputIndex > 0 && inputIndex <= holdingWeapons.Count) && !weapon.IsReload)
+        if (int.TryParse(Input.inputString, out inputIndex) && (inputIndex > 0 && inputIndex <= GameManager.instance.holdingWeaponPrefabs.Count) && !weapon.IsReload)
             SetArsenal(inputIndex);
     }
 
@@ -79,7 +81,7 @@ public class PlayerAnimator : MonoBehaviour
 
     public void SetArsenal(int number)
     {
-        for(int i = 0;i < holdingWeapons.Count;i++)
+        for(int i = 0;i < GameManager.instance.holdingWeaponPrefabs.Count;i++)
         {
             rightGunBone.GetChild(i).gameObject.SetActive(false);
         }

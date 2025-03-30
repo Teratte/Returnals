@@ -27,6 +27,8 @@ public class InventoryUI : MonoBehaviour
     private TextMeshProUGUI currentWeaponDetails;   // 현재 무기 상세정보
     [SerializeField]
     private TextMeshProUGUI currentWeaponStatus;    // 현재 무기 스탯
+    [SerializeField]
+    private GameObject panelDetail;                 // 무기 상세 정보 창
 
     private UIWeapon currentWeapon;                 // 현재 무기
 
@@ -47,6 +49,7 @@ public class InventoryUI : MonoBehaviour
         slots = slotsParent.GetComponentsInChildren<Slot>();
         playerAnimator = FindObjectOfType<PlayerAnimator>();
         InventoryObject.SetActive(false);
+        panelDetail.SetActive(false);
     }
 
     private void Update()
@@ -99,6 +102,7 @@ public class InventoryUI : MonoBehaviour
 
     public void UpdateCurrentWeapon(UIWeapon current)
     {
+        panelDetail.SetActive(true);
         currentWeapon = current;
 
         currentWeaponIcon.sprite = current.Icon;
@@ -106,9 +110,24 @@ public class InventoryUI : MonoBehaviour
         currentWeaponDetails.text = current.Details;
         currentWeaponStatus.text = current.WeaponStatus;
 
+        GameManager.instance.holdingWeaponPrefabs.Add(current.WeaponPrefab);
         if(current.WeaponType == WeaponAttribute.Support)
         {
             supportWeapon.sprite = current.Icon;
+            //GameManager.instance.holdingWeaponPrefabs[0] = current.WeaponPrefab;
+        }
+        else if (current.WeaponType == WeaponAttribute.Main)
+        {
+            if(GameManager.instance.holdingWeaponPrefabs.Count <2)
+            {
+                mainWeapon_1.sprite = current.Icon;
+                //GameManager.instance.holdingWeaponPrefabs[1] = current.WeaponPrefab;
+            }
+            else if(GameManager.instance.holdingWeaponPrefabs.Count < 3)
+            {
+                mainWeapon_2.sprite = current.Icon;
+                //GameManager.instance.holdingWeaponPrefabs[2] = current.WeaponPrefab;
+            }
         }
     }
 }

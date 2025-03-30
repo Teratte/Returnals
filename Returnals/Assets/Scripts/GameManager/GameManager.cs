@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 // 점수와 게임 오버 여부를 관리하는 게임 매니저
 public class GameManager : MonoBehaviour
@@ -38,6 +39,8 @@ public class GameManager : MonoBehaviour
     public bool isGameOver = false;
 
     public bool isGameStart = false;
+    public List<GameObject> holdingWeaponPrefabs;   // 보유 무기 리스트
+    public GameObject gazet;                        // 보유 가젯
 
     private void Awake()
     {
@@ -76,6 +79,10 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("인 게임 씬 로드");
             Slots = FindObjectOfType<InventoryUI>().Slots;
+        }
+        else if(SceneManager.GetActiveScene().name == "BaseCampTest")
+        {
+            holdingWeaponPrefabs.Clear();
         }
     }
 
