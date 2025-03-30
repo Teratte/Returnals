@@ -28,7 +28,7 @@ public class KeyPressHandler : MonoBehaviour
 
     private void Update()
     {
-        if (isPlayerNearby && Input.GetKeyDown(KeyCode.F))
+        if (isPlayerNearby && Input.GetKeyDown(KeyCode.F) && !startPanel.activeSelf)
         {
             if (gameObject.name == "Truck")
             {

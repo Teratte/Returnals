@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -63,5 +64,11 @@ public class PlayerController : MonoBehaviour
         }
 
         status.PlayerStamina = Mathf.Clamp(status.PlayerStamina, 0, status.MaxStamina);
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            GameManager.instance.isGameStart = false;
+            SceneManager.LoadScene("BaseCampTest");
+        }
     }
 }
