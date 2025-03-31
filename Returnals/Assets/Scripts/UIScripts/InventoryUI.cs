@@ -109,21 +109,24 @@ public class InventoryUI : MonoBehaviour
         currentWeaponName.text = current.Name;
         currentWeaponDetails.text = current.Details;
         currentWeaponStatus.text = current.WeaponStatus;
+    }
 
+    public void AddWeapon(UIWeapon current)
+    {
         GameManager.instance.holdingWeaponPrefabs.Add(current.WeaponPrefab);
-        if(current.WeaponType == WeaponAttribute.Support)
+        if (current.WeaponType == WeaponAttribute.Support)
         {
             supportWeapon.sprite = current.Icon;
             //GameManager.instance.holdingWeaponPrefabs[0] = current.WeaponPrefab;
         }
         else if (current.WeaponType == WeaponAttribute.Main)
         {
-            if(GameManager.instance.holdingWeaponPrefabs.Count <2)
+            if (GameManager.instance.holdingWeaponPrefabs.Count < 2)
             {
                 mainWeapon_1.sprite = current.Icon;
                 //GameManager.instance.holdingWeaponPrefabs[1] = current.WeaponPrefab;
             }
-            else if(GameManager.instance.holdingWeaponPrefabs.Count < 3)
+            else if (GameManager.instance.holdingWeaponPrefabs.Count < 3)
             {
                 mainWeapon_2.sprite = current.Icon;
                 //GameManager.instance.holdingWeaponPrefabs[2] = current.WeaponPrefab;

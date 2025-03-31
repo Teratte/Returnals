@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UIWeapon : MonoBehaviour, IPointerClickHandler
+public class UIWeapon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
 {
     [SerializeField]
     private WeaponData weaponData;
@@ -17,12 +17,20 @@ public class UIWeapon : MonoBehaviour, IPointerClickHandler
     public WeaponAttribute WeaponType => weaponData.type;
     public GameObject WeaponPrefab => weaponPrefab;
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (Icon != null)
+        {
+            inventoryUI.UpdateCurrentWeapon(this);
+        }
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if(Icon != null)
         {
-            inventoryUI.UpdateCurrentWeapon(this);
-            Destroy(this);
+            inventoryUI.AddWeapon(this);
+            Destroy(gameObject);
         }
     }
 }
