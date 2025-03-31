@@ -6,7 +6,7 @@ public class UIWeapon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
     [SerializeField]
     private WeaponData weaponData;
     [SerializeField]
-    private InventoryUI inventoryUI;
+    private UIBaseCamp uiBaseCamp;
     [SerializeField]
     private GameObject weaponPrefab;
 
@@ -21,7 +21,7 @@ public class UIWeapon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
     {
         if (Icon != null)
         {
-            inventoryUI.UpdateCurrentWeapon(this);
+            uiBaseCamp.UpdateCurrentWeapon(this);
         }
     }
 
@@ -29,7 +29,7 @@ public class UIWeapon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
     {
         if(Icon != null)
         {
-            inventoryUI.AddWeapon(this);
+            uiBaseCamp.AddWeapon(this);
             Destroy(gameObject);
         }
     }

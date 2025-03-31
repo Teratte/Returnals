@@ -366,13 +366,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 643858373}
     m_Modifications:
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
+      propertyPath: uiBaseCamp
+      value: 
+      objectReference: {fileID: 1859298395}
+    - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: inventoryUI
       value: 
-      objectReference: {fileID: 1859298390}
+      objectReference: {fileID: 0}
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: weaponPrefab
       value: 
-      objectReference: {fileID: 4115301380646426663, guid: b6ddb5cedd75ac741966c5f8e57b696f, type: 3}
+      objectReference: {fileID: 100000, guid: c56b9df7cee41024aaf65cae7565754f, type: 3}
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: weaponData.icon
       value: 
@@ -1062,9 +1066,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 643858373}
     m_Modifications:
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
+      propertyPath: uiBaseCamp
+      value: 
+      objectReference: {fileID: 1859298395}
+    - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: inventoryUI
       value: 
-      objectReference: {fileID: 1859298390}
+      objectReference: {fileID: 0}
     - target: {fileID: 1797818868158212996, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Name
       value: WeaponSlot (9)
@@ -1168,9 +1176,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 643858373}
     m_Modifications:
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
+      propertyPath: uiBaseCamp
+      value: 
+      objectReference: {fileID: 1859298395}
+    - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: inventoryUI
       value: 
-      objectReference: {fileID: 1859298390}
+      objectReference: {fileID: 0}
     - target: {fileID: 1797818868158212996, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Name
       value: WeaponSlot (12)
@@ -1712,9 +1724,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 643858373}
     m_Modifications:
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
+      propertyPath: uiBaseCamp
+      value: 
+      objectReference: {fileID: 1859298395}
+    - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: inventoryUI
       value: 
-      objectReference: {fileID: 1859298390}
+      objectReference: {fileID: 0}
     - target: {fileID: 1797818868158212996, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Name
       value: WeaponSlot (14)
@@ -2766,9 +2782,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 643858373}
     m_Modifications:
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
+      propertyPath: uiBaseCamp
+      value: 
+      objectReference: {fileID: 1859298395}
+    - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: inventoryUI
       value: 
-      objectReference: {fileID: 1859298390}
+      objectReference: {fileID: 0}
     - target: {fileID: 1797818868158212996, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Name
       value: WeaponSlot (10)
@@ -2872,9 +2892,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 643858373}
     m_Modifications:
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
+      propertyPath: uiBaseCamp
+      value: 
+      objectReference: {fileID: 1859298395}
+    - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: inventoryUI
       value: 
-      objectReference: {fileID: 1859298390}
+      objectReference: {fileID: 0}
     - target: {fileID: 1797818868158212996, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Name
       value: WeaponSlot (4)
@@ -3352,9 +3376,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 643858373}
     m_Modifications:
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
+      propertyPath: uiBaseCamp
+      value: 
+      objectReference: {fileID: 1859298395}
+    - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: inventoryUI
       value: 
-      objectReference: {fileID: 1859298390}
+      objectReference: {fileID: 0}
     - target: {fileID: 1797818868158212996, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Name
       value: WeaponSlot (8)
@@ -3458,9 +3486,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 643858373}
     m_Modifications:
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
+      propertyPath: uiBaseCamp
+      value: 
+      objectReference: {fileID: 1859298395}
+    - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: inventoryUI
       value: 
-      objectReference: {fileID: 1859298390}
+      objectReference: {fileID: 0}
     - target: {fileID: 1797818868158212996, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Name
       value: WeaponSlot (13)
@@ -4439,9 +4471,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 643858373}
     m_Modifications:
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
+      propertyPath: uiBaseCamp
+      value: 
+      objectReference: {fileID: 1859298395}
+    - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: inventoryUI
       value: 
-      objectReference: {fileID: 1859298390}
+      objectReference: {fileID: 0}
     - target: {fileID: 1797818868158212996, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Name
       value: WeaponSlot (17)
@@ -6090,9 +6126,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 643858373}
     m_Modifications:
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
+      propertyPath: uiBaseCamp
+      value: 
+      objectReference: {fileID: 1859298395}
+    - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: inventoryUI
       value: 
-      objectReference: {fileID: 1859298390}
+      objectReference: {fileID: 0}
     - target: {fileID: 1797818868158212996, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Name
       value: WeaponSlot (7)
@@ -6262,9 +6302,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 643858373}
     m_Modifications:
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
+      propertyPath: uiBaseCamp
+      value: 
+      objectReference: {fileID: 1859298395}
+    - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: inventoryUI
       value: 
-      objectReference: {fileID: 1859298390}
+      objectReference: {fileID: 0}
     - target: {fileID: 1797818868158212996, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Name
       value: WeaponSlot (6)
@@ -7077,9 +7121,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 643858373}
     m_Modifications:
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
+      propertyPath: uiBaseCamp
+      value: 
+      objectReference: {fileID: 1859298395}
+    - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: inventoryUI
       value: 
-      objectReference: {fileID: 1859298390}
+      objectReference: {fileID: 0}
     - target: {fileID: 1797818868158212996, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Name
       value: WeaponSlot (2)
@@ -7191,7 +7239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1110059754
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7363,9 +7411,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 643858373}
     m_Modifications:
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
+      propertyPath: uiBaseCamp
+      value: 
+      objectReference: {fileID: 1859298395}
+    - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: inventoryUI
       value: 
-      objectReference: {fileID: 1859298390}
+      objectReference: {fileID: 0}
     - target: {fileID: 1797818868158212996, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Name
       value: WeaponSlot (5)
@@ -8567,9 +8619,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 643858373}
     m_Modifications:
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
+      propertyPath: uiBaseCamp
+      value: 
+      objectReference: {fileID: 1859298395}
+    - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: inventoryUI
       value: 
-      objectReference: {fileID: 1859298390}
+      objectReference: {fileID: 0}
     - target: {fileID: 1797818868158212996, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Name
       value: WeaponSlot (3)
@@ -9647,9 +9703,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 643858373}
     m_Modifications:
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
+      propertyPath: uiBaseCamp
+      value: 
+      objectReference: {fileID: 1859298395}
+    - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: inventoryUI
       value: 
-      objectReference: {fileID: 1859298390}
+      objectReference: {fileID: 0}
     - target: {fileID: 1797818868158212996, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Name
       value: WeaponSlot (15)
@@ -9855,9 +9915,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 643858373}
     m_Modifications:
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
+      propertyPath: uiBaseCamp
+      value: 
+      objectReference: {fileID: 1859298395}
+    - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: inventoryUI
       value: 
-      objectReference: {fileID: 1859298390}
+      objectReference: {fileID: 0}
     - target: {fileID: 1797818868158212996, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Name
       value: WeaponSlot (16)
@@ -11979,7 +12043,7 @@ PrefabInstance:
     - target: {fileID: 2063890794844617783, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
       propertyPath: inventoryUI
       value: 
-      objectReference: {fileID: 1859298390}
+      objectReference: {fileID: 0}
     - target: {fileID: 2837794140489314136, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
       propertyPath: textInteraction
       value: 
@@ -12116,7 +12180,7 @@ GameObject:
   - component: {fileID: 1859298393}
   - component: {fileID: 1859298392}
   - component: {fileID: 1859298391}
-  - component: {fileID: 1859298390}
+  - component: {fileID: 1859298395}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -12124,31 +12188,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1859298390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1859298389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc9ff8020bfb0314eb138fc87d428bce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InventoryObject: {fileID: 1778089468}
-  slotsParent: {fileID: 233437013}
-  timer: {fileID: 0}
-  ammoText: {fileID: 0}
-  currentWeaponIcon: {fileID: 1571574346}
-  currentWeaponName: {fileID: 13865853}
-  currentWeaponDetails: {fileID: 1485782612}
-  currentWeaponStatus: {fileID: 1312704583}
-  panelDetail: {fileID: 1516382975}
-  supportWeapon: {fileID: 367714920}
-  mainWeapon_1: {fileID: 121215950}
-  mainWeapon_2: {fileID: 1665949878}
-  gazet: {fileID: 355357616}
 --- !u!114 &1859298391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12236,6 +12275,29 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1859298395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859298389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bbec423abcda814a9f9fdb528192630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InventoryObject: {fileID: 1778089468}
+  slotsParent: {fileID: 233437013}
+  currentWeaponIcon: {fileID: 1571574346}
+  currentWeaponName: {fileID: 13865853}
+  currentWeaponDetails: {fileID: 1485782612}
+  currentWeaponStatus: {fileID: 1312704583}
+  panelDetail: {fileID: 1516382975}
+  supportWeapon: {fileID: 367714920}
+  mainWeapon_1: {fileID: 121215950}
+  mainWeapon_2: {fileID: 1665949878}
+  gazet: {fileID: 355357616}
 --- !u!1 &1931420048
 GameObject:
   m_ObjectHideFlags: 0
@@ -13319,9 +13381,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 643858373}
     m_Modifications:
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
+      propertyPath: uiBaseCamp
+      value: 
+      objectReference: {fileID: 1859298395}
+    - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: inventoryUI
       value: 
-      objectReference: {fileID: 1859298390}
+      objectReference: {fileID: 0}
     - target: {fileID: 1797818868158212996, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Name
       value: WeaponSlot (11)
@@ -13672,9 +13738,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 643858373}
     m_Modifications:
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
+      propertyPath: uiBaseCamp
+      value: 
+      objectReference: {fileID: 1859298395}
+    - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: inventoryUI
       value: 
-      objectReference: {fileID: 1859298390}
+      objectReference: {fileID: 0}
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: weaponPrefab
       value: 

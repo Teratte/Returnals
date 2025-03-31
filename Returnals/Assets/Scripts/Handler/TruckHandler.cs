@@ -19,8 +19,8 @@ public class TruckHandler : KeyPressHandler
 
     public void GameStart()
     {
-        SceneManagerScript.Instance.LoadRandomScene(); // æ¿ ¿Ãµø Ω««‡
         GameManager.instance.isGameStart = true;
+        SceneManagerScript.Instance.LoadRandomScene(); // æ¿ ¿Ãµø Ω««‡
     }
 
     public void ActivePanel()
