@@ -25,7 +25,9 @@ public class PlayerAnimator : MonoBehaviour
             newRightGun.SetActive(false);
         }
         if (GameManager.instance.isGameStart)
+        {
             SetArsenal(1);
+        }
     }
 
     private void Update()
