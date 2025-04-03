@@ -11,17 +11,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float recoverAbleTime = 3.0f;
     bool isRecover = false;
-    private GazetBase gazet;    // °¡Á¬
-
-    public GazetBase Gazet => gazet;
 
     private void Awake()
     {
         character = GetComponent<MovementCharacter>();
         status = GetComponent<Status>();
 
-        if (GameManager.instance.isGameStart)
-            SetGazet();
+        //if (GameManager.instance.isGameStart)
+        //    SetGazet();
     }
 
     private void Update()
@@ -56,7 +53,7 @@ public class PlayerController : MonoBehaviour
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             character.UpdateMovement();
-            UpdateGazet();
+            //UpdateGazet();
         }
         status.PlayerHP = Mathf.Clamp(status.PlayerHP,0,status.MaxHP);
 
@@ -77,21 +74,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void UpdateGazet()
-    {
-        if (gazet != null)
-        {
-            if (Input.GetKeyDown(KeyCode.Q))
-                gazet.StartGazetAction();
-        }
-        else
-        {
-            Debug.Log("NULL");
-        }
-    }
+    //public void UpdateGazet()
+    //{
+    //    if (gazet != null)
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.Q))
+    //            gazet.StartGazetAction();
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("NULL");
+    //    }
+    //}
 
-    public void SetGazet()
-    {
-        gazet = GameManager.instance.holdingGazet.GetComponent<GazetBase>();
-    }
+    //public void SetGazet()
+    //{
+    //    gazet = GameManager.instance.holdingGazet.GetComponent<GazetBase>();
+    //}
 }

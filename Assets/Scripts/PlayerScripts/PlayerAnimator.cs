@@ -7,8 +7,10 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField]
     private Transform rightGunBone; // 오른손으로 총 드는 위치
     private WeaponBase weapon;
+    private GazetBase gazet;    // 가젯
 
     public WeaponBase Weapon => weapon;
+    public GazetBase Gazet => gazet;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -27,6 +29,7 @@ public class PlayerAnimator : MonoBehaviour
         if (GameManager.instance.isGameStart)
         {
             SetArsenal(1);
+            SetGazet();
         }
     }
 
@@ -34,6 +37,7 @@ public class PlayerAnimator : MonoBehaviour
     {
         ChangeWeapon();
         UpdateAttack();
+        UpdateGazet();
     }
 
     private void ChangeWeapon()
@@ -80,6 +84,18 @@ public class PlayerAnimator : MonoBehaviour
             }
         }
     }
+    public void UpdateGazet()
+    {
+        if (gazet != null)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+                gazet.StartGazetAction();
+        }
+        else
+        {
+            Debug.Log("NULL");
+        }
+    }
 
     public void SetArsenal(int number)
     {
@@ -94,6 +110,11 @@ public class PlayerAnimator : MonoBehaviour
         {
             animator.runtimeAnimatorController = weapon.RuntimeAnimatorController;
         }
+    }
+
+    public void SetGazet()
+    {
+        gazet = GameManager.instance.holdingGazet.GetComponent<GazetBase>();
     }
 
     private void OnAnimatorIK(int layerIndex)

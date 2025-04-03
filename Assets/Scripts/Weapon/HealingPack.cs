@@ -5,7 +5,7 @@ public class HealingPack : GazetBase
     private Status status;
     public override void StartGazetAction()
     {
-        status = FindAnyObjectByType<Status>();
+        status = FindObjectOfType<Status>();
         if(status != null )
         {
             if (Time.time >= lastUseTime + gazetSetting.rate)
