@@ -30,9 +30,7 @@ public class UIBaseCamp : MonoBehaviour
     [SerializeField]
     private Image supportWeapon;        // 보조 무기
     [SerializeField]
-    private Image mainWeapon_1;         // 메인 무기1
-    [SerializeField]
-    private Image mainWeapon_2;         // 메인 무기2
+    private Image mainWeapon;         // 메인 무기
     [SerializeField]
     private Image gazet;                // 가젯
 
@@ -73,24 +71,22 @@ public class UIBaseCamp : MonoBehaviour
 
     public void AddWeapon(UIWeapon current)
     {
-        GameManager.instance.holdingWeaponPrefabs.Add(current.WeaponPrefab);
+        if(current.WeaponPrefab.GetComponent<WeaponBase>()!=null)
+            GameManager.instance.holdingWeaponPrefabs.Add(current.WeaponPrefab);
+        else
+            GameManager.instance.holdingGazet = current.WeaponPrefab;
+
         if (current.WeaponType == WeaponAttribute.Support)
         {
             supportWeapon.sprite = current.Icon;
-            //GameManager.instance.holdingWeaponPrefabs[0] = current.WeaponPrefab;
         }
         else if (current.WeaponType == WeaponAttribute.Main)
         {
-            if (GameManager.instance.holdingWeaponPrefabs.Count < 2)
-            {
-                mainWeapon_1.sprite = current.Icon;
-                //GameManager.instance.holdingWeaponPrefabs[1] = current.WeaponPrefab;
-            }
-            else if (GameManager.instance.holdingWeaponPrefabs.Count < 3)
-            {
-                mainWeapon_2.sprite = current.Icon;
-                //GameManager.instance.holdingWeaponPrefabs[2] = current.WeaponPrefab;
-            }
+            mainWeapon.sprite = current.Icon;
+        }
+        else if(current.WeaponType == WeaponAttribute.Gazet)
+        {
+            gazet.sprite = current.Icon;
         }
     }
 }

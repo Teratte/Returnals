@@ -16,12 +16,13 @@ public class PlayerController : MonoBehaviour
     {
         character = GetComponent<MovementCharacter>();
         status = GetComponent<Status>();
+
+        //if (GameManager.instance.isGameStart)
+        //    SetGazet();
     }
 
     private void Update()
     {
-        //character.UpdateMovement();
-
         if(isNotAttack && status.PlayerHP < status.MaxHP)
         {
             notAttackTime += Time.deltaTime;
@@ -52,6 +53,7 @@ public class PlayerController : MonoBehaviour
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             character.UpdateMovement();
+            //UpdateGazet();
         }
         status.PlayerHP = Mathf.Clamp(status.PlayerHP,0,status.MaxHP);
 
@@ -71,4 +73,22 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("BaseCampTest");
         }
     }
+
+    //public void UpdateGazet()
+    //{
+    //    if (gazet != null)
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.Q))
+    //            gazet.StartGazetAction();
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("NULL");
+    //    }
+    //}
+
+    //public void SetGazet()
+    //{
+    //    gazet = GameManager.instance.holdingGazet.GetComponent<GazetBase>();
+    //}
 }
