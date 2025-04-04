@@ -29,6 +29,12 @@ public class KeyPressHandler : MonoBehaviour
             {
                 DoTableInteraction();
             }
+
+            // 임시 테스트
+            if (gameObject.name == "Truck")
+            {
+                SceneManagerScript.Instance.LoadRandomScene(); // 씬 이동 실행
+            }
         }
     }
 
