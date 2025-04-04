@@ -10,7 +10,7 @@ public class AssaultRifle: WeaponBase
     [SerializeField]
     private AudioClip reloadClip;
     [SerializeField]
-    private float inaccuracyDitance = 0.02f;
+    private float inaccuracyDitance = 0.01f;
 
     public Transform fireTransform; // 탄알이 발사될 위치
 
