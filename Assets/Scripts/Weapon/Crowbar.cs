@@ -58,4 +58,12 @@ public class Crowbar : WeaponBase
     public override void StartReload()
     {
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.GetComponent<HitableObject>() != null)
+        {
+            other.GetComponent<HitableObject>().TakeDamage(1);
+        }
+    }
 }

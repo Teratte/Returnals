@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3764363282135800562}
   - component: {fileID: 7627278805448270755}
   - component: {fileID: 8452811545343204794}
+  - component: {fileID: 6861460019685029471}
   m_Layer: 0
   m_Name: crowbar
   m_TagString: Untagged
@@ -159,6 +160,27 @@ MonoBehaviour:
   leftHandle: {fileID: 0}
   rightHandle: {fileID: 0}
   fireClip: {fileID: 8300000, guid: b82a66dab749415458d1f6600c997095, type: 3}
+--- !u!135 &6861460019685029471
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7120927118973931455}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.07
+  m_Center: {x: -0.03, y: 0.45, z: 0.09}
 --- !u!1001 &5662910528998522023
 PrefabInstance:
   m_ObjectHideFlags: 0
