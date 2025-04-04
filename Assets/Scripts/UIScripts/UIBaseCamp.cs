@@ -10,7 +10,7 @@ public class UIBaseCamp : MonoBehaviour
     private GameObject InventoryObject; // 인벤토리 창
     [SerializeField]
     private GameObject slotsParent;
-    private Slot[] slots;
+    private Slot[] slots;                           // 보관된 아이템
 
     [Header("Current Weapon")]
     [SerializeField]
@@ -41,6 +41,9 @@ public class UIBaseCamp : MonoBehaviour
         slots = slotsParent.GetComponentsInChildren<Slot>();
         InventoryObject.SetActive(false);
         panelDetail.SetActive(false);
+
+        foreach(Item item in GameManager.instance.Items)
+            AcquireItem(item);
     }
 
     private void Update()
@@ -87,6 +90,33 @@ public class UIBaseCamp : MonoBehaviour
         else if(current.WeaponType == WeaponAttribute.Gazet)
         {
             gazet.sprite = current.Icon;
+        }
+    }
+
+    public void AcquireItem(Item _item, int _count = 1)
+    {
+        if (Item.ItemType.Equipment != _item.itemType)
+        {
+            for (int i = 0; i < slots.Length; i++)
+            {
+                if (slots[i].item != null)
+                {
+                    if (slots[i].item.itemName == _item.itemName)
+                    {
+                        slots[i].SetSlotCount(_count);
+                        return;
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item == null)
+            {
+                slots[i].AddItem(_item, _count);
+                return;
+            }
         }
     }
 }
