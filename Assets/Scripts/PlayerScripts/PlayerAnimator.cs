@@ -18,16 +18,18 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < GameManager.instance.holdingWeaponPrefabs.Count; i++)
-        {
-            GameObject newRightGun = Instantiate(GameManager.instance.holdingWeaponPrefabs[i], rightGunBone.position, Quaternion.identity);
-
-            newRightGun.transform.parent = rightGunBone;
-            newRightGun.transform.localRotation = Quaternion.Euler(0, -90, -90);
-            newRightGun.SetActive(false);
-        }
         if (GameManager.instance.isGameStart)
         {
+            GameManager.instance.holdingWeaponPrefabs.Add(GameManager.instance.subWeapon);
+            GameManager.instance.holdingWeaponPrefabs.Add(GameManager.instance.mainWeapon);
+            for (int i = 0; i < GameManager.instance.holdingWeaponPrefabs.Count; i++)
+            {
+                GameObject newRightGun = Instantiate(GameManager.instance.holdingWeaponPrefabs[i], rightGunBone.position, Quaternion.identity);
+
+                newRightGun.transform.parent = rightGunBone;
+                newRightGun.transform.localRotation = Quaternion.Euler(0, -90, -90);
+                newRightGun.SetActive(false);
+            }
             SetArsenal(1);
             SetGazet();
         }

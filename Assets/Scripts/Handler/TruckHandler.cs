@@ -25,6 +25,8 @@ public class TruckHandler : KeyPressHandler
 
     public void ActivePanel()
     {
+        if (GameManager.instance.subWeapon == null || GameManager.instance.holdingGazet == null || GameManager.instance.mainWeapon == null)   // 무기나 가젯을 다 선택하지 않았을 경우, 실행X
+            return;
         weaponSelectPanel.SetActive(false);
         startPanel.SetActive(true);
     }
