@@ -74,6 +74,7 @@ public class MovementCharacter : MonoBehaviour
         {
             int index = collision.gameObject.GetComponent<EatableObject>().ItemIndex;
             inventoryUI.AcquireItem(collision.gameObject.GetComponent<EatableObject>().item);
+            GameManager.instance.AddItem(collision.gameObject.GetComponent<EatableObject>().item);
 
             Destroy(collision.gameObject);
             Debug.Log(collision.gameObject.name);
