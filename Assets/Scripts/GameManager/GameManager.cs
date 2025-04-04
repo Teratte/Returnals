@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     private static GameManager m_instance; // 싱글톤이 할당될 static 변수
 
-    private Slot[] slots;
+    public Slot[] slots;
     public Slot[] Slots
     {
         set => slots = value;

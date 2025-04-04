@@ -73,22 +73,4 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("BaseCampTest");
         }
     }
-
-    //public void UpdateGazet()
-    //{
-    //    if (gazet != null)
-    //    {
-    //        if (Input.GetKeyDown(KeyCode.Q))
-    //            gazet.StartGazetAction();
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("NULL");
-    //    }
-    //}
-
-    //public void SetGazet()
-    //{
-    //    gazet = GameManager.instance.holdingGazet.GetComponent<GazetBase>();
-    //}
 }
