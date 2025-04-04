@@ -71,17 +71,17 @@ public class UIBaseCamp : MonoBehaviour
 
     public void AddWeapon(UIWeapon current)
     {
-        if(current.WeaponPrefab.GetComponent<WeaponBase>()!=null)
-            GameManager.instance.holdingWeaponPrefabs.Add(current.WeaponPrefab);
-        else
+        if(current.WeaponPrefab.GetComponent<WeaponBase>()==null)
             GameManager.instance.holdingGazet = current.WeaponPrefab;
 
         if (current.WeaponType == WeaponAttribute.Support)
         {
+            GameManager.instance.subWeapon = current.WeaponPrefab;
             supportWeapon.sprite = current.Icon;
         }
         else if (current.WeaponType == WeaponAttribute.Main)
         {
+            GameManager.instance.mainWeapon = current.WeaponPrefab;
             mainWeapon.sprite = current.Icon;
         }
         else if(current.WeaponType == WeaponAttribute.Gazet)

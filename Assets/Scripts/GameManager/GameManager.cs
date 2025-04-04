@@ -40,7 +40,9 @@ public class GameManager : MonoBehaviour
 
     public bool isGameStart = false;
     public List<GameObject> holdingWeaponPrefabs;   // 보유 무기 리스트
-    public GameObject holdingGazet;                        // 보유 가젯
+    public GameObject mainWeapon;                   // 메인 무기
+    public GameObject subWeapon;                    // 보조 무기
+    public GameObject holdingGazet;                 // 보유 가젯
 
     private void Awake()
     {

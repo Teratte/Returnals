@@ -30,7 +30,7 @@ public class UIWeapon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
         if(Icon != null)
         {
             uiBaseCamp.AddWeapon(this);
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }
