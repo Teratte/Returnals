@@ -10,7 +10,7 @@ public class AssaultRifle: WeaponBase
     [SerializeField]
     private AudioClip reloadClip;
     [SerializeField]
-    private float inaccuracyDitance = 0.01f;
+    private float inaccuracyDitance = 0.001f;
 
     public Transform fireTransform; // 탄알이 발사될 위치
 
@@ -101,8 +101,9 @@ public class AssaultRifle: WeaponBase
         }
 
         Vector3 attackDirection = (hitPosition - fireTransform.position).normalized;
+        Vector3 finalDirection = GetShootingDirection(attackDirection);
         // 레이캐스트(시작 지점, 방향, 충돌 정보 컨테이너, 사정거리)
-        if (Physics.Raycast(fireTransform.position, GetShootingDirection(attackDirection), out hit))
+        if (Physics.Raycast(fireTransform.position, finalDirection, out hit))
         {
             Instantiate(Impact, hit.point, hit.transform.rotation);
 

@@ -11,6 +11,6 @@ public class PlayerStaminaViewer : MonoBehaviour
 
     private void Update()
     {
-        textStamina.text = $"{(int)status.PlayerStamina}";
+        textStamina.text = $"{(int)status.PlayerStamina} / {(int)status.MaxStamina}";
     }
 }

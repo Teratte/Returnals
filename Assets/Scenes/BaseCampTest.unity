@@ -8251,6 +8251,8 @@ MonoBehaviour:
   mainWeapon: {fileID: 0}
   subWeapon: {fileID: 0}
   holdingGazet: {fileID: 0}
+  items: []
+  isUIOn: 0
 --- !u!1001 &1036235038
 PrefabInstance:
   m_ObjectHideFlags: 0

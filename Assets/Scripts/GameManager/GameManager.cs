@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
 
     public List<Item> Items => items;
 
+    public bool isUIOn = false;
+
     private void Awake()
     {
         // 씬에 싱글톤 오브젝트가 된 다른 GameManager 오브젝트가 있다면
@@ -95,5 +97,19 @@ public class GameManager : MonoBehaviour
     public void AddItem(Item item)
     {
         items.Add(item);
+    }
+
+    public void ActiveUI()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        isUIOn = true;
+    }
+
+    public void DeactiveUI()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        isUIOn = false;
     }
 }

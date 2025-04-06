@@ -53,11 +53,13 @@ public class UIBaseCamp : MonoBehaviour
         {
             inventoryActivated = true;
             InventoryObject.SetActive(true);
+            //GameManager.instance.ActiveUI();
         }
         else
         {
             inventoryActivated = false;
             InventoryObject.SetActive(false);
+            //GameManager.instance.DeactiveUI();
         }
     }
 
