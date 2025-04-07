@@ -104,6 +104,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         isUIOn = true;
+        Time.timeScale = 0.0f;
     }
 
     public void DeactiveUI()
@@ -111,5 +112,6 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         isUIOn = false;
+        Time.timeScale = 1.0f;
     }
 }
