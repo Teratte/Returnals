@@ -195,8 +195,8 @@ MonoBehaviour:
   leftHandle: {fileID: 7300774343669999594}
   rightHandle: {fileID: 1316213225439065313}
   Impact: {fileID: 100002, guid: 99c73c92ac40473459640b165473206f, type: 3}
-  fireClip: {fileID: 8300000, guid: 8521dc921224ebf44b860f57a87408a5, type: 3}
-  reloadClip: {fileID: 8300000, guid: 9eca29ee7f8209e419470fcd586aec21, type: 3}
+  fireClip: {fileID: 8300000, guid: 2203773368e4340d98c114f55c2dd7fd, type: 3}
+  reloadClip: {fileID: 8300000, guid: 9158afb6966d445db9caf1dccf7acbcc, type: 3}
   fireTransform: {fileID: 8197919948460952314}
   muzzleFlashEffect: {fileID: 6929504620534478471}
   shellEjectEffect: {fileID: 1388553676300989329}
