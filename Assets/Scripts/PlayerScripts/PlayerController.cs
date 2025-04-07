@@ -42,9 +42,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(!GameManager.instance.isUIOn)
-            character.UpdateMovement();
-
+        character.UpdateMovement();
         status.PlayerHP = Mathf.Clamp(status.PlayerHP,0,status.MaxHP);
 
         status.PlayerStamina += Time.deltaTime * status.RecoverRateStamina;
