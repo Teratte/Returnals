@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour
     {
         if (Cursor.visible) return;
         UpdateRotate();
-        UpdateZoom();
+        //UpdateZoom();
     }
 
     private void LateUpdate()

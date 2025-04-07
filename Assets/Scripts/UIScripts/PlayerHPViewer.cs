@@ -11,6 +11,6 @@ public class PlayerHPViewer : MonoBehaviour
 
     private void Update()
     {
-        textHP.text = $"{(int)status.PlayerHP}";
+        textHP.text = $"{(int)status.PlayerHP} / {(int)status.MaxHP}";
     }
 }

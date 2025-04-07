@@ -28,8 +28,8 @@ public class MovementCharacter : MonoBehaviour
     public void UpdateMovement()
     {
         // 키 입력으로 x, z축 이동 방향 설정
-        float AxisH = Input.GetAxisRaw("Horizontal");
-        float AxisV = Input.GetAxisRaw("Vertical");
+        float AxisH = Input.GetAxis("Horizontal");
+        float AxisV = Input.GetAxis("Vertical");
 
         // 오브젝트의 이동 속도 설정 (Shift키를 누르지 않으면 walkSpeed, 누르면 runSpeed)
         status.MoveSpeed = Mathf.Lerp(status.WalkSpeed, status.RunSpeed, Input.GetAxis("Sprint"));

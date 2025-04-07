@@ -11,8 +11,7 @@ public class TruckHandler : KeyPressHandler
     {
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.F) && !startPanel.activeSelf)
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            GameManager.instance.ActiveUI();
             weaponSelectPanel.SetActive(true);
         }
     }
@@ -21,6 +20,7 @@ public class TruckHandler : KeyPressHandler
     {
         SceneManagerScript.Instance.LoadRandomScene(); // æ¿ ¿Ãµø Ω««‡
         GameManager.instance.isGameStart = true;
+        GameManager.instance.DeactiveUI();
     }
 
     public void ActivePanel()
@@ -29,12 +29,12 @@ public class TruckHandler : KeyPressHandler
             return;
         weaponSelectPanel.SetActive(false);
         startPanel.SetActive(true);
+        GameManager.instance.ActiveUI();
     }
 
     public void Continue()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        GameManager.instance.DeactiveUI();
         weaponSelectPanel.SetActive(false);
         startPanel.SetActive(false);
     }
