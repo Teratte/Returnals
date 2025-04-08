@@ -10,7 +10,7 @@ public class UIBaseCamp : MonoBehaviour
     private GameObject InventoryObject; // 인벤토리 창
     [SerializeField]
     private GameObject slotsParent;
-    private Slot[] slots;
+    private Slot[] slots;                           // 보관된 아이템
 
     [Header("Current Weapon")]
     [SerializeField]
@@ -30,9 +30,7 @@ public class UIBaseCamp : MonoBehaviour
     [SerializeField]
     private Image supportWeapon;        // 보조 무기
     [SerializeField]
-    private Image mainWeapon_1;         // 메인 무기1
-    [SerializeField]
-    private Image mainWeapon_2;         // 메인 무기2
+    private Image mainWeapon;         // 메인 무기
     [SerializeField]
     private Image gazet;                // 가젯
 
@@ -43,6 +41,9 @@ public class UIBaseCamp : MonoBehaviour
         slots = slotsParent.GetComponentsInChildren<Slot>();
         InventoryObject.SetActive(false);
         panelDetail.SetActive(false);
+
+        foreach(Item item in GameManager.instance.Items)
+            AcquireItem(item);
     }
 
     private void Update()
@@ -52,11 +53,13 @@ public class UIBaseCamp : MonoBehaviour
         {
             inventoryActivated = true;
             InventoryObject.SetActive(true);
+            //GameManager.instance.ActiveUI();
         }
         else
         {
             inventoryActivated = false;
             InventoryObject.SetActive(false);
+            //GameManager.instance.DeactiveUI();
         }
     }
 
@@ -73,23 +76,48 @@ public class UIBaseCamp : MonoBehaviour
 
     public void AddWeapon(UIWeapon current)
     {
-        GameManager.instance.holdingWeaponPrefabs.Add(current.WeaponPrefab);
+        if(current.WeaponPrefab.GetComponent<WeaponBase>()==null)
+            GameManager.instance.holdingGazet = current.WeaponPrefab;
+
         if (current.WeaponType == WeaponAttribute.Support)
         {
+            GameManager.instance.subWeapon = current.WeaponPrefab;
             supportWeapon.sprite = current.Icon;
-            //GameManager.instance.holdingWeaponPrefabs[0] = current.WeaponPrefab;
         }
         else if (current.WeaponType == WeaponAttribute.Main)
         {
-            if (GameManager.instance.holdingWeaponPrefabs.Count < 2)
+            GameManager.instance.mainWeapon = current.WeaponPrefab;
+            mainWeapon.sprite = current.Icon;
+        }
+        else if(current.WeaponType == WeaponAttribute.Gazet)
+        {
+            gazet.sprite = current.Icon;
+        }
+    }
+
+    public void AcquireItem(Item _item, int _count = 1)
+    {
+        if (Item.ItemType.Equipment != _item.itemType)
+        {
+            for (int i = 0; i < slots.Length; i++)
             {
-                mainWeapon_1.sprite = current.Icon;
-                //GameManager.instance.holdingWeaponPrefabs[1] = current.WeaponPrefab;
+                if (slots[i].item != null)
+                {
+                    if (slots[i].item.itemName == _item.itemName)
+                    {
+                        slots[i].SetSlotCount(_count);
+                        return;
+                    }
+                }
             }
-            else if (GameManager.instance.holdingWeaponPrefabs.Count < 3)
+        }
+
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item == null)
             {
-                mainWeapon_2.sprite = current.Icon;
-                //GameManager.instance.holdingWeaponPrefabs[2] = current.WeaponPrefab;
+                slots[i].AddItem(_item, _count);
+                return;
             }
         }
     }

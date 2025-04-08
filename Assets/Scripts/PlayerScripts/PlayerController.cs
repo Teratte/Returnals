@@ -16,12 +16,12 @@ public class PlayerController : MonoBehaviour
     {
         character = GetComponent<MovementCharacter>();
         status = GetComponent<Status>();
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
     {
-        //character.UpdateMovement();
-
         if(isNotAttack && status.PlayerHP < status.MaxHP)
         {
             notAttackTime += Time.deltaTime;
@@ -42,17 +42,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.Tab) || UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-        else
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            character.UpdateMovement();
-        }
+        character.UpdateMovement();
         status.PlayerHP = Mathf.Clamp(status.PlayerHP,0,status.MaxHP);
 
         status.PlayerStamina += Time.deltaTime * status.RecoverRateStamina;

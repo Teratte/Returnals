@@ -7,8 +7,10 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField]
     private Transform rightGunBone; // 오른손으로 총 드는 위치
     private WeaponBase weapon;
+    private GazetBase gazet;    // 가젯
 
     public WeaponBase Weapon => weapon;
+    public GazetBase Gazet => gazet;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -16,22 +18,28 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < GameManager.instance.holdingWeaponPrefabs.Count; i++)
-        {
-            GameObject newRightGun = Instantiate(GameManager.instance.holdingWeaponPrefabs[i], rightGunBone.position, Quaternion.identity);
-
-            newRightGun.transform.parent = rightGunBone;
-            newRightGun.transform.localRotation = Quaternion.Euler(0, -90, -90);
-            newRightGun.SetActive(false);
-        }
         if (GameManager.instance.isGameStart)
+        {
+            GameManager.instance.holdingWeaponPrefabs.Add(GameManager.instance.subWeapon);
+            GameManager.instance.holdingWeaponPrefabs.Add(GameManager.instance.mainWeapon);
+            for (int i = 0; i < GameManager.instance.holdingWeaponPrefabs.Count; i++)
+            {
+                GameObject newRightGun = Instantiate(GameManager.instance.holdingWeaponPrefabs[i], rightGunBone.position, Quaternion.identity);
+
+                newRightGun.transform.parent = rightGunBone;
+                newRightGun.transform.localRotation = Quaternion.Euler(0, -90, -90);
+                newRightGun.SetActive(false);
+            }
             SetArsenal(1);
+            SetGazet();
+        }
     }
 
     private void Update()
     {
         ChangeWeapon();
         UpdateAttack();
+        UpdateGazet();
     }
 
     private void ChangeWeapon()
@@ -78,6 +86,18 @@ public class PlayerAnimator : MonoBehaviour
             }
         }
     }
+    public void UpdateGazet()
+    {
+        if (gazet != null)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+                gazet.StartGazetAction();
+        }
+        else
+        {
+            Debug.Log("NULL");
+        }
+    }
 
     public void SetArsenal(int number)
     {
@@ -92,6 +112,11 @@ public class PlayerAnimator : MonoBehaviour
         {
             animator.runtimeAnimatorController = weapon.RuntimeAnimatorController;
         }
+    }
+
+    public void SetGazet()
+    {
+        gazet = GameManager.instance.holdingGazet.GetComponent<GazetBase>();
     }
 
     private void OnAnimatorIK(int layerIndex)

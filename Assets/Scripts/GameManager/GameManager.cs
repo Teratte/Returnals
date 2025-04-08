@@ -24,13 +24,6 @@ public class GameManager : MonoBehaviour
 
     private static GameManager m_instance; // 싱글톤이 할당될 static 변수
 
-    private Slot[] slots;
-    public Slot[] Slots
-    {
-        set => slots = value;
-        get => slots;
-    }
-
     [SerializeField]
     private float timer = 900.0f;
 
@@ -40,7 +33,16 @@ public class GameManager : MonoBehaviour
 
     public bool isGameStart = false;
     public List<GameObject> holdingWeaponPrefabs;   // 보유 무기 리스트
-    public GameObject gazet;                        // 보유 가젯
+    public GameObject mainWeapon;                   // 메인 무기
+    public GameObject subWeapon;                    // 보조 무기
+    public GameObject holdingGazet;                 // 보유 가젯
+
+    [Header("Items")]
+    public List<Item> items;
+
+    public List<Item> Items => items;
+
+    public bool isUIOn = false;
 
     private void Awake()
     {
@@ -52,7 +54,6 @@ public class GameManager : MonoBehaviour
 
             return;
         }
-
         DontDestroyOnLoad(gameObject);
 
         // 씬이 로드될 때 실행할 함수 등록
@@ -77,8 +78,9 @@ public class GameManager : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().name == "Yuno's Test")
         {
+            timer = 900.0f;
             Debug.Log("인 게임 씬 로드");
-            Slots = FindObjectOfType<InventoryUI>().Slots;
+            //Slots = FindObjectOfType<InventoryUI>().Slots;
         }
         else if(SceneManager.GetActiveScene().name == "BaseCampTest")
         {
@@ -90,5 +92,26 @@ public class GameManager : MonoBehaviour
     {
         // 이벤트 해제 (메모리 누수 방지)
         SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    public void AddItem(Item item)
+    {
+        items.Add(item);
+    }
+
+    public void ActiveUI()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        isUIOn = true;
+        Time.timeScale = 0.0f;
+    }
+
+    public void DeactiveUI()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        isUIOn = false;
+        Time.timeScale = 1.0f;
     }
 }

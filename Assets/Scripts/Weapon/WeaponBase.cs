@@ -43,6 +43,5 @@ public abstract class WeaponBase : MonoBehaviour
     {
         Main,
         Support,
-        Gazet
     }
 }

@@ -34,11 +34,13 @@ public class InventoryUI : MonoBehaviour
         {
             inventoryActivated = true;
             InventoryObject.SetActive(true);
+            GameManager.instance.ActiveUI();
         }
         else
         {
             inventoryActivated = false;
             InventoryObject.SetActive(false);
+            GameManager.instance.DeactiveUI();
         }
 
         if (GameManager.instance.isGameStart)
