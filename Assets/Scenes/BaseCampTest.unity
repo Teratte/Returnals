@@ -1859,8 +1859,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   availableScenes:
-  - Yuno's Test
-  returnScene: Tera'_Test
+  - Tera'_Test
+  returnScene: BaseCampTest
 --- !u!4 &170348850
 Transform:
   m_ObjectHideFlags: 0
