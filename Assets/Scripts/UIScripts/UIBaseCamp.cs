@@ -53,13 +53,13 @@ public class UIBaseCamp : MonoBehaviour
         {
             inventoryActivated = true;
             InventoryObject.SetActive(true);
-            //GameManager.instance.ActiveUI();
+            GameManager.instance.ActiveUI();
         }
-        else
+        else if(Input.GetKeyUp(KeyCode.Tab))
         {
             inventoryActivated = false;
             InventoryObject.SetActive(false);
-            //GameManager.instance.DeactiveUI();
+            GameManager.instance.DeactiveUI();
         }
     }
 
