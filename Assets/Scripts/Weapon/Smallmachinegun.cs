@@ -113,8 +113,9 @@ public class SmallMachinegun : WeaponBase
             // 상대방으로부터 IDamageable 오브젝트를 가져오는 데 성공했다면
             if (target != null)
             {
+                Debug.Log("몬스터 데미지 입는 중 : " + weaponSetting.damage);
                 // 상대방의 OnDamage 함수를 실행시켜 상대방에 데미지 추가
-                target.OnDamage(weaponSetting.damage, hit.point, hit.normal);
+                target.OnDamage(weaponSetting.damage);
             }
         }
     }

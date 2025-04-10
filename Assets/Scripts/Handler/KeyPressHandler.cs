@@ -20,21 +20,4 @@ public class KeyPressHandler : MonoBehaviour
             isPlayerNearby = false;
         }
     }
-
-    private void Update()
-    {
-        if (isPlayerNearby && Input.GetKeyDown(KeyCode.F))
-        {
-            if (gameObject.name == "Table")
-            {
-                DoTableInteraction();
-            }
-        }
-    }
-
-    private void DoTableInteraction()
-    {
-        Debug.Log("Table과 상호작용 실행됨.");
-        // 테이블과의 상호작용 로직 추가
-    }
 }
