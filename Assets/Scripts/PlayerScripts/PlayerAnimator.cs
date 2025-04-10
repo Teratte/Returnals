@@ -93,10 +93,6 @@ public class PlayerAnimator : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Q))
                 gazet.StartGazetAction();
         }
-        else
-        {
-            Debug.Log("NULL");
-        }
     }
 
     public void SetArsenal(int number)
