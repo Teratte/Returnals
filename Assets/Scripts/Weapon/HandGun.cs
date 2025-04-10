@@ -113,7 +113,7 @@ public class Handgun : WeaponBase
             if(target != null )
             {
                 // 상대방의 OnDamage 함수를 실행시켜 상대방에 데미지 추가
-                target.OnDamage(weaponSetting.damage, hit.point, hit.normal);
+                target.OnDamage(weaponSetting.damage);
             }
         }
     }
