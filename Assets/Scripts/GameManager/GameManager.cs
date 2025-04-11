@@ -86,6 +86,9 @@ public class GameManager : MonoBehaviour
         else if(SceneManager.GetActiveScene().name == "BaseCampTest")
         {
             holdingWeaponPrefabs.Clear();
+            mainWeapon = null;
+            subWeapon = null;
+            holdingGazet = null;
         }
     }
 
