@@ -169,7 +169,7 @@ MonoBehaviour:
   Impact: {fileID: 100002, guid: 99c73c92ac40473459640b165473206f, type: 3}
   fireClip: {fileID: 8300000, guid: 1b766da7cc2d648aa84e36cb5fe8abcb, type: 3}
   reloadClip: {fileID: 8300000, guid: cef0fa03af5b747f0abe82cde0b2bccc, type: 3}
-  inaccuracyDitance: 0.2
+  inaccuracyDitance: 2
   fireTransform: {fileID: 4620671094105810546}
   muzzleFlashEffect: {fileID: 1873496853431514725}
   shellEjectEffect: {fileID: 5909714681381644738}
