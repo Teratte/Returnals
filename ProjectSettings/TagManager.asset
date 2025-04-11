@@ -10,6 +10,7 @@ TagManager:
   - Sniper
   - Pistol
   - CrowBar
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -1829,53 +1829,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3848506313826569265, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
   m_PrefabInstance: {fileID: 167545623}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &170348848
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 170348850}
-  - component: {fileID: 170348849}
-  m_Layer: 0
-  m_Name: SceneManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &170348849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 170348848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6458ac58378590e4eb722fdbc3cc950f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  availableScenes:
-  - Tera'_Test
-  returnScene: BaseCampTest
---- !u!4 &170348850
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 170348848}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.004191, y: 2.2502441, z: 0.75373733}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &184557150
 GameObject:
   m_ObjectHideFlags: 0
@@ -11993,6 +11946,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1615639829}
   m_CullTransparentMesh: 1
+--- !u!1001 &1618966943
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4054093127195227337, guid: bb0d53d062106634bb0c22be1369b173, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.004191
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054093127195227337, guid: bb0d53d062106634bb0c22be1369b173, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.2502441
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054093127195227337, guid: bb0d53d062106634bb0c22be1369b173, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.75373733
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054093127195227337, guid: bb0d53d062106634bb0c22be1369b173, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054093127195227337, guid: bb0d53d062106634bb0c22be1369b173, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054093127195227337, guid: bb0d53d062106634bb0c22be1369b173, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054093127195227337, guid: bb0d53d062106634bb0c22be1369b173, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054093127195227337, guid: bb0d53d062106634bb0c22be1369b173, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054093127195227337, guid: bb0d53d062106634bb0c22be1369b173, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054093127195227337, guid: bb0d53d062106634bb0c22be1369b173, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5738271735304334370, guid: bb0d53d062106634bb0c22be1369b173, type: 3}
+      propertyPath: m_Name
+      value: SceneManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6940516968785510653, guid: bb0d53d062106634bb0c22be1369b173, type: 3}
+      propertyPath: 'availableScenes.Array.data[2]'
+      value: Abandoned City
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bb0d53d062106634bb0c22be1369b173, type: 3}
 --- !u!1 &1629166347
 GameObject:
   m_ObjectHideFlags: 0
@@ -16182,9 +16196,9 @@ SceneRoots:
   - {fileID: 462212025}
   - {fileID: 1251156892}
   - {fileID: 1629166350}
-  - {fileID: 170348850}
   - {fileID: 1799680109}
   - {fileID: 1859298394}
   - {fileID: 1025157590}
   - {fileID: 1036235038}
   - {fileID: 1203173926}
+  - {fileID: 1618966943}
