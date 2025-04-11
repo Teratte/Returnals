@@ -11998,10 +11998,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneManager
       objectReference: {fileID: 0}
-    - target: {fileID: 6940516968785510653, guid: bb0d53d062106634bb0c22be1369b173, type: 3}
-      propertyPath: 'availableScenes.Array.data[2]'
-      value: Abandoned City
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
