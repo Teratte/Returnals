@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 using System.Collections.Generic;
 
 // 점수와 게임 오버 여부를 관리하는 게임 매니저
@@ -62,7 +63,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name == "Yuno's Test" && !isGameOver)
+        if (isGameStart && !isGameOver)
         {
             timer -= Time.deltaTime;
 
@@ -76,7 +77,7 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(SceneManager.GetActiveScene().name == "Yuno's Test")
+        if(isGameStart)
         {
             timer = 900.0f;
             Debug.Log("인 게임 씬 로드");
@@ -85,6 +86,9 @@ public class GameManager : MonoBehaviour
         else if(SceneManager.GetActiveScene().name == "BaseCampTest")
         {
             holdingWeaponPrefabs.Clear();
+            mainWeapon = null;
+            subWeapon = null;
+            holdingGazet = null;
         }
     }
 
@@ -101,10 +105,10 @@ public class GameManager : MonoBehaviour
 
     public void ActiveUI()
     {
+        Time.timeScale = 0.0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         isUIOn = true;
-        Time.timeScale = 0.0f;
     }
 
     public void DeactiveUI()

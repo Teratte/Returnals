@@ -28,9 +28,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (Cursor.visible) return;
         UpdateRotate();
-        //UpdateZoom();
     }
 
     private void LateUpdate()

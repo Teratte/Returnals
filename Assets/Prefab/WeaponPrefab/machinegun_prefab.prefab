@@ -89,7 +89,7 @@ MonoBehaviour:
     weaponType: 6
     fireRate: 0.05
     reloadTime: 5
-    distance: 20
+    distance: 50
     currentAmmo: 150
     maxAmmo: 999
     maxCapacity: 150
@@ -101,7 +101,7 @@ MonoBehaviour:
   Impact: {fileID: 100002, guid: 99c73c92ac40473459640b165473206f, type: 3}
   fireClip: {fileID: 8300000, guid: b82a66dab749415458d1f6600c997095, type: 3}
   reloadClip: {fileID: 8300000, guid: 9eca29ee7f8209e419470fcd586aec21, type: 3}
-  inaccuracyDitance: 0.3
+  inaccuracyDitance: 3
   fireTransform: {fileID: 3019626878494056234}
   muzzleFlashEffect: {fileID: 198000012944515248, guid: 74d744994bc414c37bfda957f1d57118, type: 3}
   shellEjectEffect: {fileID: 198000010131513902, guid: 8e60b325a019543cbb2e3920522a2e6b, type: 3}

@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tera'_Test.unity
     guid: 2cf5207c5d09e0f4ea3d0b21bbe52953
+  - enabled: 1
+    path: Assets/Scenes/Level_Design/Abandoned City.unity
+    guid: 88efaa610fa670649964c9293c4b1938
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
