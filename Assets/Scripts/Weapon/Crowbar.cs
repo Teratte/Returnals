@@ -68,7 +68,7 @@ public class Crowbar : WeaponBase
     {
         if(other.GetComponent<HitableObject>() != null)
         {
-            other.GetComponent<HitableObject>().TakeDamage((int)(weaponSetting.damage));
+            other.GetComponent<HitableObject>().TakeDamage((int)weaponSetting.damage);
         }
     }
 

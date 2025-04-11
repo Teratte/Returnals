@@ -51,6 +51,9 @@ public class PlayerAnimator : MonoBehaviour
 
     public void UpdateAttack()
     {
+        // UI가 나와있을 때에는 공격불가
+        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) return;
+
         if (weapon != null)
         {
             if (!weapon.IsReload)
