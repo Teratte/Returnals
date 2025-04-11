@@ -36,7 +36,7 @@ public class InventoryUI : MonoBehaviour
             InventoryObject.SetActive(true);
             GameManager.instance.ActiveUI();
         }
-        else
+        else if(Input.GetKeyUp(KeyCode.Tab))
         {
             inventoryActivated = false;
             InventoryObject.SetActive(false);

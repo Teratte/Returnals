@@ -10,7 +10,7 @@ public class SmallMachinegun : WeaponBase
     [SerializeField]
     private AudioClip reloadClip;
     [SerializeField]
-    private float inaccuracyDitance = 0.1f;
+    private float inaccuracyDitance = 0.5f;
 
     public Transform fireTransform; // 탄알이 발사될 위치
 
@@ -91,7 +91,7 @@ public class SmallMachinegun : WeaponBase
 
         ray = mainCamera.ViewportPointToRay(new Vector2(0.5f, 0.58f));
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, weaponSetting.distance))
         {
             hitPosition = hit.point;
         }
@@ -102,7 +102,7 @@ public class SmallMachinegun : WeaponBase
 
         Vector3 attackDirection = (hitPosition - fireTransform.position).normalized;
         // 레이캐스트(시작 지점, 방향, 충돌 정보 컨테이너, 사정거리)
-        if (Physics.Raycast(fireTransform.position, GetShootingDirection(attackDirection), out hit))
+        if (Physics.Raycast(fireTransform.position, GetShootingDirection(attackDirection), out hit, weaponSetting.distance))
         {
             Instantiate(Impact, hit.point, hit.transform.rotation);
 
@@ -113,8 +113,9 @@ public class SmallMachinegun : WeaponBase
             // 상대방으로부터 IDamageable 오브젝트를 가져오는 데 성공했다면
             if (target != null)
             {
+                Debug.Log("몬스터 데미지 입는 중 : " + weaponSetting.damage);
                 // 상대방의 OnDamage 함수를 실행시켜 상대방에 데미지 추가
-                target.OnDamage(weaponSetting.damage, hit.point, hit.normal);
+                target.OnDamage(weaponSetting.damage);
             }
         }
     }
@@ -128,8 +129,8 @@ public class SmallMachinegun : WeaponBase
             _direction.z + Random.Range(-inaccuracyDitance, inaccuracyDitance)
             );
 
-        Vector3 direction = _direction - fireTransform.position;
-        return direction.normalized;
+        //Vector3 direction = _direction - fireTransform.position;
+        return _direction.normalized;
     }
 
     // 발사 이펙트와 소리를 재생하고 탄알 궤적을 그림
