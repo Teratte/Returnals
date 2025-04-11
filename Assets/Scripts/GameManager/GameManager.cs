@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name == "Yuno's Test" && !isGameOver)
+        if (isGameStart && !isGameOver)
         {
             timer -= Time.deltaTime;
 
@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(SceneManager.GetActiveScene().name == "Yuno's Test")
+        if(isGameStart)
         {
             timer = 900.0f;
             Debug.Log("인 게임 씬 로드");

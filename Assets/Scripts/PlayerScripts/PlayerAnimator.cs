@@ -51,8 +51,6 @@ public class PlayerAnimator : MonoBehaviour
 
     public void UpdateAttack()
     {
-        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) return;
-
         if (weapon != null)
         {
             if (!weapon.IsReload)

@@ -1588,6 +1588,33 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+--- !u!1 &1222320656 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6842914381188818275, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+  m_PrefabInstance: {fileID: 1222320655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1222320657 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3698074830116498111, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+  m_PrefabInstance: {fileID: 1222320655}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1222320658 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5841529475703123068, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+  m_PrefabInstance: {fileID: 1222320655}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc9ff8020bfb0314eb138fc87d428bce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1251156891
 GameObject:
   m_ObjectHideFlags: 0
@@ -2292,7 +2319,7 @@ PrefabInstance:
     - target: {fileID: 2063890794844617783, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
       propertyPath: inventoryUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1222320658}
     - target: {fileID: 2232985668108529993, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -2312,7 +2339,7 @@ PrefabInstance:
     - target: {fileID: 2837794140489314136, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
       propertyPath: textInteraction
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1222320657}
     - target: {fileID: 2892949468235184450, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -3071,6 +3098,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6160919000284788307, guid: e1866130bbd2f634eb679afe1ecc057e, type: 3}
+      propertyPath: returnPanel
+      value: 
+      objectReference: {fileID: 1222320656}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
