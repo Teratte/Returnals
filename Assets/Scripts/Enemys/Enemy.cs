@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -56,9 +57,17 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void Update()
     {
+
+        if(nav.enabled)
+        { 
+        }
         if (!isChase || Target == null) return;
 
-        nav.SetDestination(Target.position);
+        if(nav.enabled)
+        {
+            nav.SetDestination(Target.position);
+            nav.isStopped = !isChase;
+        }
 
         // 회전 보간 처리 (자연스러운 회전)
         Vector3 direction = (Target.position - transform.position).normalized;

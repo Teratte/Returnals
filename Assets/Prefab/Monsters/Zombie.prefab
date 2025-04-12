@@ -2750,7 +2750,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 34f47b08b08f2ba42b2be82dac517018, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -2797,7 +2797,7 @@ LODGroup:
     - renderer: {fileID: 4353827951931184527}
     - renderer: {fileID: 6205992038050503044}
     - renderer: {fileID: 8746568188609715779}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!54 &6088197389014418766
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2883,9 +2883,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  curHealth: 100
+  moveSpeed: 2
+  rotationSpeed: 5
   Target: {fileID: 0}
-  isChase: 0
 --- !u!1 &6303159735993863875
 GameObject:
   m_ObjectHideFlags: 0
