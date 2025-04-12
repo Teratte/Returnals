@@ -6,6 +6,8 @@ public class SmallMachinegun : WeaponBase
     [SerializeField]
     private GameObject Impact;
     [SerializeField]
+    private GameObject monsterImpact;
+    [SerializeField]
     private AudioClip fireClip;
     [SerializeField]
     private AudioClip reloadClip;
@@ -104,8 +106,6 @@ public class SmallMachinegun : WeaponBase
         // 레이캐스트(시작 지점, 방향, 충돌 정보 컨테이너, 사정거리)
         if (Physics.Raycast(fireTransform.position, GetShootingDirection(attackDirection), out hit, weaponSetting.distance))
         {
-            Instantiate(Impact, hit.point, hit.transform.rotation);
-
             // 레이가 어떤 물체와 충돌한 경우,
             // 충돌한 상대방으로부터 IDamageable 오브젝트 가져오기 시도
             IDamageable target = hit.collider.gameObject.GetComponent<IDamageable>();
@@ -113,9 +113,13 @@ public class SmallMachinegun : WeaponBase
             // 상대방으로부터 IDamageable 오브젝트를 가져오는 데 성공했다면
             if (target != null)
             {
-                Debug.Log("몬스터 데미지 입는 중 : " + weaponSetting.damage);
+                Instantiate(monsterImpact, hit.point, hit.transform.rotation);
                 // 상대방의 OnDamage 함수를 실행시켜 상대방에 데미지 추가
                 target.OnDamage(weaponSetting.damage);
+            }
+            else
+            {
+                Instantiate(Impact, hit.point, hit.transform.rotation);
             }
         }
     }

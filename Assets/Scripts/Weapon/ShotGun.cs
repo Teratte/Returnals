@@ -10,7 +10,7 @@ public class Shotgun : WeaponBase
     [SerializeField]
     private float inaccuracyDitance = 3.0f; // 분산 정도
     [SerializeField]
-    private int bulletsPerShot = 6; // 발사 시 분산되는 탄알 수
+    private int bulletsPerShot = 10; // 발사 시 분산되는 탄알 수
     [SerializeField]
     private GameObject laser;       // 탄환 궤적
 
@@ -18,6 +18,8 @@ public class Shotgun : WeaponBase
     private AudioClip fireClip;
     [SerializeField]
     private AudioClip reloadClip;
+    [SerializeField]
+    private GameObject monsterImpact;   // 몬스터 피격 이펙트
 
     private float fadeDuration = 0.3f;
     public ParticleSystem muzzle;   // 총구 이펙트
@@ -96,7 +98,6 @@ public class Shotgun : WeaponBase
             Vector3 shootingDir = GetShootingDirection(attackDirection);
             if (Physics.Raycast(fireTr.position, shootingDir, out hit))
             {
-                Instantiate(impact, hit.point, hit.transform.rotation);
                 CreateLaser(hit.point);
 
                 // 레이가 어떤 물체와 충돌한 경우,
@@ -106,12 +107,18 @@ public class Shotgun : WeaponBase
                 // 상대방으로부터 IDamageable 오브젝트를 가져오는 데 성공했다면
                 if (target != null)
                 {
+                    Instantiate(monsterImpact, hit.point, hit.transform.rotation);
                     // 상대방의 OnDamage 함수를 실행시켜 상대방에 데미지 추가
                     target.OnDamage(weaponSetting.damage);
+                }
+                else
+                {
+                    Instantiate(impact, hit.point, hit.transform.rotation);
                 }
             }
             else
             {
+                Instantiate(impact, hit.point, hit.transform.rotation);
                 CreateLaser(fireTr.position + shootingDir * distance);
             }
         }
@@ -132,8 +139,7 @@ public class Shotgun : WeaponBase
             _direction.z + Random.Range(-inaccuracyDitance, inaccuracyDitance)
             );
 
-        Vector3 direction = _direction - fireTr.position;
-        return direction.normalized;
+        return _direction.normalized;
     }
 
     void CreateLaser(Vector3 end)

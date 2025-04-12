@@ -160,6 +160,7 @@ MonoBehaviour:
   leftHandle: {fileID: 0}
   rightHandle: {fileID: 0}
   fireClip: {fileID: 8300000, guid: 961723c87966ba142b8faee5ddc23742, type: 3}
+  monsterImpact: {fileID: 100002, guid: d342fd04c095bf64888ab930f0796c88, type: 3}
 --- !u!135 &6861460019685029471
 SphereCollider:
   m_ObjectHideFlags: 0
