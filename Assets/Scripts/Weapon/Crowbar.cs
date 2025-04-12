@@ -5,6 +5,8 @@ public class Crowbar : WeaponBase
 {
     [SerializeField]
     private AudioClip fireClip;
+    [SerializeField]
+    private GameObject monsterImpact;
 
     private SphereCollider sphereCollider;
 
@@ -69,6 +71,11 @@ public class Crowbar : WeaponBase
         if(other.GetComponent<HitableObject>() != null)
         {
             other.GetComponent<HitableObject>().TakeDamage((int)weaponSetting.damage);
+        }
+        else if(other.GetComponent<IDamageable>() != null)
+        {
+            other.GetComponent<IDamageable>().OnDamage(weaponSetting.damage);
+            Instantiate(monsterImpact, other.gameObject.transform);
         }
     }
 
