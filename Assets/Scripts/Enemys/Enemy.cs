@@ -81,7 +81,11 @@ public class Enemy : MonoBehaviour, IDamageable
             gameObject.layer = 15;
             isChase = false;
             nav.enabled = false;
+            capsuleCollider.enabled = false;
+            rigid.isKinematic = true;
+
             anim.SetTrigger("doDie");
+
             StartCoroutine(DieRoutine());
 
             // 물리 충돌 해제 -> 혹시나 필요하면
