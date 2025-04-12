@@ -63,17 +63,18 @@ MonoBehaviour:
     maxAmmo: 999
     maxCapacity: 8
     isAutomaticAttack: 0
-    damage: 0
+    damage: 25
   runtimeAnimatorController: {fileID: 9100000, guid: a1b4a8e888dc406429024958f8e32447, type: 2}
   leftHandle: {fileID: 7152086635977748797}
   rightHandle: {fileID: 4553503688969598113}
   fireTr: {fileID: 9066056220905495605}
   distance: 8
-  inaccuracyDitance: 3
-  bulletsPerShot: 6
+  inaccuracyDitance: 6
+  bulletsPerShot: 10
   laser: {fileID: 1373698898082108739, guid: 5e014a8a43b66b646be8cfee4f92d6ea, type: 3}
   fireClip: {fileID: 8300000, guid: b62ab760ca18fd14fb22254a841a9f9c, type: 3}
   reloadClip: {fileID: 8300000, guid: 9eca29ee7f8209e419470fcd586aec21, type: 3}
+  monsterImpact: {fileID: 100002, guid: d342fd04c095bf64888ab930f0796c88, type: 3}
   muzzle: {fileID: 741302018188927806}
   impact: {fileID: 100002, guid: 99c73c92ac40473459640b165473206f, type: 3}
 --- !u!82 &8936634440002380846

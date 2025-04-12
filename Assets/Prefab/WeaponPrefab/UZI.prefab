@@ -602,6 +602,7 @@ MonoBehaviour:
   leftHandle: {fileID: 4355249862128598}
   rightHandle: {fileID: 4789895822770736}
   Impact: {fileID: 100002, guid: 99c73c92ac40473459640b165473206f, type: 3}
+  monsterImpact: {fileID: 100002, guid: d342fd04c095bf64888ab930f0796c88, type: 3}
   fireClip: {fileID: 8300000, guid: 8521dc921224ebf44b860f57a87408a5, type: 3}
   reloadClip: {fileID: 8300000, guid: 9eca29ee7f8209e419470fcd586aec21, type: 3}
   inaccuracyDitance: 1.5
