@@ -49,13 +49,13 @@ public class UIBaseCamp : MonoBehaviour
     private void Update()
     {
         // 인벤토리 창 열기
-        if (Input.GetKey(KeyCode.Tab))
+        if (Input.GetKey(KeyCode.Tab) && !GameManager.instance.isUIOn)
         {
             inventoryActivated = true;
             InventoryObject.SetActive(true);
             GameManager.instance.ActiveUI();
         }
-        else if(Input.GetKeyUp(KeyCode.Tab))
+        else if(Input.GetKeyUp(KeyCode.Tab) && InventoryObject.activeSelf)
         {
             inventoryActivated = false;
             InventoryObject.SetActive(false);
