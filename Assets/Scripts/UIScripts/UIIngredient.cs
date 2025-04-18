@@ -25,7 +25,7 @@ public class UIIngredient : MonoBehaviour, IPointerClickHandler
         // 레시피 조회
         foreach (Ingredient receipe in ingredientData.ingredients)
         {
-            if (!uiBaseCamp.items.ContainsKey(receipe.ingredient) || uiBaseCamp.items[receipe.ingredient] < receipe.count)
+            if (!GameManager.instance.Items.ContainsKey(receipe.ingredient) || GameManager.instance.Items[receipe.ingredient] < receipe.count)
                 return false;
         }
         return true;
@@ -50,6 +50,9 @@ public class UIIngredient : MonoBehaviour, IPointerClickHandler
                     slot.SetSlotCount(-receipe.count);
                 }
             }
+
+            if(GameManager.instance.Items.ContainsKey(receipe.ingredient))
+                GameManager.instance.Items[receipe.ingredient] -= receipe.count;
         }
         produceTable.UpdateInformation(this);
 
