@@ -15,9 +15,11 @@ public class ProduceTable : MonoBehaviour
     [SerializeField]
     private GameObject requireSlotsParent;      // 필요한 재료들의 부모 오브젝트
     [SerializeField]
-    private UIBaseCamp uiBaseCamp;
+    private UIBaseCamp uiBaseCamp;              // UIBaseCamp
 
     private RequireingredientSlot[] requireingredientSlots; // 필요한 재료들
+
+    private UIIngredient currentItemInformation = null;   // 현재 보여지는 아이템
 
     private void Awake()
     {
@@ -86,6 +88,13 @@ public class ProduceTable : MonoBehaviour
             }
             AcquireIngredient(ingre.ingredient, currentCount, ingre.count);
         }
+
+        currentItemInformation = uiIngredient;
+    }
+
+    public void TryCreateWeapon()
+    {
+        currentItemInformation.CraftWeapon();
     }
 
     // 필요한 재료 슬롯 업데이트 함수
