@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ public class UIBaseCamp : MonoBehaviour
     [SerializeField]
     private GameObject slotsParent;
     private Slot[] slots;                           // 보관된 아이템
+    public Dictionary<Item, int>items = new Dictionary<Item, int>();
 
     [Header("Current Weapon")]
     [SerializeField]
@@ -42,7 +44,7 @@ public class UIBaseCamp : MonoBehaviour
         InventoryObject.SetActive(false);
         panelDetail.SetActive(false);
 
-        foreach(Item item in GameManager.instance.Items)
+        foreach (Item item in GameManager.instance.Items)
             AcquireItem(item);
     }
 
@@ -106,6 +108,7 @@ public class UIBaseCamp : MonoBehaviour
                     if (slots[i].item.itemName == _item.itemName)
                     {
                         slots[i].SetSlotCount(_count);
+                        items[_item] = _count;
                         return;
                     }
                 }
@@ -117,6 +120,7 @@ public class UIBaseCamp : MonoBehaviour
             if (slots[i].item == null)
             {
                 slots[i].AddItem(_item, _count);
+                items.Add(_item, _count);
                 return;
             }
         }
