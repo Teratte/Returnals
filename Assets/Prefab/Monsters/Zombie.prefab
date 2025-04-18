@@ -2885,7 +2885,7 @@ MonoBehaviour:
   maxHealth: 100
   moveSpeed: 2
   rotationSpeed: 5
-  Target: {fileID: 0}
+  Target: {fileID: 9171868947698613781, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
 --- !u!1 &6303159735993863875
 GameObject:
   m_ObjectHideFlags: 0

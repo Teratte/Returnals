@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public struct IngredientData
 {
 
-    public List<Ingredient> ingredients;            // 필요한 재료들과 그 개수
+    public List<Ingredient> ingredients;            // 필요한 재료들과 그 각각의 개수
     public Sprite icon;                             // 해당 아이템 아이콘
     [TextArea(0, 30)]
     public string information;                      // 해당 아이템에 대한 설명
