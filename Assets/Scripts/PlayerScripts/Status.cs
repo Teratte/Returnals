@@ -20,6 +20,8 @@ public class Status : MonoBehaviour
     private float runSpeed = 5.0f;       // 뛰는 속도
     [SerializeField]
     private float moveSpeed = 4.0f;      // 움직이는 속도
+    [SerializeField]
+    private float diffense = 50.0f;         // 방어력
 
     public float PlayerHP
     {
@@ -42,6 +44,8 @@ public class Status : MonoBehaviour
         set => moveSpeed = Mathf.Max(0,value);
         get => moveSpeed;
     }
+
+    public float Diffense => diffense;
 
     private void Awake()
     {
