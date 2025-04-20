@@ -18,6 +18,7 @@ public class TruckHandler : KeyPressHandler
 
     public void GameStart()
     {
+        startPanel.SetActive(false);
         SceneManagerScript.Instance.LoadRandomScene(); // æ¿ ¿Ãµø Ω««‡
         GameManager.instance.isGameStart = true;
         GameManager.instance.DeactiveUI();

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ public class UIBaseCamp : MonoBehaviour
     [SerializeField]
     private GameObject slotsParent;
     private Slot[] slots;                           // 보관된 아이템
+    //public Dictionary<Item, int>items = new Dictionary<Item, int>();
 
     [Header("Current Weapon")]
     [SerializeField]
@@ -42,20 +44,20 @@ public class UIBaseCamp : MonoBehaviour
         InventoryObject.SetActive(false);
         panelDetail.SetActive(false);
 
-        foreach(Item item in GameManager.instance.Items)
-            AcquireItem(item);
+        foreach (var item in GameManager.instance.Items)
+            AcquireItem(item.Key, item.Value);
     }
 
     private void Update()
     {
         // 인벤토리 창 열기
-        if (Input.GetKey(KeyCode.Tab))
+        if (Input.GetKey(KeyCode.Tab) && !GameManager.instance.isUIOn)
         {
             inventoryActivated = true;
             InventoryObject.SetActive(true);
             GameManager.instance.ActiveUI();
         }
-        else if(Input.GetKeyUp(KeyCode.Tab))
+        else if(Input.GetKeyUp(KeyCode.Tab) && InventoryObject.activeSelf)
         {
             inventoryActivated = false;
             InventoryObject.SetActive(false);
