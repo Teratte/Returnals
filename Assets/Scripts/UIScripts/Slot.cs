@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -49,7 +50,7 @@ public class Slot : MonoBehaviour
         itemCount += _count;
         text_Count.text = "x" + itemCount.ToString();
 
-        if(itemCount <= 0)
+        if (itemCount <= 0)
         {
             ClearSlot();
         }

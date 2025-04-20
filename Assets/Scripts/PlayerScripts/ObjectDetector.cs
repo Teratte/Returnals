@@ -30,6 +30,7 @@ public class ObjectDetector : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        textInteraction.enabled = false;
         if(other.CompareTag("Interactable") || other.GetComponent<KeyPressHandler>())
         {
             if (textInteraction.enabled == true)

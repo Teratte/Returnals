@@ -39,9 +39,9 @@ public class GameManager : MonoBehaviour
     public GameObject holdingGazet;                 // 보유 가젯
 
     [Header("Items")]
-    public List<Item> items;
+    private Dictionary<Item, int> items = new Dictionary<Item, int>();
 
-    public List<Item> Items => items;
+    public Dictionary<Item, int> Items => items;
 
     public bool isUIOn = false;
 
@@ -98,9 +98,12 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    public void AddItem(Item item)
+    public void AddItem(Item item, int count=1)
     {
-        items.Add(item);
+        if (!items.ContainsKey(item))
+            items.Add(item, count);
+        else
+            items[item] += count;
     }
 
     public void ActiveUI()
