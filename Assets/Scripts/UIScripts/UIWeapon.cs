@@ -6,9 +6,10 @@ public class UIWeapon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
     [SerializeField]
     private WeaponData weaponData;
     [SerializeField]
-    private UIBaseCamp uiBaseCamp;
-    [SerializeField]
     private GameObject weaponPrefab;
+
+
+    private UIBaseCamp uiBaseCamp;
 
     public Sprite Icon => weaponData.icon;
     public string Name => weaponData.name;
@@ -16,6 +17,11 @@ public class UIWeapon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
     public string WeaponStatus => weaponData.weaponStatus;
     public WeaponAttribute WeaponType => weaponData.type;
     public GameObject WeaponPrefab => weaponPrefab;
+
+    private void Awake()
+    {
+        uiBaseCamp = FindAnyObjectByType<UIBaseCamp>();
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {

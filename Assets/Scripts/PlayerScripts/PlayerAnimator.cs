@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerAnimator : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.instance.isGameStart)
+        if (GameManager.instance.isGameStart && SceneManager.GetActiveScene().name != "BaseCamp")
         {
             GameManager.instance.holdingWeaponPrefabs.Add(GameManager.instance.subWeapon);
             GameManager.instance.holdingWeaponPrefabs.Add(GameManager.instance.mainWeapon);
@@ -37,9 +38,30 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Update()
     {
-        ChangeWeapon();
-        UpdateAttack();
-        UpdateGazet();
+        if(!GameManager.instance.isGameOver)
+        {
+            ChangeWeapon();
+            UpdateAttack();
+            UpdateGazet();
+        }
+
+        TestAnimation();
+    }
+
+    private void TestAnimation()
+    {
+        animator.SetBool("isDie", Input.GetKey(KeyCode.G));
+        if (Input.GetKey(KeyCode.G))
+        {
+            GameManager.instance.isGameOver = true;
+        }
+        else
+        {
+            GameManager.instance.isGameOver = false;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.H))
+            animator.SetTrigger("onHit");
     }
 
     private void ChangeWeapon()
