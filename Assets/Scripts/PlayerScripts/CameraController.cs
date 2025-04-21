@@ -28,7 +28,8 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        UpdateRotate();
+        if(!GameManager.instance.isGameOver)
+            UpdateRotate();
     }
 
     private void LateUpdate()

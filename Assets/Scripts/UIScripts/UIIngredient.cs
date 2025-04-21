@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using UnityEditor.Search;
 
 public class UIIngredient : MonoBehaviour, IPointerClickHandler
 {
@@ -10,6 +11,8 @@ public class UIIngredient : MonoBehaviour, IPointerClickHandler
     private ProduceTable produceTable;
     [SerializeField]
     private UIBaseCamp uiBaseCamp;
+    [SerializeField]
+    private GameObject selectWeaponObject;  // 무기 선택창에 추가할 슬롯
 
     public Sprite Icon => ingredientData.icon;
     public string Information => ingredientData.information;
@@ -50,13 +53,19 @@ public class UIIngredient : MonoBehaviour, IPointerClickHandler
                     slot.SetSlotCount(-receipe.count);
                 }
             }
-
+            // 게임매니저에 저장되어있던 아이템 목록에도 차감
             if(GameManager.instance.Items.ContainsKey(receipe.ingredient))
+            {
                 GameManager.instance.Items[receipe.ingredient] -= receipe.count;
+                // 만약 0이 되면 제거
+                if(GameManager.instance.Items[receipe.ingredient] <= 0)
+                    GameManager.instance.Items.Remove(receipe.ingredient);
+            }
         }
         produceTable.UpdateInformation(this);
 
         // 무기생성
         Debug.Log("제작 성공!");
+        GameManager.instance.selectWeaponList.Add(selectWeaponObject);  // 무기 선택 리스트에 해당 무기 선택 버튼 추가
     }
 }

@@ -10,7 +10,6 @@ public abstract class WeaponBase : MonoBehaviour
     [SerializeField]
     protected RuntimeAnimatorController runtimeAnimatorController;
     public Transform leftHandle;            // 왼쪽 손잡이
-    public Transform rightHandle;           // 오른쪽 손잡이
 
     protected float lastAttackTime = 0;     // 마지막 발사 시간 체크
     protected bool isReload = false;        // 재장전 중인지 체크

@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
     public GameObject subWeapon;                    // 보조 무기
     public GameObject holdingGazet;                 // 보유 가젯
 
+    public List<GameObject> selectWeaponList;       // 무기 선택 리스트
+
     [Header("Items")]
     private Dictionary<Item, int> items = new Dictionary<Item, int>();
 
