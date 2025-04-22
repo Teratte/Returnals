@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    public static bool inventoryActivated = false;
-
     [SerializeField]
     private GameObject InventoryObject; // 인벤토리 창
     [SerializeField]
@@ -23,7 +21,7 @@ public class InventoryUI : MonoBehaviour
     private void Awake()
     {
         slots = slotsParent.GetComponentsInChildren<Slot>();
-        playerAnimator = FindObjectOfType<PlayerAnimator>();
+        playerAnimator = FindAnyObjectByType<PlayerAnimator>();
         InventoryObject.SetActive(false);
     }
 
@@ -32,13 +30,11 @@ public class InventoryUI : MonoBehaviour
         // 인벤토리 창 열기
         if (Input.GetKey(KeyCode.Tab))
         {
-            inventoryActivated = true;
             InventoryObject.SetActive(true);
             GameManager.instance.ActiveUI();
         }
         else if(Input.GetKeyUp(KeyCode.Tab))
         {
-            inventoryActivated = false;
             InventoryObject.SetActive(false);
             GameManager.instance.DeactiveUI();
         }

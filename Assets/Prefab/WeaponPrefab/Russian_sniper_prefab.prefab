@@ -125,8 +125,8 @@ MonoBehaviour:
     isAutomaticAttack: 0
     damage: 300
   runtimeAnimatorController: {fileID: 9100000, guid: 5539409bd71a757479d852f56258f2af, type: 2}
+  weaponIcon: {fileID: 21300000, guid: 4e7e6d55c3669b644bee0931ffa39675, type: 3}
   leftHandle: {fileID: 2280822011059624951}
-  rightHandle: {fileID: 3710240712856015168}
   Impact: {fileID: 100002, guid: 99c73c92ac40473459640b165473206f, type: 3}
   monsterImpact: {fileID: 100002, guid: d342fd04c095bf64888ab930f0796c88, type: 3}
   fireClip: {fileID: 8300000, guid: 8521dc921224ebf44b860f57a87408a5, type: 3}

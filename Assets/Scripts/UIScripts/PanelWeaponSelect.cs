@@ -13,7 +13,7 @@ public class PanelWeaponSelect : MonoBehaviour
         foreach(GameObject weapon in GameManager.instance.selectWeaponList)
         {
             Instantiate(weapon, holdingWeaponsParent.transform);
-            weapon.transform.parent = holdingWeaponsParent.transform;
+            //weapon.transform.parent = holdingWeaponsParent.transform;
         }
     }
 }

@@ -93,7 +93,8 @@ public class PlayerAnimator : MonoBehaviour
                     if (Input.GetMouseButtonDown(0) && Input.GetAxis("Sprint") == 0 && weapon.CurrentAmmo > 0)
                     {
                         weapon.StartWeaponAction(0);
-                        animator.SetTrigger("onAttack");
+                        if(weapon.IsAttack)
+                            animator.SetTrigger("onAttack");
                     }
                 }
             }

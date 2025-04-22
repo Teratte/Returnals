@@ -50,6 +50,7 @@ MonoBehaviour:
     ableCount: 5
     rate: 2
     damage: 10
+  gazetIcon: {fileID: 21300000, guid: e9bb4d9855f77a14fb90c936f78812cc, type: 3}
 --- !u!1001 &7214327795436701685
 PrefabInstance:
   m_ObjectHideFlags: 0

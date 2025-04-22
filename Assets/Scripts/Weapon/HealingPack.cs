@@ -5,13 +5,14 @@ public class HealingPack : GazetBase
     private Status status;
     public override void StartGazetAction()
     {
-        status = FindObjectOfType<Status>();
+        status = FindAnyObjectByType<Status>();
         if(status != null )
         {
-            if (Time.time >= lastUseTime + gazetSetting.rate)
+            if (Time.time >= lastUseTime + Rate && AbleCount > 0 && status.PlayerHP < status.MaxHP)
             {
                 status.PlayerHP += Damage;
                 lastUseTime = Time.time;
+                AbleCount--;
                 Debug.Log("heal");
             }
         }
