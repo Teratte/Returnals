@@ -9,18 +9,14 @@ public class MainWeaponView : MonoBehaviour
     private Image backGround;
 
     private WeaponBase mainWeapon;
-    private PlayerAnimator playerAnimator;
     private Color currentColor = Color.gray;
+    private PlayerAnimator playerAnimator;
 
     private void Awake()
     {
         playerAnimator = FindAnyObjectByType<PlayerAnimator>();
-    }
-
-    private void Start()
-    {
         mainWeapon = GameManager.instance.mainWeapon.GetComponent<WeaponBase>();
-        if(mainWeapon != null )
+        if (mainWeapon != null)
         {
             mainWeaponIcon.sprite = mainWeapon.WeaponIcon;
         }

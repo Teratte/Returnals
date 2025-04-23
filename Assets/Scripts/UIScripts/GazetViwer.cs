@@ -1,39 +1,38 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GazetViwer : MonoBehaviour
 {
-    private PlayerAnimator playerAnimator;
     [SerializeField]
-    private Slider slider;
+    private Slider slider;          // °¡Á¬ ÄðÅ¸ÀÓ
     [SerializeField]
-    private Image gazetImage;
+    private Image gazetImage;       // °¡Á¬ ¾ÆÀÌÄÜ
+    [SerializeField]
+    private TextMeshProUGUI gazetAbleCount; // °¡Á¬ »ç¿ë °¡´É È½¼ö
     private float gazetCoolTime;
-    private GazetBase gazetBase;
+    private GazetBase gazetBase;    // ¼ÒÀ¯ÇÑ °¡Á¬
+    private Status status;
 
     private void Awake()
     {
-        playerAnimator = FindAnyObjectByType<PlayerAnimator>();
-    }
-
-    private void Start()
-    {
-        gazetCoolTime = playerAnimator.Gazet.Rate;
+        status = FindAnyObjectByType<Status>();
         gazetBase = GameManager.instance.holdingGazet.GetComponent<GazetBase>();
         if (gazetBase != null)
         {
             gazetImage.sprite = gazetBase.GazetIcon;
+            gazetCoolTime = gazetBase.Rate;
         }
     }
 
     private void Update()
     {
+        gazetAbleCount.text = $"{gazetBase.CurrentAbleCount}";
         gazetCoolTime += Time.deltaTime;
-        slider.value = gazetCoolTime / playerAnimator.Gazet.Rate;
-        if (Input.GetKeyDown(KeyCode.Q) && slider.value >= 1)
+        slider.value = gazetCoolTime / gazetBase.Rate;
+        if (Input.GetKeyDown(KeyCode.Q) && slider.value >= 1 && gazetBase.CurrentAbleCount > 0 && status.PlayerHP < status.MaxHP)
         {
             gazetCoolTime = 0.0f;
         }
-
     }
 }

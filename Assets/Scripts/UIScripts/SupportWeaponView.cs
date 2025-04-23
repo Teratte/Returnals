@@ -15,12 +15,8 @@ public class SupportWeaponView : MonoBehaviour
     private void Awake()
     {
         playerAnimator = FindAnyObjectByType<PlayerAnimator>();
-    }
-
-    private void Start()
-    {
         subWeapon = GameManager.instance.subWeapon.GetComponent<WeaponBase>();
-        if(subWeapon != null )
+        if (subWeapon != null)
         {
             subWeaponIcon.sprite = subWeapon.WeaponIcon;
         }

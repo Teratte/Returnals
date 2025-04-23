@@ -11,10 +11,12 @@ public abstract class GazetBase : MonoBehaviour
     public float Damage => gazetSetting.damage;
     public float Rate => gazetSetting.rate;
     public Sprite GazetIcon => gazetIcon;
-    public int AbleCount
-    {
-        get => gazetSetting.ableCount;
-        set => gazetSetting.ableCount = value;
-    }
+    
+    public int CurrentAbleCount => gazetSetting.currentAbleCount;
     public abstract void StartGazetAction();
+
+    protected void SetUp()
+    {
+        gazetSetting.currentAbleCount = gazetSetting.maxAbleCount;
+    }
 }
