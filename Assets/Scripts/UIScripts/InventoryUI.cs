@@ -12,6 +12,8 @@ public class InventoryUI : MonoBehaviour
     private TextMeshProUGUI timer;      // Å¸ÀÌ¸Ó
     [SerializeField]
     private TextMeshProUGUI ammoText;   // ÅºÃ¢ ¼ö
+    [SerializeField]
+    private TextMeshProUGUI gazetAbleCount; // °¡Á¬ »ç¿ë °¡´É È½¼ö
 
     private Slot[] slots;
     private PlayerAnimator playerAnimator;
@@ -43,6 +45,7 @@ public class InventoryUI : MonoBehaviour
         {
             timer.text = $"{(int)GameManager.instance.Timer}";
             ammoText.text = $"{playerAnimator.Weapon.CurrentAmmo} / {playerAnimator.Weapon.MaxAmmo}";
+            gazetAbleCount.text = $"{playerAnimator.Gazet.CurrentAbleCount}";
         }
     }
 

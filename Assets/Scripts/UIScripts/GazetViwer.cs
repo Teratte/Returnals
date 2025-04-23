@@ -8,15 +8,11 @@ public class GazetViwer : MonoBehaviour
     private Slider slider;          // °¡Á¬ ÄðÅ¸ÀÓ
     [SerializeField]
     private Image gazetImage;       // °¡Á¬ ¾ÆÀÌÄÜ
-    [SerializeField]
-    private TextMeshProUGUI gazetAbleCount; // °¡Á¬ »ç¿ë °¡´É È½¼ö
     private float gazetCoolTime;
     private GazetBase gazetBase;    // ¼ÒÀ¯ÇÑ °¡Á¬
-    private Status status;
 
     private void Awake()
     {
-        status = FindAnyObjectByType<Status>();
         gazetBase = GameManager.instance.holdingGazet.GetComponent<GazetBase>();
         if (gazetBase != null)
         {
@@ -27,12 +23,14 @@ public class GazetViwer : MonoBehaviour
 
     private void Update()
     {
-        gazetAbleCount.text = $"{gazetBase.CurrentAbleCount}";
-        gazetCoolTime += Time.deltaTime;
-        slider.value = gazetCoolTime / gazetBase.Rate;
-        if (Input.GetKeyDown(KeyCode.Q) && slider.value >= 1 && gazetBase.CurrentAbleCount > 0 && status.PlayerHP < status.MaxHP)
+        if(GameManager.instance.isGameStart)
         {
-            gazetCoolTime = 0.0f;
+            gazetCoolTime += Time.deltaTime;
+            slider.value = gazetCoolTime / gazetBase.Rate;
+            if (Input.GetKeyDown(KeyCode.Q) && slider.value >= 1)
+            {
+                gazetCoolTime = 0.0f;
+            }
         }
     }
 }
