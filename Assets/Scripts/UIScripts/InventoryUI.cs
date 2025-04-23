@@ -14,6 +14,9 @@ public class InventoryUI : MonoBehaviour
     private TextMeshProUGUI ammoText;   // ÅºÃ¢ ¼ö
     [SerializeField]
     private TextMeshProUGUI gazetAbleCount; // °¡Á¬ »ç¿ë °¡´É È½¼ö
+    [SerializeField]
+    private Slider gazetCoolTimeSlider;     // °¡Á¬ ÄðÅ¸ÀÓ ½½¶óÀÌ´õ
+    private float gazetCoolTime;            // °¡Á¬ ÄðÅ¸ÀÓ
 
     private Slot[] slots;
     private PlayerAnimator playerAnimator;
@@ -25,6 +28,11 @@ public class InventoryUI : MonoBehaviour
         slots = slotsParent.GetComponentsInChildren<Slot>();
         playerAnimator = FindAnyObjectByType<PlayerAnimator>();
         InventoryObject.SetActive(false);
+    }
+
+    private void Start()
+    {
+        gazetCoolTime = playerAnimator.Gazet.Rate;
     }
 
     private void Update()
@@ -46,6 +54,12 @@ public class InventoryUI : MonoBehaviour
             timer.text = $"{(int)GameManager.instance.Timer}";
             ammoText.text = $"{playerAnimator.Weapon.CurrentAmmo} / {playerAnimator.Weapon.MaxAmmo}";
             gazetAbleCount.text = $"{playerAnimator.Gazet.CurrentAbleCount}";
+            gazetCoolTime += Time.deltaTime;
+            gazetCoolTimeSlider.value = gazetCoolTime / playerAnimator.Gazet.Rate;
+            if (Input.GetKeyDown(KeyCode.Q) && gazetCoolTimeSlider.value >= 1 && playerAnimator.Gazet.canUse)
+            {
+                gazetCoolTime = 0.0f;
+            }
         }
     }
 

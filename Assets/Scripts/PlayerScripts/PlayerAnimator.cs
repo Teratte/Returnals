@@ -7,6 +7,8 @@ public class PlayerAnimator : MonoBehaviour
 
     [SerializeField]
     private Transform rightGunBone; // 오른손으로 총 드는 위치
+    [SerializeField]
+    private Transform backPack;     // 가방 위치 -> 가젯 장착 위치
     private WeaponBase weapon;
     private GazetBase gazet;    // 가젯
 
@@ -136,7 +138,9 @@ public class PlayerAnimator : MonoBehaviour
 
     public void SetGazet()
     {
-        gazet = GameManager.instance.holdingGazet.GetComponent<GazetBase>();
+        GameObject newGazet = Instantiate(GameManager.instance.holdingGazet, backPack.position, Quaternion.identity);
+        newGazet.transform.parent = backPack;
+        gazet = newGazet.GetComponent<GazetBase>();
     }
 
     private void OnAnimatorIK(int layerIndex)

@@ -13,6 +13,7 @@ public abstract class GazetBase : MonoBehaviour
     public Sprite GazetIcon => gazetIcon;
     
     public int CurrentAbleCount => gazetSetting.currentAbleCount;
+    public bool canUse = false;
     public abstract void StartGazetAction();
 
     protected void SetUp()

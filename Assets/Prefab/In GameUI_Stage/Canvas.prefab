@@ -1989,7 +1989,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1558d11117272743a78448dbfb23c5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 7714746549095631853}
   gazetImage: {fileID: 2822844469233143521}
 --- !u!1 &4152188269798986953
 GameObject:
@@ -2435,6 +2434,7 @@ MonoBehaviour:
   timer: {fileID: 7708264754189128867}
   ammoText: {fileID: 6519028226323555998}
   gazetAbleCount: {fileID: 9192254466676134547}
+  gazetCoolTimeSlider: {fileID: 7714746549095631853}
 --- !u!1 &4757178804992354885
 GameObject:
   m_ObjectHideFlags: 0

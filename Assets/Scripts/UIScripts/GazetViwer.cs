@@ -5,11 +5,9 @@ using UnityEngine.UI;
 public class GazetViwer : MonoBehaviour
 {
     [SerializeField]
-    private Slider slider;          // °¡Á¬ ÄðÅ¸ÀÓ
-    [SerializeField]
     private Image gazetImage;       // °¡Á¬ ¾ÆÀÌÄÜ
-    private float gazetCoolTime;
     private GazetBase gazetBase;    // ¼ÒÀ¯ÇÑ °¡Á¬
+    private PlayerAnimator playerAnimator;
 
     private void Awake()
     {
@@ -17,20 +15,7 @@ public class GazetViwer : MonoBehaviour
         if (gazetBase != null)
         {
             gazetImage.sprite = gazetBase.GazetIcon;
-            gazetCoolTime = gazetBase.Rate;
         }
     }
 
-    private void Update()
-    {
-        if(GameManager.instance.isGameStart)
-        {
-            gazetCoolTime += Time.deltaTime;
-            slider.value = gazetCoolTime / gazetBase.Rate;
-            if (Input.GetKeyDown(KeyCode.Q) && slider.value >= 1)
-            {
-                gazetCoolTime = 0.0f;
-            }
-        }
-    }
 }
