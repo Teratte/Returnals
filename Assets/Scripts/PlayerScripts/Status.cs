@@ -23,6 +23,8 @@ public class Status : MonoBehaviour
     [SerializeField]
     private float diffense = 50.0f;         // ¹æ¾î·Â
 
+    public bool OnAdrenaline = false;
+
     public float PlayerHP
     {
         set => playerHP = Mathf.Clamp(value,0,maxHP);
@@ -37,8 +39,16 @@ public class Status : MonoBehaviour
     public float MaxStamina => maxStamina;
     public float RecoverRateHP => recoverRateHP;
     public float RecoverRateStamina => recoverRateStamina;
-    public float WalkSpeed => walkSpeed;
-    public float RunSpeed => runSpeed;
+    public float WalkSpeed
+    {
+        set => walkSpeed = value;
+        get => walkSpeed;
+    }
+    public float RunSpeed
+    {
+        set => runSpeed = value;
+        get => runSpeed;
+    }
     public float MoveSpeed
     {
         set => moveSpeed = Mathf.Max(0,value);

@@ -8,7 +8,11 @@ public abstract class GazetBase : MonoBehaviour
     protected Sprite gazetIcon;             // °¡Á¬ ¾ÆÀÌÄÜ
     protected float lastUseTime = 0.0f;
 
-    public float Damage => gazetSetting.damage;
+    public float Damage
+    {
+        set => gazetSetting.damage = value;
+        get => gazetSetting.damage;
+    }
     public float Rate => gazetSetting.rate;
     public Sprite GazetIcon => gazetIcon;
     

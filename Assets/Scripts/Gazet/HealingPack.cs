@@ -27,6 +27,7 @@ public class HealingPack : GazetBase
                 lastUseTime = Time.time;
                 if (gazetSetting.currentAbleCount <= 0)
                     return;
+                Damage = status.MaxHP * 0.3f;
                 status.PlayerHP += Damage;
                 gazetSetting.currentAbleCount--;
                 Debug.Log("heal");

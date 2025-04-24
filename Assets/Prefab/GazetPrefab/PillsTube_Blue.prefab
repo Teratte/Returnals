@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1594117848546088459}
+  - component: {fileID: 8435450282435343054}
   m_Layer: 0
   m_Name: PillsTube_Blue
   m_TagString: Untagged
@@ -23,6 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9018083828553603102}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -30,13 +32,33 @@ Transform:
   m_Children:
   - {fileID: 2772061153260626777}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8435450282435343054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9018083828553603102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bca70ffe1861d8458207fc6f3c4ced6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gazetSetting:
+    name: Epinephrine
+    maxAbleCount: 5
+    currentAbleCount: 5
+    rate: 60
+    damage: 0
+  gazetIcon: {fileID: 21300000, guid: 436507e27e767764494a6fac0de1a964, type: 3}
+  canUse: 0
 --- !u!1001 &2446280966306464946
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1594117848546088459}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e8c4fc4e8302dc843956efa3bd3876b4, type: 3}
@@ -84,7 +106,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: e8c4fc4e8302dc843956efa3bd3876b4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 06157e6c78de2984ea20f83704398b9f, type: 2}
     - target: {fileID: 919132149155446097, guid: e8c4fc4e8302dc843956efa3bd3876b4, type: 3}
@@ -92,6 +114,9 @@ PrefabInstance:
       value: PillsTube
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8c4fc4e8302dc843956efa3bd3876b4, type: 3}
 --- !u!4 &2772061153260626777 stripped
 Transform:
