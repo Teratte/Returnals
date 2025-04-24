@@ -63,8 +63,8 @@ public class Shotgun : WeaponBase
             lastAttackTime = Time.time;
             if (CurrentAmmo <= 0)
                 return;
-
-            weaponSetting.currentAmmo--;
+            if(!onSubMagazine)
+                weaponSetting.currentAmmo--;
             PlaySound(fireClip);
             ShotEffect();
             TwoStepRayCast();

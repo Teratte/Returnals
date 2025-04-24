@@ -19,6 +19,7 @@ public abstract class WeaponBase : MonoBehaviour
     protected bool isAttack = true;        // 공격 여부 체크용
     protected AudioSource audioSource;      // 사운드 재생 컴포넌트
 
+    public bool onSubMagazine = false;      // 보조 탄창 가젯 발동 여부
     public string weaponName => weaponSetting.weaponName;
     public int CurrentAmmo => weaponSetting.currentAmmo;
     public int MaxAmmo => weaponSetting.maxAmmo;

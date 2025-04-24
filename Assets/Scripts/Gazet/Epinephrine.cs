@@ -15,12 +15,21 @@ public class Epinephrine : GazetBase
     {
         if (status != null)
         {
-            StartCoroutine(Adrenaline());
+            if(isFirstTimeUse)
+            {
+                isFirstTimeUse = false;
+                StartCoroutine(Adrenaline());
+            }
+            else if(Time.time >= lastUseTime + Rate)
+            {
+                StartCoroutine(Adrenaline());
+            }
         }
     }
 
     private IEnumerator Adrenaline()
     {
+        lastUseTime = Time.time;
         // 5초동안 걷는 속도, 뛰는 속도 120%, 스태미나 감소X
         gazetSetting.currentAbleCount--;
         float currentWalkSpeed = status.WalkSpeed;
@@ -29,14 +38,14 @@ public class Epinephrine : GazetBase
         status.WalkSpeed = currentWalkSpeed * 1.2f;
         status.RunSpeed = currentRunSpeed * 1.2f;
         status.OnAdrenaline = true;
-        Debug.Log("변경 후 : " + status.MoveSpeed);
+        Debug.Log("변경 후 : " + status.WalkSpeed);
         Debug.Log("변경 후 : " + status.RunSpeed);
         yield return new WaitForSeconds(5.0f);
 
         status.WalkSpeed = currentWalkSpeed;
         status.RunSpeed = currentRunSpeed;
         status.OnAdrenaline= false;
-        Debug.Log("변경 후 : " + status.MoveSpeed);
+        Debug.Log("변경 후 : " + status.WalkSpeed);
         Debug.Log("변경 후 : " + status.RunSpeed);
     }
 }

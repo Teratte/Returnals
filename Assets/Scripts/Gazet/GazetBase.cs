@@ -7,6 +7,7 @@ public abstract class GazetBase : MonoBehaviour
     [SerializeField]
     protected Sprite gazetIcon;             // 가젯 아이콘
     protected float lastUseTime = 0.0f;
+    protected bool isFirstTimeUse;
 
     public float Damage
     {
@@ -22,6 +23,7 @@ public abstract class GazetBase : MonoBehaviour
 
     protected void SetUp()
     {
+        isFirstTimeUse = true;
         gazetSetting.currentAbleCount = gazetSetting.maxAbleCount;
     }
 }
