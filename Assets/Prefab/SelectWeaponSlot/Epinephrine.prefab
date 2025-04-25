@@ -19,7 +19,7 @@ PrefabInstance:
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: weaponData.icon
       value: 
-      objectReference: {fileID: 21300000, guid: 436507e27e767764494a6fac0de1a964, type: 3}
+      objectReference: {fileID: 21300000, guid: 06169828577f3284999be4ba19061c20, type: 3}
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: weaponData.name
       value: Epinephrine
@@ -124,7 +124,7 @@ PrefabInstance:
     - target: {fileID: 5301930396806924609, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 436507e27e767764494a6fac0de1a964, type: 3}
+      objectReference: {fileID: 21300000, guid: 06169828577f3284999be4ba19061c20, type: 3}
     - target: {fileID: 5301930396806924609, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Color.a
       value: 1
