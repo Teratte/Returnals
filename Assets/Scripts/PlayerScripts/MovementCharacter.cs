@@ -82,7 +82,6 @@ public class MovementCharacter : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Eatable"))
         {
-            int index = collision.gameObject.GetComponent<EatableObject>().ItemIndex;
             inventoryUI.AcquireItem(collision.gameObject.GetComponent<EatableObject>().item);
             GameManager.instance.AddItem(collision.gameObject.GetComponent<EatableObject>().item);
 
