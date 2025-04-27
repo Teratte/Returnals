@@ -46,24 +46,6 @@ public class PlayerAnimator : MonoBehaviour
             UpdateAttack();
             UpdateGazet();
         }
-
-        TestAnimation();
-    }
-
-    private void TestAnimation()
-    {
-        animator.SetBool("isDie", Input.GetKey(KeyCode.G));
-        if (Input.GetKey(KeyCode.G))
-        {
-            GameManager.instance.isGameOver = true;
-        }
-        else
-        {
-            GameManager.instance.isGameOver = false;
-        }
-        
-        if (Input.GetKeyDown(KeyCode.H))
-            animator.SetTrigger("onHit");
     }
 
     private void ChangeWeapon()

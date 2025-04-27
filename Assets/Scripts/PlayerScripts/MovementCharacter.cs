@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class MovementCharacter : MonoBehaviour
+public class MovementCharacter : MonoBehaviour, IDamageable
 {
     [SerializeField]
     private InventoryUI inventoryUI;
@@ -76,6 +76,10 @@ public class MovementCharacter : MonoBehaviour
 
         // 현재 카메라가 바라보고 있는 전방 방향을 보도록 설정
         transform.rotation = Quaternion.Euler(0, mainCamera.eulerAngles.y, 0);
+
+
+        // Hit또는 Die애니메이션 테스트
+        TestAnimation();
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -114,5 +118,26 @@ public class MovementCharacter : MonoBehaviour
         {
             status.PlayerStamina += Time.deltaTime * status.RecoverRateStamina;
         }
+    }
+
+    private void TestAnimation()
+    {
+        animator.SetBool("isDie", Input.GetKey(KeyCode.G));
+        if (Input.GetKey(KeyCode.G))
+        {
+            GameManager.instance.isGameOver = true;
+        }
+        else
+        {
+            GameManager.instance.isGameOver = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.H))
+            animator.SetTrigger("onHit");
+    }
+
+    public void OnDamage(float damage)
+    {
+        // 데미지 입을 시
     }
 }
