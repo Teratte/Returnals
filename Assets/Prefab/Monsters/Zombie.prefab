@@ -2259,9 +2259,10 @@ GameObject:
   - component: {fileID: 2000854878110620845}
   - component: {fileID: 7517280882174442623}
   - component: {fileID: 7682292082976588664}
+  - component: {fileID: 2828812887853272965}
   m_Layer: 14
   m_Name: small axe
-  m_TagString: Untagged
+  m_TagString: EnemyWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2334,6 +2335,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2828812887853272965
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5237697133019169254}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: -0.12, y: 0.20853093, z: 0.036530513}
+  m_Center: {x: -0.28, y: 0.053505346, z: -0.000000017906874}
 --- !u!1 &5251317645378357765
 GameObject:
   m_ObjectHideFlags: 0
@@ -2885,7 +2907,11 @@ MonoBehaviour:
   maxHealth: 100
   moveSpeed: 2
   rotationSpeed: 5
-  Target: {fileID: 9171868947698613781, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
+  attackRange: 2
+  attackDelay: 1.5
+  defense: 1.5
+  detectionAngle: 90
+  weapon: {fileID: 0}
 --- !u!1 &6303159735993863875
 GameObject:
   m_ObjectHideFlags: 0
