@@ -702,6 +702,16 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 541656100}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &606844002 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5237697133019169254, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
+  m_PrefabInstance: {fileID: 1743445493}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &606844007 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 2828812887853272965, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
+  m_PrefabInstance: {fileID: 1743445493}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &757250009
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1271,7 +1281,6 @@ MonoBehaviour:
   mainWeapon: {fileID: 0}
   subWeapon: {fileID: 0}
   holdingGazet: {fileID: 0}
-  items: []
   isUIOn: 0
 --- !u!1001 &1093567629
 PrefabInstance:
@@ -1447,6 +1456,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3489186203778448922, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4104039702020557245, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4104039702020557245, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4104039702020557245, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4529948749049636226, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -1463,6 +1488,10 @@ PrefabInstance:
       propertyPath: status
       value: 
       objectReference: {fileID: 1799680111}
+    - target: {fileID: 7535865144940105639, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7691692432374438192, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2100,10 +2129,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2000854878110620845, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000854878110620845, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.016
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000854878110620845, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.001
+      objectReference: {fileID: 0}
     - target: {fileID: 2127389832877636230, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
       propertyPath: Target
       value: 
       objectReference: {fileID: 1799680116}
+    - target: {fileID: 2127389832877636230, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 606844002}
+    - target: {fileID: 2127389832877636230, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
+      propertyPath: weaponCollider
+      value: 
+      objectReference: {fileID: 606844007}
+    - target: {fileID: 2828812887853272965, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
+      propertyPath: m_Size.x
+      value: -0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828812887853272965, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
+      propertyPath: m_Center.x
+      value: -0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 5733457877574321421, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6256583199356865944, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
       propertyPath: m_Name
       value: Zombie
