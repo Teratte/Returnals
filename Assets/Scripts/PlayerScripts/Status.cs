@@ -21,9 +21,15 @@ public class Status : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 4.0f;      // 움직이는 속도
     [SerializeField]
-    private float diffense = 50.0f;         // 방어력
+    private float defense = 50.0f;         // 방어력
+    [SerializeField]
+    private float recoverAbleTime = 3.0f;   // 회복가능 시간
 
     public bool OnAdrenaline = false;
+
+    bool isNotAttack = true;    // 공격 시점이 아닌 경우
+    float notAttackTime = 0.0f; // 공격 중인 시간이 아닌 경우
+    bool isRecover = false;     // HP 회복 중인 경우
 
     public float PlayerHP
     {
@@ -55,11 +61,34 @@ public class Status : MonoBehaviour
         get => moveSpeed;
     }
 
-    public float Diffense => diffense;
+    public float Defense => defense;
 
     private void Awake()
     {
         playerHP = maxHP;
         playerStamina = maxStamina;
+    }
+
+    private void Update()
+    {
+        if (isNotAttack && PlayerHP < MaxHP)
+        {
+            notAttackTime += Time.deltaTime;
+        }
+
+        if (notAttackTime >= recoverAbleTime)
+        {
+            notAttackTime = 0.0f;
+            isRecover = true;
+        }
+
+        if (isRecover && PlayerHP < MaxHP)
+        {
+            PlayerHP += Time.deltaTime * 1.0f;
+            if (PlayerHP >= MaxHP)
+            {
+                isRecover = false;
+            }
+        }
     }
 }

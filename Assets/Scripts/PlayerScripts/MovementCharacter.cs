@@ -122,13 +122,9 @@ public class MovementCharacter : MonoBehaviour, IDamageable
 
     private void TestAnimation()
     {
-        animator.SetBool("isDie", Input.GetKey(KeyCode.G));
-        if (Input.GetKey(KeyCode.G))
+        if(Input.GetKeyDown(KeyCode.B))
         {
-            GameManager.instance.isGameOver = true;
-        }
-        else
-        {
+            animator.SetBool("isDie", false);
             GameManager.instance.isGameOver = false;
         }
 
@@ -139,5 +135,14 @@ public class MovementCharacter : MonoBehaviour, IDamageable
     public void OnDamage(float damage)
     {
         // 데미지 입을 시
+        animator.SetTrigger("onHit");
+        float final = 100 / (100 + status.Defense);
+        status.PlayerHP -= damage * final;
+
+        if(status.PlayerHP <= 0)
+        {
+            animator.SetBool("isDie", true);
+            GameManager.instance.isGameOver = true;
+        }
     }
 }
