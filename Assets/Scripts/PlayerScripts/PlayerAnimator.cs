@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerAnimator : MonoBehaviour
 {
@@ -6,6 +7,8 @@ public class PlayerAnimator : MonoBehaviour
 
     [SerializeField]
     private Transform rightGunBone; // 오른손으로 총 드는 위치
+    [SerializeField]
+    private Transform backPack;     // 가방 위치 -> 가젯 장착 위치
     private WeaponBase weapon;
     private GazetBase gazet;    // 가젯
 
@@ -18,7 +21,7 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.instance.isGameStart)
+        if (GameManager.instance.isGameStart && SceneManager.GetActiveScene().name != "BaseCamp")
         {
             GameManager.instance.holdingWeaponPrefabs.Add(GameManager.instance.subWeapon);
             GameManager.instance.holdingWeaponPrefabs.Add(GameManager.instance.mainWeapon);
@@ -37,9 +40,30 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Update()
     {
-        ChangeWeapon();
-        UpdateAttack();
-        UpdateGazet();
+        if(!GameManager.instance.isGameOver)
+        {
+            ChangeWeapon();
+            UpdateAttack();
+            UpdateGazet();
+        }
+
+        TestAnimation();
+    }
+
+    private void TestAnimation()
+    {
+        animator.SetBool("isDie", Input.GetKey(KeyCode.G));
+        if (Input.GetKey(KeyCode.G))
+        {
+            GameManager.instance.isGameOver = true;
+        }
+        else
+        {
+            GameManager.instance.isGameOver = false;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.H))
+            animator.SetTrigger("onHit");
     }
 
     private void ChangeWeapon()
@@ -71,7 +95,8 @@ public class PlayerAnimator : MonoBehaviour
                     if (Input.GetMouseButtonDown(0) && Input.GetAxis("Sprint") == 0 && weapon.CurrentAmmo > 0)
                     {
                         weapon.StartWeaponAction(0);
-                        animator.SetTrigger("onAttack");
+                        if(weapon.IsAttack)
+                            animator.SetTrigger("onAttack");
                     }
                 }
             }
@@ -113,7 +138,9 @@ public class PlayerAnimator : MonoBehaviour
 
     public void SetGazet()
     {
-        gazet = GameManager.instance.holdingGazet.GetComponent<GazetBase>();
+        GameObject newGazet = Instantiate(GameManager.instance.holdingGazet, backPack.position, Quaternion.identity);
+        newGazet.transform.parent = backPack;
+        gazet = newGazet.GetComponent<GazetBase>();
     }
 
     private void OnAnimatorIK(int layerIndex)

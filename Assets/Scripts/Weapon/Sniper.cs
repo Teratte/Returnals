@@ -70,7 +70,8 @@ public class Sniper : WeaponBase
             // 남은 탄알이 없으면 발사 불가능
             if (weaponSetting.currentAmmo <= 0)
                 return;
-            weaponSetting.currentAmmo--;
+            if(!onSubMagazine)
+                weaponSetting.currentAmmo--;
             // 발사 이펙트 재생
             ShotEffect();
             // 발사 사운드 재생

@@ -65,12 +65,14 @@ public class Handgun : WeaponBase
         // && 마지막 총 발사 시점에서 gunData.timeBetFire 이상의 시간이 지남.
         if (Time.time >= lastAttackTime + weaponSetting.fireRate)
         {
+            isAttack = true;
             // 마지막 총 발사 시점 갱신
             lastAttackTime = Time.time;
             // 남은 탄알이 없으면 발사 불가능
             if (weaponSetting.currentAmmo <= 0)
                 return;
-            weaponSetting.currentAmmo--;
+            if(!onSubMagazine)
+                weaponSetting.currentAmmo--;
             // 발사 이펙트 재생
             ShotEffect();
             // 발사 사운드 재생
@@ -78,6 +80,8 @@ public class Handgun : WeaponBase
             // 실제 발사 처리 실행
             TwoStepRayCast();
         }
+        else
+            isAttack = false;
     }
 
     // 실제 발사 처리

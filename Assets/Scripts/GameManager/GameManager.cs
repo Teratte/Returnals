@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
             if (m_instance == null)
             {
                 // 씬에서 GameManager 오브젝트를 찾아 할당
-                m_instance = FindObjectOfType<GameManager>();
+                m_instance = FindAnyObjectByType<GameManager>();
             }
 
             // 싱글톤 오브젝트를 반환
@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     public GameObject mainWeapon;                   // 메인 무기
     public GameObject subWeapon;                    // 보조 무기
     public GameObject holdingGazet;                 // 보유 가젯
+
+    public List<GameObject> selectWeaponList;       // 무기 선택 리스트
 
     [Header("Items")]
     private Dictionary<Item, int> items = new Dictionary<Item, int>();
