@@ -14,14 +14,14 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [Header("Status")]
     [Tooltip("몬스터 스테이터스를 설정")]
-    [SerializeField] private int maxHealth = 100;
+    [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float moveSpeed = 3.5f;
     [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private float attackRange = 1f;
     [SerializeField] private float attackDelay = 1.5f;
     [SerializeField] private float defense = 1.5f;
     [SerializeField] private float monsterDamage = 40.0f;
-    private int curHealth;
+    private float curHealth;
 
     public float MonsterDamage => monsterDamage;
 
@@ -172,8 +172,9 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if (currentState == EnemyState.Die) return;
 
+        float damageRange = 100 / (100 + defense);
         Debug.Log("Damage! : " + damage);
-        curHealth -= (int)damage;
+        curHealth -= (damage * damageRange); // 방어력에 따른 데미지 계산
 
         if (curHealth <= 0)
         {
