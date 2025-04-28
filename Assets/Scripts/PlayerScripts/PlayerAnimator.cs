@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerAnimator : MonoBehaviour
 {
-    private Animator animator;
+    private Animator animator;      // 애니메이션 컨트롤러
 
     [SerializeField]
     private Transform rightGunBone; // 오른손으로 총 드는 위치
@@ -12,8 +12,23 @@ public class PlayerAnimator : MonoBehaviour
     private WeaponBase weapon;
     private GazetBase gazet;    // 가젯
 
-    public WeaponBase Weapon => weapon;
+    public WeaponBase Weapon
+    {
+        set => weapon = value;
+        get => weapon;
+    }
     public GazetBase Gazet => gazet;
+    public Animator Animator
+    {
+        set=>animator = value;
+        get => animator;
+    }
+
+    public Transform RightGunBone
+    {
+        set => rightGunBone = value;
+        get => rightGunBone;
+    }
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -115,6 +130,14 @@ public class PlayerAnimator : MonoBehaviour
         if(weapon != null)
         {
             animator.runtimeAnimatorController = weapon.RuntimeAnimatorController;
+        }
+    }
+
+    public void ResetArsenal()
+    {
+        for (int i = 0; i < GameManager.instance.holdingWeaponPrefabs.Count; i++)
+        {
+            rightGunBone.GetChild(i).gameObject.SetActive(false);
         }
     }
 

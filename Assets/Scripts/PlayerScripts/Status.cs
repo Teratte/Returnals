@@ -27,8 +27,8 @@ public class Status : MonoBehaviour
 
     public bool OnAdrenaline = false;
 
-    bool isNotAttack = true;    // 공격 시점이 아닌 경우
-    float notAttackTime = 0.0f; // 공격 중인 시간이 아닌 경우
+    public bool isNotAttack = true;    // 공격 받는 중이 아닌 경우
+    float notAttackTime = 0.0f; // 공격 받지 않는 시간
     bool isRecover = false;     // HP 회복 중인 경우
 
     public float PlayerHP
@@ -43,7 +43,6 @@ public class Status : MonoBehaviour
         get => playerStamina;
     }
     public float MaxStamina => maxStamina;
-    public float RecoverRateHP => recoverRateHP;
     public float RecoverRateStamina => recoverRateStamina;
     public float WalkSpeed
     {
@@ -71,23 +70,30 @@ public class Status : MonoBehaviour
 
     private void Update()
     {
-        if (isNotAttack && PlayerHP < MaxHP)
+        if(!GameManager.instance.isGameOver)
         {
-            notAttackTime += Time.deltaTime;
-        }
-
-        if (notAttackTime >= recoverAbleTime)
-        {
-            notAttackTime = 0.0f;
-            isRecover = true;
-        }
-
-        if (isRecover && PlayerHP < MaxHP)
-        {
-            PlayerHP += Time.deltaTime * 1.0f;
-            if (PlayerHP >= MaxHP)
+            // 공격 받는 중이 아니며 최대 체력이 아니면 공격 받지 않는 시간 계산
+            if (isNotAttack && PlayerHP < MaxHP)
             {
                 isRecover = false;
+                notAttackTime += Time.deltaTime;
+            }
+
+            // 공격 받지 않는 시간이 자동 재생 시간 후라면 회복
+            if (notAttackTime >= recoverAbleTime)
+            {
+                isNotAttack = false;
+                notAttackTime = 0.0f;
+                isRecover = true;
+            }
+
+            if (isRecover && PlayerHP < MaxHP)
+            {
+                PlayerHP += Time.deltaTime * recoverRateHP;
+                if (PlayerHP >= MaxHP)
+                {
+                    isRecover = false;
+                }
             }
         }
     }
