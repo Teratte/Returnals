@@ -135,6 +135,7 @@ public class MovementCharacter : MonoBehaviour, IDamageable
     public void OnDamage(float damage)
     {
         // 데미지 입을 시
+        status.isNotAttack = true;
         animator.SetTrigger("onHit");
         float final = 100 / (100 + status.Defense);
         status.PlayerHP -= damage * final;

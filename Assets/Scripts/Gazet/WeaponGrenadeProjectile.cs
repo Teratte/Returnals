@@ -6,18 +6,23 @@ public class WeaponGrenadeProjectile : MonoBehaviour
     [SerializeField]
     private GameObject explosionPrefab;
     [SerializeField]
-    private float explosionRadius = 10.0f;
+    private float explosionRadius = 10.0f;      // 气惯 裹困
     [SerializeField]
-    private float explosionForce = 500.0f;
-    [SerializeField]
-    private float throwForce = 1000.0f;
+    private float throwForce = 1000.0f;         // 带瘤绰 塞
 
-    private int explosionDamage;
-    private new Rigidbody rigidbody;
+    private float explosionDamage;                // 气惯 单固瘤
+    private new Rigidbody rigidbody;            // 拱府贸府
 
-    public void Setup(int damage, Vector3 rotation)
+    private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
+        rigidbody.isKinematic = true;
+    }
+
+    public void Setup(float damage, Vector3 rotation)
+    {
+        rigidbody = GetComponent<Rigidbody>();
+        rigidbody.isKinematic = false;
         rigidbody.AddForce(rotation * throwForce);
 
         explosionDamage = damage;
