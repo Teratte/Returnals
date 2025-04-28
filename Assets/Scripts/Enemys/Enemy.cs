@@ -17,10 +17,13 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private float moveSpeed = 3.5f;
     [SerializeField] private float rotationSpeed = 5f;
-    [SerializeField] private float attackRange = 2f;
+    [SerializeField] private float attackRange = 1f;
     [SerializeField] private float attackDelay = 1.5f;
     [SerializeField] private float defense = 1.5f;
+    [SerializeField] private float monsterDamage = 40.0f;
     private int curHealth;
+
+    public float MonsterDamage => monsterDamage;
 
     [Header("Detection")]
     [SerializeField] private float detectionAngle = 90f; // 정면 인식 각도
@@ -129,24 +132,26 @@ public class Enemy : MonoBehaviour, IDamageable
         lastAttackTime = Time.time;
 
         if (weaponCollider != null)
-            weaponCollider.enabled = true;  // 공격 시작 시 콜라이더 활성화
+        {
+            weaponCollider.enabled = true;
+            weaponCollider.GetComponent<EnemyAttack>().ResetHit(); // ⭐ 여기 필수!
+        }
     }
 
-    void Attack()
+    private void Attack()
     {
         if (currentState == EnemyState.Die) return;
-
         EndAttack();
     }
 
     void EndAttack()
     {
+        if (weaponCollider != null)
+            weaponCollider.enabled = false;
+
         if (currentState == EnemyState.Die) return;
 
         currentState = EnemyState.Chase;  // 공격이 끝나면 추격 상태로
-
-        if (weaponCollider != null)
-            weaponCollider.enabled = false;
 
         float distance = Vector3.Distance(transform.position, target.position);
         Vector3 dirToTarget = (target.position - transform.position).normalized;

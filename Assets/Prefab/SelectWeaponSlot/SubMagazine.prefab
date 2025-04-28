@@ -19,7 +19,7 @@ PrefabInstance:
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: weaponData.icon
       value: 
-      objectReference: {fileID: 21300000, guid: cc1d47cf07758074986de39fa1d4ad70, type: 3}
+      objectReference: {fileID: 21300000, guid: 25cfc743a997982418728f3055e4c27e, type: 3}
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: weaponData.name
       value: SubMagazine
@@ -124,7 +124,7 @@ PrefabInstance:
     - target: {fileID: 5301930396806924609, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: cc1d47cf07758074986de39fa1d4ad70, type: 3}
+      objectReference: {fileID: 21300000, guid: 25cfc743a997982418728f3055e4c27e, type: 3}
     - target: {fileID: 5301930396806924609, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Color.a
       value: 1

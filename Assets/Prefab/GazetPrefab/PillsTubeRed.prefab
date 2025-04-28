@@ -51,7 +51,7 @@ MonoBehaviour:
     currentAbleCount: 10
     rate: 60
     damage: 10
-  gazetIcon: {fileID: 21300000, guid: e9bb4d9855f77a14fb90c936f78812cc, type: 3}
+  gazetIcon: {fileID: 21300000, guid: 6ac3c9c066281b64cbebf52306a4602a, type: 3}
   canUse: 0
 --- !u!1001 &7214327795436701685
 PrefabInstance:

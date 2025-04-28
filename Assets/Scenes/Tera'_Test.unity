@@ -702,16 +702,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 541656100}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &606844002 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5237697133019169254, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
-  m_PrefabInstance: {fileID: 1743445493}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &606844007 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 2828812887853272965, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
-  m_PrefabInstance: {fileID: 1743445493}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &757250009
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1281,6 +1271,7 @@ MonoBehaviour:
   mainWeapon: {fileID: 0}
   subWeapon: {fileID: 0}
   holdingGazet: {fileID: 0}
+  selectWeaponList: []
   isUIOn: 0
 --- !u!1001 &1093567629
 PrefabInstance:
@@ -1454,6 +1445,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2268774471445555537, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556228233222793851, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3489186203778448922, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
@@ -2129,42 +2124,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2000854878110620845, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000854878110620845, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.016
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000854878110620845, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.001
-      objectReference: {fileID: 0}
-    - target: {fileID: 2127389832877636230, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
-      propertyPath: Target
-      value: 
-      objectReference: {fileID: 1799680116}
-    - target: {fileID: 2127389832877636230, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
-      propertyPath: weapon
-      value: 
-      objectReference: {fileID: 606844002}
-    - target: {fileID: 2127389832877636230, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
-      propertyPath: weaponCollider
-      value: 
-      objectReference: {fileID: 606844007}
-    - target: {fileID: 2828812887853272965, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
-      propertyPath: m_Size.x
-      value: -0.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 2828812887853272965, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
-      propertyPath: m_Center.x
-      value: -0.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 5733457877574321421, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6256583199356865944, guid: cfff480b262b3884e9b43ade3e78083b, type: 3}
       propertyPath: m_Name
       value: Zombie
@@ -2558,11 +2517,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b58fdb4cdad1d489288b83acfc00f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1799680116 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9171868947698613781, guid: 48dcd6665fdf8b142bb5e810e76decbc, type: 3}
-  m_PrefabInstance: {fileID: 1799680109}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1845134800
 PrefabInstance:
   m_ObjectHideFlags: 0
