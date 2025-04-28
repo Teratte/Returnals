@@ -2918,12 +2918,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c29707435d50694ab6f1e0f36fc5c0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 160
   moveSpeed: 2
   rotationSpeed: 5
   attackRange: 1.2
-  attackDelay: 1.5
-  defense: 1.5
+  attackDelay: 2
+  defense: 0
   monsterDamage: 40
   detectionAngle: 90
   weaponCollider: {fileID: 2828812887853272965}
