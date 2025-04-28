@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    public static bool inventoryActivated = false;
-
     [SerializeField]
     private GameObject InventoryObject; // 인벤토리 창
     [SerializeField]
@@ -14,6 +12,11 @@ public class InventoryUI : MonoBehaviour
     private TextMeshProUGUI timer;      // 타이머
     [SerializeField]
     private TextMeshProUGUI ammoText;   // 탄창 수
+    [SerializeField]
+    private TextMeshProUGUI gazetAbleCount; // 가젯 사용 가능 횟수
+    [SerializeField]
+    private Slider gazetCoolTimeSlider;     // 가젯 쿨타임 슬라이더
+    private float gazetCoolTime;            // 가젯 쿨타임
 
     private Slot[] slots;
     private PlayerAnimator playerAnimator;
@@ -23,8 +26,13 @@ public class InventoryUI : MonoBehaviour
     private void Awake()
     {
         slots = slotsParent.GetComponentsInChildren<Slot>();
-        playerAnimator = FindObjectOfType<PlayerAnimator>();
+        playerAnimator = FindAnyObjectByType<PlayerAnimator>();
         InventoryObject.SetActive(false);
+    }
+
+    private void Start()
+    {
+        gazetCoolTime = playerAnimator.Gazet.Rate;
     }
 
     private void Update()
@@ -32,13 +40,11 @@ public class InventoryUI : MonoBehaviour
         // 인벤토리 창 열기
         if (Input.GetKey(KeyCode.Tab))
         {
-            inventoryActivated = true;
             InventoryObject.SetActive(true);
             GameManager.instance.ActiveUI();
         }
         else if(Input.GetKeyUp(KeyCode.Tab))
         {
-            inventoryActivated = false;
             InventoryObject.SetActive(false);
             GameManager.instance.DeactiveUI();
         }
@@ -47,6 +53,13 @@ public class InventoryUI : MonoBehaviour
         {
             timer.text = $"{(int)GameManager.instance.Timer}";
             ammoText.text = $"{playerAnimator.Weapon.CurrentAmmo} / {playerAnimator.Weapon.MaxAmmo}";
+            gazetAbleCount.text = $"{playerAnimator.Gazet.CurrentAbleCount}";
+            gazetCoolTime += Time.deltaTime;
+            gazetCoolTimeSlider.value = gazetCoolTime / playerAnimator.Gazet.Rate;
+            if (Input.GetKeyDown(KeyCode.Q) && gazetCoolTimeSlider.value >= 1 && playerAnimator.Gazet.canUse)
+            {
+                gazetCoolTime = 0.0f;
+            }
         }
     }
 
