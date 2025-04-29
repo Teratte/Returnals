@@ -18,10 +18,12 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private float moveSpeed = 3.5f;
     [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private float attackRange = 1f;
-    [SerializeField] private float attackDelay = 1.5f;
+    [SerializeField] private float attackDelay = 1.5f;  // 공격 간 딜레이
     [SerializeField] private float defense = 1.5f;
     [SerializeField] private float monsterDamage = 40.0f;
+    [SerializeField] private float postAttackDelay = 0.3f; // 공격 후 딜레이
     private float curHealth;
+    private bool isPostDelay = false;
 
     public float MonsterDamage => monsterDamage;
 
@@ -38,6 +40,10 @@ public class Enemy : MonoBehaviour, IDamageable
     private Animator anim;
     private Rigidbody rigid;
     private CapsuleCollider capsuleCollider;
+
+    float distance;
+    Vector3 dirToTarget;
+    float angle;
 
     private float lastAttackTime;
 
@@ -97,34 +103,43 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void Update()
     {
-        if (currentState == EnemyState.Die || target == null || nav == null) return;
+        if (currentState == EnemyState.Die || target == null || nav == null || isPostDelay) return;
 
-        float distance = Vector3.Distance(transform.position, target.position);
-        Vector3 dirToTarget = (target.position - transform.position).normalized;
-        float angle = Vector3.Angle(transform.forward, dirToTarget);
+        distance = Vector3.Distance(transform.position, target.position);
+        dirToTarget = (target.position - transform.position).normalized;
+        angle = Vector3.Angle(transform.forward, dirToTarget);
+
+        // ✅ 공격 중에는 아무 상태 전환도 하지 않음
+        if (currentState == EnemyState.Attack)
+        {
+            // 공격 딜레이가 끝난 경우에만 다음 단계로 넘어감
+            if (Time.time >= lastAttackTime + attackDelay)
+            {
+                Attack(); // 이 안에서 EndAttack 호출
+            }
+            return;
+        }
 
         if (currentState == EnemyState.Chase)
         {
             if (distance <= attackRange && angle <= detectionAngle * 0.5f)
             {
-                StartAttack();
-                Debug.Log("Chase Start!");
+                if (Time.time >= lastAttackTime + attackDelay)
+                {
+                    StartAttack();
+                }
             }
-            else if (distance > attackRange || angle > detectionAngle * 0.5f)
+            else
             {
                 nav.SetDestination(target.position);
             }
-        }
-
-        if (currentState == EnemyState.Attack && Time.time >= lastAttackTime + attackDelay)
-        {
-            Attack();
         }
     }
 
     void StartAttack()
     {
-        if (currentState == EnemyState.Die) return;
+        
+        if (currentState == EnemyState.Die || currentState == EnemyState.Attack) return;
 
         currentState = EnemyState.Attack;
         nav.isStopped = true;
@@ -133,14 +148,16 @@ public class Enemy : MonoBehaviour, IDamageable
 
         if (weaponCollider != null)
         {
+            weaponCollider.enabled = false; // 추가
             weaponCollider.enabled = true;
-            weaponCollider.GetComponent<EnemyAttack>().ResetHit(); // ⭐ 여기 필수!
+            weaponCollider.GetComponent<EnemyAttack>().ResetHit();
         }
     }
 
     private void Attack()
     {
         if (currentState == EnemyState.Die) return;
+        Debug.Log("End Attack! 전환");
         EndAttack();
     }
 
@@ -151,20 +168,32 @@ public class Enemy : MonoBehaviour, IDamageable
 
         if (currentState == EnemyState.Die) return;
 
-        currentState = EnemyState.Chase;  // 공격이 끝나면 추격 상태로
+        Debug.Log("End Attack, Waiting for next state transition");
+        StartCoroutine(WaitAfterAttack());
 
-        float distance = Vector3.Distance(transform.position, target.position);
-        Vector3 dirToTarget = (target.position - transform.position).normalized;
-        float angle = Vector3.Angle(transform.forward, dirToTarget);
+    }
+    private IEnumerator WaitAfterAttack()
+    {
+        isPostDelay = true;
+
+        yield return new WaitForSeconds(postAttackDelay); // 🔸 경직 시간
+
+        isPostDelay = false;
+
+        // ✅ 이 시점에서만 상태를 Chase로 전환
+        distance = Vector3.Distance(transform.position, target.position);
+        angle = Vector3.Angle(transform.forward, dirToTarget);
 
         if (distance > attackRange || angle > detectionAngle * 0.5f)
         {
-            currentState = EnemyState.Chase;  // 범위 벗어나면 추격 상태로 돌아감
+            currentState = EnemyState.Chase;
             nav.isStopped = false;
         }
         else
         {
-            StartAttack(); // 계속 공격 상태로 유지
+            // 여전히 조건을 만족하면 다음 공격 대기
+            currentState = EnemyState.Attack;
+            lastAttackTime = Time.time; // 다음 공격 타이밍 초기화
         }
     }
 
