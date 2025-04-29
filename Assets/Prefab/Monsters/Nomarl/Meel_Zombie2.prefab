@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4528333136132114}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLArmDigit51
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4781040007562802}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRArmDigit42
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4961561720686362}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRLegDigit11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4146303758286550}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigHub003Bone001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4178755511286078}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigHub002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4283608930189254}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRArmCollarbone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4083902618699240}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRArmDigit32
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,7 +233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4710412227387350}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRArmDigit52
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4855840122092098}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLArmDigit33
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +298,7 @@ GameObject:
   - component: {fileID: 4858251921064568}
   - component: {fileID: 33304992529592858}
   - component: {fileID: 23296841355276928}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 knife 3 LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -384,7 +384,7 @@ GameObject:
   - component: {fileID: 4065253055822146}
   - component: {fileID: 33118662557362512}
   - component: {fileID: 23460259007773742}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 knife 3 LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -471,7 +471,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4994023718062808}
   - component: {fileID: 137414116629829492}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 belt LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -564,7 +564,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4428049552748610}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLArmDigit23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -595,7 +595,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4402638760075046}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigHub003Bone003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -632,13 +632,13 @@ GameObject:
   - component: {fileID: 5508217566535855039}
   - component: {fileID: 853675977549531132}
   - component: {fileID: 1684310769391774911}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Meel_Zombie2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4778868142476608
 Transform:
   m_ObjectHideFlags: 0
@@ -814,6 +814,7 @@ MonoBehaviour:
   attackDelay: 1.5
   defense: 0
   monsterDamage: 40
+  postAttackDelay: 1
   detectionAngle: 90
   weaponCollider: {fileID: 381470949564028428}
 --- !u!136 &1684310769391774911
@@ -831,7 +832,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -849,7 +850,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4505562178643546}
   - component: {fileID: 137269961674057138}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 boots LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -946,7 +947,7 @@ GameObject:
   - component: {fileID: 4585113521004646}
   - component: {fileID: 33961053608004680}
   - component: {fileID: 23983102645610896}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 knife 2 LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1030,7 +1031,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4522306316031172}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRArmDigit11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1062,7 +1063,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4649258386737662}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLArmDigit32
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1095,7 +1096,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4018989586386468}
   - component: {fileID: 137327152393378208}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 clothes LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1201,7 +1202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4197406486485632}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRArmDigit31
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1233,7 +1234,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4923806211974528}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRLegAnkle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1267,7 +1268,7 @@ GameObject:
   - component: {fileID: 4462510156417130}
   - component: {fileID: 33415900891262384}
   - component: {fileID: 23934243818233736}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 knife 1 LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1351,7 +1352,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4639237522304976}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLArmDigit52
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1383,7 +1384,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4377476967603294}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLArmCollarbone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1416,7 +1417,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4172574509360454}
   - component: {fileID: 137121419784511288}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 skin LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1553,7 +1554,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4713806025488578}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigSpine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1586,7 +1587,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4763275157484556}
   - component: {fileID: 137704547859706474}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 handkerchief LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1681,7 +1682,7 @@ GameObject:
   - component: {fileID: 23384961919159982}
   - component: {fileID: 4687664487782736377}
   - component: {fileID: 381470949564028428}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: "\u0421leaver"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1800,7 +1801,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4572634476306904}
   - component: {fileID: 137900754800809162}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 boots LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1895,7 +1896,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4731187916525964}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLArmDigit53
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1926,7 +1927,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4422534155111038}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRArmDigit53
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1957,7 +1958,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4679168241287332}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLArmDigit11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1989,7 +1990,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4633485610971122}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLLeg1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2022,7 +2023,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4391230843327972}
   - component: {fileID: 137739728924607316}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 clothes LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2129,7 +2130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4453771559253448}
   - component: {fileID: 137693239539344476}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 skin LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2267,7 +2268,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4039030298727342}
   - component: {fileID: 137774911790245644}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 belt LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2361,7 +2362,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4278983375953066}
   - component: {fileID: 137241385391352806}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 belt LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2456,7 +2457,7 @@ GameObject:
   - component: {fileID: 4589311926992350}
   - component: {fileID: 33077423682547618}
   - component: {fileID: 23635466313371670}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 knife 2 LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2543,7 +2544,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4091351813320320}
   - component: {fileID: 137503994125268582}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 handkerchief LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2634,7 +2635,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4613467463830804}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLArmDigit41
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2668,7 +2669,7 @@ GameObject:
   - component: {fileID: 4299488906256950}
   - component: {fileID: 33830036320019624}
   - component: {fileID: 23323870552204436}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 knife 3 LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2752,7 +2753,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4012888881509252}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRArmDigit51
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2784,7 +2785,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4987873945784452}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLArmDigit21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2816,7 +2817,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4436015897905234}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLArmDigit43
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2847,7 +2848,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4051486980530670}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLArmDigit42
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2880,7 +2881,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4631385313742444}
   - component: {fileID: 137622920829262648}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 apron LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2976,7 +2977,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4726164077385704}
   - component: {fileID: 137123110746536190}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 glass LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3071,7 +3072,7 @@ GameObject:
   - component: {fileID: 4133614445571802}
   - component: {fileID: 33754370221663870}
   - component: {fileID: 23043748995328238}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 knife 1 LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3157,7 +3158,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4999949016375856}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigHub001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3194,7 +3195,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4733366930816776}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLArm2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3228,7 +3229,7 @@ GameObject:
   - component: {fileID: 4221150987828338}
   - component: {fileID: 33960650865078876}
   - component: {fileID: 23619300357767288}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 knife 1 LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3312,7 +3313,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4871939208064346}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRArmDigit23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3344,7 +3345,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4097303497860730}
   - component: {fileID: 137180407084681258}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 skin LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3481,7 +3482,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4325631978245166}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLArmDigit12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3514,7 +3515,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4426771250210234}
   - component: {fileID: 137761550642903192}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 boots LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3609,7 +3610,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4396538471244062}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRLegPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3640,7 +3641,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4905426058589518}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLArmDigit31
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3674,7 +3675,7 @@ GameObject:
   - component: {fileID: 4759254860842922}
   - component: {fileID: 33304769432834640}
   - component: {fileID: 23783198542745196}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 knife 2 LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3758,7 +3759,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4207525231120928}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLArm1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3790,7 +3791,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4512523860396512}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigSpine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3822,7 +3823,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4753353289967418}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRArmDigit13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3853,7 +3854,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4981375949481466}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigHub003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3888,7 +3889,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4534375256329934}
   - component: {fileID: 137174197226202360}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 apron LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3983,7 +3984,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4065944509558326}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLLegAnkle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4016,7 +4017,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4115908240397404}
   - component: {fileID: 137673791671923228}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 glass LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4110,7 +4111,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4848932625797846}
   - component: {fileID: 137672157263991014}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 glass LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4203,7 +4204,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4817086909596704}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRArmDigit21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4235,7 +4236,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4107003534778356}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRArmDigit33
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4266,7 +4267,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4336811126876256}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLLeg2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4298,7 +4299,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4320105836764700}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRArm1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4331,7 +4332,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4648938872374844}
   - component: {fileID: 137374359240022086}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 clothes LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4437,7 +4438,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4171879405144896}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLArmDigit22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4469,7 +4470,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4262426481935146}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRArmDigit12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4501,7 +4502,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4105896350159516}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRArm2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4533,7 +4534,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4950673307792114}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRArmDigit43
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4564,7 +4565,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4005680273334626}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRLeg1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4596,7 +4597,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4116499033959346}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRLeg2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4628,7 +4629,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4081598299528594}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigSpine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4660,7 +4661,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4217793663442614}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRArmDigit22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4692,7 +4693,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4884094084628122}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Character001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4723,7 +4724,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4678367181291190}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLLegPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4754,7 +4755,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4978436230666450}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRArmDigit41
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4787,7 +4788,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4593293567375058}
   - component: {fileID: 137508538318244650}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 apron LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4882,7 +4883,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4719850609614360}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLArmPalm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4918,7 +4919,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4039358238493764}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigHub003Bone002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4950,7 +4951,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4170691527274366}
   - component: {fileID: 137739447515015562}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Z5 handkerchief LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5041,7 +5042,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4269475979200598}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigRArmPalm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5078,7 +5079,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4291456830473986}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLLegDigit11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5109,7 +5110,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4125556523926406}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CATRigLArmDigit13
   m_TagString: Untagged
   m_Icon: {fileID: 0}

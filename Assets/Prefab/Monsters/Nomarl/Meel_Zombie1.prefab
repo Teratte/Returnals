@@ -2738,7 +2738,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &646309929142768299
 Transform:
   m_ObjectHideFlags: 0
@@ -2925,6 +2925,7 @@ MonoBehaviour:
   attackDelay: 2
   defense: 0
   monsterDamage: 40
+  postAttackDelay: 1
   detectionAngle: 90
   weaponCollider: {fileID: 2828812887853272965}
 --- !u!1 &6303159735993863875
