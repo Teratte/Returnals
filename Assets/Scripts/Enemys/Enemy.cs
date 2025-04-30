@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -40,6 +41,10 @@ public class Enemy : MonoBehaviour, IDamageable
     private CapsuleCollider capsuleCollider;
 
     private float lastAttackTime;
+    // 몬스터에 드랍되는 아이템 리스트
+    public List<Item> itemList;
+    [SerializeField]
+    private float itemDropPercent;
 
 
     void Awake()
@@ -202,6 +207,8 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         yield return new WaitForSeconds(3f);
         Destroy(gameObject);
+        // 아이템 드롭
+        DropItem();
     }
 
     // 애니메이션 처리 (LateUpdate에서 호출)
@@ -233,6 +240,17 @@ public class Enemy : MonoBehaviour, IDamageable
                 anim.SetTrigger("doDie");
                 Die();
                 break;
+        }
+    }
+
+    // 아이템을 드롭하는 로직
+    private void DropItem()
+    {
+        float percent = Random.Range(0, 100);
+        if(percent >= 100-itemDropPercent)
+        {
+            int itemIndex = Random.Range(0, itemList.Count);
+            Instantiate(itemList[itemIndex].itemPrefab, transform.position, Quaternion.identity);
         }
     }
 }

@@ -2927,6 +2927,13 @@ MonoBehaviour:
   monsterDamage: 40
   detectionAngle: 90
   weaponCollider: {fileID: 2828812887853272965}
+  itemList:
+  - {fileID: 11400000, guid: e1163b7e622effb41ab748abc009b12e, type: 2}
+  - {fileID: 11400000, guid: 6f4c8952190b4d74096846f9e3ee8adf, type: 2}
+  - {fileID: 11400000, guid: daee51ce18bf30347a6093e798a82f5e, type: 2}
+  - {fileID: 11400000, guid: 83b679fa27bcb754197abb282b01056b, type: 2}
+  - {fileID: 11400000, guid: 0ec7aa01164934948a7ed2a5b9d7fa8b, type: 2}
+  itemDropPercent: 70
 --- !u!1 &6303159735993863875
 GameObject:
   m_ObjectHideFlags: 0
