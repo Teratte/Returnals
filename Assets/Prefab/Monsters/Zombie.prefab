@@ -2733,12 +2733,12 @@ GameObject:
   - component: {fileID: 5926575958576773542}
   - component: {fileID: 2127389832877636230}
   m_Layer: 14
-  m_Name: Meel_Zombie1
+  m_Name: Zombie
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &646309929142768299
 Transform:
   m_ObjectHideFlags: 0
@@ -2918,14 +2918,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c29707435d50694ab6f1e0f36fc5c0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 160
+  maxHealth: 100
   moveSpeed: 2
   rotationSpeed: 5
   attackRange: 1.2
-  attackDelay: 2
-  defense: 0
+  attackDelay: 1.5
+  defense: 1.5
   monsterDamage: 40
-  postAttackDelay: 1
   detectionAngle: 90
   weaponCollider: {fileID: 2828812887853272965}
 --- !u!1 &6303159735993863875
