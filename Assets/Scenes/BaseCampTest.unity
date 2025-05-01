@@ -7326,6 +7326,16 @@ MonoBehaviour:
   - {fileID: 4712138017908649545, guid: e274b38632e031543b3ec89f157f719b, type: 3}
   - {fileID: 4712138017908649545, guid: 0c56e95670bea0042aaf5a2f7563c9df, type: 3}
   - {fileID: 4712138017908649545, guid: a9da21ec95f2f2f40bab1e841ebac158, type: 3}
+  currentAssaultAmmo: 25
+  maxAssuaultAmmo: 999
+  currentShotgunAmmo: 8
+  maxShotgunAmmo: 999
+  currentMachinegunAmmo: 150
+  maxMachinegunAmmo: 999
+  currentSMGAmmo: 25
+  maxSMGAmmo: 999
+  currentSniperAmmo: 5
+  maxSniperAmmo: 999
   isUIOn: 0
 --- !u!1001 &1036235038
 PrefabInstance:

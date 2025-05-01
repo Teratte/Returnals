@@ -24,6 +24,14 @@ public class SmallMachinegun : WeaponBase
     {
         base.Setup();
         mainCamera = Camera.main;
+        if (GameManager.instance.isFirstStage)
+        {
+            GameManager.instance.currentSMGAmmo = weaponSetting.maxCapacity;
+            GameManager.instance.isFirstStage = false;
+        }
+
+        CurrentAmmo = GameManager.instance.currentSMGAmmo;
+        MaxAmmo = GameManager.instance.maxSMGAmmo;
     }
 
     public override void StartWeaponAction(int type = 0)
@@ -69,10 +77,11 @@ public class SmallMachinegun : WeaponBase
             // 마지막 총 발사 시점 갱신
             lastAttackTime = Time.time;
             // 남은 탄알이 없으면 발사 불가능
-            if (weaponSetting.currentAmmo <= 0)
+            if (GameManager.instance.currentSMGAmmo <= 0)
                 return;
             if(!onSubMagazine)
-                weaponSetting.currentAmmo--;
+                GameManager.instance.currentSMGAmmo--;
+            CurrentAmmo = GameManager.instance.currentSMGAmmo;
             // 발사 이펙트 재생
             ShotEffect();
             // 발사 사운드 재생
@@ -162,7 +171,7 @@ public class SmallMachinegun : WeaponBase
     // 재장전 시도
     public void Reload()
     {
-        if (weaponSetting.maxAmmo <= 0 || weaponSetting.currentAmmo >= weaponSetting.maxCapacity)
+        if (GameManager.instance.maxSMGAmmo <= 0 || GameManager.instance.currentSMGAmmo >= weaponSetting.maxCapacity)
         {
             // 이미 재장전 중이거나 남은 탄알이 없거나
             // 탄창에 탄알이 이미 가득한 경우 재장전 불가능
@@ -183,19 +192,21 @@ public class SmallMachinegun : WeaponBase
         yield return new WaitForSeconds(weaponSetting.reloadTime);
 
         // 탄창에 채울 탄알 계산
-        int ammoToFill = weaponSetting.maxCapacity - weaponSetting.currentAmmo;
+        int ammoToFill = weaponSetting.maxCapacity - GameManager.instance.currentSMGAmmo;
 
         // 탄창에 채워야 할 탄알이 남은 탄알보다 많다면
         // 채워야 할 탄알 수를 남은 탄알 수에 맞춰 줄임
-        if (weaponSetting.maxAmmo <= ammoToFill)
+        if (GameManager.instance.maxSMGAmmo <= ammoToFill)
         {
-            ammoToFill = weaponSetting.maxAmmo;
+            ammoToFill = GameManager.instance.maxSMGAmmo;
         }
 
         // 탄창을 채움
-        weaponSetting.currentAmmo += ammoToFill;
+        GameManager.instance.currentSMGAmmo += ammoToFill;
+        CurrentAmmo = GameManager.instance.currentSMGAmmo;
         // 남은 탄알에서 탄창에 채운만큼 탄알을 뺌
-        weaponSetting.maxAmmo -= ammoToFill;
+        GameManager.instance.maxSMGAmmo -= ammoToFill;
+        MaxAmmo = GameManager.instance.maxSMGAmmo;
         // 총의 상태를 발사 준비 상태로 변경
         isReload = false;
     }
