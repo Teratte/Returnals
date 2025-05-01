@@ -638,7 +638,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4778868142476608
 Transform:
   m_ObjectHideFlags: 0
@@ -817,6 +817,12 @@ MonoBehaviour:
   postAttackDelay: 1
   detectionAngle: 90
   weaponCollider: {fileID: 381470949564028428}
+  itemList:
+  - {fileID: 11400000, guid: 83b679fa27bcb754197abb282b01056b, type: 2}
+  - {fileID: 11400000, guid: 634a17ff11868f04d9a1b6c01d588f50, type: 2}
+  - {fileID: 11400000, guid: daee51ce18bf30347a6093e798a82f5e, type: 2}
+  monsterIngredient: {fileID: 11400000, guid: e1163b7e622effb41ab748abc009b12e, type: 2}
+  DropPercent: 80
 --- !u!136 &1684310769391774911
 CapsuleCollider:
   m_ObjectHideFlags: 0
