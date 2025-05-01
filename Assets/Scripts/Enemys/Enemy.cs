@@ -41,10 +41,11 @@ public class Enemy : MonoBehaviour, IDamageable
     private CapsuleCollider capsuleCollider;
 
     private float lastAttackTime;
-    // 몬스터에 드랍되는 아이템 리스트
-    public List<Item> itemList;
+    public List<Item> itemList; // 몬스터에 드랍되는 아이템 리스트
     [SerializeField]
-    private float itemDropPercent;
+    private Item monsterIngredient;   // 몬스터에 드랍되는 고유 몬스터 재료
+    [SerializeField]
+    private float itemDropPercent;  // 몬스터 고유 드랍 확률
 
 
     void Awake()
@@ -209,6 +210,8 @@ public class Enemy : MonoBehaviour, IDamageable
         Destroy(gameObject);
         // 아이템 드롭
         DropItem();
+        // 몬스터 아이템 드롭
+        DropMonsterIngredient();
     }
 
     // 애니메이션 처리 (LateUpdate에서 호출)
@@ -251,6 +254,15 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             int itemIndex = Random.Range(0, itemList.Count);
             Instantiate(itemList[itemIndex].itemPrefab, transform.position, Quaternion.identity);
+        }
+    }
+
+    private void DropMonsterIngredient()
+    {
+        float percent = Random.Range(0, 100);
+        if(percent >= 100-itemDropPercent)
+        {
+            Instantiate(monsterIngredient.itemPrefab, transform.position, Quaternion.identity);
         }
     }
 }

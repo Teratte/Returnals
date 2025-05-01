@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public abstract class WeaponBase : MonoBehaviour
 {
@@ -21,8 +20,8 @@ public abstract class WeaponBase : MonoBehaviour
 
     public bool onSubMagazine = false;      // º¸Á¶ ÅºÃ¢ °¡Á¬ ¹ßµ¿ ¿©ºÎ
     public string weaponName => weaponSetting.weaponName;
-    public int CurrentAmmo => weaponSetting.currentAmmo;
-    public int MaxAmmo => weaponSetting.maxAmmo;
+    public int CurrentAmmo;
+    public int MaxAmmo;
     public WeaponSetting WeaponSetting => weaponSetting;
     public RuntimeAnimatorController RuntimeAnimatorController => runtimeAnimatorController;
     public bool IsReload => isReload;
@@ -43,7 +42,6 @@ public abstract class WeaponBase : MonoBehaviour
     protected void Setup()
     {
         audioSource = GetComponent<AudioSource>();
-        weaponSetting.currentAmmo = weaponSetting.maxCapacity;
     }
 }
 

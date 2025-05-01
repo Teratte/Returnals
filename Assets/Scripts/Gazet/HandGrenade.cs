@@ -86,6 +86,7 @@ public class HandGrenade : GazetBase
     // ¼ö·ùÅº ÀåÂø
     private void SetGrenade()
     {
+        lastUseTime = Time.time;
         playerAnimator.ResetArsenal();
         playerAnimator.Animator.runtimeAnimatorController = grenadeAnimator;
         GameObject grenadeModel = Instantiate(grenadePrefab, playerAnimator.RightGunBone.position, Quaternion.identity);

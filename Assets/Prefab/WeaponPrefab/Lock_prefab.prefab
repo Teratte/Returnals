@@ -186,18 +186,20 @@ MonoBehaviour:
     fireRate: 0.3
     reloadTime: 1
     distance: 50
-    currentAmmo: 10
-    maxAmmo: 999
     maxCapacity: 10
     isAutomaticAttack: 0
     damage: 15
   runtimeAnimatorController: {fileID: 9100000, guid: 0fd3b20fc2774c14f9e42b2b3b1fcd8c, type: 2}
   weaponIcon: {fileID: 21300000, guid: df756e4529c79604d96c907f468b79ba, type: 3}
   leftHandle: {fileID: 7300774343669999594}
+  onSubMagazine: 0
+  CurrentAmmo: 10
+  MaxAmmo: 0
   Impact: {fileID: 100002, guid: 99c73c92ac40473459640b165473206f, type: 3}
   monsterImpact: {fileID: 100002, guid: d342fd04c095bf64888ab930f0796c88, type: 3}
   fireClip: {fileID: 8300000, guid: 2203773368e4340d98c114f55c2dd7fd, type: 3}
   reloadClip: {fileID: 8300000, guid: 9158afb6966d445db9caf1dccf7acbcc, type: 3}
+  currentAmmo: 0
   fireTransform: {fileID: 8197919948460952314}
   muzzleFlashEffect: {fileID: 6929504620534478471}
   shellEjectEffect: {fileID: 1388553676300989329}
@@ -432,7 +434,10 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f825b589726b2884aab7ef41c5257991, type: 2}
     m_RemovedComponents:
     - {fileID: -6057140222963153312, guid: 1e2f6fcc2d82dd54091f5e9a3989672b, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -1209081791205276547, guid: 1e2f6fcc2d82dd54091f5e9a3989672b, type: 3}
+    - {fileID: 777723782619511085, guid: 1e2f6fcc2d82dd54091f5e9a3989672b, type: 3}
+    - {fileID: -7449999052031379432, guid: 1e2f6fcc2d82dd54091f5e9a3989672b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e2f6fcc2d82dd54091f5e9a3989672b, type: 3}
