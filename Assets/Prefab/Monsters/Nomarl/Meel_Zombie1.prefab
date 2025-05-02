@@ -2928,6 +2928,13 @@ MonoBehaviour:
   postAttackDelay: 1
   detectionAngle: 90
   weaponCollider: {fileID: 2828812887853272965}
+  itemList:
+  - {fileID: 11400000, guid: c24f2caa1f9f2aa4ab8fb4727964bedf, type: 2}
+  - {fileID: 11400000, guid: 634a17ff11868f04d9a1b6c01d588f50, type: 2}
+  - {fileID: 11400000, guid: 83b679fa27bcb754197abb282b01056b, type: 2}
+  - {fileID: 11400000, guid: daee51ce18bf30347a6093e798a82f5e, type: 2}
+  monsterIngredient: {fileID: 11400000, guid: 6f4c8952190b4d74096846f9e3ee8adf, type: 2}
+  DropPercent: 70
 --- !u!1 &6303159735993863875
 GameObject:
   m_ObjectHideFlags: 0

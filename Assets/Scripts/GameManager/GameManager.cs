@@ -36,8 +36,28 @@ public class GameManager : MonoBehaviour
     public GameObject mainWeapon;                   // 메인 무기
     public GameObject subWeapon;                    // 보조 무기
     public GameObject holdingGazet;                 // 보유 가젯
-
     public List<GameObject> selectWeaponList;       // 무기 선택 리스트
+    public bool isFirstStage = true;                       // 첫 스테이지 진입 여부
+
+    [Header("AssaultBullet")]
+    public int currentAssaultAmmo;
+    public int maxAssuaultAmmo;
+
+    [Header("ShotgunBullet")]
+    public int currentShotgunAmmo;
+    public int maxShotgunAmmo;
+
+    [Header("Machinegun")]
+    public int currentMachinegunAmmo;
+    public int maxMachinegunAmmo;
+
+    [Header("SMGBullet")]
+    public int currentSMGAmmo;
+    public int maxSMGAmmo;
+
+    [Header("SniperBullet")]
+    public int currentSniperAmmo;
+    public int maxSniperAmmo;
 
     [Header("Items")]
     private Dictionary<Item, int> items = new Dictionary<Item, int>();

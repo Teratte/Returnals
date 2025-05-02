@@ -1,4 +1,6 @@
+using GDS.Core.Events;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -47,6 +49,13 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private float lastAttackTime;
 
+    [Header("Item List")]
+    [SerializeField]
+    private List<Item> itemList; // 드롭할 아이템 리스트
+    [SerializeField]
+    private Item monsterIngredient; // 드롭할 몬스터 재료
+    [SerializeField]
+    private float DropPercent;      // 드롭 확률
 
     void Awake()
     {
@@ -232,6 +241,8 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         yield return new WaitForSeconds(3f);
         Destroy(gameObject);
+        DropItem();
+        DropMonsterIngredient();
     }
 
     // 애니메이션 처리 (LateUpdate에서 호출)
@@ -263,6 +274,25 @@ public class Enemy : MonoBehaviour, IDamageable
                 anim.SetTrigger("doDie");
                 Die();
                 break;
+        }
+    }
+
+    private void DropItem()
+    {
+        float percent = Random.Range(0, 100);
+        if(percent >= 100-DropPercent)
+        {
+            int itemIndex = Random.Range(0, itemList.Count);
+            Instantiate(itemList[itemIndex].itemPrefab, transform.position, Quaternion.identity);
+        }
+    }
+
+    private void DropMonsterIngredient()
+    {
+        float percent = Random.Range(0, 100);
+        if (percent >= 100 - DropPercent)
+        {
+            Instantiate(monsterIngredient.itemPrefab, transform.position, Quaternion.identity);
         }
     }
 }
