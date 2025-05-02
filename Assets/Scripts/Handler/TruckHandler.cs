@@ -6,15 +6,8 @@ public class TruckHandler : KeyPressHandler
     private GameObject weaponSelectPanel;
     [SerializeField]
     private GameObject startPanel;
-
-    private void Update()
-    {
-        if (isPlayerNearby && Input.GetKeyDown(KeyCode.F) && !startPanel.activeSelf)
-        {
-            GameManager.instance.ActiveUI();
-            weaponSelectPanel.SetActive(true);
-        }
-    }
+    [SerializeField]
+    private ClickByRaycast clicker;
 
     public void GameStart()
     {
@@ -22,11 +15,13 @@ public class TruckHandler : KeyPressHandler
         SceneManagerScript.Instance.LoadRandomScene(); // 씬 이동 실행
         GameManager.instance.isGameStart = true;
         GameManager.instance.DeactiveUI();
+        clicker.isPanelActive = false;
     }
 
     public void ActivePanel()
     {
-        if (GameManager.instance.subWeapon == null || GameManager.instance.holdingGazet == null || GameManager.instance.mainWeapon == null)   // 무기나 가젯을 다 선택하지 않았을 경우, 실행X
+        // 무기나 가젯을 다 선택하지 않았을 경우, 실행X
+        if (GameManager.instance.subWeapon == null || GameManager.instance.holdingGazet == null || GameManager.instance.mainWeapon == null)
             return;
         weaponSelectPanel.SetActive(false);
         startPanel.SetActive(true);
@@ -35,8 +30,19 @@ public class TruckHandler : KeyPressHandler
 
     public void Continue()
     {
-        GameManager.instance.DeactiveUI();
+        //GameManager.instance.DeactiveUI();
         weaponSelectPanel.SetActive(false);
         startPanel.SetActive(false);
+        clicker.isPanelActive = false;
+    }
+
+    public override void Interact()
+    {
+        if (!startPanel.activeSelf && !clicker.isPanelActive)
+        {
+            GameManager.instance.ActiveUI();
+            weaponSelectPanel.SetActive(true);
+            clicker.isPanelActive = true;
+        }
     }
 }
