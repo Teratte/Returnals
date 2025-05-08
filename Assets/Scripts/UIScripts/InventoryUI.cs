@@ -1,3 +1,4 @@
+using KINEMATION.FPSAnimationPack.Scripts.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,20 +20,20 @@ public class InventoryUI : MonoBehaviour
     private float gazetCoolTime;            // ∞°¡¨ ƒ≈∏¿”
 
     private Slot[] slots;
-    private PlayerAnimator playerAnimator;
+    private FPSPlayer player;
 
     public Slot[] Slots => slots;       // »πµÊ æ∆¿Ã≈€ ∏ÆΩ∫∆Æ
 
     private void Awake()
     {
         slots = slotsParent.GetComponentsInChildren<Slot>();
-        playerAnimator = FindAnyObjectByType<PlayerAnimator>();
+        player = FindAnyObjectByType<FPSPlayer>();
         InventoryObject.SetActive(false);
     }
 
     private void Start()
     {
-        gazetCoolTime = playerAnimator.Gazet.Rate;
+        gazetCoolTime = 99;
     }
 
     private void Update()
@@ -52,11 +53,11 @@ public class InventoryUI : MonoBehaviour
         if (GameManager.instance.isGameStart)
         {
             timer.text = $"{(int)GameManager.instance.Timer}";
-            ammoText.text = $"{playerAnimator.Weapon.CurrentAmmo} / {playerAnimator.Weapon.MaxAmmo}";
-            gazetAbleCount.text = $"{playerAnimator.Gazet.CurrentAbleCount}";
+            ammoText.text = $"{player.GetActiveWeapon().CurrentAmmo} / {GameManager.instance.maxAssuaultAmmo}";
+            gazetAbleCount.text = $"{player.Gazet.CurrentAbleCount}";
             gazetCoolTime += Time.deltaTime;
-            gazetCoolTimeSlider.value = gazetCoolTime / playerAnimator.Gazet.Rate;
-            if (Input.GetKeyDown(KeyCode.Q) && gazetCoolTimeSlider.value >= 1 && playerAnimator.Gazet.canUse)
+            gazetCoolTimeSlider.value = gazetCoolTime / player.Gazet.Rate;
+            if (Input.GetKeyDown(KeyCode.Q) && gazetCoolTimeSlider.value >= 1 && player.Gazet.canUse)
             {
                 gazetCoolTime = 0.0f;
             }

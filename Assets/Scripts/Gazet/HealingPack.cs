@@ -21,7 +21,7 @@ public class HealingPack : GazetBase
     public override void StartGazetAction()
     {
         Debug.Log("°¡Á¬ »ç¿ë °¡´É È½¼ö: " + gazetSetting.currentAbleCount);
-        if (status != null)
+        if (status != null && canUse)
         {
             if(isFirstTimeUse)
             {

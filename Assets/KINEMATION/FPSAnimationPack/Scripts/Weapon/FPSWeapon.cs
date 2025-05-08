@@ -10,7 +10,14 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
 {
     public class FPSWeapon : MonoBehaviour, IAmmoProvider
     {
-        public WeaponAttribute weaponAttribute;
+        public WeaponAttribute weaponAttribute; // 무기 속성
+        public WeaponType weaponType;           // 무기 종류
+
+        [SerializeField]
+        private Sprite weaponIcon;
+
+        public Sprite WeaponIcon => weaponIcon;   // 무기 아이콘
+
         public float UnEquipDelay => unEquipDelay;
         public FireMode ActiveFireMode => fireMode;
         
@@ -44,11 +51,15 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
         protected float tacReloadDelay;
 
         protected int _activeAmmo;
+
+        public int CurrentAmmo => _activeAmmo;  // 현재 남아있는 탄알
         
         protected bool _isReloading;
         protected bool _isFiring;
 
         protected FPSCameraAnimator cameraAnimator;
+
+        public bool IsReloading => _isReloading;    // 재장전 중인가를 검사
 
         public virtual void Initialize(GameObject owner)
         {
@@ -107,7 +118,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
 
         public virtual void OnReload()
         {
-            if (_activeAmmo == weaponSettings.ammo) return;
+            if (_activeAmmo == weaponSettings.ammo || _isReloading) return;
             
             var reloadHash = _activeAmmo == 0 ? RELOAD_EMPTY : RELOAD_TAC;
             characterAnimator.Play(reloadHash, -1, 0f);

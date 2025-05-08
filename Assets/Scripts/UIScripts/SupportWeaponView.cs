@@ -1,3 +1,5 @@
+using KINEMATION.FPSAnimationPack.Scripts.Player;
+using KINEMATION.FPSAnimationPack.Scripts.Weapon;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,14 +10,14 @@ public class SupportWeaponView : MonoBehaviour
     [SerializeField]
     private Image backGround;
     
-    private PlayerAnimator playerAnimator;
+    private FPSPlayer player;
     private Color currentColor = Color.gray;
-    private WeaponBase subWeapon;
+    private FPSWeapon subWeapon;
 
     private void Awake()
     {
-        playerAnimator = FindAnyObjectByType<PlayerAnimator>();
-        subWeapon = GameManager.instance.subWeapon.GetComponent<WeaponBase>();
+        player = FindAnyObjectByType<FPSPlayer>();
+        subWeapon = GameManager.instance.subWeapon.GetComponent<FPSWeapon>();
         if (subWeapon != null)
         {
             subWeaponIcon.sprite = subWeapon.WeaponIcon;
@@ -24,7 +26,7 @@ public class SupportWeaponView : MonoBehaviour
 
     private void Update()
     {
-        if (playerAnimator.Weapon.WeaponType == WeaponList.Support)
+        if (player.GetActiveWeapon().weaponAttribute == WeaponAttribute.Support)
             backGround.color = Color.white;
         else
             backGround.color = currentColor;
