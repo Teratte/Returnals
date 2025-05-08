@@ -26,7 +26,7 @@ public class ReturnTruckHandler : KeyPressHandler
         //GameManager.instance.DeactiveUI();
         // 결과 환산창 출력
         GameManager.instance.isGameStart = false;
-        SceneManager.LoadScene("BaseCampTest");
+        SceneManager.LoadScene("BaseCamp");
     }
 
     public override void Interact()
