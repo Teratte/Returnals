@@ -10,6 +10,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
 {
     public class FPSWeapon : MonoBehaviour, IAmmoProvider
     {
+        public WeaponAttribute weaponAttribute;
         public float UnEquipDelay => unEquipDelay;
         public FireMode ActiveFireMode => fireMode;
         

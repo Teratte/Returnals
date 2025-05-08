@@ -25,12 +25,12 @@ public class TruckHandler : KeyPressHandler
             return;
         weaponSelectPanel.SetActive(false);
         startPanel.SetActive(true);
-        GameManager.instance.ActiveUI();
+        GameManager.instance.isUIOn = true;
     }
 
     public void Continue()
     {
-        //GameManager.instance.DeactiveUI();
+        GameManager.instance.isUIOn = false;
         weaponSelectPanel.SetActive(false);
         startPanel.SetActive(false);
         clicker.isPanelActive = false;
@@ -40,7 +40,7 @@ public class TruckHandler : KeyPressHandler
     {
         if (!startPanel.activeSelf && !clicker.isPanelActive)
         {
-            GameManager.instance.ActiveUI();
+            GameManager.instance.isUIOn = true;
             weaponSelectPanel.SetActive(true);
             clicker.isPanelActive = true;
         }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using KINEMATION.FPSAnimationPack.Scripts.Player;
 
 // 점수와 게임 오버 여부를 관리하는 게임 매니저
 public class GameManager : MonoBehaviour
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
     public GameObject holdingGazet;                 // 보유 가젯
     public List<GameObject> selectWeaponList;       // 무기 선택 리스트
     public bool isFirstStage = true;                       // 첫 스테이지 진입 여부
+    private FPSPlayer player;
 
     [Header("AssaultBullet")]
     public int currentAssaultAmmo;
@@ -103,6 +105,12 @@ public class GameManager : MonoBehaviour
             timer = 900.0f;
             Debug.Log("인 게임 씬 로드");
             //Slots = FindObjectOfType<InventoryUI>().Slots;
+            player = FindAnyObjectByType<FPSPlayer>();
+            if(player != null)
+            {
+                player.playerSettings.weaponPrefabs.Add(mainWeapon);
+                player.playerSettings.weaponPrefabs.Add(subWeapon);
+            }
         }
         else if(SceneManager.GetActiveScene().name == "BaseCampTest")
         {

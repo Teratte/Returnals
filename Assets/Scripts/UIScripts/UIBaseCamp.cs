@@ -1,3 +1,4 @@
+using KINEMATION.FPSAnimationPack.Scripts.Weapon;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -61,7 +62,7 @@ public class UIBaseCamp : MonoBehaviour
         {
             inventoryActivated = false;
             InventoryObject.SetActive(false);
-            GameManager.instance.DeactiveUI();
+            GameManager.instance.isUIOn = false;
         }
     }
 
@@ -78,7 +79,7 @@ public class UIBaseCamp : MonoBehaviour
 
     public void AddWeapon(UIWeapon current)
     {
-        if(current.WeaponPrefab.GetComponent<WeaponBase>()==null)
+        if(current.WeaponPrefab.GetComponent<FPSWeapon>()==null)
             GameManager.instance.holdingGazet = current.WeaponPrefab;
 
         if (current.WeaponType == WeaponAttribute.Support)

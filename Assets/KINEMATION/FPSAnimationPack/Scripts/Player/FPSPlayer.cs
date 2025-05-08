@@ -81,6 +81,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
         private KTransform _ikMotion = KTransform.Identity;
         private KTransform _cachedIkMotion = KTransform.Identity;
         private IKMotion _activeMotion;
+        private CharacterController _characterController;   // 캐릭터 컨트롤러
         
         private void EquipWeapon_Incremental()
         {
@@ -263,7 +264,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
             if (Input.GetKeyDown(KeyCode.F)) OnChangeWeapon();
             if (Input.GetKeyDown(KeyCode.B)) OnChangeFireMode();
             if (Input.GetKeyDown(KeyCode.R)) OnReload();
-            if (Input.GetKeyDown(KeyCode.Space)) OnJump();
+            if (Input.GetKeyDown(KeyCode.Space) && _characterController.isGrounded) OnJump();
             if (Input.GetKeyDown(KeyCode.I)) OnInspect();
             
             if (Input.GetKeyDown(KeyCode.Mouse0)) GetActiveWeapon().OnFirePressed();
@@ -295,7 +296,8 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
             _animator = GetComponent<Animator>();
             _recoilAnimation = GetComponent<RecoilAnimation>();
             _playerSound = GetComponent<FPSPlayerSound>();
-            
+            _characterController =GetComponentInParent<CharacterController>();
+
             _triggerDisciplineLayerIndex = _animator.GetLayerIndex("TriggerDiscipline");
             _rightHandLayerIndex = _animator.GetLayerIndex("RightHand");
             _tacSprintLayerIndex = _animator.GetLayerIndex("TacSprint");

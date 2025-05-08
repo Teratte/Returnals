@@ -52,9 +52,6 @@ public class MovementCharacter : MonoBehaviour, IDamageable
 
         RecoveryStamina();
 
-        animator.SetFloat("horizontal", AxisH * offset);
-        animator.SetFloat("vertical", AxisV * offset);
-
         // 오브젝트의 이동 방향 설정
         Vector3 dir = mainCamera.rotation * new Vector3(AxisH, 0, AxisV);
         moveDirection = new Vector3(dir.x, moveDirection.y, dir.z);
@@ -65,7 +62,7 @@ public class MovementCharacter : MonoBehaviour, IDamageable
         // Space 키를 눌렀을 때 플레이어가 바닥에 있으면 점프
         if (Input.GetKeyDown(KeyCode.Space) && characterController.isGrounded == true)
         {
-            animator.SetTrigger("onJump");
+            //animator.SetTrigger("onJump");
             moveDirection.y = jumpForce;
         }
 
