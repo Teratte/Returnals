@@ -13,10 +13,6 @@ public class CameraController : MonoBehaviour
     private float xAxisLimitMax = 20.0f;// 회전 가능한 x축 최대 각도
     private float x, y;
 
-    private float distanceMin = 2.0f;   // target과 카메라의 최소 거리
-    private float distanceMax = 50.0f;  // target과 카메라의 최대 거리
-    private float wheelSpeed = 1000.0f; // 카메라의 zoom 속도
-
     private void Awake()
     {
         distance = Vector3.Distance(transform.position, target.position);
@@ -28,7 +24,8 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        UpdateRotate();
+        if(!GameManager.instance.isGameOver)
+            UpdateRotate();
     }
 
     private void LateUpdate()
@@ -59,13 +56,5 @@ public class CameraController : MonoBehaviour
         if (angle > 360) angle -= 360;
 
         return Mathf.Clamp(angle, min, max);
-    }
-
-    void UpdateZoom()
-    {
-        // 마우스 스크롤 휠 회전으로 target과 카메라의 거리(distance) 조절
-        distance -= Input.GetAxisRaw("Mouse ScrollWheel") * wheelSpeed * Time.deltaTime;
-        // distanceMin <= distance <= distanceMax
-        distance = Mathf.Clamp(distance, distanceMin, distanceMax);
     }
 }

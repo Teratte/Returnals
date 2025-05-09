@@ -21,7 +21,15 @@ public class Status : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 4.0f;      // 움직이는 속도
     [SerializeField]
-    private float diffense = 50.0f;         // 방어력
+    private float defense = 50.0f;         // 방어력
+    [SerializeField]
+    private float recoverAbleTime = 3.0f;   // 회복가능 시간
+
+    public bool OnAdrenaline = false;
+
+    public bool isNotAttack = true;    // 공격 받는 중이 아닌 경우
+    float notAttackTime = 0.0f; // 공격 받지 않는 시간
+    bool isRecover = false;     // HP 회복 중인 경우
 
     public float PlayerHP
     {
@@ -35,21 +43,58 @@ public class Status : MonoBehaviour
         get => playerStamina;
     }
     public float MaxStamina => maxStamina;
-    public float RecoverRateHP => recoverRateHP;
     public float RecoverRateStamina => recoverRateStamina;
-    public float WalkSpeed => walkSpeed;
-    public float RunSpeed => runSpeed;
+    public float WalkSpeed
+    {
+        set => walkSpeed = value;
+        get => walkSpeed;
+    }
+    public float RunSpeed
+    {
+        set => runSpeed = value;
+        get => runSpeed;
+    }
     public float MoveSpeed
     {
         set => moveSpeed = Mathf.Max(0,value);
         get => moveSpeed;
     }
 
-    public float Diffense => diffense;
+    public float Defense => defense;
 
     private void Awake()
     {
         playerHP = maxHP;
         playerStamina = maxStamina;
+    }
+
+    private void Update()
+    {
+        if(!GameManager.instance.isGameOver)
+        {
+            // 공격 받는 중이 아니며 최대 체력이 아니면 공격 받지 않는 시간 계산
+            if (isNotAttack && PlayerHP < MaxHP)
+            {
+                isRecover = false;
+                notAttackTime += Time.deltaTime;
+            }
+
+            // 공격 받지 않는 시간이 자동 재생 시간 후라면 회복
+            if (notAttackTime >= recoverAbleTime)
+            {
+                isNotAttack = false;
+                notAttackTime = 0.0f;
+                isRecover = true;
+            }
+
+            if (isRecover && PlayerHP < MaxHP)
+            {
+                PlayerHP += Time.deltaTime * recoverRateHP;
+                if (PlayerHP >= MaxHP)
+                {
+                    isRecover = false;
+                }
+            }
+        }
     }
 }

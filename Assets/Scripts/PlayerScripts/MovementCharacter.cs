@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class MovementCharacter : MonoBehaviour
+public class MovementCharacter : MonoBehaviour, IDamageable
 {
     [SerializeField]
     private InventoryUI inventoryUI;
@@ -52,9 +52,6 @@ public class MovementCharacter : MonoBehaviour
 
         RecoveryStamina();
 
-        animator.SetFloat("horizontal", AxisH * offset);
-        animator.SetFloat("vertical", AxisV * offset);
-
         // 오브젝트의 이동 방향 설정
         Vector3 dir = mainCamera.rotation * new Vector3(AxisH, 0, AxisV);
         moveDirection = new Vector3(dir.x, moveDirection.y, dir.z);
@@ -65,7 +62,7 @@ public class MovementCharacter : MonoBehaviour
         // Space 키를 눌렀을 때 플레이어가 바닥에 있으면 점프
         if (Input.GetKeyDown(KeyCode.Space) && characterController.isGrounded == true)
         {
-            animator.SetTrigger("onJump");
+            //animator.SetTrigger("onJump");
             moveDirection.y = jumpForce;
         }
 
@@ -76,13 +73,16 @@ public class MovementCharacter : MonoBehaviour
 
         // 현재 카메라가 바라보고 있는 전방 방향을 보도록 설정
         transform.rotation = Quaternion.Euler(0, mainCamera.eulerAngles.y, 0);
+
+
+        // Hit또는 Die애니메이션 테스트
+        TestAnimation();
     }
 
     private void OnTriggerEnter(Collider collision)
     {
         if(collision.gameObject.CompareTag("Eatable"))
         {
-            int index = collision.gameObject.GetComponent<EatableObject>().ItemIndex;
             inventoryUI.AcquireItem(collision.gameObject.GetComponent<EatableObject>().item);
             GameManager.instance.AddItem(collision.gameObject.GetComponent<EatableObject>().item);
 
@@ -114,6 +114,33 @@ public class MovementCharacter : MonoBehaviour
         else
         {
             status.PlayerStamina += Time.deltaTime * status.RecoverRateStamina;
+        }
+    }
+
+    private void TestAnimation()
+    {
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            animator.SetBool("isDie", false);
+            GameManager.instance.isGameOver = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.H))
+            animator.SetTrigger("onHit");
+    }
+
+    public void OnDamage(float damage)
+    {
+        // 데미지 입을 시
+        status.isNotAttack = true;
+        animator.SetTrigger("onHit");
+        float final = 100 / (100 + status.Defense);
+        status.PlayerHP -= damage * final;
+
+        if(status.PlayerHP <= 0)
+        {
+            animator.SetBool("isDie", true);
+            GameManager.instance.isGameOver = true;
         }
     }
 }

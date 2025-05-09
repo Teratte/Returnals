@@ -4,26 +4,30 @@ public class TableHandler : KeyPressHandler
 {
     [SerializeField]
     private GameObject producePanel;
+    [SerializeField]
+    private ClickByRaycast clicker;
 
-    private void Update()
-    {
-        if (isPlayerNearby && Input.GetKeyDown(KeyCode.F))
-        {
-            DoTableInteraction();
-        }
-    }
-
-    private void DoTableInteraction()
+    public void DoTableInteraction()
     {
         Debug.Log("Table과 상호작용 실행됨.");
         // 테이블과의 상호작용 로직 추가
         producePanel.SetActive(true);
-        GameManager.instance.ActiveUI();
+        GameManager.instance.isUIOn = true;
+        clicker.isPanelActive = true;
     }
 
     public void ExitProducePanel()
     {
         producePanel.SetActive(false);
-        GameManager.instance.DeactiveUI();
+        GameManager.instance.isUIOn = false;
+        clicker.isPanelActive = false;
+    }
+
+    public override void Interact()
+    {
+        if(!clicker.isPanelActive)
+        {
+            DoTableInteraction();
+        }
     }
 }

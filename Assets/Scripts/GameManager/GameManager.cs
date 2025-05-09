@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
 using System.Collections.Generic;
+using KINEMATION.FPSAnimationPack.Scripts.Player;
 
 // 점수와 게임 오버 여부를 관리하는 게임 매니저
 public class GameManager : MonoBehaviour
@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
             if (m_instance == null)
             {
                 // 씬에서 GameManager 오브젝트를 찾아 할당
-                m_instance = FindObjectOfType<GameManager>();
+                m_instance = FindAnyObjectByType<GameManager>();
             }
 
             // 싱글톤 오브젝트를 반환
@@ -37,6 +37,29 @@ public class GameManager : MonoBehaviour
     public GameObject mainWeapon;                   // 메인 무기
     public GameObject subWeapon;                    // 보조 무기
     public GameObject holdingGazet;                 // 보유 가젯
+    public List<GameObject> selectWeaponList;       // 무기 선택 리스트
+    public bool isFirstStage = true;                       // 첫 스테이지 진입 여부
+    private FPSPlayer player;
+
+    [Header("AssaultBullet")]
+    public int currentAssaultAmmo;
+    public int maxAssuaultAmmo;
+
+    [Header("ShotgunBullet")]
+    public int currentShotgunAmmo;
+    public int maxShotgunAmmo;
+
+    [Header("Machinegun")]
+    public int currentMachinegunAmmo;
+    public int maxMachinegunAmmo;
+
+    [Header("SMGBullet")]
+    public int currentSMGAmmo;
+    public int maxSMGAmmo;
+
+    [Header("SniperBullet")]
+    public int currentSniperAmmo;
+    public int maxSniperAmmo;
 
     [Header("Items")]
     private Dictionary<Item, int> items = new Dictionary<Item, int>();
@@ -82,6 +105,12 @@ public class GameManager : MonoBehaviour
             timer = 900.0f;
             Debug.Log("인 게임 씬 로드");
             //Slots = FindObjectOfType<InventoryUI>().Slots;
+            player = FindAnyObjectByType<FPSPlayer>();
+            if(player != null)
+            {
+                player.playerSettings.weaponPrefabs.Add(mainWeapon);
+                player.playerSettings.weaponPrefabs.Add(subWeapon);
+            }
         }
         else if(SceneManager.GetActiveScene().name == "BaseCampTest")
         {

@@ -11,6 +11,8 @@ TagManager:
   - Pistol
   - CrowBar
   - Enemy
+  - EnemyWeapon
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -21,7 +23,7 @@ TagManager:
   - Player
   - Ground
   - Wall
-  - 
+  - Grenade
   - 
   - 
   - 

@@ -23,6 +23,14 @@ public class Sniper : WeaponBase
     {
         base.Setup();
         mainCamera = Camera.main;
+        if (GameManager.instance.isFirstStage)
+        {
+            GameManager.instance.currentSniperAmmo = weaponSetting.maxCapacity;
+            GameManager.instance.isFirstStage = false;
+        }
+
+        CurrentAmmo = GameManager.instance.currentSniperAmmo;
+        MaxAmmo = GameManager.instance.maxSniperAmmo;
     }
 
     public override void StartWeaponAction(int type = 0)
@@ -68,9 +76,11 @@ public class Sniper : WeaponBase
             // 마지막 총 발사 시점 갱신
             lastAttackTime = Time.time;
             // 남은 탄알이 없으면 발사 불가능
-            if (weaponSetting.currentAmmo <= 0)
+            if (GameManager.instance.currentSniperAmmo <= 0)
                 return;
-            weaponSetting.currentAmmo--;
+            if(!onSubMagazine)
+                GameManager.instance.currentSniperAmmo--;
+            CurrentAmmo = GameManager.instance.currentSniperAmmo;
             // 발사 이펙트 재생
             ShotEffect();
             // 발사 사운드 재생
@@ -147,7 +157,7 @@ public class Sniper : WeaponBase
     // 재장전 시도
     public void Reload()
     {
-        if(weaponSetting.maxAmmo <= 0 || weaponSetting.currentAmmo >= weaponSetting.maxCapacity)
+        if(GameManager.instance.maxSniperAmmo <= 0 || GameManager.instance.currentSniperAmmo >= weaponSetting.maxCapacity)
         {
             // 이미 재장전 중이거나 남은 탄알이 없거나
             // 탄창에 탄알이 이미 가득한 경우 재장전 불가능
@@ -168,19 +178,21 @@ public class Sniper : WeaponBase
         yield return new WaitForSeconds(weaponSetting.reloadTime);
 
         // 탄창에 채울 탄알 계산
-        int ammoToFill = weaponSetting.maxCapacity - weaponSetting.currentAmmo;
+        int ammoToFill = weaponSetting.maxCapacity - GameManager.instance.currentSniperAmmo;
 
         // 탄창에 채워야 할 탄알이 남은 탄알보다 많다면
         // 채워야 할 탄알 수를 남은 탄알 수에 맞춰 줄임
-        if (weaponSetting.maxAmmo <= ammoToFill)
+        if (GameManager.instance.maxSniperAmmo <= ammoToFill)
         {
-            ammoToFill = weaponSetting.maxAmmo;
+            ammoToFill = GameManager.instance.maxSniperAmmo;
         }
 
         // 탄창을 채움
-        weaponSetting.currentAmmo += ammoToFill;
+        GameManager.instance.currentSniperAmmo += ammoToFill;
+        CurrentAmmo = GameManager.instance.currentSniperAmmo;
         // 남은 탄알에서 탄창에 채운만큼 탄알을 뺌
-        weaponSetting.maxAmmo -= ammoToFill;
+        GameManager.instance.maxSniperAmmo -= ammoToFill;
+        MaxAmmo = GameManager.instance.maxSniperAmmo;
         // 총의 상태를 발사 준비 상태로 변경
         isReload = false;
     }

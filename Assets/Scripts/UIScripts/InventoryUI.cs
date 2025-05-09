@@ -1,11 +1,10 @@
+using KINEMATION.FPSAnimationPack.Scripts.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    public static bool inventoryActivated = false;
-
     [SerializeField]
     private GameObject InventoryObject; // 인벤토리 창
     [SerializeField]
@@ -14,17 +13,27 @@ public class InventoryUI : MonoBehaviour
     private TextMeshProUGUI timer;      // 타이머
     [SerializeField]
     private TextMeshProUGUI ammoText;   // 탄창 수
+    [SerializeField]
+    private TextMeshProUGUI gazetAbleCount; // 가젯 사용 가능 횟수
+    [SerializeField]
+    private Slider gazetCoolTimeSlider;     // 가젯 쿨타임 슬라이더
+    private float gazetCoolTime;            // 가젯 쿨타임
 
     private Slot[] slots;
-    private PlayerAnimator playerAnimator;
+    private FPSPlayer player;
 
     public Slot[] Slots => slots;       // 획득 아이템 리스트
 
     private void Awake()
     {
         slots = slotsParent.GetComponentsInChildren<Slot>();
-        playerAnimator = FindObjectOfType<PlayerAnimator>();
+        player = FindAnyObjectByType<FPSPlayer>();
         InventoryObject.SetActive(false);
+    }
+
+    private void Start()
+    {
+        gazetCoolTime = 99;
     }
 
     private void Update()
@@ -32,13 +41,11 @@ public class InventoryUI : MonoBehaviour
         // 인벤토리 창 열기
         if (Input.GetKey(KeyCode.Tab))
         {
-            inventoryActivated = true;
             InventoryObject.SetActive(true);
             GameManager.instance.ActiveUI();
         }
         else if(Input.GetKeyUp(KeyCode.Tab))
         {
-            inventoryActivated = false;
             InventoryObject.SetActive(false);
             GameManager.instance.DeactiveUI();
         }
@@ -46,7 +53,14 @@ public class InventoryUI : MonoBehaviour
         if (GameManager.instance.isGameStart)
         {
             timer.text = $"{(int)GameManager.instance.Timer}";
-            ammoText.text = $"{playerAnimator.Weapon.CurrentAmmo} / {playerAnimator.Weapon.MaxAmmo}";
+            ammoText.text = $"{player.GetActiveWeapon().CurrentAmmo} / {player.GetActiveWeapon().MaxAmmo}";
+            gazetAbleCount.text = $"{player.Gazet.CurrentAbleCount}";
+            gazetCoolTime += Time.deltaTime;
+            gazetCoolTimeSlider.value = gazetCoolTime / player.Gazet.Rate;
+            if (Input.GetKeyDown(KeyCode.Q) && gazetCoolTimeSlider.value >= 1 && player.Gazet.canUse)
+            {
+                gazetCoolTime = 0.0f;
+            }
         }
     }
 

@@ -65,8 +65,8 @@ MonoBehaviour:
     isAutomaticAttack: 0
     damage: 25
   runtimeAnimatorController: {fileID: 9100000, guid: a1b4a8e888dc406429024958f8e32447, type: 2}
+  weaponIcon: {fileID: 21300000, guid: 91dbb5d6052ca114f9cb60217abbd956, type: 3}
   leftHandle: {fileID: 7152086635977748797}
-  rightHandle: {fileID: 4553503688969598113}
   fireTr: {fileID: 9066056220905495605}
   distance: 8
   inaccuracyDitance: 6
