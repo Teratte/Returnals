@@ -10,13 +10,28 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
 {
     public class FPSWeapon : MonoBehaviour, IAmmoProvider
     {
-        public WeaponAttribute weaponAttribute;
+        public WeaponAttribute weaponAttribute; // 무기 속성
+        public WeaponType weaponType;           // 무기 종류
+
+        [SerializeField]
+        private Sprite weaponIcon;                // 무기 아이콘
+        [SerializeField]
+        private Transform fireTransform;          // 탄알이 날라가는 위치
+        [SerializeField]
+        private ShotEffect shotEffect;            // 발사 이펙트 관련 정보들
+        [SerializeField]
+        private float damage;                     // 무기 데미지
+        private int maxAmmo;                      // 최대 가지고 있는 탄알
+        private bool onSubMagazine = false;       // 보조 탄창 가젯 발동 여부
+
+        public Sprite WeaponIcon => weaponIcon;   // 무기 아이콘
+
         public float UnEquipDelay => unEquipDelay;
         public FireMode ActiveFireMode => fireMode;
-        
+
         public FPSWeaponSettings weaponSettings;
         public Transform aimPoint;
-        
+
         [SerializeField] protected FireMode fireMode = FireMode.Semi;
 
         [HideInInspector] public KTransform rightHandPose;
@@ -28,27 +43,37 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
 
         protected Animator characterAnimator;
         protected Animator weaponAnimator;
-        
+
         protected static int RELOAD_EMPTY = Animator.StringToHash("Reload_Empty");
         protected static int RELOAD_TAC = Animator.StringToHash("Reload_Tac");
         protected static int FIRE = Animator.StringToHash("Fire");
         protected static int FIREOUT = Animator.StringToHash("FireOut");
-        
+
         protected static int EQUIP = Animator.StringToHash("Equip");
         protected static int EQUIP_OVERRIDE = Animator.StringToHash("Equip_Override");
         protected static int UNEQUIP = Animator.StringToHash("UnEquip");
         protected static int IDLE = Animator.StringToHash("Idle");
-        
+
         protected float unEquipDelay;
         protected float emptyReloadDelay;
         protected float tacReloadDelay;
 
         protected int _activeAmmo;
-        
+
+        public int CurrentAmmo => _activeAmmo;  // 현재 남아있는 탄알
+        public int MaxAmmo => maxAmmo;
+
         protected bool _isReloading;
         protected bool _isFiring;
 
         protected FPSCameraAnimator cameraAnimator;
+
+        public bool IsReloading => _isReloading;    // 재장전 중인가를 검사
+        public bool OnSubMagazine
+        {
+            get => onSubMagazine;
+            set => onSubMagazine = value;
+        }
 
         public virtual void Initialize(GameObject owner)
         {
@@ -86,14 +111,14 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
                     if (clip.name.Contains("Empty")) emptyReloadDelay = clip.length;
                     continue;
                 }
-                
+
                 if (clip.name.ToLower().Contains("unequip"))
                 {
                     unEquipDelay = clip.length;
                     continue;
                 }
-                
-                if(idlePose != null) continue;
+
+                if (idlePose != null) continue;
                 if (clip.name.Contains("Idle") || clip.name.Contains("Pose")) idlePose = clip;
             }
 
@@ -103,12 +128,60 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
             }
 
             cameraAnimator = owner.transform.parent.GetComponentInChildren<FPSCameraAnimator>();
+
+            SetUpAmmo();
+        }
+
+        public void SetUpAmmo()
+        {
+            if (weaponType == WeaponType.AssaultRifle)
+                maxAmmo = GameManager.instance.maxAssuaultAmmo;
+            else if (weaponType == WeaponType.Shotgun)
+                maxAmmo = GameManager.instance.maxShotgunAmmo;
+            else if (weaponType == WeaponType.SmallMachinegun)
+                maxAmmo = GameManager.instance.maxSMGAmmo;
+            else if (weaponType == WeaponType.HeavyWeapon)
+                maxAmmo = GameManager.instance.maxMachinegunAmmo;
+            else if (weaponType == WeaponType.Sniper)
+                maxAmmo = GameManager.instance.maxSniperAmmo;
+            else
+                maxAmmo = 999;
+        }
+
+        public int GetActiveMaxAmmo()
+        {
+            if (weaponType == WeaponType.AssaultRifle)
+                return GameManager.instance.maxAssuaultAmmo;
+            else if (weaponType == WeaponType.Shotgun)
+                return GameManager.instance.maxShotgunAmmo;
+            else if (weaponType == WeaponType.SmallMachinegun)
+                return GameManager.instance.maxSMGAmmo;
+            else if (weaponType == WeaponType.HeavyWeapon)
+                return GameManager.instance.maxMachinegunAmmo;
+            else if (weaponType == WeaponType.Sniper)
+                return GameManager.instance.maxSniperAmmo;
+
+            return 999;
+        }
+
+        public void UpdateMaxAmmo()
+        {
+            if (weaponType == WeaponType.AssaultRifle)
+                GameManager.instance.maxAssuaultAmmo = maxAmmo;
+            else if (weaponType == WeaponType.Shotgun)
+                GameManager.instance.maxShotgunAmmo = maxAmmo;
+            else if (weaponType == WeaponType.SmallMachinegun)
+                GameManager.instance.maxSMGAmmo = maxAmmo;
+            else if (weaponType == WeaponType.HeavyWeapon)
+                GameManager.instance.maxMachinegunAmmo = maxAmmo;
+            else if (weaponType == WeaponType.Sniper)
+                GameManager.instance.maxSniperAmmo = maxAmmo;
         }
 
         public virtual void OnReload()
         {
-            if (_activeAmmo == weaponSettings.ammo) return;
-            
+            if (_activeAmmo == weaponSettings.ammo || _isReloading || maxAmmo <= 0) return;
+
             var reloadHash = _activeAmmo == 0 ? RELOAD_EMPTY : RELOAD_TAC;
             characterAnimator.Play(reloadHash, -1, 0f);
             weaponAnimator.Play(reloadHash, -1, 0f);
@@ -135,7 +208,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
         {
             characterAnimator.runtimeAnimatorController = weaponSettings.characterController;
             recoilAnimation.Init(weaponSettings.recoilAnimData, weaponSettings.fireRate, fireMode);
-            
+
             // Reset the default pose to idle.
             characterAnimator.Play(IDLE, -1, 0f);
 
@@ -146,7 +219,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
                 characterAnimator.Play(fastEquip ? EQUIP : EQUIP_OVERRIDE, -1, 0f);
                 return;
             }
-            
+
             // Play the curve-based equipping animation.
             characterAnimator.Play(EQUIP, -1, 0f);
         }
@@ -156,7 +229,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
             characterAnimator.SetTrigger(UNEQUIP);
             return unEquipDelay + 0.05f;
         }
-        
+
         public void OnFirePressed()
         {
             _isFiring = true;
@@ -178,7 +251,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
                 OnFireReleased();
                 return;
             }
-            
+
             recoilAnimation.Play();
             if (weaponSound != null) weaponSound.PlayFireSound();
             if (cameraAnimator != null) cameraAnimator.PlayCameraShake(weaponSettings.cameraShake);
@@ -188,15 +261,34 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
                 ? FIREOUT
                 : FIRE, -1, 0f);
 
-            _activeAmmo--;
-            
+            if(!onSubMagazine)
+                _activeAmmo--;
+
+            // 발사 이펙트 재생
+            RayCast();
+            OnMuzzleEffect();
             if (fireMode == FireMode.Semi) return;
             Invoke(nameof(OnFire), 60f / weaponSettings.fireRate);
         }
 
         protected void ResetActiveAmmo()
         {
-            _activeAmmo = weaponSettings.ammo;
+            int ammoToFill = weaponSettings.ammo - _activeAmmo; // 채워야할 탄알 수
+
+            if (ammoToFill >= GetActiveMaxAmmo())
+            {
+                ammoToFill = GetActiveMaxAmmo();
+            }
+
+            if (weaponAttribute == WeaponAttribute.Support)
+                _activeAmmo = weaponSettings.ammo;
+            else
+            {
+                _activeAmmo += ammoToFill;
+                maxAmmo -= ammoToFill;
+            }
+
+            UpdateMaxAmmo();
             _isReloading = false;
         }
 
@@ -208,6 +300,33 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
         public int GetMaxAmmo()
         {
             return weaponSettings.ammo;
+        }
+
+        public void RayCast()
+        {
+            RaycastHit hit;
+
+            if (Physics.Raycast(fireTransform.position, fireTransform.forward, out hit, 50.0f))
+            {
+                IDamageable target = hit.collider.gameObject.GetComponent<IDamageable>();
+
+                if (target != null)
+                {
+                    Instantiate(shotEffect.monsterImpact, hit.point, hit.transform.rotation);
+                    target.OnDamage(damage);
+                }
+                else
+                {
+                    Instantiate(shotEffect.impact, hit.point, hit.transform.rotation);
+                }
+            }
+        }
+
+        public void OnMuzzleEffect()
+        {
+            ParticleSystem particle = Instantiate(shotEffect.muzzleEffect, fireTransform);
+            particle.transform.position = fireTransform.position;
+            particle.Play();
         }
     }
 }

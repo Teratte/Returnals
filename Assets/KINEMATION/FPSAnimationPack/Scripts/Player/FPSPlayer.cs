@@ -40,6 +40,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
         [SerializeField] private Transform cameraPoint;
         [SerializeField] private IKTransforms rightHand;
         [SerializeField] private IKTransforms leftHand;
+        [SerializeField] private Transform backPack;
         
         private KTwoBoneIkData _rightHandIk;
         private KTwoBoneIkData _leftHandIk;
@@ -82,6 +83,9 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
         private KTransform _cachedIkMotion = KTransform.Identity;
         private IKMotion _activeMotion;
         private CharacterController _characterController;   // 캐릭터 컨트롤러
+        private GazetBase gazet;    // 가젯
+
+        public GazetBase Gazet => gazet;
         
         private void EquipWeapon_Incremental()
         {
@@ -150,6 +154,18 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
             _animator.CrossFade(INSPECT, 0.1f);
         }
         
+        public bool IsMoving()
+        {
+            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
 #if ENABLE_INPUT_SYSTEM
         public void OnMouseWheel(InputValue value)
         {
@@ -213,7 +229,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
         private void OnMouseWheelLegacy()
         {
             float mouseWheelValue = Input.GetAxis("Mouse ScrollWheel");
-            if (mouseWheelValue == 0f) return;
+            if (mouseWheelValue == 0f || GetActiveWeapon().IsReloading) return;
             
             GetActiveWeapon().gameObject.SetActive(false);
             _activeWeaponIndex += mouseWheelValue > 0f ? 1 : -1;
@@ -222,7 +238,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
             if(_activeWeaponIndex > _weapons.Count - 1) _activeWeaponIndex = 0;
             
             GetActiveWeapon().gameObject.SetActive(true);
-            GetActiveWeapon().OnEquipped_Immediate();
+            GetActiveWeapon().OnEquipped();
         }
 
         private void OnAimLegacy(bool isPressed)
@@ -256,23 +272,29 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
             if (!_bSprinting) return;
             _bTacSprinting = isPressed;
         }
+
+        private void OnGazetAction()
+        {
+            gazet.StartGazetAction();
+        }
         
         private void ProcessLegacyInputs()
         {
             OnMouseWheelLegacy();
             if (Input.GetKeyDown(KeyCode.G)) OnThrowGrenade();
-            if (Input.GetKeyDown(KeyCode.F)) OnChangeWeapon();
+            //if (Input.GetKeyDown(KeyCode.F)) OnChangeWeapon();
             if (Input.GetKeyDown(KeyCode.B)) OnChangeFireMode();
             if (Input.GetKeyDown(KeyCode.R)) OnReload();
             if (Input.GetKeyDown(KeyCode.Space) && _characterController.isGrounded) OnJump();
             if (Input.GetKeyDown(KeyCode.I)) OnInspect();
+            if (Input.GetKeyDown(KeyCode.Q)) OnGazetAction();
             
-            if (Input.GetKeyDown(KeyCode.Mouse0)) GetActiveWeapon().OnFirePressed();
+            if (Input.GetKeyDown(KeyCode.Mouse0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) GetActiveWeapon().OnFirePressed();
             if (Input.GetKeyUp(KeyCode.Mouse0)) GetActiveWeapon().OnFireReleased();
 
             OnAimLegacy(Input.GetKey(KeyCode.Mouse1));
             OnMoveLegacy();
-            OnSprintLegacy(Input.GetKey(KeyCode.LeftShift));
+            OnSprintLegacy(Input.GetKey(KeyCode.LeftShift) && IsMoving());
             OnTacSprintLegacy(Input.GetKey(KeyCode.X));
         }
 #endif
@@ -333,6 +355,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
             
             GetActiveWeapon().gameObject.SetActive(true);
             GetActiveWeapon().OnEquipped();
+            SetGazet();
         }
 
         private float GetDesiredGait()
@@ -345,7 +368,8 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
         private void Update()
         {
 #if !ENABLE_INPUT_SYSTEM
-            ProcessLegacyInputs();
+            if(!GameManager.instance.isGameOver)
+                ProcessLegacyInputs();
 #endif
             _adsWeight = Mathf.Clamp01(_adsWeight + playerSettings.aimSpeed * Time.deltaTime * (_isAiming ? 1f : -1f));
 
@@ -538,6 +562,13 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
         private void OnFire()
         {
             _recoilAnimation.Play();
+        }
+
+        public void SetGazet()
+        {
+            GameObject newGazet = Instantiate(GameManager.instance.holdingGazet, backPack.position, Quaternion.identity);
+            newGazet.transform.parent = backPack;
+            gazet = newGazet.GetComponent<GazetBase>();
         }
     }
 }
