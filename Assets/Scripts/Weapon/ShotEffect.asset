@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a641503aac8fb4b42807c13c30c4027c, type: 3}
+  m_Name: ShotEffect
+  m_EditorClassIdentifier: 
+  muzzleEffect: {fileID: 198000012944515248, guid: 74d744994bc414c37bfda957f1d57118, type: 3}
+  impact: {fileID: 100002, guid: 99c73c92ac40473459640b165473206f, type: 3}
+  monsterImpact: {fileID: 100002, guid: d342fd04c095bf64888ab930f0796c88, type: 3}

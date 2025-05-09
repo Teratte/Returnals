@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponAttribute: 1
+  weaponType: 0
+  weaponIcon: {fileID: 0}
   weaponSettings: {fileID: 11400000, guid: b18f7b2327233fb47af0fc083e423362, type: 2}
   aimPoint: {fileID: 1371217864291336938}
   fireMode: 0
@@ -147,6 +149,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4d62d9dea8b125f4a814833787f8148f, type: 3}
       propertyPath: m_Name
       value: Viper-357
+      objectReference: {fileID: 0}
+    - target: {fileID: 4956078781782189858, guid: 4d62d9dea8b125f4a814833787f8148f, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

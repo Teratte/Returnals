@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1106960687510680253}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1246883870500048481
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8638124552271031767}
+  m_Layer: 0
+  m_Name: FireTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8638124552271031767
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1246883870500048481}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.2203}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3593893617755835209}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1405136511983599699
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,6 +93,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1106960687510680253}
+  - {fileID: 8638124552271031767}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6818483394034740614
@@ -79,6 +111,9 @@ MonoBehaviour:
   weaponAttribute: 1
   weaponType: 0
   weaponIcon: {fileID: 21300000, guid: c3e887d8f7426df4c8bb25b13d5fe231, type: 3}
+  fireTransform: {fileID: 8638124552271031767}
+  shotEffect: {fileID: 11400000, guid: 7e8621033e9924b4b92fcf1bfc385ff9, type: 2}
+  damage: 15
   weaponSettings: {fileID: 11400000, guid: 02fcbed359064394793c4f0dcd37470f, type: 2}
   aimPoint: {fileID: 6517663930352328273}
   fireMode: 0
@@ -140,6 +175,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d4b986ad936d2054eac4bbb2523c3c4f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5855518543227394179, guid: d4b986ad936d2054eac4bbb2523c3c4f, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -5855518543227394179, guid: d4b986ad936d2054eac4bbb2523c3c4f, type: 3}

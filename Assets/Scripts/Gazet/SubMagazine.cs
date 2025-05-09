@@ -1,16 +1,17 @@
+using KINEMATION.FPSAnimationPack.Scripts.Player;
 using System.Collections;
 using UnityEngine;
 
 public class SubMagazine : GazetBase
 {
-    private PlayerAnimator playerAnimator;
+    private FPSPlayer player;
     private bool onFever = false;
     private float feverTime = 0.0f;
 
     private void Awake()
     {
         base.SetUp();
-        playerAnimator = FindAnyObjectByType<PlayerAnimator>();
+        player = FindAnyObjectByType<FPSPlayer>();
         canUse = true;
     }
 
@@ -18,7 +19,7 @@ public class SubMagazine : GazetBase
     {
         if(onFever)
         {
-            playerAnimator.Weapon.onSubMagazine = true;
+            player.GetActiveWeapon().OnSubMagazine = true;
             feverTime += Time.deltaTime;
             if(feverTime >= 8.0f)
             {
@@ -28,12 +29,12 @@ public class SubMagazine : GazetBase
         }
         else
         {
-            playerAnimator.Weapon.onSubMagazine = false;
+            player.GetActiveWeapon().OnSubMagazine = false;
         }
     }
     public override void StartGazetAction()
     {
-        if(playerAnimator != null)
+        if(player != null)
         {
             if (isFirstTimeUse)
             {

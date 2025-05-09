@@ -154,6 +154,18 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
             _animator.CrossFade(INSPECT, 0.1f);
         }
         
+        public bool IsMoving()
+        {
+            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
 #if ENABLE_INPUT_SYSTEM
         public void OnMouseWheel(InputValue value)
         {
@@ -226,7 +238,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
             if(_activeWeaponIndex > _weapons.Count - 1) _activeWeaponIndex = 0;
             
             GetActiveWeapon().gameObject.SetActive(true);
-            GetActiveWeapon().OnEquipped_Immediate();
+            GetActiveWeapon().OnEquipped();
         }
 
         private void OnAimLegacy(bool isPressed)
@@ -270,7 +282,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
         {
             OnMouseWheelLegacy();
             if (Input.GetKeyDown(KeyCode.G)) OnThrowGrenade();
-            if (Input.GetKeyDown(KeyCode.F)) OnChangeWeapon();
+            //if (Input.GetKeyDown(KeyCode.F)) OnChangeWeapon();
             if (Input.GetKeyDown(KeyCode.B)) OnChangeFireMode();
             if (Input.GetKeyDown(KeyCode.R)) OnReload();
             if (Input.GetKeyDown(KeyCode.Space) && _characterController.isGrounded) OnJump();
@@ -282,7 +294,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
 
             OnAimLegacy(Input.GetKey(KeyCode.Mouse1));
             OnMoveLegacy();
-            OnSprintLegacy(Input.GetKey(KeyCode.LeftShift));
+            OnSprintLegacy(Input.GetKey(KeyCode.LeftShift) && IsMoving());
             OnTacSprintLegacy(Input.GetKey(KeyCode.X));
         }
 #endif

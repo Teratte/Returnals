@@ -53,7 +53,7 @@ public class InventoryUI : MonoBehaviour
         if (GameManager.instance.isGameStart)
         {
             timer.text = $"{(int)GameManager.instance.Timer}";
-            ammoText.text = $"{player.GetActiveWeapon().CurrentAmmo} / {GameManager.instance.maxAssuaultAmmo}";
+            ammoText.text = $"{player.GetActiveWeapon().CurrentAmmo} / {player.GetActiveWeapon().MaxAmmo}";
             gazetAbleCount.text = $"{player.Gazet.CurrentAbleCount}";
             gazetCoolTime += Time.deltaTime;
             gazetCoolTimeSlider.value = gazetCoolTime / player.Gazet.Rate;

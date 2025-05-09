@@ -78,6 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponAttribute: 0
   weaponType: 5
+  weaponIcon: {fileID: 0}
   weaponSettings: {fileID: 11400000, guid: fb7dc12e43c289e47ab91bdbbdd67c8d, type: 2}
   aimPoint: {fileID: 6519863761731780192}
   fireMode: 2
@@ -139,6 +140,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 927c660bb68c26f4589b45c2aaeb5126, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1134777354096287749, guid: 927c660bb68c26f4589b45c2aaeb5126, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 927c660bb68c26f4589b45c2aaeb5126, type: 3}

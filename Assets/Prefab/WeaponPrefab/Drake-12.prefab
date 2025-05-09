@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponAttribute: 0
   weaponType: 3
+  weaponIcon: {fileID: 0}
   weaponSettings: {fileID: 11400000, guid: c30b40f589bcef34ba3253dcb9ede8c4, type: 2}
   aimPoint: {fileID: 7573577964910029030}
   fireMode: 0
@@ -144,6 +145,10 @@ PrefabInstance:
     - target: {fileID: -3438789650544559379, guid: fcb56f77dc7a7584f9056535799d204a, type: 3}
       propertyPath: m_Name
       value: Drake-12
+      objectReference: {fileID: 0}
+    - target: {fileID: -2215984173843945156, guid: fcb56f77dc7a7584f9056535799d204a, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -2215984173843945156, guid: fcb56f77dc7a7584f9056535799d204a, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'

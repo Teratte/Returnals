@@ -78,6 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponAttribute: 0
   weaponType: 5
+  weaponIcon: {fileID: 0}
   weaponSettings: {fileID: 11400000, guid: 994fa12675435d143844dd7c491200fc, type: 2}
   aimPoint: {fileID: 129538254066334122}
   fireMode: 0
@@ -148,6 +149,10 @@ PrefabInstance:
     - target: {fileID: 6150774018030635730, guid: 7a6288eca542bac4ea39ef33b4d68e13, type: 3}
       propertyPath: m_Name
       value: MPS5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7332080982558129300, guid: 7a6288eca542bac4ea39ef33b4d68e13, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1128,6 +1128,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -643793720788819389, guid: 405129f43f2032e4bbed300529635549, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -643793720788819389, guid: 405129f43f2032e4bbed300529635549, type: 3}
       propertyPath: m_UpdateWhenOffscreen
       value: 1
       objectReference: {fileID: 0}
@@ -1288,6 +1292,10 @@ PrefabInstance:
       value: -31.533506
       objectReference: {fileID: 0}
     - target: {fileID: 2594905638231780816, guid: 405129f43f2032e4bbed300529635549, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2594905638231780816, guid: 405129f43f2032e4bbed300529635549, type: 3}
       propertyPath: m_UpdateWhenOffscreen
       value: 1
       objectReference: {fileID: 0}
@@ -1342,6 +1350,10 @@ PrefabInstance:
     - target: {fileID: 3382952122049589119, guid: 405129f43f2032e4bbed300529635549, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3944914171396787563, guid: 405129f43f2032e4bbed300529635549, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3944914171396787563, guid: 405129f43f2032e4bbed300529635549, type: 3}
       propertyPath: m_UpdateWhenOffscreen
