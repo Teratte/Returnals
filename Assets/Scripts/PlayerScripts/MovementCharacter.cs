@@ -18,7 +18,8 @@ public class MovementCharacter : MonoBehaviour, IDamageable
     private CharacterController characterController;
     private Animator animator;
     private Status status;
-    bool isRecoveryMode = false;
+    private bool isRecoveryMode = false;
+    public bool IsRecoveryMode => isRecoveryMode;
 
     private void Awake()
     {

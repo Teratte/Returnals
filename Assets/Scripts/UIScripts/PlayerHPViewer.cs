@@ -17,7 +17,7 @@ public class PlayerHPViewer : MonoBehaviour
 
     private void Update()
     {
-        slider.value = status.PlayerHP / status.MaxHP;
+        slider.value = 1-(status.PlayerHP / status.MaxHP);
         textHP.text = $"{(int)status.PlayerHP} / {(int)status.MaxHP}";
     }
 }

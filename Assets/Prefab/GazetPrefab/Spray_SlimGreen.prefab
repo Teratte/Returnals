@@ -48,15 +48,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gazetSetting:
     name: Grenade
-    maxAbleCount: 5
-    currentAbleCount: 5
-    rate: 30
+    maxAbleCount: 999
+    currentAbleCount: 999
+    rate: 1
     damage: 80
   gazetIcon: {fileID: 21300000, guid: 21007b9a1ee3fff4abb7b450737babce, type: 3}
   canUse: 1
   throwAudio: {fileID: 8300000, guid: 961723c87966ba142b8faee5ddc23742, type: 3}
   grenadePrefab: {fileID: 5076600425727177328, guid: 547e55d4eef9a2147b6cd04668dd68d9, type: 3}
-  grenadeAnimator: {fileID: 9100000, guid: f5187c0d25b1fa1448d049208fca9a64, type: 2}
 --- !u!82 &4025560506650516750
 AudioSource:
   m_ObjectHideFlags: 0
