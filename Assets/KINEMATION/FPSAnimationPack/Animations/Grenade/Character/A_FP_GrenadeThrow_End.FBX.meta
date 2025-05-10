@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: 4d506873b141c1c44bd86860e718d784
+AssetOrigin:
+  serializedVersion: 1
+  productId: 240060
+  packageName: FPS Animation Ultimate
+  packageVersion: 2.0.1
+  assetPath: Assets/KINEMATION/FPSAnimationPack/Animations/Grenade/Character/A_FP_GrenadeThrow_End.FBX
+  uploadId: 751761
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -16,8 +23,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -56,7 +61,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.29790795
+        functionName: SpawnGrenadeProjectile
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -140,10 +152,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 240060
-  packageName: FPS Animation Ultimate
-  packageVersion: 2.0.1
-  assetPath: Assets/KINEMATION/FPSAnimationPack/Animations/Grenade/Character/A_FP_GrenadeThrow_End.FBX
-  uploadId: 751761

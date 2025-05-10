@@ -41,6 +41,8 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
         [SerializeField] private IKTransforms rightHand;
         [SerializeField] private IKTransforms leftHand;
         [SerializeField] private Transform backPack;
+        [SerializeField] private Transform grenadeTransform;    // 수류탄 생성 위치
+        public Transform GrenadeTransform => grenadeTransform;
         
         private KTwoBoneIkData _rightHandIk;
         private KTwoBoneIkData _leftHandIk;
@@ -53,6 +55,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
         private int _activeWeaponIndex = 0;
 
         private Animator _animator;
+        public Animator _Animator => _animator;
 
         private static int RIGHT_HAND_WEIGHT = Animator.StringToHash("RightHandWeight");
         private static int TAC_SPRINT_WEIGHT = Animator.StringToHash("TacSprintWeight");
@@ -69,6 +72,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
         private int _rightHandLayerIndex;
         
         private bool _isAiming;
+        private bool _canFire = true;
 
         private Vector2 _moveInput;
         private float _smoothGait;
@@ -84,6 +88,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
         private IKMotion _activeMotion;
         private CharacterController _characterController;   // 캐릭터 컨트롤러
         private GazetBase gazet;    // 가젯
+        private MovementCharacter _movementCharacter;
 
         public GazetBase Gazet => gazet;
         
@@ -115,6 +120,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
 
         public void OnThrowGrenade()
         {
+            _canFire = false;
             _animator.SetTrigger(THROW_GRENADE);
             Invoke(nameof(ThrowGrenade), GetActiveWeapon().UnEquipDelay);
         }
@@ -122,6 +128,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
         public void OnChangeWeapon()
         {
             if (_weapons.Count <= 1) return;
+            _canFire = false;
             float delay = GetActiveWeapon().OnUnEquipped();
             Invoke(nameof(EquipWeapon_Incremental), delay);
         }
@@ -230,7 +237,8 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
         {
             float mouseWheelValue = Input.GetAxis("Mouse ScrollWheel");
             if (mouseWheelValue == 0f || GetActiveWeapon().IsReloading) return;
-            
+
+            _canFire = false;
             GetActiveWeapon().gameObject.SetActive(false);
             _activeWeaponIndex += mouseWheelValue > 0f ? 1 : -1;
 
@@ -239,6 +247,12 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
             
             GetActiveWeapon().gameObject.SetActive(true);
             GetActiveWeapon().OnEquipped();
+            Invoke(nameof(CanFire), 0.5f);
+        }
+
+        private void CanFire()
+        {
+            _canFire = true;
         }
 
         private void OnAimLegacy(bool isPressed)
@@ -289,18 +303,19 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
             if (Input.GetKeyDown(KeyCode.I)) OnInspect();
             if (Input.GetKeyDown(KeyCode.Q)) OnGazetAction();
             
-            if (Input.GetKeyDown(KeyCode.Mouse0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) GetActiveWeapon().OnFirePressed();
+            if (Input.GetKeyDown(KeyCode.Mouse0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject() && _canFire) GetActiveWeapon().OnFirePressed();
             if (Input.GetKeyUp(KeyCode.Mouse0)) GetActiveWeapon().OnFireReleased();
 
             OnAimLegacy(Input.GetKey(KeyCode.Mouse1));
             OnMoveLegacy();
-            OnSprintLegacy(Input.GetKey(KeyCode.LeftShift) && IsMoving());
+            OnSprintLegacy(Input.GetKey(KeyCode.LeftShift) && IsMoving() && !_movementCharacter.IsRecoveryMode);
             OnTacSprintLegacy(Input.GetKey(KeyCode.X));
         }
 #endif
         private void SetWeaponVisible()
         {
             GetActiveWeapon().gameObject.SetActive(true);
+            _canFire = true;
         }
 
         public FPSWeapon GetActiveWeapon()
@@ -319,6 +334,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
             _recoilAnimation = GetComponent<RecoilAnimation>();
             _playerSound = GetComponent<FPSPlayerSound>();
             _characterController =GetComponentInParent<CharacterController>();
+            _movementCharacter = GetComponentInParent<MovementCharacter>();
 
             _triggerDisciplineLayerIndex = _animator.GetLayerIndex("TriggerDiscipline");
             _rightHandLayerIndex = _animator.GetLayerIndex("RightHand");

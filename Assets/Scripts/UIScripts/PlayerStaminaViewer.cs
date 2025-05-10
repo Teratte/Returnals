@@ -18,7 +18,7 @@ public class PlayerStaminaViewer : MonoBehaviour
 
     private void Update()
     {
-        slider.value = status.PlayerStamina / status.MaxStamina;
+        slider.value = 1 - status.PlayerStamina / status.MaxStamina;
         textStamina.text = $"{(int)status.PlayerStamina} / {(int)status.MaxStamina}";
     }
 }
