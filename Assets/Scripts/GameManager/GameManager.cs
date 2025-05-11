@@ -108,6 +108,7 @@ public class GameManager : MonoBehaviour
             player = FindAnyObjectByType<FPSPlayer>();
             if(player != null)
             {
+                player.playerSettings.weaponPrefabs.Clear();
                 player.playerSettings.weaponPrefabs.Add(mainWeapon);
                 player.playerSettings.weaponPrefabs.Add(subWeapon);
             }

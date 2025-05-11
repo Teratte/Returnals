@@ -32,6 +32,7 @@ Transform:
   m_Children:
   - {fileID: 1412648822220167086}
   - {fileID: 4692861757224599252}
+  - {fileID: 4533637468500882614}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1245874089795515332
@@ -48,7 +49,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponAttribute: 0
   weaponType: 2
-  weaponIcon: {fileID: 0}
+  weaponIcon: {fileID: 21300000, guid: f28146a3ea125224f84e74682de28653, type: 3}
+  fireTransform: {fileID: 4533637468500882614}
+  shotEffect: {fileID: 11400000, guid: 7e8621033e9924b4b92fcf1bfc385ff9, type: 2}
+  damage: 20
   weaponSettings: {fileID: 11400000, guid: 91714cb181e4c464e8521a8648a94123, type: 2}
   aimPoint: {fileID: 4692861757224599252}
   fireMode: 2
@@ -83,6 +87,37 @@ MonoBehaviour:
   - {fileID: 2856858539050078540}
   - {fileID: 3747388582259063696}
   tapeResetTime: 2.45
+--- !u!1 &5643335708950554432
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4533637468500882614}
+  m_Layer: 0
+  m_Name: FireTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4533637468500882614
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5643335708950554432}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.6482}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5804713991301324180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6039354068436376080
 GameObject:
   m_ObjectHideFlags: 0

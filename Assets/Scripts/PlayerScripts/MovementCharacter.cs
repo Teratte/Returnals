@@ -74,10 +74,6 @@ public class MovementCharacter : MonoBehaviour, IDamageable
 
         // 현재 카메라가 바라보고 있는 전방 방향을 보도록 설정
         transform.rotation = Quaternion.Euler(0, mainCamera.eulerAngles.y, 0);
-
-
-        // Hit또는 Die애니메이션 테스트
-        TestAnimation();
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -118,29 +114,17 @@ public class MovementCharacter : MonoBehaviour, IDamageable
         }
     }
 
-    private void TestAnimation()
-    {
-        if(Input.GetKeyDown(KeyCode.B))
-        {
-            animator.SetBool("isDie", false);
-            GameManager.instance.isGameOver = false;
-        }
-
-        if (Input.GetKeyDown(KeyCode.H))
-            animator.SetTrigger("onHit");
-    }
-
     public void OnDamage(float damage)
     {
         // 데미지 입을 시
         status.isNotAttack = true;
-        animator.SetTrigger("onHit");
+        //animator.SetTrigger("onHit");
         float final = 100 / (100 + status.Defense);
-        status.PlayerHP -= damage * final;
+        bool isDie = status.DecreaseHP(damage * final);
 
-        if(status.PlayerHP <= 0)
+        if(isDie)
         {
-            animator.SetBool("isDie", true);
+            //animator.SetBool("isDie", true);
             GameManager.instance.isGameOver = true;
         }
     }
