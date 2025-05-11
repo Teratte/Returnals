@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour, IDamageable
         Die       // 사망 상태
     }
 
-    [Header("Status")]
+    [Header("기본 스텟")]
     [Tooltip("몬스터 스테이터스를 설정")]
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float moveSpeed = 3.5f;
@@ -29,10 +29,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public float MonsterDamage => monsterDamage;
 
-    [Header("Detection")]
+    [Header("몬스터 정면 시야 각도")]
     [SerializeField] private float detectionAngle = 90f; // 정면 인식 각도
 
-    [Header("Weapon")]
+    [Header("몬스터 무기")]
     [SerializeField] private BoxCollider weaponCollider;
 
     private Transform target;
@@ -49,7 +49,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private float lastAttackTime;
 
-    [Header("Item List")]
+    [Header("아이템 리스트")]
     [SerializeField]
     private List<Item> itemList; // 드롭할 아이템 리스트
     [SerializeField]
