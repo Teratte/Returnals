@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0cfbdc419a1a9dd49afe7719467587ae
+guid: 14f1da2e4eb10304292beb7029dab44f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable:
@@ -1121,7 +1121,8 @@ ModelImporter:
     - name: CATRigLArm2
       parentName: CATRigLArm1
       position: {x: -0.31531265, y: 9.313226e-10, z: 0}
-      rotation: {x: 0.0000000819564, y: -0.0000000083819085, z: 0.000000059604645, w: 1}
+      rotation: {x: 0.0000000819564, y: -0.0000000083819085, z: 0.000000059604645,
+        w: 1}
       scale: {x: 1, y: 0.99999994, z: 0.99999994}
     - name: CATRigLArmPalm
       parentName: CATRigLArm2
@@ -1141,7 +1142,8 @@ ModelImporter:
     - name: CATRigLArmDigit13
       parentName: CATRigLArmDigit12
       position: {x: -0.035063505, y: -0.000000059604645, z: 0}
-      rotation: {x: -0.000000071245374, y: -0.000000042840238, z: -0.000000014901214, w: 1}
+      rotation: {x: -0.000000071245374, y: -0.000000042840238, z: -0.000000014901214,
+        w: 1}
       scale: {x: 0.99999666, y: 1.0000007, z: 1.0000029}
     - name: CATRigLArmDigit21
       parentName: CATRigLArmPalm
@@ -1171,7 +1173,8 @@ ModelImporter:
     - name: CATRigLArmDigit33
       parentName: CATRigLArmDigit32
       position: {x: -0.036905885, y: 0, z: 0}
-      rotation: {x: -0.000000035918124, y: 0.0000000037252617, z: -6.0484307e-17, w: 1}
+      rotation: {x: -0.000000035918124, y: 0.0000000037252617, z: -6.0484307e-17,
+        w: 1}
       scale: {x: 1.0000017, y: 0.9999987, z: 0.99999964}
     - name: CATRigLArmDigit41
       parentName: CATRigLArmPalm
@@ -1186,7 +1189,8 @@ ModelImporter:
     - name: CATRigLArmDigit43
       parentName: CATRigLArmDigit42
       position: {x: -0.025973141, y: 0, z: 0}
-      rotation: {x: -0.000000024413927, y: -0.0000000055879004, z: 1.9372001e-10, w: 1}
+      rotation: {x: -0.000000024413927, y: -0.0000000055879004, z: 1.9372001e-10,
+        w: 1}
       scale: {x: 0.9999984, y: 1.0000023, z: 0.99999875}
     - name: CATRigLArmDigit51
       parentName: CATRigLArmPalm
@@ -1256,7 +1260,8 @@ ModelImporter:
     - name: CATRigRArmDigit31
       parentName: CATRigRArmPalm
       position: {x: -0.06470102, y: 0.0094281435, z: 0.0020868694}
-      rotation: {x: 0.000000048955126, y: -0.000000041501846, z: -0.000000044703363, w: 1}
+      rotation: {x: 0.000000048955126, y: -0.000000041501846, z: -0.000000044703363,
+        w: 1}
       scale: {x: 1.0000012, y: 0.99999845, z: 0.9999999}
     - name: CATRigRArmDigit32
       parentName: CATRigRArmDigit31
@@ -1291,7 +1296,8 @@ ModelImporter:
     - name: CATRigRArmDigit52
       parentName: CATRigRArmDigit51
       position: {x: -0.0347988, y: 0, z: 0}
-      rotation: {x: -0.0000000037252692, y: 2.7755382e-17, z: -0.000000007450571, w: 1}
+      rotation: {x: -0.0000000037252692, y: 2.7755382e-17, z: -0.000000007450571,
+        w: 1}
       scale: {x: 0.9999969, y: 1.0000002, z: 1.000002}
     - name: CATRigRArmDigit53
       parentName: CATRigRArmDigit52
@@ -1425,7 +1431,8 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: fdd3ad8b8c10fb94fb5dbfb9a5e2dab9, type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: fdd3ad8b8c10fb94fb5dbfb9a5e2dab9,
+    type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1

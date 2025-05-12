@@ -1,4 +1,3 @@
-using GLTF.Schema;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,64 +5,98 @@ using UnityEngine.AI;
 
 public class EnemyFSM : MonoBehaviour, IDamageable
 {
-    [Header("¸ó½ºÅÍ µ¥ÀÌÅÍ")]
+    [Header("ëª¬ìŠ¤í„° ë°ì´í„°")]
     [SerializeField] private EnemyData enemyData;
 
-    private EnemyState currentState; // ÇöÀç »óÅÂ
+    [Header("ëª¬ìŠ¤í„° ë¬´ê¸°")]
+    [Tooltip("ëª¬ìŠ¤í„°ì˜ ë¬´ê¸°ë¥¼ ë“±ë¡")]
+    public Collider weaponCollider; // ëª¬ìŠ¤í„°ì˜ ë¬´ê¸° ì½œë¼ì´ë”
 
-    public float MonsterDamage => enemyData.monsterDamage; // ¸ó½ºÅÍ °ø°İ·Â
-    private float curHealth; // ÇöÀç Ã¼·Â
-    private bool isPostDelay = false; // °ø°İ ÈÄ µô·¹ÀÌ À¯¹«
+    private EnemyState currentState; // í˜„ì¬ ìƒíƒœ
 
+    public float MonsterDamage => enemyData.monsterDamage; // ëª¬ìŠ¤í„° ê³µê²©ë ¥
+    private float curHealth; // í˜„ì¬ ì²´ë ¥
+    private bool isPostDelay = false; // ê³µê²© í›„ ë”œë ˆì´ ìœ ë¬´
+    private float idleTimer; // ëŒ€ê¸° íƒ€ì´ë¨¸
+    private float idleWaitTime; // ëŒ€ê¸° ì‹œê°„
+
+    private float patrolTimer;  // ìˆœì°° íƒ€ì´ë¨¸
+    private float patrolDuration;   // ìˆœì°° ì‹œê°„
+    private Vector3 patrolDestination; // ìˆœì°° ëª©ì ì§€
+
+    private Transform player; // í”Œë ˆì´ì–´ íŠ¸ëœìŠ¤í¼
     private NavMeshAgent nav;
     private Animator anim;
     private Rigidbody rigid;
     private CapsuleCollider capsuleCollider;
+    private EnemyAttack enemyAttack; // ê³µê²© ìŠ¤í¬ë¦½íŠ¸
 
-    private string currentPlayingAnimation = string.Empty; // ÇöÀç Àç»ıÁßÀÎ ¾Ö´Ï¸ŞÀÌ¼Ç ÀÌ¸§
+    private string currentPlayingAnimation = string.Empty; // í˜„ì¬ ì¬ìƒì¤‘ì¸ ì• ë‹ˆë©”ì´ì…˜ ì´ë¦„
 
 
     private void Awake()
     {
-        curHealth = enemyData.maxHealth; // ÃÖ´ë Ã¼·ÂÀ¸·Î ÃÊ±âÈ­
+        curHealth = enemyData.maxHealth; // ìµœëŒ€ ì²´ë ¥ìœ¼ë¡œ ì´ˆê¸°í™”
 
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
 
-        nav.speed = enemyData.moveSpeed; // ÀÌµ¿ ¼Óµµ
-        nav.angularSpeed = enemyData.rotationSpeed * 100f; // È¸Àü¼Óµµ
-        nav.acceleration = 8f; // °¡¼Óµµ
-        nav.updateRotation = true; // È¸Àü ¾÷µ¥ÀÌÆ®(ÀÚµ¿ È¸Àü)
-        nav.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance; // Àå¾Ö¹° È¸ÇÇ Å¸ÀÔ ¼³Á¤(°íÇ°Áú È¸ÇÇ »ç¿ë)
-        nav.avoidancePriority = Random.Range(30, 70); // Àå¾Ö¹° È¸ÇÇ ¿ì¼±¼øÀ§ ¼³Á¤(·£´ı°ªÀ¸·Î ¼³Á¤), ³·À» ¼ö·Ï ¿ì¼±¼øÀ§°¡ ³ôÀ½, ¿©·¯ AI°¡ ¸ô¸± ¶§ Ãæµ¹ ¹æÁö
+        rigid.isKinematic = true;                 // NavMeshAgentìš© Rigidbody
+        capsuleCollider.isTrigger = false;         // ì¶©ëŒ O
+
+        if (weaponCollider != null)
+            enemyAttack = weaponCollider.GetComponent<EnemyAttack>();
+
+        nav.speed = enemyData.moveSpeed; // ì´ë™ ì†ë„
+        nav.angularSpeed = enemyData.rotationSpeed * 100f; // íšŒì „ì†ë„
+        nav.acceleration = 8f; // ê°€ì†ë„
+        nav.updateRotation = true; // íšŒì „ ì—…ë°ì´íŠ¸(ìë™ íšŒì „)
+        nav.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance; // ì¥ì• ë¬¼ íšŒí”¼ íƒ€ì… ì„¤ì •(ê³ í’ˆì§ˆ íšŒí”¼ ì‚¬ìš©)
+        nav.avoidancePriority = Random.Range(30, 70); // ì¥ì• ë¬¼ íšŒí”¼ ìš°ì„ ìˆœìœ„ ì„¤ì •(ëœë¤ê°’ìœ¼ë¡œ ì„¤ì •), ë‚®ì„ ìˆ˜ë¡ ìš°ì„ ìˆœìœ„ê°€ ë†’ìŒ, ì—¬ëŸ¬ AIê°€ ëª°ë¦´ ë•Œ ì¶©ëŒ ë°©ì§€
     }
 
     private void Start()
     {
-        currentState = EnemyState.Idle; // »óÅÂ ÃÊ±âÈ­
-        
-        if (enemyData.weaponCollider != null) // ¹«±â Äİ¶óÀÌ´õ°¡ ÀÖ´Ù¸é ºñÈ°¼ºÈ­ (ºñº­Á®¼­ µ¥¹ÌÁö ¹Ş´Â°É ¹æÁö)
-            enemyData.weaponCollider.enabled = false;
+        currentState = EnemyState.Idle; // ìƒíƒœ ì´ˆê¸°í™”
+        player = GameObject.FindWithTag("Player")?.transform;
+
+        if (weaponCollider != null) // ë¬´ê¸° ì½œë¼ì´ë”ê°€ ìˆë‹¤ë©´ ë¹„í™œì„±í™” (ë¹„ë²¼ì ¸ì„œ ë°ë¯¸ì§€ ë°›ëŠ”ê±¸ ë°©ì§€)
+            weaponCollider.enabled = false;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (currentState == EnemyState.None) return; // »óÅÂ ¾øÀ¸¸é ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ıx, ÀÚ¿ø ³¶ºñ ¹æÁö
+        if (currentState == EnemyState.None) return; // ìƒíƒœ ì—†ìœ¼ë©´ ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒx, ìì› ë‚­ë¹„ ë°©ì§€
 
-        StateUpdate(); // »óÅÂ ¾÷µ¥ÀÌÆ®
+        StateUpdate(); // ìƒíƒœ ì—…ë°ì´íŠ¸
+
+        Debug.Log("Current State: " + currentState); // í˜„ì¬ ìƒíƒœ ì¶œë ¥
     }
 
     private void FixedUpdate()
-    { 
+    {
+        FreezeVelocity(); // Rigidbody ì •ì§€ ì²˜ë¦¬
     }
 
     private void LateUpdate()
     {
-        if(currentState == EnemyState.None) return; // »óÅÂ ¾øÀ¸¸é ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ıx, ÀÚ¿ø ³¶ºñ ¹æÁö
-        UpdateAnimation(); // ¾Ö´Ï¸ŞÀÌ¼Ç ¾÷µ¥ÀÌÆ®
+        if (currentState == EnemyState.None) return; // ìƒíƒœ ì—†ìœ¼ë©´ ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒx, ìì› ë‚­ë¹„ ë°©ì§€
+        UpdateAnimation(); // ì• ë‹ˆë©”ì´ì…˜ ì—…ë°ì´íŠ¸
+    }
+
+    void FreezeVelocity()
+    {
+        if (currentState == EnemyState.Die) return;
+
+        // NavMeshAgentê°€ ì´ë™ ì¤‘ì´ì§€ë§Œ, Rigidbodyê°€ íŠ•ê¸°ëŠ” ê²½ìš° ë°©ì§€
+        if (nav.enabled && nav.velocity.sqrMagnitude > 0.01f)
+        {
+            rigid.linearVelocity = Vector3.zero;
+            rigid.angularVelocity = Vector3.zero;
+        }
     }
 
     private void StateUpdate()
@@ -75,6 +108,9 @@ public class EnemyFSM : MonoBehaviour, IDamageable
                 break;
             case EnemyState.Patrol:
                 Patrol();
+                break;
+            case EnemyState.Search:
+                Search();
                 break;
             case EnemyState.Chase:
                 Chase();
@@ -94,65 +130,116 @@ public class EnemyFSM : MonoBehaviour, IDamageable
 
         float damageRange = 100 / (100 + enemyData.defense);
         Debug.Log("Damage! : " + damage);
-        curHealth -= (damage * damageRange); // ¹æ¾î·Â¿¡ µû¸¥ µ¥¹ÌÁö °è»ê
+        curHealth -= (damage * damageRange); // ë°©ì–´ë ¥ì— ë”°ë¥¸ ë°ë¯¸ì§€ ê³„ì‚°
 
         if (curHealth <= 0)
         {
-            currentState = EnemyState.Die; // »ç¸Á »óÅÂ·Î ÀüÈ¯
+            currentState = EnemyState.Die; // ì‚¬ë§ ìƒíƒœë¡œ ì „í™˜
         }
     }
 
     void Idle()
     {
-        // ´ë±â »óÅÂ Ã³¸®
+        // ëŒ€ê¸° ìƒíƒœ ì²˜ë¦¬
         /*
-         [´ë±â ¹æ¹ı]
-         ´ë±â »óÅÂ¿¡¼­ 2~3ÃÊ ´ë±â ÈÄ ÇöÀç »óÅÂ¸¦ Patrol »óÅÂ·Î ÀüÈ¯ [else]
-         ´ë±â Áß¿¡ ÇÃ·¹ÀÌ¾î°¡ °¨ÁöµÇ¸é ÇöÀç»óÅÂ¸¦ Chase »óÅÂ·Î ÀüÈ¯
-         ÇÃ·¹ÀÌ¾î°¡ °¨ÁöµÇ´Â Á¶°Ç : Á¤¸é½Ã¾ß°¢µµ ¹× Å½Áö¹üÀ§ ³»¿¡¼­ ÇÃ·¹ÀÌ¾î°¡ °¨ÁöµÇ¸é Chase »óÅÂ·Î ÀüÈ¯
-         ¸¸¾à ÀÌ¶§ °ø°İ »ç°Å¸® ¾È¿¡ µé¾î¿Í ÀÖÀ¸¸é Attack »óÅÂ·Î ÀüÈ¯
-         ¸ó½ºÅÍ°¡ °¨ÁöÇÏ´Â ¹üÀ§ ¹Û¿¡¼­ ÇÃ·¹ÀÌ¾î°¡ ¸ÕÀú °ø°İÇÏ¿© ÇÇ°İµÈ °æ¿ì, ¸ó½ºÅÍ°¡ ¸ÂÀº ºÎÀ§¿¡ µû¶ó ±× ¹æÇâÀ¸·Î È¸Àü ¹× ÀÌµ¿
-         */
+        [ëŒ€ê¸° ìƒíƒœ ê·œì¹™]
+         - ëŒ€ê¸° ì‹œê°„: ëŒ€ê¸° ì¤‘ 2~3ì´ˆ ë™ì•ˆ ëŒ€ê¸° í›„ Patrol ìƒíƒœë¡œ ì „í™˜.
+         - í”Œë ˆì´ì–´ ê°ì§€:
+             - ì •ë©´ ì‹œì•¼ê° (60Â° ~ 120Â°) ë‚´ì—ì„œ í”Œë ˆì´ì–´ê°€ ê°ì§€ë˜ë©´ Chase ìƒíƒœë¡œ ì „í™˜.
+             - í›„ë©´ ì‹œì•¼ê° (120Â° ~ 180Â°) ë‚´ì—ì„œ í”Œë ˆì´ì–´ê°€ ê°ì§€ë˜ë©´, ë’¤ë¡œ ëŒì•„ì„œ Chase ìƒíƒœë¡œ ì „í™˜.
+             - ì •ë©´ ì‹œì•¼ê° ë‚´ì—ì„œ ê³µê²© ì‚¬ê±°ë¦¬ ë‚´ì— í”Œë ˆì´ì–´ê°€ ë“¤ì–´ì˜¤ë©´ Attack ìƒíƒœë¡œ ì „í™˜.
+         - ì¢€ë¹„ê°€ ê°ì§€ ë²”ìœ„ ë°–ì—ì„œ í”Œë ˆì´ì–´ì˜ ê³µê²©ì„ ë°›ìœ¼ë©´, ê³µê²© ë°›ì€ ë¶€ìœ„ì— ë”°ë¼ íšŒì „í•˜ë©°, Chase ìƒíƒœë¡œ ì „í™˜í•˜ì—¬ í”Œë ˆì´ì–´ë¥¼ ì¶”ê²©.
+         - ê³µê²© ì‚¬ê±°ë¦¬ ë‚´ í”Œë ˆì´ì–´ ê°ì§€:
+             - ì •ë©´ ì‹œì•¼ê° ë‚´ì—ì„œ ê³µê²© ì‚¬ê±°ë¦¬ ë‚´ì— í”Œë ˆì´ì–´ê°€ ë“¤ì–´ì˜¤ë©´ Attack ìƒíƒœë¡œ ì „í™˜.
+        */
 
     }
+
     void Patrol()
     {
-        // ¼øÂû »óÅÂ Ã³¸®
+        // ìˆœì°° ìƒíƒœ ì²˜ë¦¬
         /*
-         [¼øÂû ¹æ¹ı]
-         ÀÓÀÇ À§Ä¡ ¼øÂûÇÏ´Â ¹æ½Ä
-         ÀÓÀÇ À§Ä¡·Î 2~3ÃÊ ÀÌµ¿ ÈÄ Idle »óÅÂ·Î ÀüÈ¯
-         ¼øÂû Áß ÇÃ·¹ÀÌ¾î°¡ °¨ÁöµÇ¸é ÇöÀç »óÅÂ¸¦ Chase »óÅÂ·Î ÀüÈ¯
-         ÇÃ·¹ÀÌ¾î°¡ °¨ÁöµÇ´Â Á¶°Ç : Á¤¸é½Ã¾ß°¢µµ ¹× Å½Áö¹üÀ§ ³»¿¡¼­ ÇÃ·¹ÀÌ¾î°¡ °¨ÁöµÇ¸é Chase »óÅÂ·Î ÀüÈ¯
-         ¸¸¾à ÀÌ¶§ °ø°İ »ç°Å¸® ¾È¿¡ µé¾î¿Í ÀÖÀ¸¸é Attack »óÅÂ·Î ÀüÈ¯
-         ¸ó½ºÅÍ°¡ °¨ÁöÇÏ´Â ¹üÀ§ ¹Û¿¡¼­ ÇÃ·¹ÀÌ¾î°¡ ¸ÕÀú °ø°İÇÏ¿© ÇÇ°İµÈ °æ¿ì, ¸ó½ºÅÍ°¡ ¸ÂÀº ºÎÀ§¿¡ µû¶ó ±× ¹æÇâÀ¸·Î È¸Àü ¹× 3ÃÊ ÀÌµ¿
-         */
+        [ìˆœì°° ìƒíƒœ ê·œì¹™]
+         - ì„ì˜ ìœ„ì¹˜ë¥¼ 2~3ì´ˆ ë™ì•ˆ ì´ë™ í›„ Idle ìƒíƒœë¡œ ì „í™˜.
+         - í”Œë ˆì´ì–´ ê°ì§€:
+             - ì •ë©´ ì‹œì•¼ê° (60Â° ~ 120Â°) ë‚´ì—ì„œ í”Œë ˆì´ì–´ê°€ ê°ì§€ë˜ë©´ Chase ìƒíƒœë¡œ ì „í™˜.
+             - í›„ë©´ ì‹œì•¼ê° (120Â° ~ 180Â°) ë‚´ì—ì„œ í”Œë ˆì´ì–´ê°€ ê°ì§€ë˜ë©´, ë’¤ë¡œ ëŒì•„ì„œ Chase ìƒíƒœë¡œ ì „í™˜.
+             - ì •ë©´ ì‹œì•¼ê° ë‚´ì—ì„œ ê³µê²© ì‚¬ê±°ë¦¬ ë‚´ì— í”Œë ˆì´ì–´ê°€ ë“¤ì–´ì˜¤ë©´ Attack ìƒíƒœë¡œ ì „í™˜.
+         - ì¢€ë¹„ê°€ ê°ì§€ ë²”ìœ„ ë°–ì—ì„œ í”Œë ˆì´ì–´ì˜ ê³µê²©ì„ ë°›ìœ¼ë©´, ê³µê²© ë°›ì€ ë¶€ìœ„ì— ë”°ë¼ íšŒì „ í›„ 3ì´ˆ ì´ë™í•˜ë©° Chase ìƒíƒœë¡œ ì „í™˜.
+        */
+
     }
+
     void Chase()
     {
-        // Ãß°İ »óÅÂ Ã³¸®
+        // ì¶”ê²© ìƒíƒœ ì²˜ë¦¬
         /*
-         [Ãß°İ ¹æ¹ı]
-         ÇÃ·¹ÀÌ¾î¸¦ Ãß°İ, ÀÌ¶§ ÀÌµ¿ ¼Óµµ Áõ°¡(Ãß°İ ¼Óµµ)
-         ¸¸¾à ÀÌ¶§ °ø°İ »ç°Å¸® ¾È¿¡ µé¾î¿Í ÀÖÀ¸¸é Attack »óÅÂ·Î ÀüÈ¯
-         ¸ó½ºÅÍ°¡ °¨ÁöÇÏ´Â ¹üÀ§(Á¤¸é ½Ã¾ß °¢ ¹× Å½Áö ¹üÀ§)¸¦ ÇÃ·¹ÀÌ¾î°¡ ¹ş¾î³ª¸é Idle »óÅÂ·Î ÀüÈ¯
-         */
+        [ì¶”ê²© ìƒíƒœ ê·œì¹™]
+         - í”Œë ˆì´ì–´ ì¶”ê²©:
+             - í”Œë ˆì´ì–´ê°€ ì •ë©´ ì‹œì•¼ê° ë‚´ì— ìˆìœ¼ë©´ ì¶”ê²©ì„ ê³„ì†í•œë‹¤.
+             - í”Œë ˆì´ì–´ê°€ í›„ë©´ ì‹œì•¼ê° ë‚´ì— ìˆìœ¼ë©´ ë’¤ë¡œ ëŒì•„ì„œ ì¶”ê²©ì„ ê³„ì†í•œë‹¤.
+         - í”Œë ˆì´ì–´ê°€ ê³µê²© ì‚¬ê±°ë¦¬ ë‚´ì— ìˆìœ¼ë©´ Attack ìƒíƒœë¡œ ì „í™˜.
+         - í”Œë ˆì´ì–´ê°€ ê°ì§€ ë²”ìœ„ ë°–ìœ¼ë¡œ ë‚˜ê°€ë©´ Search ìƒíƒœë¡œ ì „í™˜.
+         - í”Œë ˆì´ì–´ê°€ ì¥ì• ë¬¼ ë’¤ë¡œ ìˆ¨ìœ¼ë©´ Search ìƒíƒœë¡œ ì „í™˜.
+         - ì¢€ë¹„ê°€ ê°ì§€ ë²”ìœ„ ë°–ì—ì„œ í”Œë ˆì´ì–´ì˜ ê³µê²©ì„ ë°›ìœ¼ë©´, ê³µê²© ë°›ì€ ë¶€ìœ„ì— ë”°ë¼ íšŒì „ í›„ 3ì´ˆ ì´ë™í•˜ë©° Chase ìƒíƒœë¡œ ì¬ê°œ.
+        */
     }
+
+    void Search()
+    {
+        // íƒìƒ‰ ìƒíƒœ ì²˜ë¦¬
+        /*
+        [íƒìƒ‰ ìƒíƒœ ê·œì¹™]
+         - í”Œë ˆì´ì–´ì˜ ë§ˆì§€ë§‰ ìœ„ì¹˜ë¥¼ ì¶”ì í•˜ë©° 2~3ì´ˆ ë™ì•ˆ ìˆ˜ìƒ‰.
+         - í”Œë ˆì´ì–´ë¥¼ ì°¾ìœ¼ë©´ Chase ìƒíƒœë¡œ ì „í™˜.
+         - í”Œë ˆì´ì–´ë¥¼ ì°¾ì§€ ëª»í•˜ë©´ Idle ìƒíƒœë¡œ ì „í™˜.
+        */
+
+        
+    }
+
     void Attack()
     {
-        switch(enemyData.enemyAttackType)
+        if (currentState == EnemyState.Die) return;
+
+        // í”Œë ˆì´ì–´ê°€ ê³µê²© ë²”ìœ„ë¡œ ë“¤ì–´ì˜¤ë©´ swichë¬¸ìœ¼ë¡œ ê³µê²© íƒ€ì…ì— ë”°ë¼ ê³µê²© ì²˜ë¦¬ ifë¬¸ ì²˜ë¦¬ í•„ìš”
+        switch (enemyData.enemyAttackType)
         {
             case EnemyAttackType.Melee:
-                // ±ÙÁ¢ °ø°İ Ã³¸®
-                break;
+                // ê·¼ì ‘ ê³µê²© ì²˜ë¦¬
+                /*
+                [ê·¼ì ‘ ê³µê²© ê·œì¹™]
+                 - í”Œë ˆì´ì–´ê°€ ê³µê²© ë²”ìœ„ ë‚´ì— ë“¤ì–´ì˜¤ë©´ ê·¼ì ‘ ê³µê²©ì„ ì‹¤í–‰.
+                 - ê³µê²© ì‹œ ë¬´ê¸° ì½œë¼ì´ë”ê°€ onë˜ì–´ í”Œë ˆì´ì–´ì—ê²Œ ì¶©ëŒí•˜ë©´ ë°ë¯¸ì§€ë¥¼ ì…í˜
+                 - ê³µê²© í›„ ëª‡ ì´ˆê°„ ê²½ì§(enemyData.attackDelay)
+                 - ê³µê²© í›„ ë§Œì•½ í”Œë ˆì´ì–´ê°€ ì—¬ì „íˆ ê³µê²©ì‚¬ê±°ë¦¬(ê°ì§€ ë²”ìœ„, ì •ë©´ ë° í›„ë©´ ì‹œì•¼ê°ë„ ì¶©ì¡± í•„ìš”) ì•ˆì— ìˆìœ¼ë©´ ê³µê²©, ë§Œì•½ ì´ë•Œ ì¢€ë¹„ê°€ ë°”ë¼ë³´ëŠ” ê³³ì€ í”Œë ˆì´ì–´ ë°©í–¥ìœ¼ë¡œ íšŒì „í›„ ê³µê²©
+                 - ê³µê²© í›„ í”Œë ˆì´ì–´ê°€ ê³µê²© ì‚¬ê±°ë¦¬ ë°–ìœ¼ë¡œ ë‚˜ê°€ê³  ê°ì§€ ë²”ìœ„ ì´ë‚´ì— ìˆìœ¼ë©´ Chase ìƒíƒœë¡œ ì „í™˜
+                 - ê³µê²© í›„ í”Œë ˆì´ì–´ê°€ ê°ì§€ ë²”ìœ„ ë°–ìœ¼ë¡œ ë‚˜ê°€ë©´ Idle ìƒíƒœë¡œ ì „í™˜ 
+                */
+                
             case EnemyAttackType.Ranged:
-                // ¿ø°Å¸® °ø°İ Ã³¸®
+                // ì›ê±°ë¦¬ ê³µê²© ì²˜ë¦¬
+                /*
+                    - í”Œë ˆì´ì–´ê°€ ì›ê±°ë¦¬ ê³µê²© ë²”ìœ„ ë‚´ì— ë“¤ì–´ì˜¤ë©´ ì›ê±°ë¦¬ ê³µê²©ì„ ì¤€ë¹„.
+                    - ê³µê²©ì€ íˆ¬ì‚¬ì²´ë¥¼ ë˜ì§€ëŠ” ì›ê±°ë¦¬ ê³µê²©ìœ¼ë¡œ ì²˜ë¦¬ (íˆ¬ì‚¬ì²´ëŠ” ë”°ë¡œ êµ¬í˜„ í• ê²ƒì´ë©°, ë°”ë‹¥ì´ë‚˜ í”Œë ˆì´ì–´ì—ê²Œ ë‹¿ì•˜ì„ ë•Œ í­ë°œ í›„ ë²”ìœ„ ë°ë¯¸ì§€)
+                    - ê³µê²© í›„ ë§Œì•½ í”Œë ˆì´ì–´ê°€ ì—¬ì „íˆ ê³µê²©ì‚¬ê±°ë¦¬(ê°ì§€ ë²”ìœ„, ì •ë©´ ë° í›„ë©´ ì‹œì•¼ê°ë„ ì¶©ì¡± í•„ìš”) ì•ˆì— ìˆìœ¼ë©´ ê³µê²©, ë§Œì•½ ì´ë•Œ ì¢€ë¹„ê°€ ë°”ë¼ë³´ëŠ” ê³³ì€ í”Œë ˆì´ì–´ ë°©í–¥ìœ¼ë¡œ íšŒì „í›„ ê³µê²©
+                    - ê³µê²© í›„ í”Œë ˆì´ì–´ê°€ ê³µê²© ì‚¬ê±°ë¦¬ ë°–ìœ¼ë¡œ ë‚˜ê°€ê³  ê°ì§€ ë²”ìœ„ ì´ë‚´ì— ìˆìœ¼ë©´ Chase ìƒíƒœë¡œ ì „í™˜
+                    - ê³µê²© í›„ í”Œë ˆì´ì–´ê°€ ê°ì§€ ë²”ìœ„ ë°–ìœ¼ë¡œ ë‚˜ê°€ë©´ Idle ìƒíƒœë¡œ ì „í™˜ 
+                */
                 break;
-            case EnemyAttackType.Bomb:
-                // ÀÚÆø °ø°İ Ã³¸®
+            case EnemyAttackType.SelfBomb:
+                // ìí­ ê³µê²© ì²˜ë¦¬
+                /*
+                 [ìí­ ê³µê²© ê·œì¹™]
+                  - í”Œë ˆì´ì–´ê°€ ê³µê²© ë²”ìœ„ ë‚´ì— ë“¤ì–´ì˜¤ë©´ ìí­ ê³µê²©ì„ ì‹¤í–‰
+                  - ìí­ ë²”ìœ„ ë‚´ ëª¨ë“  ê°ì²´(í”Œë ˆì´ì–´, ëª¬ìŠ¤í„°)ì—ê²Œ í”¼í•´ ì ìš© <ë²”ìœ„ ë°ë¯¸ì§€>
+                  - ìí­ í›„ ì ì€ ì‚¬ë§ ìƒíƒœë¡œ ì „í™˜
+                 */
                 break;
         }
     }
+    
+
 
     private void DropItem()
     {
@@ -164,10 +251,12 @@ public class EnemyFSM : MonoBehaviour, IDamageable
         }
     }
 
-    // »ç¸Á Ã³¸®
+    // ì‚¬ë§ ì²˜ë¦¬
     void Die()
     {
-        gameObject.layer = 15;  // Á×Àº ¿ÀºêÁ§Æ® ·¹ÀÌ¾î
+        // currentStateê°€ Dieê°€ ë˜ë©´ ë”ì´ìƒ ë‹¤ë¥¸ Stateë¡œ ì „í™˜ë˜ë©´ ì•ˆë¨
+
+        gameObject.layer = 15;  // ì£½ì€ ì˜¤ë¸Œì íŠ¸ ë ˆì´ì–´
 
         nav.enabled = false;
         capsuleCollider.enabled = false;
@@ -184,50 +273,57 @@ public class EnemyFSM : MonoBehaviour, IDamageable
 
     private void PlayAnimation(AnimationClip _clip, float _blendTime = 0.1f)
     {
-        if (currentPlayingAnimation == _clip.name) return;  // Áßº¹ Àç»ı ¹æÁö
+        if (currentPlayingAnimation == _clip.name) return;  // ì¤‘ë³µ ì¬ìƒ ë°©ì§€
 
-        anim.CrossFade(_clip.name, _blendTime);             // ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı
-        currentPlayingAnimation = _clip.name;               // ÇöÀç Àç»ıÁßÀÎ ¾Ö´Ï¸ŞÀÌ¼Ç ÀÌ¸§ ÀúÀå
+        anim.CrossFade(_clip.name, _blendTime);             // ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
+        currentPlayingAnimation = _clip.name;               // í˜„ì¬ ì¬ìƒì¤‘ì¸ ì• ë‹ˆë©”ì´ì…˜ ì´ë¦„ ì €ì¥
     }
 
+    // ì• ë‹ˆë©”ì´ì…˜ ì—…ë°ì´íŠ¸, ì• ë‹ˆë©”ì´ì…˜ í´ë¦½ ì´ë¦„ìœ¼ë¡œ ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
     private void UpdateAnimation()
     {
+        // currenStateì— ë”°ë¼ ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
         switch (currentState)
         {
             case EnemyState.Idle:
-                PlayAnimation(enemyData.idleAnimation);   // Idle ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı
+                PlayAnimation(enemyData.idleAnimation);   // Idle ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
                 break;
             case EnemyState.Patrol:
-                PlayAnimation(enemyData.patrolAnimation); // Patrol ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı
+                PlayAnimation(enemyData.patrolAnimation); // Patrol ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
                 break;
             case EnemyState.Chase:
-                PlayAnimation(enemyData.chaseAnimation);   // Chase ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı
+                PlayAnimation(enemyData.chaseAnimation);   // Chase ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
+                break;
+            case EnemyState.Search:
+                PlayAnimation(enemyData.searchAnimation); // Search ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
                 break;
             case EnemyState.Attack:
-                PlayAnimation(enemyData.attackAnimation); // Attack ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı
+                PlayAnimation(enemyData.attackAnimation); // Attack ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
                 break;
             case EnemyState.Die:
-                PlayAnimation(enemyData.dieAnimation);    // Die ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı
-                currentState = EnemyState.None;           // »ç¸Á ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı ÈÄ State¸¦ NoneÀ¸·Î
+                PlayAnimation(enemyData.dieAnimation);    // Die ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
+                currentState = EnemyState.None;           // ì‚¬ë§ ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ í›„ Stateë¥¼ Noneìœ¼ë¡œ
                 break;
         }
     }
 
     public enum EnemyState
     {
-        None = -1,
-        Idle,
-        Patrol,
-        Chase,
-        Attack,
-        Die,
+        None = -1, // ìƒíƒœ ì—†ìŒ
+        Idle, // ëŒ€ê¸° ìƒíƒœ
+        Patrol, // ìˆœì°° ìƒíƒœ
+        Chase, // ì¶”ê²© ìƒíƒœ
+        Search, // íƒìƒ‰ ìƒíƒœ
+        Attack, //  ê³µê²© ìƒíƒœ
+        Die,    // ì‚¬ë§ ìƒíƒœ
+
     }
 
-    // ¸ó½ºÅÍ °ø°İ Å¸ÀÔ
+    // ëª¬ìŠ¤í„° ê³µê²© íƒ€ì…
     public enum EnemyAttackType
     {
-        Melee,
-        Ranged,
-        Bomb,
+        Melee,  // ê·¼ì ‘ ê³µê²©
+        Ranged, // ì›ê±°ë¦¬ ê³µê²©
+        SelfBomb,   // ìí­ ê³µê²©
     }
 }

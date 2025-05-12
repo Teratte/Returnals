@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     [SerializeField]
-    private Enemy enemy;
+    private EnemyFSM enemy;
 
     private bool hasHit = false;
 
