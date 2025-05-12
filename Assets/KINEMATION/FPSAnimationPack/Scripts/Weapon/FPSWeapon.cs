@@ -1,9 +1,11 @@
 // Designed by KINEMATION, 2025.
 
+using GDS.Core;
 using KINEMATION.FPSAnimationPack.Scripts.Camera;
 using KINEMATION.FPSAnimationPack.Scripts.Sounds;
 using KINEMATION.KAnimationCore.Runtime.Core;
 using KINEMATION.ProceduralRecoilAnimationSystem.Runtime;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
@@ -21,6 +23,12 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
         private ShotEffect shotEffect;            // 발사 이펙트 관련 정보들
         [SerializeField]
         private float damage;                     // 무기 데미지
+
+        [Header("Shotgun")]
+        [SerializeField]
+        private int bulletsPerShot;
+        [SerializeField]
+        private float inaccuracyDitance;
         private int maxAmmo;                      // 최대 가지고 있는 탄알
         private bool onSubMagazine = false;       // 보조 탄창 가젯 발동 여부
 
@@ -305,21 +313,52 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
         public void RayCast()
         {
             RaycastHit hit;
-
+            Vector3 hitPosition = Vector3.zero;
             if (Physics.Raycast(fireTransform.position, fireTransform.forward, out hit, 50.0f))
             {
-                IDamageable target = hit.collider.gameObject.GetComponent<IDamageable>();
+                hitPosition = hit.point;
+            }
+            else
+            {
+                hitPosition = fireTransform.position + fireTransform.forward * 50.0f;
+            }
 
-                if (target != null)
+            Vector3 direction = (hitPosition - fireTransform.position).normalized;
+
+            for (int i = 0; i < bulletsPerShot; i++)
+            {
+                if (Physics.Raycast(fireTransform.position, GetShootingDirection(direction), out hit))
                 {
-                    Instantiate(shotEffect.monsterImpact, hit.point, hit.transform.rotation);
-                    target.OnDamage(damage);
+                    // 레이가 어떤 물체와 충돌한 경우,
+                    IDamageable target = hit.collider.gameObject.GetComponent<IDamageable>();
+
+                    if (target != null)
+                    {
+                        Instantiate(shotEffect.monsterImpact, hit.point, hit.transform.rotation);
+                        target.OnDamage(damage);
+                    }
+                    else
+                    {
+                        Instantiate(shotEffect.impact, hit.point, hit.transform.rotation);
+                    }
                 }
                 else
                 {
-                    Instantiate(shotEffect.impact, hit.point, hit.transform.rotation);
+                    Instantiate(shotEffect.impact, hit.point, Quaternion.identity);
                 }
             }
+        }
+
+        Vector3 GetShootingDirection(Vector3 _direction)
+        {
+            _direction *= 50.0f;
+            _direction = new Vector3(
+                _direction.x + Random.Range(-inaccuracyDitance, inaccuracyDitance),
+                _direction.y + Random.Range(-inaccuracyDitance, inaccuracyDitance),
+                _direction.z + Random.Range(-inaccuracyDitance, inaccuracyDitance)
+                );
+
+            return _direction.normalized;
         }
 
         public void OnMuzzleEffect()

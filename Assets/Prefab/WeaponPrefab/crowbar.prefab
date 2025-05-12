@@ -151,14 +151,15 @@ MonoBehaviour:
     fireRate: 0.2
     reloadTime: 0
     distance: 0
-    currentAmmo: 1
-    maxAmmo: 1
     maxCapacity: 1
     isAutomaticAttack: 0
     damage: 140
   runtimeAnimatorController: {fileID: 9100000, guid: 4563d177d0be30747b35f56e5821c78e, type: 2}
+  weaponIcon: {fileID: 0}
   leftHandle: {fileID: 0}
-  rightHandle: {fileID: 0}
+  onSubMagazine: 0
+  CurrentAmmo: 0
+  MaxAmmo: 0
   fireClip: {fileID: 8300000, guid: 961723c87966ba142b8faee5ddc23742, type: 3}
   monsterImpact: {fileID: 100002, guid: d342fd04c095bf64888ab930f0796c88, type: 3}
 --- !u!135 &6861460019685029471

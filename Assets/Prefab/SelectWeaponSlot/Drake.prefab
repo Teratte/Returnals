@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5037611716686167436
+--- !u!1001 &3020539477149863837
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -15,26 +15,28 @@ PrefabInstance:
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: weaponPrefab
       value: 
-      objectReference: {fileID: 684161438172492668, guid: 0adf61a16068ca64aa8126389fcf44dd, type: 3}
+      objectReference: {fileID: 472434944859137347, guid: 2c4c2d8e2bdf83143a1815ce7344a8eb, type: 3}
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: weaponData.icon
       value: 
-      objectReference: {fileID: 21300000, guid: e2da478a57c13d14387462d9326cc596, type: 3}
+      objectReference: {fileID: 21300000, guid: 763cce447b6fc5f439fc510a35c5b8ab, type: 3}
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: weaponData.name
-      value: PKP
+      value: Drake
       objectReference: {fileID: 0}
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: weaponData.details
-      value: "\uAC15\uB825\uD55C \uBA38\uC2E0\uAC74"
+      value: "\uADFC\uAC70\uB9AC\uC5D0\uC11C \uC6D0\uD0AC\uB0BC \uC218 \uC788\uB294
+        \uC0B0\uD0C4\uCD1D\uC774\uB2E4."
       objectReference: {fileID: 0}
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: weaponData.weaponStatus
-      value: "\uBB34\uAE30 \uACF5\uACA9\uB825 : 20\n\uC0AC\uC6A9 \uD0C4\uC57D : \uC911\uD0C4"
+      value: "\uBB34\uAE30 \uACF5\uACA9\uB825 : 25\n\uD0C4\uC54C \uAC1C\uC218 : 10\n\uC0AC\uC6A9
+        \uD0C4\uC57D : \uC0B0\uD0C4\uCD1D \uC804\uC6A9 \uD0C4\uC57D"
       objectReference: {fileID: 0}
     - target: {fileID: 1797818868158212996, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Name
-      value: MachineGun
+      value: Drake
       objectReference: {fileID: 0}
     - target: {fileID: 3848506313826569265, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Pivot.x
@@ -98,11 +100,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3848506313826569265, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 525
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 3848506313826569265, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -80
+      value: -230
       objectReference: {fileID: 0}
     - target: {fileID: 3848506313826569265, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -119,34 +121,22 @@ PrefabInstance:
     - target: {fileID: 5301930396806924609, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1ebf338975c6e894c934e83d9169e86d, type: 3}
+      objectReference: {fileID: 21300000, guid: 763cce447b6fc5f439fc510a35c5b8ab, type: 3}
     - target: {fileID: 5301930396806924609, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7349871730564536377, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 5301930396806924609, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
+      propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7349871730564536377, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
-      propertyPath: m_AnchorMax.y
+    - target: {fileID: 5301930396806924609, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
+      propertyPath: m_Color.g
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7349871730564536377, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7349871730564536377, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7349871730564536377, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7349871730564536377, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
+    - target: {fileID: 5301930396806924609, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

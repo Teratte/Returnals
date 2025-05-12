@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System.Collections.Generic;
+using TMPro;
+using System.Collections;
 
 public class SceneManagerScript : MonoBehaviour
 {
-    public static SceneManagerScript Instance;
+    public static SceneManagerScript Instance { get; private set; }
     private HashSet<string> visitedScenes = new HashSet<string>();
 
     [SerializeField]
@@ -13,16 +16,30 @@ public class SceneManagerScript : MonoBehaviour
     [SerializeField]
     public string returnScene = "MainScene"; // 모든 씬 방문 후 돌아올 씬
 
+    [SerializeField]
+    private GameObject loadingScreen;   // 로딩 화면
+    [SerializeField]
+    private Image loadingBackGround;    // 로딩 화면에 출력되는 배경 이미지
+    [SerializeField]
+    private Sprite[] loadingSprites;    // 배경 이미지 목록
+    [SerializeField]
+    private Slider loadingProgress;     // 로딩 진행도
+    [SerializeField]
+    private TextMeshProUGUI textProgress; // 로딩 진행도 텍스트
+
+    private WaitForSeconds waitChangeDelay;// 씬 변경 지연 시간
+
     private void Awake()
     {
-        if (Instance == null)
+        if (Instance != null && Instance != this)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            Destroy(gameObject);
         }
         else
         {
-            Destroy(gameObject);
+            Instance = this;
+            waitChangeDelay = new WaitForSeconds(0.5f);
+            DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -31,7 +48,7 @@ public class SceneManagerScript : MonoBehaviour
         if (visitedScenes.Count >= availableScenes.Count)
         {
             visitedScenes.Clear();
-            SceneManager.LoadScene(returnScene); // 모든 씬을 방문하면 특정 씬으로 이동
+            LoadScene(returnScene); // 모든 씬을 방문하면 특정 씬으로 이동
             return;
         }
 
@@ -49,7 +66,34 @@ public class SceneManagerScript : MonoBehaviour
         {
             string nextScene = remainingScenes[Random.Range(0, remainingScenes.Count)];
             visitedScenes.Add(nextScene);
-            SceneManager.LoadScene(nextScene);
+            LoadScene(nextScene);
         }
+    }
+
+    public void LoadScene(string name)
+    {
+        int index = Random.Range(0, loadingSprites.Length);
+        loadingBackGround.sprite = loadingSprites[index];
+        loadingProgress.value = 0.0f;
+        loadingScreen.SetActive(true);
+
+        StartCoroutine(LoadSceneAsync(name));
+    }
+
+    private IEnumerator LoadSceneAsync(string name)
+    {
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(name);
+
+        // 비동기 작업(씬 불러오기)이 완료될 때까지 반복
+        while (asyncOperation.isDone == false)
+        {
+            // 비동기 작업의 진행 사항(0.0~1.0)
+            loadingProgress.value = asyncOperation.progress;
+            textProgress.text = $"{Mathf.RoundToInt(asyncOperation.progress * 100)}%";
+
+            yield return null;
+        }
+
+        loadingScreen.SetActive(false);
     }
 }

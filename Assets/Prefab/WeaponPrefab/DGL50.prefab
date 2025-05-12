@@ -110,10 +110,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponAttribute: 1
   weaponType: 0
-  weaponIcon: {fileID: 21300000, guid: c3e887d8f7426df4c8bb25b13d5fe231, type: 3}
+  weaponIcon: {fileID: 21300000, guid: 8e73c9784c0006f4187b5848cc7e6459, type: 3}
   fireTransform: {fileID: 8638124552271031767}
   shotEffect: {fileID: 11400000, guid: 7e8621033e9924b4b92fcf1bfc385ff9, type: 2}
   damage: 15
+  bulletsPerShot: 1
+  inaccuracyDitance: 0
   weaponSettings: {fileID: 11400000, guid: 02fcbed359064394793c4f0dcd37470f, type: 2}
   aimPoint: {fileID: 6517663930352328273}
   fireMode: 0
