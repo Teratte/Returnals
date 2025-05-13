@@ -85,6 +85,7 @@ public class EnemyFSM : MonoBehaviour, IDamageable
     {
         if (currentState == EnemyState.None) return; // 상태 없으면 애니메이션 재생x, 자원 낭비 방지
         UpdateAnimation(); // 애니메이션 업데이트
+        
     }
 
     void FreezeVelocity()
@@ -98,6 +99,36 @@ public class EnemyFSM : MonoBehaviour, IDamageable
             rigid.angularVelocity = Vector3.zero;
         }
     }
+
+    private bool IsPlayerInSight(float angleLimit, float range)
+    {
+        if (player == null) return false;
+
+        Vector3 dirToPlayer = (player.position - transform.position).normalized;
+        float angle = Vector3.Angle(transform.forward, dirToPlayer);
+        float distance = Vector3.Distance(transform.position, player.position);
+
+        return angle <= angleLimit * 0.5f && distance <= range;
+    }
+
+    private bool IsPlayerInAttackRange()
+    {
+        if (player == null) return false;
+        return Vector3.Distance(transform.position, player.position) <= enemyData.attackRange;
+    }
+
+    private void LookAtPlayer()
+    {
+        if (player == null) return;
+        Vector3 direction = (player.position - transform.position).normalized;
+        direction.y = 0;
+        if (direction != Vector3.zero)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * enemyData.rotationSpeed);
+        }
+    }
+
 
     private void StateUpdate()
     {
@@ -153,6 +184,30 @@ public class EnemyFSM : MonoBehaviour, IDamageable
              - 정면 시야각 내에서 공격 사거리 내에 플레이어가 들어오면 Attack 상태로 전환.
         */
 
+        nav.isStopped = true;
+        idleTimer += Time.deltaTime;
+
+        if (idleWaitTime == 0)
+            idleWaitTime = Random.Range(enemyData.idleWaitTimeMin, enemyData.idleWaitTimeMax);
+
+        if (IsPlayerInAttackRange() && IsPlayerInSight(enemyData.detectionAngle, enemyData.detectionRange))
+        {
+            currentState = EnemyState.Attack;
+            return;
+        }
+        if (IsPlayerInSight(enemyData.detectionAngle, enemyData.detectionRange) ||
+            IsPlayerInSight(enemyData.rearDetectionAngle, enemyData.rearDetectionRange))
+        {
+            currentState = EnemyState.Chase;
+            return;
+        }
+
+        if (idleTimer >= idleWaitTime)
+        {
+            idleTimer = 0f;
+            idleWaitTime = 0f;
+            currentState = EnemyState.Patrol;
+        }
     }
 
     void Patrol()
@@ -160,13 +215,49 @@ public class EnemyFSM : MonoBehaviour, IDamageable
         // 순찰 상태 처리
         /*
         [순찰 상태 규칙]
-         - 임의 위치를 2~3초 동안 이동 후 Idle 상태로 전환.
+         - 임의 위치(자유롭게 이동)를 2~3초 동안 이동 후 Idle 상태로 전환.
          - 플레이어 감지:
              - 정면 시야각 (60° ~ 120°) 내에서 플레이어가 감지되면 Chase 상태로 전환.
              - 후면 시야각 (120° ~ 180°) 내에서 플레이어가 감지되면, 뒤로 돌아서 Chase 상태로 전환.
              - 정면 시야각 내에서 공격 사거리 내에 플레이어가 들어오면 Attack 상태로 전환.
          - 좀비가 감지 범위 밖에서 플레이어의 공격을 받으면, 공격 받은 부위에 따라 회전 후 3초 이동하며 Chase 상태로 전환.
         */
+        nav.isStopped = false;
+
+        patrolTimer += Time.deltaTime;
+
+        if (!nav.hasPath || nav.remainingDistance < 0.5f)
+        {
+            Vector3 randomDirection = Random.insideUnitSphere * 5f;
+            randomDirection += transform.position;
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(randomDirection, out hit, 5f, NavMesh.AllAreas))
+            {
+                nav.SetDestination(hit.position);
+            }
+        }
+
+        if (patrolDuration == 0f)
+            patrolDuration = Random.Range(enemyData.patrolTimeMin, enemyData.patrolTimeMax);
+
+        if (IsPlayerInAttackRange() && IsPlayerInSight(enemyData.detectionAngle, enemyData.detectionRange))
+        {
+            currentState = EnemyState.Attack;
+            return;
+        }
+        if (IsPlayerInSight(enemyData.detectionAngle, enemyData.detectionRange) ||
+            IsPlayerInSight(enemyData.rearDetectionAngle, enemyData.rearDetectionRange))
+        {
+            currentState = EnemyState.Chase;
+            return;
+        }
+
+        if (patrolTimer >= patrolDuration)
+        {
+            patrolTimer = 0f;
+            patrolDuration = 0f;
+            currentState = EnemyState.Idle;
+        }
 
     }
 
@@ -183,8 +274,26 @@ public class EnemyFSM : MonoBehaviour, IDamageable
          - 플레이어가 장애물 뒤로 숨으면 Search 상태로 전환.
          - 좀비가 감지 범위 밖에서 플레이어의 공격을 받으면, 공격 받은 부위에 따라 회전 후 3초 이동하며 Chase 상태로 재개.
         */
+
+        if (player == null) return;
+
+        nav.isStopped = false;
+        nav.speed = enemyData.chaseSpeed;
+        nav.SetDestination(player.position);
+
+        if (IsPlayerInAttackRange())
+        {
+            currentState = EnemyState.Attack;
+            return;
+        }
+
+        if (!IsPlayerInSight(enemyData.rearDetectionAngle, enemyData.detectionRange + 2f))
+        {
+            currentState = EnemyState.Search;
+        }
     }
 
+    private float searchTimer = 0f;
     void Search()
     {
         // 탐색 상태 처리
@@ -195,16 +304,38 @@ public class EnemyFSM : MonoBehaviour, IDamageable
          - 플레이어를 찾지 못하면 Idle 상태로 전환.
         */
 
-        
+        searchTimer += Time.deltaTime;
+
+        if (player != null)
+            nav.SetDestination(player.position); // 마지막 위치 대신 현재 위치 사용
+
+        if (IsPlayerInSight(enemyData.detectionAngle, enemyData.detectionRange))
+        {
+            searchTimer = 0f;
+            currentState = EnemyState.Chase;
+            return;
+        }
+
+        if (searchTimer >= 3f)
+        {
+            searchTimer = 0f;
+            currentState = EnemyState.Idle;
+        }
     }
 
     void Attack()
     {
         if (currentState == EnemyState.Die) return;
+        if (isPostDelay) return;
+        if (player == null) return;
 
-        // 플레이어가 공격 범위로 들어오면 swich문으로 공격 타입에 따라 공격 처리 if문 처리 필요
+        nav.isStopped = true;
+        LookAtPlayer();
+
+
         switch (enemyData.enemyAttackType)
         {
+            // 몬스터 무기 별로 콜라이더가 존재하고 있음 EnemyAttact.cs -> 플레이어에게 데미지를 처리하고, 중복 데미지 방지하는게 들어있음
             case EnemyAttackType.Melee:
                 // 근접 공격 처리
                 /*
@@ -238,8 +369,6 @@ public class EnemyFSM : MonoBehaviour, IDamageable
                 break;
         }
     }
-    
-
 
     private void DropItem()
     {
@@ -279,8 +408,15 @@ public class EnemyFSM : MonoBehaviour, IDamageable
         currentPlayingAnimation = _clip.name;               // 현재 재생중인 애니메이션 이름 저장
     }
 
-    // 애니메이션 업데이트, 애니메이션 클립 이름으로 애니메이션 재생
-    private void UpdateAnimation()
+    private void OnGUI()
+    {
+        if (rigid == null) return;
+
+        GUI.Label(new Rect(10, 10, 300, 20), "상태 : " + currentState);
+
+    }
+
+    private void UpdateAnimation() // 애니메이션 업데이트, 애니메이션 클립 이름으로 애니메이션 재생, 메카님으로 제어하지 않음
     {
         // currenState에 따라 애니메이션 재생
         switch (currentState)
@@ -306,6 +442,8 @@ public class EnemyFSM : MonoBehaviour, IDamageable
                 break;
         }
     }
+
+
 
     public enum EnemyState
     {

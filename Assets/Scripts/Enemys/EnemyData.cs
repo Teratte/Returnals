@@ -38,7 +38,6 @@ public class EnemyData : ScriptableObject
     public float detectionAngle = 90f; // 정면 인식 각도
     public float rearDetectionAngle = 180f; // 후방 시야각 (180도, 즉 후방 전역)
     public float rearDetectionRange = 5f;        // 후방 감지 가능 거리
-    public float detectionReactionDelay = 0.3f;  // 감지 후 반응까지 걸리는 시간
     public float detectionRange = 10f; // 정면 기준 탐지 거리 (플레이어를 감지하는 범위, 정면 인식 각도와 함께 사용됨)
 
     [Header("대기 및 탐색 시간")]
@@ -46,10 +45,9 @@ public class EnemyData : ScriptableObject
     public float idleWaitTimeMax = 3f;           // 대기 상태 최대 시간
     public float patrolTimeMin = 2f;             // 순찰 상태 최소 시간
     public float patrolTimeMax = 3f;             // 순찰 상태 최대 시간
-    public float patrolRadius = 5f;              // 순찰 반경 (순찰 시 이동할 수 있는 범위)
 
     [Header("사운드 클립")]
-    public AudioClip alertSound;                 // 발견 시 외침
+    public AudioClip zombieSound;                 // 발견 시 외침
     public AudioClip attackSound;                // 공격 시 사운드
     public AudioClip dieSound;                   // 사망 사운드
 

@@ -34,14 +34,12 @@ MonoBehaviour:
   detectionAngle: 90
   rearDetectionAngle: 120
   rearDetectionRange: 5
-  detectionReactionDelay: 0.3
   detectionRange: 10
   idleWaitTimeMin: 3
   idleWaitTimeMax: 5
-  patrolTimeMin: 1
-  patrolTimeMax: 2
-  patrolRadius: 5
-  alertSound: {fileID: 0}
+  patrolTimeMin: 3
+  patrolTimeMax: 5
+  zombieSound: {fileID: 0}
   attackSound: {fileID: 0}
   dieSound: {fileID: 0}
   itemList: []
