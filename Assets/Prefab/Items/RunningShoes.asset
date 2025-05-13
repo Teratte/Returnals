@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RunningShoes
   m_EditorClassIdentifier: 
   itemName: RunningShoes
-  itemSprite: {fileID: 0}
-  itemPrefab: {fileID: 0}
-  itemType: 0
+  itemSprite: {fileID: 21300000, guid: b28193325b06b1c499b1e408dadf57ee, type: 3}
+  itemPrefab: {fileID: 1616440949347285625, guid: 71a2884509d325b4cae9314162a54f86, type: 3}
+  itemType: 2

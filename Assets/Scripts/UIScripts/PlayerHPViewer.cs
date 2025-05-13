@@ -4,8 +4,8 @@ using TMPro;
 
 public class PlayerHPViewer : MonoBehaviour
 {
-    [SerializeField]
-    private TextMeshProUGUI textHP; // 플레이어의 체력 텍스트를 출력하는 Text UI
+    //[SerializeField]
+    //private TextMeshProUGUI textHP; // 플레이어의 체력 텍스트를 출력하는 Text UI
     private Slider slider;
     private Status status;
 
@@ -18,6 +18,6 @@ public class PlayerHPViewer : MonoBehaviour
     private void Update()
     {
         slider.value = 1-(status.PlayerHP / status.MaxHP);
-        textHP.text = $"{(int)status.PlayerHP} / {(int)status.MaxHP}";
+        //textHP.text = $"{(int)status.PlayerHP} / {(int)status.MaxHP}";
     }
 }

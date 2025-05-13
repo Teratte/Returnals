@@ -4,8 +4,8 @@ using TMPro;
 
 public class PlayerStaminaViewer : MonoBehaviour
 {
-    [SerializeField]
-    private TextMeshProUGUI textStamina;
+    //[SerializeField]
+    //private TextMeshProUGUI textStamina;
 
     private Slider slider;
     private Status status;
@@ -19,6 +19,6 @@ public class PlayerStaminaViewer : MonoBehaviour
     private void Update()
     {
         slider.value = 1 - status.PlayerStamina / status.MaxStamina;
-        textStamina.text = $"{(int)status.PlayerStamina} / {(int)status.MaxStamina}";
+        //textStamina.text = $"{(int)status.PlayerStamina} / {(int)status.MaxStamina}";
     }
 }
