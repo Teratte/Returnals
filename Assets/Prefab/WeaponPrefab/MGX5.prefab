@@ -53,6 +53,8 @@ MonoBehaviour:
   fireTransform: {fileID: 4533637468500882614}
   shotEffect: {fileID: 11400000, guid: 7e8621033e9924b4b92fcf1bfc385ff9, type: 2}
   damage: 20
+  bulletsPerShot: 1
+  inaccuracyDitance: 0
   weaponSettings: {fileID: 11400000, guid: 91714cb181e4c464e8521a8648a94123, type: 2}
   aimPoint: {fileID: 4692861757224599252}
   fireMode: 2
