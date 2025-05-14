@@ -20,18 +20,15 @@ public class OnMousePointer : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if(!GameManager.instance.isUIOn)
+        foreach (var renderer in meshRenderers)
         {
-            foreach (var renderer in meshRenderers)
-            {
-                renderer.material.color = newColor;
-            }
-
-            //Vector3 mousePos = Input.mousePosition;
-            interactionText.text = objectInformation;
-            //interactionText.transform.position = mousePos;
-            interactionText.enabled = true;
+            renderer.material.color = newColor;
         }
+
+        //Vector3 mousePos = Input.mousePosition;
+        interactionText.text = objectInformation;
+        //interactionText.transform.position = mousePos;
+        interactionText.enabled = true;
     }
 
     private void OnMouseOver()
