@@ -370,6 +370,22 @@ public class EnemyFSM : MonoBehaviour, IDamageable
         }
     }
 
+    // 애니메이션 이벤트에서 호출할 함수 (근접 무기용)
+    public void MeelEnableWeaponCollider() // 애니메이션 시작시
+    {
+        if (weaponCollider != null)
+        {
+            weaponCollider.enabled = true;
+            enemyAttack.ResetHit(); // 공격 콜라이더 초기화
+        }
+    }
+
+    public void MeelDisableWeaponCollider() // 끝날시 처리
+    {
+        if (weaponCollider != null)
+            weaponCollider.enabled = false;
+    }
+
     private void DropItem()
     {
         float percent = Random.Range(0, 100);
