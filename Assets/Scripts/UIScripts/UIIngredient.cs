@@ -103,25 +103,9 @@ public class UIIngredient : MonoBehaviour, IPointerClickHandler
 
         Debug.Log("탄알 제작 성공!");
         // 탄알 생성(종류별로 생성)
-        if (weaponType == WeaponType.AssaultRifle)
+        if(GameManager.instance.MaxAmmo.ContainsKey(weaponType.ToString()))
         {
-            GameManager.instance.maxAssuaultAmmo += createAmmo;
-        }
-        else if (weaponType == WeaponType.SmallMachinegun)
-        {
-            GameManager.instance.maxSMGAmmo += createAmmo;
-        }
-        else if (weaponType == WeaponType.Shotgun)
-        {
-            GameManager.instance.maxShotgunAmmo += createAmmo;
-        }
-        else if (weaponType == WeaponType.Sniper)
-        {
-            GameManager.instance.maxSniperAmmo += createAmmo;
-        }
-        else if (weaponType == WeaponType.HeavyWeapon)
-        {
-            GameManager.instance.maxMachinegunAmmo += createAmmo;
+            GameManager.instance.MaxAmmo[weaponType.ToString()] += createAmmo;
         }
     }
 }

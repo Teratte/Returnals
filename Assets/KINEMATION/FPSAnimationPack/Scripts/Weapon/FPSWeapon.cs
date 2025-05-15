@@ -66,7 +66,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
         protected float emptyReloadDelay;
         protected float tacReloadDelay;
 
-        protected int _activeAmmo;
+        protected int _activeAmmo;  // 현재 남아있는 탄알
 
         public int CurrentAmmo => _activeAmmo;  // 현재 남아있는 탄알
         public int MaxAmmo => maxAmmo;
@@ -142,48 +142,22 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
 
         public void SetUpAmmo()
         {
-            if (weaponType == WeaponType.AssaultRifle)
-                maxAmmo = GameManager.instance.maxAssuaultAmmo;
-            else if (weaponType == WeaponType.Shotgun)
-                maxAmmo = GameManager.instance.maxShotgunAmmo;
-            else if (weaponType == WeaponType.SmallMachinegun)
-                maxAmmo = GameManager.instance.maxSMGAmmo;
-            else if (weaponType == WeaponType.HeavyWeapon)
-                maxAmmo = GameManager.instance.maxMachinegunAmmo;
-            else if (weaponType == WeaponType.Sniper)
-                maxAmmo = GameManager.instance.maxSniperAmmo;
-            else
-                maxAmmo = 999;
+            maxAmmo = GameManager.instance.MaxAmmo[weaponType.ToString()];
         }
 
         public int GetActiveMaxAmmo()
         {
-            if (weaponType == WeaponType.AssaultRifle)
-                return GameManager.instance.maxAssuaultAmmo;
-            else if (weaponType == WeaponType.Shotgun)
-                return GameManager.instance.maxShotgunAmmo;
-            else if (weaponType == WeaponType.SmallMachinegun)
-                return GameManager.instance.maxSMGAmmo;
-            else if (weaponType == WeaponType.HeavyWeapon)
-                return GameManager.instance.maxMachinegunAmmo;
-            else if (weaponType == WeaponType.Sniper)
-                return GameManager.instance.maxSniperAmmo;
+            if(GameManager.instance.MaxAmmo.ContainsKey(weaponType.ToString()))
+            {
+                return GameManager.instance.MaxAmmo [weaponType.ToString()];
+            }
 
             return 999;
         }
 
         public void UpdateMaxAmmo()
         {
-            if (weaponType == WeaponType.AssaultRifle)
-                GameManager.instance.maxAssuaultAmmo = maxAmmo;
-            else if (weaponType == WeaponType.Shotgun)
-                GameManager.instance.maxShotgunAmmo = maxAmmo;
-            else if (weaponType == WeaponType.SmallMachinegun)
-                GameManager.instance.maxSMGAmmo = maxAmmo;
-            else if (weaponType == WeaponType.HeavyWeapon)
-                GameManager.instance.maxMachinegunAmmo = maxAmmo;
-            else if (weaponType == WeaponType.Sniper)
-                GameManager.instance.maxSniperAmmo = maxAmmo;
+            GameManager.instance.MaxAmmo[weaponType.ToString()] = maxAmmo;
         }
 
         public virtual void OnReload()
