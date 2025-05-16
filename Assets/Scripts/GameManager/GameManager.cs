@@ -41,6 +41,9 @@ public class GameManager : MonoBehaviour
     public bool isFirstStage = true;                       // 첫 스테이지 진입 여부
     private FPSPlayer player;
 
+    private Dictionary<string,int> maxAmmo = new Dictionary<string,int>();  // 탄알 종류별로 최대 가지고 있는 탄알 수 보관
+    public Dictionary<string, int>MaxAmmo => maxAmmo;
+
     [Header("AssaultBullet")]
     public int currentAssaultAmmo;
     public int maxAssuaultAmmo;
@@ -62,7 +65,7 @@ public class GameManager : MonoBehaviour
     public int maxSniperAmmo;
 
     [Header("Items")]
-    private Dictionary<Item, int> items = new Dictionary<Item, int>();
+    private Dictionary<Item, int> items = new Dictionary<Item, int>();  // 아이템 보관 딕셔너리
 
     public Dictionary<Item, int> Items => items;
 
@@ -78,6 +81,13 @@ public class GameManager : MonoBehaviour
 
             return;
         }
+        // 최대 탄약 세팅
+        maxAmmo.Add("AssaultRifle", 999);
+        maxAmmo.Add("Shotgun", 999);
+        maxAmmo.Add("Sniper", 999);
+        maxAmmo.Add("SmallMachinegun", 999);
+        maxAmmo.Add("HeavyWeapon", 999);
+        maxAmmo.Add("Handgun", 999);
         DontDestroyOnLoad(gameObject);
 
         // 씬이 로드될 때 실행할 함수 등록
@@ -108,6 +118,7 @@ public class GameManager : MonoBehaviour
             player = FindAnyObjectByType<FPSPlayer>();
             if(player != null)
             {
+                player.playerSettings.weaponPrefabs.Clear();
                 player.playerSettings.weaponPrefabs.Add(mainWeapon);
                 player.playerSettings.weaponPrefabs.Add(subWeapon);
             }

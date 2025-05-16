@@ -1,7 +1,12 @@
 using UnityEngine;
 
+[System.Serializable]
+public class HPEvent : UnityEngine.Events.UnityEvent<float, float> { }
 public class Status : MonoBehaviour
 {
+    [HideInInspector]
+    public HPEvent onHPEvent = new HPEvent();
+
     [SerializeField]
     private float playerHP = 150.0f;     // 플레이어 HP
     [SerializeField]
@@ -96,5 +101,21 @@ public class Status : MonoBehaviour
                 }
             }
         }
+    }
+
+    public bool DecreaseHP(float damage)
+    {
+        float previousHP = PlayerHP;
+
+        playerHP = playerHP - damage > 0 ? playerHP - damage : 0;
+
+        onHPEvent.Invoke(previousHP, playerHP);
+
+        if(playerHP == 0)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

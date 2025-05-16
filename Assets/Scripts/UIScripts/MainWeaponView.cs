@@ -8,7 +8,7 @@ public class MainWeaponView : MonoBehaviour
     [SerializeField]
     private Image mainWeaponIcon;
     [SerializeField]
-    private Image backGround;
+    private GameObject arrow;
 
     private FPSWeapon mainWeapon;
     private Color currentColor = Color.gray;
@@ -27,8 +27,8 @@ public class MainWeaponView : MonoBehaviour
     private void Update()
     {
         if(player.GetActiveWeapon().weaponAttribute == WeaponAttribute.Main)
-            backGround.color = Color.white;
+            arrow.SetActive(true);
         else
-            backGround.color = currentColor;
+            arrow.SetActive(false);
     }
 }

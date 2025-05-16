@@ -25,8 +25,12 @@ public class ReturnTruckHandler : KeyPressHandler
     {
         //GameManager.instance.DeactiveUI();
         // 결과 환산창 출력
+        GameManager.instance.subWeapon = null;
+        GameManager.instance.holdingGazet = null;
+        GameManager.instance.mainWeapon = null;
+        SceneManagerScript.Instance.LoadScene("BaseCamp");
         GameManager.instance.isGameStart = false;
-        SceneManager.LoadScene("BaseCamp");
+        GameManager.instance.isUIOn = false;
     }
 
     public override void Interact()

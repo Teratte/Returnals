@@ -39,12 +39,14 @@ public class MovementCharacter : MonoBehaviour, IDamageable
 
         float offset = 0.5f + Input.GetAxis("Sprint") * 0.5f;
 
+        // 스태미나가 0이하라면 회복 모드
         if(status.PlayerStamina <= 0)
         {
             isRecoveryMode = true;
             StartCoroutine("Recovery");
         }
 
+        // 회복 모드 시 플레이어의 이동 속도는 걷는 속도
         if(isRecoveryMode == true)
         {
             status.MoveSpeed = status.WalkSpeed;
@@ -74,14 +76,11 @@ public class MovementCharacter : MonoBehaviour, IDamageable
 
         // 현재 카메라가 바라보고 있는 전방 방향을 보도록 설정
         transform.rotation = Quaternion.Euler(0, mainCamera.eulerAngles.y, 0);
-
-
-        // Hit또는 Die애니메이션 테스트
-        TestAnimation();
     }
 
     private void OnTriggerEnter(Collider collision)
     {
+        // 드랍되어있는 아이템 획득
         if(collision.gameObject.CompareTag("Eatable"))
         {
             inventoryUI.AcquireItem(collision.gameObject.GetComponent<EatableObject>().item);
@@ -118,29 +117,18 @@ public class MovementCharacter : MonoBehaviour, IDamageable
         }
     }
 
-    private void TestAnimation()
-    {
-        if(Input.GetKeyDown(KeyCode.B))
-        {
-            animator.SetBool("isDie", false);
-            GameManager.instance.isGameOver = false;
-        }
-
-        if (Input.GetKeyDown(KeyCode.H))
-            animator.SetTrigger("onHit");
-    }
-
+    // 플레이어 데미지 처리
     public void OnDamage(float damage)
     {
         // 데미지 입을 시
         status.isNotAttack = true;
-        animator.SetTrigger("onHit");
+        //animator.SetTrigger("onHit");
         float final = 100 / (100 + status.Defense);
-        status.PlayerHP -= damage * final;
+        bool isDie = status.DecreaseHP(damage * final);
 
-        if(status.PlayerHP <= 0)
+        if(isDie)
         {
-            animator.SetBool("isDie", true);
+            //animator.SetBool("isDie", true);
             GameManager.instance.isGameOver = true;
         }
     }

@@ -1,4 +1,5 @@
 using KINEMATION.FPSAnimationPack.Scripts.Player;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +22,14 @@ public class InventoryUI : MonoBehaviour
 
     private Slot[] slots;
     private FPSPlayer player;
+    [SerializeField]
+    private Status status;  // 플레이어의 스테이터스
+
+    [Header("HP & BloodScreen UI")]
+    [SerializeField]
+    private Image imageBloodScreen;             // 플레이어가 공격받았을 때 화면에 표시되는 Image
+    [SerializeField]
+    private AnimationCurve curveBloodScreen;
 
     public Slot[] Slots => slots;       // 획득 아이템 리스트
 
@@ -29,6 +38,7 @@ public class InventoryUI : MonoBehaviour
         slots = slotsParent.GetComponentsInChildren<Slot>();
         player = FindAnyObjectByType<FPSPlayer>();
         InventoryObject.SetActive(false);
+        status.onHPEvent.AddListener(UpdateHPHUD);
     }
 
     private void Start()
@@ -52,8 +62,8 @@ public class InventoryUI : MonoBehaviour
 
         if (GameManager.instance.isGameStart)
         {
-            timer.text = $"{(int)GameManager.instance.Timer}";
-            ammoText.text = $"{player.GetActiveWeapon().CurrentAmmo} / {player.GetActiveWeapon().MaxAmmo}";
+            timer.text = $"{(int)GameManager.instance.Timer / 60} : {(int)GameManager.instance.Timer % 60}";
+            ammoText.text = $"{player.GetActiveWeapon().CurrentAmmo} | {player.GetActiveWeapon().MaxAmmo}";
             gazetAbleCount.text = $"{player.Gazet.CurrentAbleCount}";
             gazetCoolTime += Time.deltaTime;
             gazetCoolTimeSlider.value = gazetCoolTime / player.Gazet.Rate;
@@ -88,6 +98,31 @@ public class InventoryUI : MonoBehaviour
                 slots[i].AddItem(_item, _count);
                 return;
             }
+        }
+    }
+
+    private void UpdateHPHUD(float previous, float current)
+    {   
+        if(previous - current > 0)
+        {
+            StopCoroutine("OnBloodScreen");
+            StartCoroutine("OnBloodScreen");
+        }
+    }
+
+    private IEnumerator OnBloodScreen()
+    {
+        float percent = 0.0f;
+
+        while(percent < 1)
+        {
+            percent += Time.deltaTime;
+
+            Color color = imageBloodScreen.color;
+            color.a = Mathf.Lerp(1,0,curveBloodScreen.Evaluate(percent));
+            imageBloodScreen.color = color;
+
+            yield return null;
         }
     }
 }
