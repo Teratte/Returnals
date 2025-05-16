@@ -279,6 +279,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9024914328721159430}
   - component: {fileID: -1610435729468880343}
+  - component: {fileID: 2144786531253862719}
+  - component: {fileID: 7325866105738589658}
+  - component: {fileID: 1553250801625180435}
   m_Layer: 0
   m_Name: ItemBox
   m_TagString: Untagged
@@ -317,12 +320,77 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6, y: 1, z: 4}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &2144786531253862719
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7474319304864936533}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.287072, y: 1.2395914, z: 1.5580351}
+  m_Center: {x: 1.9147032, y: 0.11979577, z: 0.0038216114}
+--- !u!65 &7325866105738589658
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7474319304864936533}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.240819, y: 2.2543683, z: 1.7118108}
+  m_Center: {x: -1.9850473, y: 0.62718445, z: -0.08667898}
+--- !u!114 &1553250801625180435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7474319304864936533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb8d43bf9c7c9f4fbf5d67f61eb480d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textInteract: {fileID: 0}
+  items:
+  - {fileID: 11400000, guid: 45c550ae11cd28b43ac65ab75e57afa2, type: 2}
+  - {fileID: 11400000, guid: e1163b7e622effb41ab748abc009b12e, type: 2}
+  - {fileID: 11400000, guid: 3ad089d1954ddc143b7311bd71592516, type: 2}
+  - {fileID: 11400000, guid: 478d7314f4520b349ae86719520ad13b, type: 2}
+  - {fileID: 11400000, guid: a3fc3e2159412c84b9ddb8b0b9d622ac, type: 2}
+  - {fileID: 11400000, guid: aae455a04e5786940bc1fcf1f4c33c09, type: 2}
+  - {fileID: 11400000, guid: 0201509f17a7c7c4b887bc62ed8a2deb, type: 2}
+  - {fileID: 11400000, guid: 26116470bbce97849815c367669f30fd, type: 2}
+  ui: {fileID: 0}
 --- !u!1 &8546652363810075462
 GameObject:
   m_ObjectHideFlags: 0

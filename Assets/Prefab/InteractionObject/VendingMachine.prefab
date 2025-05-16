@@ -138,6 +138,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7457308153692576474}
   - component: {fileID: 7491677894871901146}
+  - component: {fileID: 338083876231292370}
+  - component: {fileID: 1010292497231052691}
   m_Layer: 0
   m_Name: VendingMachine
   m_TagString: Untagged
@@ -180,8 +182,43 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 977.1, y: 995.1, z: 1182}
+  m_Size: {x: 428, y: 973.16, z: 685.8}
   m_Center: {x: 0, y: 353.5, z: 575}
+--- !u!65 &338083876231292370
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4486039636450778972}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1526.6, y: 911, z: 1326.3}
+  m_Center: {x: 0, y: 353, z: 575}
+--- !u!114 &1010292497231052691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4486039636450778972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e7016ba4c50ab49b8c33dd2d07f88c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textDrink: {fileID: 0}
+  heal: 30
 --- !u!1 &4837695607611971314
 GameObject:
   m_ObjectHideFlags: 0

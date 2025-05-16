@@ -30,6 +30,7 @@ public class ReturnTruckHandler : KeyPressHandler
         GameManager.instance.mainWeapon = null;
         SceneManagerScript.Instance.LoadScene("BaseCamp");
         GameManager.instance.isGameStart = false;
+        GameManager.instance.isUIOn = false;
     }
 
     public override void Interact()
