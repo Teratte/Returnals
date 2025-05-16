@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class OnMousePointer : MonoBehaviour
 {
@@ -20,22 +19,25 @@ public class OnMousePointer : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if(!GameManager.instance.isUIOn)
-        {
-            foreach (var renderer in meshRenderers)
-            {
-                renderer.material.color = newColor;
-            }
+        if (GameManager.instance.isUIOn)
+            return;
 
-            //Vector3 mousePos = Input.mousePosition;
-            interactionText.text = objectInformation;
-            //interactionText.transform.position = mousePos;
-            interactionText.enabled = true;
+        foreach (var renderer in meshRenderers)
+        {
+            renderer.material.color = newColor;
         }
+
+        //Vector3 mousePos = Input.mousePosition;
+        interactionText.text = objectInformation;
+        //interactionText.transform.position = mousePos;
+        interactionText.enabled = true;
     }
 
     private void OnMouseOver()
     {
+        if (GameManager.instance.isUIOn)
+            return;
+
         Vector3 mousePos = Input.mousePosition;
         interactionText.transform.position = mousePos;
     }
