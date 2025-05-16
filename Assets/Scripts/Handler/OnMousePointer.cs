@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class OnMousePointer : MonoBehaviour
 {
@@ -20,6 +19,9 @@ public class OnMousePointer : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        if (GameManager.instance.isUIOn)
+            return;
+
         foreach (var renderer in meshRenderers)
         {
             renderer.material.color = newColor;
@@ -33,6 +35,9 @@ public class OnMousePointer : MonoBehaviour
 
     private void OnMouseOver()
     {
+        if (GameManager.instance.isUIOn)
+            return;
+
         Vector3 mousePos = Input.mousePosition;
         interactionText.transform.position = mousePos;
     }

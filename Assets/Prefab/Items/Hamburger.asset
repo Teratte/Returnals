@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Hamburger
   itemSprite: {fileID: 21300000, guid: 05ca28d1e3ee8fa4592957a102efe649, type: 3}
-  itemPrefab: {fileID: 2337381438991290005, guid: 4b880615f3655c141b3162a39caff162, type: 3}
+  itemPrefab: {fileID: 1000011448446114, guid: 8155176e03f33f44884efb0dd767197c, type: 3}
   itemType: 2

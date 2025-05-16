@@ -39,12 +39,14 @@ public class MovementCharacter : MonoBehaviour, IDamageable
 
         float offset = 0.5f + Input.GetAxis("Sprint") * 0.5f;
 
+        // 스태미나가 0이하라면 회복 모드
         if(status.PlayerStamina <= 0)
         {
             isRecoveryMode = true;
             StartCoroutine("Recovery");
         }
 
+        // 회복 모드 시 플레이어의 이동 속도는 걷는 속도
         if(isRecoveryMode == true)
         {
             status.MoveSpeed = status.WalkSpeed;
@@ -78,6 +80,7 @@ public class MovementCharacter : MonoBehaviour, IDamageable
 
     private void OnTriggerEnter(Collider collision)
     {
+        // 드랍되어있는 아이템 획득
         if(collision.gameObject.CompareTag("Eatable"))
         {
             inventoryUI.AcquireItem(collision.gameObject.GetComponent<EatableObject>().item);
@@ -114,6 +117,7 @@ public class MovementCharacter : MonoBehaviour, IDamageable
         }
     }
 
+    // 플레이어 데미지 처리
     public void OnDamage(float damage)
     {
         // 데미지 입을 시

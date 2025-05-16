@@ -7,10 +7,6 @@ public class AmmoBoxHandler : KeyPressHandler
 {
     [SerializeField]
     private List<WeaponType> weaponTypes;
-    [SerializeField]
-    private TextMeshProUGUI textInteract;
-    private bool isNearby = false;
-    private bool isInteracted = false;
     private FPSPlayer player; 
 
     private void Awake()
@@ -51,7 +47,7 @@ public class AmmoBoxHandler : KeyPressHandler
 
     public override void Interact()
     {
-        if(!isInteracted)
+        if(!isUsed)
         {
             int index = Random.Range(0, weaponTypes.Count);
             int addAmmo = Random.Range(20, 30);
@@ -63,7 +59,7 @@ public class AmmoBoxHandler : KeyPressHandler
             }
 
             textInteract.text = $"{weaponTypes[index].ToString()}의 탄알이 {addAmmo}개 추가";
-            isInteracted = true;
+            isUsed = true;
         }
         else
         {
