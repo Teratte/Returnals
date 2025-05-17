@@ -45,6 +45,8 @@ public class ReturnTruckHandler : KeyPressHandler
         if (player != null)
         {
             isPlayerNearby = true;
+            textInteract.text = "F키를 눌러 복귀";
+            textInteract.enabled = true;
         }
     }
 
@@ -54,6 +56,7 @@ public class ReturnTruckHandler : KeyPressHandler
         if (player != null)
         {
             isPlayerNearby = false;
+            textInteract.enabled = false;
         }
     }
 }
