@@ -384,8 +384,10 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
         private void Update()
         {
 #if !ENABLE_INPUT_SYSTEM
-            if(!GameManager.instance.isGameOver)
-                ProcessLegacyInputs();
+            if (GameManager.instance.isGameOver || GameManager.instance.isUIOn)
+                return;
+
+            ProcessLegacyInputs();
 #endif
             _adsWeight = Mathf.Clamp01(_adsWeight + playerSettings.aimSpeed * Time.deltaTime * (_isAiming ? 1f : -1f));
 

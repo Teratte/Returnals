@@ -73,6 +73,8 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
 
         protected bool _isReloading;
         protected bool _isFiring;
+        [SerializeField]
+        protected bool _isRevolver; // 현재 총이 리볼버인가
 
         protected FPSCameraAnimator cameraAnimator;
 
@@ -164,13 +166,15 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
         {
             if (_activeAmmo == weaponSettings.ammo || _isReloading || maxAmmo <= 0) return;
 
+            _isReloading = true;
             var reloadHash = _activeAmmo == 0 ? RELOAD_EMPTY : RELOAD_TAC;
             characterAnimator.Play(reloadHash, -1, 0f);
             weaponAnimator.Play(reloadHash, -1, 0f);
 
             float delay = _activeAmmo == 0 ? emptyReloadDelay : tacReloadDelay;
+            if (_isRevolver)
+                delay = emptyReloadDelay;
             Invoke(nameof(ResetActiveAmmo), delay * weaponSettings.ammoResetTimeScale);
-            _isReloading = true;
         }
 
         public void OnFireModeChange()
@@ -214,6 +218,8 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
 
         public void OnFirePressed()
         {
+            if (_isReloading)
+                return;
             _isFiring = true;
             OnFire();
         }

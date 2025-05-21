@@ -1121,7 +1121,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6772927306237355876}
-  - component: {fileID: 4060264408584872029}
   - component: {fileID: 2243267473985589402}
   m_Layer: 5
   m_Name: MainWeapon
@@ -1151,14 +1150,6 @@ RectTransform:
   m_AnchoredPosition: {x: -161.9, y: 190}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &4060264408584872029
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2049327418046042169}
-  m_CullTransparentMesh: 1
 --- !u!114 &2243267473985589402
 MonoBehaviour:
   m_ObjectHideFlags: 0
