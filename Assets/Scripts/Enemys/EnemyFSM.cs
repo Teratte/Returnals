@@ -415,16 +415,12 @@ public class EnemyFSM : MonoBehaviour, IDamageable
         capsuleCollider.enabled = false;    // 콜라이더 비활성화
         rigid.isKinematic = true;   // Rigidbody 비활성화
 
-
-        // 실제 시간 기준으로 3초 대기
-
-        Invoke("EndDie", 3f); // 3초 후 EndDie() 호출
+        
     }
-    private void EndDie()
+    public void EndDie()
     { 
         Destroy(gameObject);
         DropItem();
-
     }
  
     private void PlayAnimation(AnimationClip _clip, float _blendTime = 0.1f)
