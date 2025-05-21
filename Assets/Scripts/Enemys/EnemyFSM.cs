@@ -415,10 +415,12 @@ public class EnemyFSM : MonoBehaviour, IDamageable
         capsuleCollider.enabled = false;    // 콜라이더 비활성화
         rigid.isKinematic = true;   // Rigidbody 비활성화
 
-
+        
+    }
+    public void EndDie()
+    { 
         Destroy(gameObject);
         DropItem();
-
     }
  
     private void PlayAnimation(AnimationClip _clip, float _blendTime = 0.1f)
