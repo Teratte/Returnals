@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class MovementCharacter : MonoBehaviour, IDamageable
 {
+    public static Action OnDie; 
     [SerializeField]
     private InventoryUI inventoryUI;
 
@@ -30,6 +32,9 @@ public class MovementCharacter : MonoBehaviour, IDamageable
 
     public void UpdateMovement()
     {
+        if (GameManager.instance.isUIOn || GameManager.instance.isGameOver)
+            return;
+
         // 키 입력으로 x, z축 이동 방향 설정
         float AxisH = Input.GetAxis("Horizontal");
         float AxisV = Input.GetAxis("Vertical");
@@ -130,6 +135,7 @@ public class MovementCharacter : MonoBehaviour, IDamageable
         {
             //animator.SetBool("isDie", true);
             GameManager.instance.isGameOver = true;
+            OnDie?.Invoke();
         }
     }
 }

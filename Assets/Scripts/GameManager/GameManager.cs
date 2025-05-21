@@ -70,7 +70,16 @@ public class GameManager : MonoBehaviour
     public Dictionary<Item, int> Items => items;
 
     public bool isUIOn = false;
-
+    private int _stage = 0; // 스테이지 수
+    private int _killCount = 0; // 적 처치 수
+    private int _waveCount = 0; // 웨이브 수
+    public int Stage => _stage;
+    public int KillCount => _killCount;
+    public int WaveCount
+    {
+        set => _waveCount = value;
+        get => _waveCount;
+    }
     private void Awake()
     {
         // 씬에 싱글톤 오브젝트가 된 다른 GameManager 오브젝트가 있다면
@@ -112,6 +121,7 @@ public class GameManager : MonoBehaviour
     {
         if(isGameStart)
         {
+            _stage++;
             timer = 900.0f;
             Debug.Log("인 게임 씬 로드");
             //Slots = FindObjectOfType<InventoryUI>().Slots;
@@ -125,6 +135,7 @@ public class GameManager : MonoBehaviour
         }
         else if(SceneManager.GetActiveScene().name == "BaseCampTest")
         {
+            _waveCount = 0;
             holdingWeaponPrefabs.Clear();
             mainWeapon = null;
             subWeapon = null;

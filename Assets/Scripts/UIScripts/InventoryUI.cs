@@ -31,6 +31,14 @@ public class InventoryUI : MonoBehaviour
     [SerializeField]
     private AnimationCurve curveBloodScreen;
 
+    [Header("Die Panel")]
+    [SerializeField]
+    private GameObject PanelClosing;    // 결산 패널
+    [SerializeField]
+    private TextMeshProUGUI closingText;    // 결산 텍스트
+    [SerializeField]
+    private GameObject closingParent;       // 지금까지 획득한 아이템을 보여줄 슬롯의 부모 객체
+
     public Slot[] Slots => slots;       // 획득 아이템 리스트
 
     private void Awake()
@@ -124,5 +132,57 @@ public class InventoryUI : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    private int ItemCount()
+    {
+        int result = 0;
+        foreach(Slot slot in slots)
+        {
+            if(slot.item != null)
+            {
+                result += slot.itemCount;
+            }
+        }
+        return result;
+    }
+
+    private void AddResultItem()
+    {
+        foreach(Slot slot in slots)
+        {
+            if(slot.item != null)
+            {
+                Instantiate(slot, closingParent.transform);
+            }
+        }
+    }
+
+    private void Closing()
+    {
+        float playingTime = 900 - GameManager.instance.Timer;
+        closingText.text = $"플레이 시간 : {playingTime / 60}:{playingTime % 60}\n" +
+            $"도달한 스테이지 : {GameManager.instance.Stage}\n" +
+            $"처치한 적 : {GameManager.instance.KillCount} \n" +
+            $"획득한 아이템 : {ItemCount()} \n" +
+            $"진행된 웨이브 : {GameManager.instance.WaveCount}";
+
+        AddResultItem();
+    }
+
+    public void ActiveClosingPanel()
+    {
+        Invoke(nameof(Closing),2.0f);
+        PanelClosing.SetActive(true);
+    }
+
+    private void OnEnable()
+    {
+        MovementCharacter.OnDie += ActiveClosingPanel;
+    }
+
+    private void OnDisable()
+    {
+        MovementCharacter.OnDie -= ActiveClosingPanel;
     }
 }
