@@ -20,6 +20,7 @@ public class WaveViewer : MonoBehaviour
         {
             // 몬스터 스폰 로직
             Debug.Log("몬스터 소환");
+            GameManager.instance.WaveCount++;
         }
     }
 }

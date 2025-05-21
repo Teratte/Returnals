@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 5380552493052318527}
   m_Layer: 0
   m_Name: UnagyuBento
-  m_TagString: Untagged
+  m_TagString: Eatable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

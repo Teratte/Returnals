@@ -1218,6 +1218,10 @@ PrefabInstance:
       propertyPath: status
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1879647774760221577, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2128332111223889227, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1330,6 +1334,34 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3938664034706074722, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3938664034706074722, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3938664034706074722, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7121891929634063125}
+    - target: {fileID: 3938664034706074722, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3938664034706074722, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnToBaseCamp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3938664034706074722, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ReturnTruckHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3938664034706074722, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4104039702020557245, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
@@ -1350,6 +1382,10 @@ PrefabInstance:
       propertyPath: status
       value: 
       objectReference: {fileID: 2035147137}
+    - target: {fileID: 6180655712897858813, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6383584195765319211, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1362,6 +1398,10 @@ PrefabInstance:
       propertyPath: status
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6842914381188818275, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7535865144940105639, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1369,10 +1409,14 @@ PrefabInstance:
     - target: {fileID: 7691692432374438192, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 7121891929634063125}
+      objectReference: {fileID: 1222320658}
     - target: {fileID: 7691692432374438192, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ReturnToBaseCamp
+      value: ActiveClosingPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7691692432374438192, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InventoryUI, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2529,6 +2573,10 @@ PrefabInstance:
       propertyPath: returnPanel
       value: 
       objectReference: {fileID: 1222320656}
+    - target: {fileID: 6160919000284788307, guid: e1866130bbd2f634eb679afe1ecc057e, type: 3}
+      propertyPath: textInteract
+      value: 
+      objectReference: {fileID: 1222320657}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
