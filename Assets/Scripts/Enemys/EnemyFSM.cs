@@ -337,17 +337,15 @@ public class EnemyFSM : MonoBehaviour, IDamageable
         {
             // 몬스터 무기 별로 콜라이더가 존재하고 있음 EnemyAttact.cs -> 플레이어에게 데미지를 처리하고, 중복 데미지 방지하는게 들어있음
             case EnemyAttackType.Melee:
-                // 근접 공격 처리
-                /*
-                [근접 공격 규칙]
-                 - 플레이어가 공격 범위 내에 들어오면 근접 공격을 실행.
-                 - 공격 시 무기 콜라이더가 on되어 플레이어에게 충돌하면 데미지를 입힘
-                 - 공격 후 몇 초간 경직(enemyData.attackDelay)
-                 - 공격 후 만약 플레이어가 여전히 공격사거리(감지 범위, 정면 및 후면 시야각도 충족 필요) 안에 있으면 공격, 만약 이때 좀비가 바라보는 곳은 플레이어 방향으로 회전후 공격
-                 - 공격 후 플레이어가 공격 사거리 밖으로 나가고 감지 범위 이내에 있으면 Chase 상태로 전환
-                 - 공격 후 플레이어가 감지 범위 밖으로 나가면 Idle 상태로 전환 
-                */
-                
+            // 근접 공격 처리
+            /*
+            [근접 공격 규칙]
+             - 이미 공격 세부 처리는 애니메이션 이벤트에서 처리
+             - 공격 후 만약 플레이어가 여전히 공격사거리(감지 범위, 정면 및 후면 시야각도 충족 필요) 안에 있으면 공격, 만약 이때 좀비가 바라보는 곳은 플레이어 방향으로 회전후 공격
+             - 공격 후 플레이어가 공격 사거리 밖으로 나가고 감지 범위 이내에 있으면 Chase 상태로 전환
+             - 공격 후 플레이어가 감지 범위 밖으로 나가면 Idle 상태로 전환 
+            */
+
             case EnemyAttackType.Ranged:
                 // 원거리 공격 처리
                 /*
@@ -407,13 +405,14 @@ public class EnemyFSM : MonoBehaviour, IDamageable
         capsuleCollider.enabled = false;
         rigid.isKinematic = true;
 
-        StartCoroutine(DieRoutine());
+
+        Invoke("DieRoutine", 3f);
+        //StartCoroutine(DieRoutine());
     }
-    IEnumerator DieRoutine()
+    void DieRoutine()
     {
-        yield return new WaitForSeconds(3f);
-        Destroy(gameObject);
         DropItem();
+        Destroy(gameObject);
     }
 
     private void PlayAnimation(AnimationClip _clip, float _blendTime = 0.1f)

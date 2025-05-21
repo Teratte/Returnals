@@ -1517,11 +1517,6 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 71e4312eaeaa1c64f97bed4095267295, type: 2}
   m_BuildHeightMesh: 0
---- !u!65 &1373317215 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 2828812887853272965, guid: 9835130baecfe2a49a5d1c05a2a9ef17, type: 3}
-  m_PrefabInstance: {fileID: 1783393647}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1396204412
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2020,10 +2015,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2594899753726610106, guid: 9835130baecfe2a49a5d1c05a2a9ef17, type: 3}
-      propertyPath: weaponCollider
-      value: 
-      objectReference: {fileID: 1373317215}
     - target: {fileID: 6256583199356865944, guid: 9835130baecfe2a49a5d1c05a2a9ef17, type: 3}
       propertyPath: m_Name
       value: Meel_Zombie1 1
