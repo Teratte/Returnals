@@ -416,6 +416,12 @@ public class EnemyFSM : MonoBehaviour, IDamageable
         rigid.isKinematic = true;   // Rigidbody 비활성화
 
 
+        // 실제 시간 기준으로 3초 대기
+
+        Invoke("EndDie", 3f); // 3초 후 EndDie() 호출
+    }
+    private void EndDie()
+    { 
         Destroy(gameObject);
         DropItem();
 
