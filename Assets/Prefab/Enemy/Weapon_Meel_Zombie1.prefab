@@ -2369,7 +2369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a2676e1a696d4548849c15a0bdde342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 2127389832877636230}
+  enemy: {fileID: 2594899753726610106}
 --- !u!1 &5251317645378357765
 GameObject:
   m_ObjectHideFlags: 0
@@ -2731,9 +2731,9 @@ GameObject:
   - component: {fileID: 6088197389014418766}
   - component: {fileID: 5733457877574321421}
   - component: {fileID: 5926575958576773542}
-  - component: {fileID: 2127389832877636230}
+  - component: {fileID: 2594899753726610106}
   m_Layer: 14
-  m_Name: Meel_Zombie1
+  m_Name: Weapon_Meel_Zombie1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2880,7 +2880,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.33
   m_Height: 1.77
   m_Direction: 1
   m_Center: {x: 0, y: 0.88, z: 0}
@@ -2906,7 +2906,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2127389832877636230
+--- !u!114 &2594899753726610106
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2915,26 +2915,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6256583199356865944}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c29707435d50694ab6f1e0f36fc5c0e, type: 3}
+  m_Script: {fileID: 11500000, guid: 25c11cca4224ad048ac25b4b351db85e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 160
-  moveSpeed: 2
-  rotationSpeed: 5
-  attackRange: 1.2
-  attackDelay: 2
-  defense: 0
-  monsterDamage: 40
-  postAttackDelay: 1
-  detectionAngle: 90
+  enemyData: {fileID: 11400000, guid: 50fb3609342894547948c3aa71a946ff, type: 2}
   weaponCollider: {fileID: 2828812887853272965}
-  itemList:
-  - {fileID: 11400000, guid: c24f2caa1f9f2aa4ab8fb4727964bedf, type: 2}
-  - {fileID: 11400000, guid: 634a17ff11868f04d9a1b6c01d588f50, type: 2}
-  - {fileID: 11400000, guid: 83b679fa27bcb754197abb282b01056b, type: 2}
-  - {fileID: 11400000, guid: daee51ce18bf30347a6093e798a82f5e, type: 2}
-  monsterIngredient: {fileID: 11400000, guid: 6f4c8952190b4d74096846f9e3ee8adf, type: 2}
-  DropPercent: 70
 --- !u!1 &6303159735993863875
 GameObject:
   m_ObjectHideFlags: 0

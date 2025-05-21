@@ -14,6 +14,9 @@ public class RotateToMouse : MonoBehaviour
 
     public void UpdateRotate(float mouseX, float mouseY)
     {
+        if (GameManager.instance.isUIOn || GameManager.instance.isGameOver)
+            return;
+
         eulerAngleY += mouseX * rotCamYAxisSpeed; // 마우스 좌/우 이동으로 카메라 y축 회전
         eulerAngleX -= mouseY * rotCamXAxisSpeed; // 마우스 위/아래 이도으로 카메라 x축 회전
 

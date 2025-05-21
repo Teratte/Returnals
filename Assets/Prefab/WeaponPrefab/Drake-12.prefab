@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponAttribute: 0
   weaponType: 3
-  weaponIcon: {fileID: 21300000, guid: 763cce447b6fc5f439fc510a35c5b8ab, type: 3}
+  weaponIcon: {fileID: 21300000, guid: 8919affa83c9da141bf2f65b6d2b62bb, type: 3}
   fireTransform: {fileID: 3790023387587251567}
   shotEffect: {fileID: 11400000, guid: 7e8621033e9924b4b92fcf1bfc385ff9, type: 2}
   damage: 8

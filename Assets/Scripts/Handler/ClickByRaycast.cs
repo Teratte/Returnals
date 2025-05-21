@@ -6,6 +6,8 @@ public class ClickByRaycast : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.instance.isUIOn)
+            return;
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

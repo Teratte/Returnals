@@ -340,14 +340,13 @@ public class EnemyFSM : MonoBehaviour, IDamageable
                 // 근접 공격 처리
                 /*
                 [근접 공격 규칙]
-                 - 플레이어가 공격 범위 내에 들어오면 근접 공격을 실행.
-                 - 공격 시 무기 콜라이더가 on되어 플레이어에게 충돌하면 데미지를 입힘
-                 - 공격 후 몇 초간 경직(enemyData.attackDelay)
+                 - 이미 공격 세부 처리는 애니메이션 이벤트에서 처리
                  - 공격 후 만약 플레이어가 여전히 공격사거리(감지 범위, 정면 및 후면 시야각도 충족 필요) 안에 있으면 공격, 만약 이때 좀비가 바라보는 곳은 플레이어 방향으로 회전후 공격
                  - 공격 후 플레이어가 공격 사거리 밖으로 나가고 감지 범위 이내에 있으면 Chase 상태로 전환
                  - 공격 후 플레이어가 감지 범위 밖으로 나가면 Idle 상태로 전환 
                 */
-                
+                break;
+
             case EnemyAttackType.Ranged:
                 // 원거리 공격 처리
                 /*
@@ -368,7 +367,10 @@ public class EnemyFSM : MonoBehaviour, IDamageable
                  */
                 break;
         }
+
+
     }
+
 
     // 애니메이션 이벤트에서 호출할 함수 (근접 무기용)
     public void MeelEnableWeaponCollider() // 애니메이션 시작시
@@ -384,6 +386,12 @@ public class EnemyFSM : MonoBehaviour, IDamageable
     {
         if (weaponCollider != null)
             weaponCollider.enabled = false;
+
+        // 현재 상태가 Attack일 경우에만 상태 변경
+        if (currentState == EnemyState.Attack)
+        {
+            currentState = EnemyState.Chase; // 공격 후 Chase 상태로 전환
+        }
     }
 
     private void DropItem()
@@ -402,20 +410,19 @@ public class EnemyFSM : MonoBehaviour, IDamageable
         // currentState가 Die가 되면 더이상 다른 State로 전환되면 안됨
 
         gameObject.layer = 15;  // 죽은 오브젝트 레이어
+        nav.isStopped = true;   // NavMeshAgent 정지
+        nav.enabled = false;    // NavMeshAgent 비활성화
+        capsuleCollider.enabled = false;    // 콜라이더 비활성화
+        rigid.isKinematic = true;   // Rigidbody 비활성화
 
-        nav.enabled = false;
-        capsuleCollider.enabled = false;
-        rigid.isKinematic = true;
-
-        StartCoroutine(DieRoutine());
+        
     }
-    IEnumerator DieRoutine()
-    {
-        yield return new WaitForSeconds(3f);
+    public void EndDie()
+    { 
         Destroy(gameObject);
         DropItem();
     }
-
+ 
     private void PlayAnimation(AnimationClip _clip, float _blendTime = 0.1f)
     {
         if (currentPlayingAnimation == _clip.name) return;  // 중복 재생 방지

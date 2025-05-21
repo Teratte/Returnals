@@ -303,7 +303,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
             if (Input.GetKeyDown(KeyCode.I)) OnInspect();
             if (Input.GetKeyDown(KeyCode.Q)) OnGazetAction();
             
-            if (Input.GetKeyDown(KeyCode.Mouse0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject() && _canFire) GetActiveWeapon().OnFirePressed();
+            if (Input.GetKeyDown(KeyCode.Mouse0) && _canFire) GetActiveWeapon().OnFirePressed();
             if (Input.GetKeyUp(KeyCode.Mouse0)) GetActiveWeapon().OnFireReleased();
 
             OnAimLegacy(Input.GetKey(KeyCode.Mouse1));
@@ -384,8 +384,10 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
         private void Update()
         {
 #if !ENABLE_INPUT_SYSTEM
-            if(!GameManager.instance.isGameOver)
-                ProcessLegacyInputs();
+            if (GameManager.instance.isGameOver || GameManager.instance.isUIOn)
+                return;
+
+            ProcessLegacyInputs();
 #endif
             _adsWeight = Mathf.Clamp01(_adsWeight + playerSettings.aimSpeed * Time.deltaTime * (_isAiming ? 1f : -1f));
 

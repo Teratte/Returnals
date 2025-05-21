@@ -56,8 +56,7 @@ public class EnemyData : ScriptableObject
     public Collider weaponCollider; // 몬스터의 무기 콜라이더
     */
 
-    [Header("아이템 리스트")][Tooltip("몬스터 아이템 드랍")]
+    [Header("드랍 아이템 리스트")][Tooltip("몬스터 아이템 드랍")]
     public List<Item> itemList; // 드롭할 아이템 리스트
-    public Item monsterIngredient; // 드롭할 몬스터 재료
     public float DropPercent;      // 드롭 확률
 }

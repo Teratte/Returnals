@@ -110,7 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponAttribute: 0
   weaponType: 5
-  weaponIcon: {fileID: 21300000, guid: cf9ddd920393ede49adaff682f909b94, type: 3}
+  weaponIcon: {fileID: 21300000, guid: 3a2aabf60d70369428a4001bf0a51802, type: 3}
   fireTransform: {fileID: 4255966578614963272}
   shotEffect: {fileID: 11400000, guid: 7e8621033e9924b4b92fcf1bfc385ff9, type: 2}
   damage: 20
