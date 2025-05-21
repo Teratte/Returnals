@@ -6,7 +6,7 @@ public class ClickByRaycast : MonoBehaviour
 
     void Update()
     {
-        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+        if (GameManager.instance.isUIOn)
             return;
         if (Input.GetMouseButtonDown(0))
         {
