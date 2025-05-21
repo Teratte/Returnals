@@ -218,7 +218,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
 
         public void OnFirePressed()
         {
-            if (_isReloading)
+            if (_isReloading || UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                 return;
             _isFiring = true;
             OnFire();

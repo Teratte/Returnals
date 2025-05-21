@@ -119,7 +119,8 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(isGameStart)
+        isGameOver = false;
+        if (isGameStart)
         {
             _stage++;
             timer = 900.0f;

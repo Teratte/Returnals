@@ -39,6 +39,9 @@ public class MovementCharacter : MonoBehaviour, IDamageable
         float AxisH = Input.GetAxis("Horizontal");
         float AxisV = Input.GetAxis("Vertical");
 
+        if (Input.GetKeyDown(KeyCode.H))
+            OnDamage(100);
+
         // 오브젝트의 이동 속도 설정 (Shift키를 누르지 않으면 walkSpeed, 누르면 runSpeed)
         status.MoveSpeed = Mathf.Lerp(status.WalkSpeed, status.RunSpeed, Input.GetAxis("Sprint"));
 

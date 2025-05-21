@@ -1398,6 +1398,10 @@ PrefabInstance:
       propertyPath: status
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6842914381188818275, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7535865144940105639, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1405,10 +1409,14 @@ PrefabInstance:
     - target: {fileID: 7691692432374438192, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 7121891929634063125}
+      objectReference: {fileID: 1222320658}
     - target: {fileID: 7691692432374438192, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ReturnToBaseCamp
+      value: ActiveClosingPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7691692432374438192, guid: fa4fff427d10df940b272a10610f9f58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InventoryUI, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

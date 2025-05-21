@@ -161,7 +161,7 @@ public class InventoryUI : MonoBehaviour
     private void Closing()
     {
         float playingTime = 900 - GameManager.instance.Timer;
-        closingText.text = $"플레이 시간 : {playingTime / 60}:{playingTime % 60}\n" +
+        closingText.text = $"플레이 시간 : {(int)playingTime / 60}:{(int)playingTime % 60}\n" +
             $"도달한 스테이지 : {GameManager.instance.Stage}\n" +
             $"처치한 적 : {GameManager.instance.KillCount} \n" +
             $"획득한 아이템 : {ItemCount()} \n" +
@@ -171,8 +171,9 @@ public class InventoryUI : MonoBehaviour
     }
 
     public void ActiveClosingPanel()
-    {
-        Invoke(nameof(Closing),2.0f);
+    { 
+        GameManager.instance.ActiveUI();
+        Closing();
         PanelClosing.SetActive(true);
     }
 
