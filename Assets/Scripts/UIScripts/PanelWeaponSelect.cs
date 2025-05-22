@@ -3,17 +3,33 @@ using UnityEngine;
 public class PanelWeaponSelect : MonoBehaviour
 {
     [SerializeField]
-    private GameObject holdingWeaponsParent;
+    private GameObject SubWeaponsParent;
+    [SerializeField]
+    private GameObject MainWeaponsParent;
+    [SerializeField]
+    private GameObject GazetParent;
 
     private void OnEnable()
     {
-        foreach(Transform child in holdingWeaponsParent.transform)
-            Destroy(child.gameObject);
+        //foreach(Transform child in SubWeaponsParent.transform)
+        //    Destroy(child.gameObject);
+        //foreach (Transform child in MainWeaponsParent.transform)
+        //    Destroy(child.gameObject);
+        //foreach (Transform child in GazetParent.transform)
+        //    Destroy(child.gameObject);
 
-        foreach(GameObject weapon in GameManager.instance.selectWeaponList)
+        foreach (GameObject weapon in GameManager.instance.selectWeaponList)
         {
-            Instantiate(weapon, holdingWeaponsParent.transform);
-            //weapon.transform.parent = holdingWeaponsParent.transform;
+            UIWeapon newWeapon = weapon.GetComponent<UIWeapon>();
+            if (newWeapon != null)
+            {
+                if (newWeapon.WeaponType == WeaponAttribute.Support)
+                    Instantiate(weapon, SubWeaponsParent.transform);
+                else if(newWeapon.WeaponType == WeaponAttribute.Main)
+                    Instantiate(weapon, MainWeaponsParent.transform);
+                else if(newWeapon.WeaponType == WeaponAttribute.Gazet)
+                    Instantiate(weapon, GazetParent.transform);
+            }
         }
     }
 }

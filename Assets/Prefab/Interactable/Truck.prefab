@@ -354,7 +354,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5849897572185748479}
   - component: {fileID: 7833565521269468235}
-  - component: {fileID: 5414344736732244673}
   - component: {fileID: 6634217914132607116}
   - component: {fileID: 741042533081744836}
   m_Layer: 0
@@ -443,27 +442,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.8687001, y: 1.8129585, z: 5.2051597}
   m_Center: {x: -0.0633387, y: 0.88581264, z: -0.13085127}
---- !u!65 &5414344736732244673
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 255217654478564789}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.215179, y: 1.694612, z: 6.9153566}
-  m_Center: {x: 0.026306625, y: 0.74450994, z: -0.14211178}
 --- !u!114 &6634217914132607116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,6 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40a8c623c83f0204f8d77fc55cb1e696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textInteract: {fileID: 0}
   weaponSelectPanel: {fileID: 0}
   startPanel: {fileID: 0}
   clicker: {fileID: 0}
