@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class WaveViewer : MonoBehaviour
 {
+    public static Action OnWavePlus;
     private Slider waveBar;
     private float waveTime;
 
@@ -20,7 +22,7 @@ public class WaveViewer : MonoBehaviour
         {
             // 몬스터 스폰 로직
             Debug.Log("몬스터 소환");
-            GameManager.instance.WaveCount++;
+            OnWavePlus?.Invoke();
         }
     }
 }

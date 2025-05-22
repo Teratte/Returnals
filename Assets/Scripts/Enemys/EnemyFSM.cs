@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
+public class KillEvent : UnityEngine.Events.UnityEvent { }
 public class EnemyFSM : MonoBehaviour, IDamageable
 {
+    [HideInInspector]
+    public static KillEvent OnKilled = new KillEvent();
+
     [Header("몬스터 데이터")]
     [SerializeField] private EnemyData enemyData;
 
@@ -408,6 +413,7 @@ public class EnemyFSM : MonoBehaviour, IDamageable
     void Die()
     {
         // currentState가 Die가 되면 더이상 다른 State로 전환되면 안됨
+        OnKilled?.Invoke();
 
         gameObject.layer = 15;  // 죽은 오브젝트 레이어
         nav.isStopped = true;   // NavMeshAgent 정지
