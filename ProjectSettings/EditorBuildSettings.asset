@@ -20,5 +20,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tera'_Test.unity
     guid: 2cf5207c5d09e0f4ea3d0b21bbe52953
+  - enabled: 1
+    path: Assets/Scenes/Level_Design/Forest.unity
+    guid: 42da06872b0627d4ca1bd43617b67225
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
