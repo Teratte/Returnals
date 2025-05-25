@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6097477d0dc6e664a8c527aed202c0d4, type: 3}
   m_Name: Meel_Zombie1
   m_EditorClassIdentifier: 
-  enemyName: "\uC880\uBE44"
+  enemyName: "\uC880\uBE441"
   maxHealth: 100
   moveSpeed: 3.5
   chaseSpeed: 5
@@ -28,10 +28,10 @@ MonoBehaviour:
   attackAnimation: {fileID: 7400000, guid: 8d165ffd305e81d4e8b6c6f06bc2e89d, type: 2}
   dieAnimation: {fileID: 7400000, guid: 32208581416b39b47b3e36fe36a78ba8, type: 2}
   searchAnimation: {fileID: 7400000, guid: b806739511275f142bf433fad7ff0ca4, type: 2}
-  selfDestructDelay: 1.5
-  selfDestructRadius: 3
-  selfDestructDamage: 80
-  detectionAngle: 90
+  selfDestructDelay: 0
+  selfDestructRadius: 0
+  selfDestructDamage: 0
+  detectionAngle: 180
   rearDetectionAngle: 120
   rearDetectionRange: 5
   detectionRange: 10

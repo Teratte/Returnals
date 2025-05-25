@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -391,13 +392,17 @@ public class EnemyFSM : MonoBehaviour, IDamageable
     {
         if (weaponCollider != null)
             weaponCollider.enabled = false;
+    }
 
+    public void EndAttack()
+    {
         // 현재 상태가 Attack일 경우에만 상태 변경
         if (currentState == EnemyState.Attack)
         {
             currentState = EnemyState.Chase; // 공격 후 Chase 상태로 전환
         }
     }
+
 
     private void DropItem()
     {

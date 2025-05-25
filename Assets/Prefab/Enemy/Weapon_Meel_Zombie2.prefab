@@ -630,8 +630,8 @@ GameObject:
   - component: {fileID: 205591705058803004}
   - component: {fileID: 2098123846236873924}
   - component: {fileID: 5508217566535855039}
-  - component: {fileID: 853675977549531132}
   - component: {fileID: 1684310769391774911}
+  - component: {fileID: 4399969907188904136}
   m_Layer: 14
   m_Name: Weapon_Meel_Zombie2
   m_TagString: Enemy
@@ -795,34 +795,6 @@ NavMeshAgent:
   m_BaseOffset: -0.05
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &853675977549531132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1135728509634986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c29707435d50694ab6f1e0f36fc5c0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 160
-  moveSpeed: 3.5
-  rotationSpeed: 5
-  attackRange: 1
-  attackDelay: 1.5
-  defense: 0
-  monsterDamage: 40
-  postAttackDelay: 1
-  detectionAngle: 90
-  weaponCollider: {fileID: 381470949564028428}
-  itemList:
-  - {fileID: 11400000, guid: 83b679fa27bcb754197abb282b01056b, type: 2}
-  - {fileID: 11400000, guid: 634a17ff11868f04d9a1b6c01d588f50, type: 2}
-  - {fileID: 11400000, guid: daee51ce18bf30347a6093e798a82f5e, type: 2}
-  monsterIngredient: {fileID: 11400000, guid: e1163b7e622effb41ab748abc009b12e, type: 2}
-  DropPercent: 80
 --- !u!136 &1684310769391774911
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -846,6 +818,20 @@ CapsuleCollider:
   m_Height: 1.7
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!114 &4399969907188904136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135728509634986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25c11cca4224ad048ac25b4b351db85e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyData: {fileID: 11400000, guid: 2217565cda3cc314ba5ae3e870bb45ed, type: 2}
+  weaponCollider: {fileID: 381470949564028428}
 --- !u!1 &1137890178484550
 GameObject:
   m_ObjectHideFlags: 0
@@ -1775,7 +1761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a2676e1a696d4548849c15a0bdde342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
+  enemy: {fileID: 4399969907188904136}
 --- !u!65 &381470949564028428
 BoxCollider:
   m_ObjectHideFlags: 0
