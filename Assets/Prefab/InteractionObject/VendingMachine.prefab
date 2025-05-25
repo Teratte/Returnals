@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83e7016ba4c50ab49b8c33dd2d07f88c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textDrink: {fileID: 0}
+  textInteract: {fileID: 0}
   heal: 30
 --- !u!1 &4837695607611971314
 GameObject:
