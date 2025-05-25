@@ -42,14 +42,13 @@ public class InventoryUI : MonoBehaviour
     public Slot[] Slots => slots;       // 획득 아이템 리스트
 
     private int _killCount = 0; // 몬스터 처치 수
-    private int _waveCount = 0; // 웨이브 카운트 수
     private void Awake()
     {
         slots = slotsParent.GetComponentsInChildren<Slot>();
         player = FindAnyObjectByType<FPSPlayer>();
         InventoryObject.SetActive(false);
         status.onHPEvent.AddListener(UpdateHPHUD);
-        EnemyFSM.OnKilled.AddListener(PlusKillCount);
+        //EnemyFSM.OnKilled.AddListener(PlusKillCount);
     }
 
     private void Start()
@@ -166,9 +165,9 @@ public class InventoryUI : MonoBehaviour
         float playingTime = 900 - GameManager.instance.Timer;
         closingText.text = $"플레이 시간 : {(int)playingTime / 60}:{(int)playingTime % 60}\n" +
             $"도달한 스테이지 : {GameManager.instance.Stage}\n" +
-            $"처치한 적 : {_killCount} \n" +
+            $"처치한 적 : {GameManager.instance.KillCount} \n" +
             $"획득한 아이템 : {ItemCount()} \n" +
-            $"진행된 웨이브 : {_waveCount}";
+            $"진행된 웨이브 : {GameManager.instance.WaveCount}";
 
         AddResultItem();
     }
@@ -180,11 +179,6 @@ public class InventoryUI : MonoBehaviour
         PanelClosing.SetActive(true);
     }
 
-    private void PlusWaveCount()
-    {
-        _waveCount++;
-    }
-
     private void PlusKillCount()
     {
         _killCount++;
@@ -193,12 +187,10 @@ public class InventoryUI : MonoBehaviour
     private void OnEnable()
     {
         MovementCharacter.OnDie += ActiveClosingPanel;
-        WaveViewer.OnWavePlus += PlusWaveCount;
     }
 
     private void OnDisable()
     {
         MovementCharacter.OnDie -= ActiveClosingPanel;
-        WaveViewer.OnWavePlus -= PlusWaveCount;
     }
 }
