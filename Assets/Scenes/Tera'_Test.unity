@@ -796,7 +796,7 @@ GameObject:
   - component: {fileID: 762544692}
   - component: {fileID: 762544694}
   m_Layer: 0
-  m_Name: SpawnManager
+  m_Name: ObjectEventSpawnManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
