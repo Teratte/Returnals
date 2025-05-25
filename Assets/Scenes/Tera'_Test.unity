@@ -239,6 +239,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weapon_Meel_Zombie3
       objectReference: {fileID: 0}
+    - target: {fileID: 1054712327344656, guid: 6755316da485286478bcd0b70d47140a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4513526062526986, guid: 6755316da485286478bcd0b70d47140a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -21
@@ -937,7 +941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1135728509634986, guid: 7b67982c68796b4479bb18e4b17415e6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4778868142476608, guid: 7b67982c68796b4479bb18e4b17415e6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1235,16 +1239,6 @@ MonoBehaviour:
   holdingGazet: {fileID: 0}
   selectWeaponList: []
   isFirstStage: 1
-  currentAssaultAmmo: 0
-  maxAssuaultAmmo: 0
-  currentShotgunAmmo: 0
-  maxShotgunAmmo: 0
-  currentMachinegunAmmo: 0
-  maxMachinegunAmmo: 0
-  currentSMGAmmo: 0
-  maxSMGAmmo: 0
-  currentSniperAmmo: 0
-  maxSniperAmmo: 0
   isUIOn: 0
 --- !u!1001 &1093567629
 PrefabInstance:
@@ -1686,6 +1680,10 @@ PrefabInstance:
     - target: {fileID: 4022663905808563727, guid: 4f665ba8fc7477a4084f9cbd342a1d14, type: 3}
       propertyPath: m_Name
       value: Meel_Zombie2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4022663905808563727, guid: 4f665ba8fc7477a4084f9cbd342a1d14, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2677,6 +2675,10 @@ PrefabInstance:
     - target: {fileID: 7840433678593859463, guid: 9eb0a393d0e86f64d9dd51e95b339c72, type: 3}
       propertyPath: m_Name
       value: Weapon_Meel_Zombie4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840433678593859463, guid: 9eb0a393d0e86f64d9dd51e95b339c72, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
