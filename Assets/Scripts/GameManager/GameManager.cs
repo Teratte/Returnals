@@ -141,12 +141,12 @@ public class GameManager : MonoBehaviour
         }
         else if(SceneManager.GetActiveScene().name == "BaseCampTest")
         {
+            RenewalBestWaveCount();
+            RenewalBestKillCount();
             holdingWeaponPrefabs.Clear();
             mainWeapon = null;
             subWeapon = null;
             holdingGazet = null;
-            RenewalBestWaveCount();
-            RenewalBestKillCount();
         }
     }
 

@@ -418,7 +418,6 @@ public class EnemyFSM : MonoBehaviour, IDamageable
     void Die()
     {
         // currentState가 Die가 되면 더이상 다른 State로 전환되면 안됨
-        OnKilled?.Invoke();
 
         gameObject.layer = 15;  // 죽은 오브젝트 레이어
         nav.isStopped = true;   // NavMeshAgent 정지
@@ -429,8 +428,9 @@ public class EnemyFSM : MonoBehaviour, IDamageable
         
     }
     public void EndDie()
-    { 
+    {
         Destroy(gameObject);
+        OnKilled?.Invoke();
         DropItem();
     }
  
