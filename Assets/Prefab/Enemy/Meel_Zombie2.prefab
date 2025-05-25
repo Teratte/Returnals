@@ -2461,7 +2461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25c11cca4224ad048ac25b4b351db85e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyData: {fileID: 11400000, guid: 2217565cda3cc314ba5ae3e870bb45ed, type: 2}
+  enemyData: {fileID: 11400000, guid: 3269565d5569c77438418be8530c3194, type: 2}
   weaponCollider: {fileID: 1098271431657306958}
 --- !u!1 &4196282703999966944
 GameObject:
