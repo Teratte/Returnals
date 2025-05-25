@@ -418,20 +418,20 @@ public class EnemyFSM : MonoBehaviour, IDamageable
     void Die()
     {
         // currentState가 Die가 되면 더이상 다른 State로 전환되면 안됨
-
+        nav.speed = 0f; // NavMeshAgent 속도 0으로 설정
         gameObject.layer = 15;  // 죽은 오브젝트 레이어
         nav.isStopped = true;   // NavMeshAgent 정지
         nav.enabled = false;    // NavMeshAgent 비활성화
         capsuleCollider.enabled = false;    // 콜라이더 비활성화
         rigid.isKinematic = true;   // Rigidbody 비활성화
 
-        OnKilled?.Invoke();
-
     }
 
     public void EndDie()
     {
+
         Destroy(gameObject);
+        OnKilled?.Invoke();
         DropItem();
     }
  
