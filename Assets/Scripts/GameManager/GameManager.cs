@@ -44,26 +44,6 @@ public class GameManager : MonoBehaviour
     private Dictionary<string,int> maxAmmo = new Dictionary<string,int>();  // 탄알 종류별로 최대 가지고 있는 탄알 수 보관
     public Dictionary<string, int>MaxAmmo => maxAmmo;
 
-    [Header("AssaultBullet")]
-    public int currentAssaultAmmo;
-    public int maxAssuaultAmmo;
-
-    [Header("ShotgunBullet")]
-    public int currentShotgunAmmo;
-    public int maxShotgunAmmo;
-
-    [Header("Machinegun")]
-    public int currentMachinegunAmmo;
-    public int maxMachinegunAmmo;
-
-    [Header("SMGBullet")]
-    public int currentSMGAmmo;
-    public int maxSMGAmmo;
-
-    [Header("SniperBullet")]
-    public int currentSniperAmmo;
-    public int maxSniperAmmo;
-
     [Header("Items")]
     private Dictionary<Item, int> items = new Dictionary<Item, int>();  // 아이템 보관 딕셔너리
 
@@ -139,8 +119,9 @@ public class GameManager : MonoBehaviour
                 player.playerSettings.weaponPrefabs.Add(subWeapon);
             }
         }
-        else if(SceneManager.GetActiveScene().name == "BaseCampTest")
+        else if(SceneManager.GetActiveScene().name == "BaseCamp")
         {
+            EnemyFSM.OnKilled.RemoveListener(PlusKillCount);
             RenewalBestWaveCount();
             RenewalBestKillCount();
             holdingWeaponPrefabs.Clear();

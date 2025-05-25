@@ -51,6 +51,7 @@ public class ExposiveBarrel : MonoBehaviour,IDamageable
             }
         }
 
+        AudioManager.instance.PlayExplosionSound();
         // 배럴 오브젝트 삭제
         Destroy(gameObject);
     }
