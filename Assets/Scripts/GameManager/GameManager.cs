@@ -71,6 +71,10 @@ public class GameManager : MonoBehaviour
 
     public bool isUIOn = false;
     private int _stage = 0; // 스테이지 수
+    private int _waveCount = 0; // 웨이브 수
+    private int _bestWaveCount = 0; // 최고 웨이브 돌파 수
+    public int WaveCount => _waveCount;
+    public int BestWaveCount => _bestWaveCount;
 
     public int Stage => _stage;
     private void Awake()
@@ -116,6 +120,7 @@ public class GameManager : MonoBehaviour
         if (isGameStart)
         {
             _stage++;
+            _waveCount = 0;
             timer = 900.0f;
             Debug.Log("인 게임 씬 로드");
             //Slots = FindObjectOfType<InventoryUI>().Slots;
@@ -164,5 +169,28 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         isUIOn = false;
         Time.timeScale = 1.0f;
+    }
+
+    private void PlusWaveCount()
+    {
+        _waveCount++;
+    }
+
+    public void RenewalBestWaveCount()
+    {
+        if(_waveCount > _bestWaveCount)
+        {
+            _bestWaveCount = _waveCount;
+        }
+    }
+
+    private void OnEnable()
+    {
+        WaveViewer.OnWavePlus += PlusWaveCount;
+    }
+
+    private void OnDisable()
+    {
+        WaveViewer.OnWavePlus -= PlusWaveCount;
     }
 }
