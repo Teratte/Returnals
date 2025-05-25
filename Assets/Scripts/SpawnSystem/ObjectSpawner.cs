@@ -2,10 +2,10 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
 
-public class ObjectSpawner : MonoBehaviour
+public class MultiBoxColliderSpawner : MonoBehaviour
 {
-    [Header("Spawn Area Object (BoxCollider 필요)")]
-    public GameObject spawnAreaObject;  // 빈 오브젝트에 BoxCollider 필요
+    [Header("Spawn Areas (BoxCollider 여러 개)")]
+    public List<GameObject> spawnAreaObjects;  // 각 오브젝트에 BoxCollider 필요
 
     [Header("Spawn Settings")]
     public List<GameObject> eventPrefabs;
@@ -13,21 +13,32 @@ public class ObjectSpawner : MonoBehaviour
     public int maxSpawnCount = 5;
     public float minDistanceBetweenSpawns = 5f;
 
-    private BoxCollider spawnAreaCollider;
+    private List<BoxCollider> spawnColliders = new List<BoxCollider>();
     private List<Vector3> spawnPositions = new List<Vector3>();
 
     void Start()
     {
-        if (spawnAreaObject == null)
+        // 각 게임오브젝트에서 BoxCollider 수집
+        spawnColliders.Clear();
+
+        foreach (var obj in spawnAreaObjects)
         {
-            Debug.LogError("Spawn Area Object가 설정되지 않았습니다.");
-            return;
+            if (obj == null) continue;
+
+            BoxCollider col = obj.GetComponent<BoxCollider>();
+            if (col != null)
+            {
+                spawnColliders.Add(col);
+            }
+            else
+            {
+                Debug.LogWarning($"오브젝트 '{obj.name}'에 BoxCollider가 없습니다.");
+            }
         }
 
-        spawnAreaCollider = spawnAreaObject.GetComponent<BoxCollider>();
-        if (spawnAreaCollider == null)
+        if (spawnColliders.Count == 0)
         {
-            Debug.LogError("Spawn Area Object에 BoxCollider 컴포넌트가 없습니다.");
+            Debug.LogError("유효한 BoxCollider가 하나도 없습니다.");
             return;
         }
 
@@ -39,9 +50,12 @@ public class ObjectSpawner : MonoBehaviour
         int spawnCount = Random.Range(minSpawnCount, maxSpawnCount + 1);
         int attempts = 0;
 
-        while (spawnPositions.Count < spawnCount && attempts < 1000)
+        while (spawnPositions.Count < spawnCount && attempts < 2000)
         {
-            Vector3 randomPos = GetRandomPointInBoxCollider(spawnAreaCollider);
+            // 랜덤한 BoxCollider 선택
+            BoxCollider randomBox = spawnColliders[Random.Range(0, spawnColliders.Count)];
+
+            Vector3 randomPos = GetRandomPointInBoxCollider(randomBox);
 
             if (NavMesh.SamplePosition(randomPos, out NavMeshHit hit, 5f, NavMesh.AllAreas))
             {
@@ -67,7 +81,6 @@ public class ObjectSpawner : MonoBehaviour
                 {
                     GameObject prefab = eventPrefabs[Random.Range(0, eventPrefabs.Count)];
 
-                    // 프리팹 바닥 Y 위치 구해서 보정
                     float bottomY = GetPrefabBottomY(prefab);
                     Vector3 correctedPos = spawnPos;
                     correctedPos.y -= bottomY;
@@ -99,7 +112,6 @@ public class ObjectSpawner : MonoBehaviour
         float randomX = Random.Range(-worldSize.x / 2f, worldSize.x / 2f);
         float randomZ = Random.Range(-worldSize.z / 2f, worldSize.z / 2f);
 
-        // Y는 박스 중앙 Y 고정
         return new Vector3(worldCenter.x + randomX, worldCenter.y, worldCenter.z + randomZ);
     }
 
@@ -112,24 +124,27 @@ public class ObjectSpawner : MonoBehaviour
         }
         else
         {
-            // 콜라이더 없으면 0 반환 (보정 없음)
             return 0f;
         }
     }
 
     void OnDrawGizmosSelected()
     {
-        if (spawnAreaObject != null)
+        if (spawnAreaObjects != null)
         {
-            BoxCollider box = spawnAreaObject.GetComponent<BoxCollider>();
-            if (box != null)
+            Gizmos.color = new Color(0f, 1f, 1f, 0.25f);
+            foreach (var obj in spawnAreaObjects)
             {
-                Gizmos.color = new Color(0f, 1f, 1f, 0.25f);
+                if (obj == null) continue;
 
-                Vector3 worldCenter = box.transform.TransformPoint(box.center);
-                Vector3 worldSize = Vector3.Scale(box.size, box.transform.lossyScale);
+                BoxCollider box = obj.GetComponent<BoxCollider>();
+                if (box != null)
+                {
+                    Vector3 worldCenter = box.transform.TransformPoint(box.center);
+                    Vector3 worldSize = Vector3.Scale(box.size, box.transform.lossyScale);
 
-                Gizmos.DrawCube(worldCenter, worldSize);
+                    Gizmos.DrawCube(worldCenter, worldSize);
+                }
             }
         }
     }
