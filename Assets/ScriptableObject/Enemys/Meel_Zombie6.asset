@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6097477d0dc6e664a8c527aed202c0d4, type: 3}
-  m_Name: Weapon_Meel_Zombie6
+  m_Name: Meel_Zombie6
   m_EditorClassIdentifier: 
   enemyName: "\uBB34\uAE30 \uC880\uBE446"
   maxHealth: 100
