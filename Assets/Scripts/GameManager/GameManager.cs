@@ -70,11 +70,15 @@ public class GameManager : MonoBehaviour
     public Dictionary<Item, int> Items => items;
 
     public bool isUIOn = false;
-    private int _stage = 0; // 스테이지 수
+    private int _stage = 0;     // 스테이지 수
     private int _waveCount = 0; // 웨이브 수
+    private int _killCount = 0; // 적 처치 수
     private int _bestWaveCount = 0; // 최고 웨이브 돌파 수
+    private int _bestKillCount = 0; // 한 게임에서 최고 처치 수
     public int WaveCount => _waveCount;
+    public int KillCount => _killCount;
     public int BestWaveCount => _bestWaveCount;
+    public int BestKillCount => _bestKillCount;
 
     public int Stage => _stage;
     private void Awake()
@@ -94,6 +98,7 @@ public class GameManager : MonoBehaviour
         maxAmmo.Add("SmallMachinegun", 999);
         maxAmmo.Add("HeavyWeapon", 999);
         maxAmmo.Add("Handgun", 999);
+
         DontDestroyOnLoad(gameObject);
 
         // 씬이 로드될 때 실행할 함수 등록
@@ -119,8 +124,10 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         if (isGameStart)
         {
+            EnemyFSM.OnKilled.AddListener(PlusKillCount);
             _stage++;
             _waveCount = 0;
+            _killCount = 0;
             timer = 900.0f;
             Debug.Log("인 게임 씬 로드");
             //Slots = FindObjectOfType<InventoryUI>().Slots;
@@ -138,6 +145,8 @@ public class GameManager : MonoBehaviour
             mainWeapon = null;
             subWeapon = null;
             holdingGazet = null;
+            RenewalBestWaveCount();
+            RenewalBestKillCount();
         }
     }
 
@@ -176,11 +185,23 @@ public class GameManager : MonoBehaviour
         _waveCount++;
     }
 
+    private void PlusKillCount()
+    {
+        _killCount++;
+    }
     public void RenewalBestWaveCount()
     {
         if(_waveCount > _bestWaveCount)
         {
             _bestWaveCount = _waveCount;
+        }
+    }
+
+    public void RenewalBestKillCount()
+    {
+        if(_killCount > _bestKillCount)
+        {
+            _bestKillCount = _killCount;
         }
     }
 
