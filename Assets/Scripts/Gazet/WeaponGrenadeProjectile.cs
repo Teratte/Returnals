@@ -45,6 +45,7 @@ public class WeaponGrenadeProjectile : MonoBehaviour
             }
         }
 
+        AudioManager.instance.PlayExplosionSound();
         // 수류탄 삭제
         Destroy(gameObject);
     }

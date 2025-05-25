@@ -11,6 +11,7 @@ public class TruckHandler : KeyPressHandler
 
     public void GameStart()
     {
+        AudioManager.instance.PlayTruckSound();
         startPanel.SetActive(false);
         SceneManagerScript.Instance.LoadRandomScene(); // æ¿ ¿Ãµø Ω««‡
         GameManager.instance.isGameStart = true;
