@@ -19,7 +19,7 @@ MonoBehaviour:
   rotationSpeed: 5
   attackRange: 1.5
   defense: 1.3
-  monsterDamage: 40
+  monsterDamage: 25
   attackDelay: 2
   enemyAttackType: 0
   idleAnimation: {fileID: 7400000, guid: 278e75402f012704e855564043abc1a7, type: 2}
