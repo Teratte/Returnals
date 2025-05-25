@@ -163,7 +163,7 @@ public class EnemyFSM : MonoBehaviour, IDamageable
 
     public void OnDamage(float damage)
     {
-        if (currentState == EnemyState.Die) return;
+        if ((currentState == EnemyState.Die) || (currentState == EnemyState.None)) return;
 
         float damageRange = 100 / (100 + enemyData.defense);
         Debug.Log("Damage! : " + damage);
@@ -425,12 +425,13 @@ public class EnemyFSM : MonoBehaviour, IDamageable
         capsuleCollider.enabled = false;    // 콜라이더 비활성화
         rigid.isKinematic = true;   // Rigidbody 비활성화
 
-        
+        OnKilled?.Invoke();
+
     }
+
     public void EndDie()
     {
         Destroy(gameObject);
-        OnKilled?.Invoke();
         DropItem();
     }
  
