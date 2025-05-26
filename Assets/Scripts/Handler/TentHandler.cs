@@ -11,6 +11,7 @@ public class TentHandler : KeyPressHandler
     {
         if (!clicker.isPanelActive)
         {
+            AudioManager.instance.PlayTentSound();
             GameManager.instance.isUIOn = true;
             PanelAchievement.SetActive(true);
             clicker.isPanelActive = true;

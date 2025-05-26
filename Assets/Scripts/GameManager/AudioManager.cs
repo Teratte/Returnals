@@ -11,6 +11,10 @@ public class AudioManager : MonoBehaviour
     private AudioClip explosionClip;
     [SerializeField]
     private AudioClip truckClip;
+    [SerializeField]
+    private AudioClip workBenchClip;
+    [SerializeField]
+    private AudioClip tentClip;
 
     private void Awake()
     {
@@ -34,6 +38,16 @@ public class AudioManager : MonoBehaviour
     public void PlayTruckSound()
     {
         StartCoroutine(TruckSound());
+    }
+
+    public void PlayTentSound()
+    {
+        audioSource.PlayOneShot(tentClip);
+    }
+
+    public void PlayWorkBenchSound()
+    {
+        audioSource.PlayOneShot(workBenchClip);
     }
 
     private IEnumerator TruckSound()

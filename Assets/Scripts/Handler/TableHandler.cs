@@ -10,6 +10,7 @@ public class TableHandler : KeyPressHandler
     public void DoTableInteraction()
     {
         Debug.Log("Table과 상호작용 실행됨.");
+        AudioManager.instance.PlayWorkBenchSound();
         // 테이블과의 상호작용 로직 추가
         producePanel.SetActive(true);
         GameManager.instance.isUIOn = true;
