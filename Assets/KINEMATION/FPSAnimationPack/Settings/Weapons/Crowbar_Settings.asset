@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067a66f68d8440b2b8854c722342a2b2, type: 3}
+  m_Name: Crowbar_Settings
+  m_EditorClassIdentifier: 
+  characterController: {fileID: 0}
+  recoilAnimData: {fileID: 0}
+  cameraShake: {fileID: 0}
+  ikOffset: {x: 0, y: 0, z: 0}
+  leftClavicleOffset: {x: 0, y: 0, z: 0}
+  rightClavicleOffset: {x: 0, y: 0, z: 0}
+  aimPointOffset: {x: 0, y: 0, z: 0}
+  rightHandSprintOffset: {x: 0, y: 0, z: 0, w: 1}
+  adsBlend: 0
+  fireRate: 600
+  ammo: 1
+  aimFov: 70
+  ammoResetTimeScale: 1
+  fullAuto: 0
+  useFireClip: 0
+  hasEquipOverride: 0
+  hasFireOut: 0
+  useSprintTriggerDiscipline: 1
+  fireSounds: []
+  firePitchRange: {x: 1, y: 1}
+  fireVolumeRange: {x: 1, y: 1}
+  weaponEventSounds: []

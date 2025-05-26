@@ -1,0 +1,41 @@
+{
+    "selectWeaponList": [
+        {
+            "instanceID": 78704
+        },
+        {
+            "instanceID": 78706
+        },
+        {
+            "instanceID": 78708
+        },
+        {
+            "instanceID": 78710
+        },
+        {
+            "instanceID": 78712
+        },
+        {
+            "instanceID": 78714
+        },
+        {
+            "instanceID": 78716
+        },
+        {
+            "instanceID": 78718
+        },
+        {
+            "instanceID": 78720
+        },
+        {
+            "instanceID": 78722
+        }
+    ],
+    "isFirstStage": true,
+    "isUIOn": false,
+    "_stage": 2,
+    "_waveCount": 0,
+    "_killCount": 0,
+    "_bestWaveCount": 0,
+    "_bestKillCount": 1
+}

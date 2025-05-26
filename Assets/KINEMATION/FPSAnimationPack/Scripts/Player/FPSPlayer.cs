@@ -295,7 +295,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
         private void ProcessLegacyInputs()
         {
             OnMouseWheelLegacy();
-            if (Input.GetKeyDown(KeyCode.G)) OnThrowGrenade();
+            //if (Input.GetKeyDown(KeyCode.G)) OnThrowGrenade();
             //if (Input.GetKeyDown(KeyCode.F)) OnChangeWeapon();
             if (Input.GetKeyDown(KeyCode.B)) OnChangeFireMode();
             if (Input.GetKeyDown(KeyCode.R)) OnReload();
