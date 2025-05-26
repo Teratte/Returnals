@@ -11,6 +11,7 @@ public class AmmoBoxHandler : KeyPressHandler
 
     private void Awake()
     {
+        textInteract = GameObject.Find("InteractionText").GetComponent<TextMeshProUGUI>();
         player = FindAnyObjectByType<FPSPlayer>();
     }
 

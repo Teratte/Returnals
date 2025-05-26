@@ -1,12 +1,18 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ItemBox : KeyPressHandler
 {
     [SerializeField]
     private List<Item> items;
-    [SerializeField]
-    private InventoryUI ui;
+    private InventoryUI ui; // 인벤토리 UI
+
+    private void Awake()
+    {
+        textInteract = GameObject.Find("InteractionText").GetComponent<TextMeshProUGUI>();
+        ui = FindAnyObjectByType<InventoryUI>();
+    }
 
     private void Update()
     {

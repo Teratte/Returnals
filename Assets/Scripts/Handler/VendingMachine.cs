@@ -11,6 +11,7 @@ public class VendingMachine : KeyPressHandler
     private void Awake()
     {
         status = FindAnyObjectByType<Status>();
+        textInteract = GameObject.Find("InteractionText").GetComponent<TextMeshProUGUI>();
     }
 
     private void Update()

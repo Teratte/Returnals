@@ -26,6 +26,12 @@ public class SceneManagerScript : MonoBehaviour
     private Slider loadingProgress;     // 로딩 진행도
     [SerializeField]
     private TextMeshProUGUI textProgress; // 로딩 진행도 텍스트
+    [SerializeField]
+    private GameObject blurVolume;        // 블러 처리 게임오브젝트
+    [SerializeField]
+    private GameObject postProcessVolume; // 게임 시작
+    [SerializeField]
+    private GameObject PanelTitle;        // 게임 타이틀
 
     private WaitForSeconds waitChangeDelay;// 씬 변경 지연 시간
 
@@ -37,6 +43,9 @@ public class SceneManagerScript : MonoBehaviour
         }
         else
         {
+            blurVolume.SetActive(true);
+            postProcessVolume.SetActive(false);
+            PanelTitle.SetActive(true);
             Instance = this;
             waitChangeDelay = new WaitForSeconds(0.5f);
             DontDestroyOnLoad(gameObject);
@@ -95,5 +104,24 @@ public class SceneManagerScript : MonoBehaviour
         }
 
         loadingScreen.SetActive(false);
+    }
+
+    public void StartNewGame()
+    {
+        GameManager.instance.isUIOn = false;
+        blurVolume.SetActive(false);
+        postProcessVolume.SetActive(true);
+        PanelTitle.SetActive(false);
+    }
+
+    public void ExitGame()
+    {
+        // 에디터에서 실행 중일 경우 (디버깅용)
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        // 빌드된 게임에서는 이 코드가 실행됨
+        Application.Quit();
+#endif
     }
 }

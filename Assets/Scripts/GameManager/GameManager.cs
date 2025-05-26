@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
             // 싱글톤 오브젝트를 반환
             return m_instance;
         }
+
+        set => m_instance = value;
     }
 
     private static GameManager m_instance; // 싱글톤이 할당될 static 변수
@@ -41,13 +43,21 @@ public class GameManager : MonoBehaviour
     public bool isFirstStage = true;                       // 첫 스테이지 진입 여부
     private FPSPlayer player;
 
-    private Dictionary<string,int> maxAmmo = new Dictionary<string,int>();  // 탄알 종류별로 최대 가지고 있는 탄알 수 보관
-    public Dictionary<string, int>MaxAmmo => maxAmmo;
+    private Dictionary<string, int> maxAmmo = new Dictionary<string, int>();  // 탄알 종류별로 최대 가지고 있는 탄알 수 보관
+    public Dictionary<string, int> MaxAmmo
+    {
+        set => maxAmmo = value;
+        get => maxAmmo;
+    }
 
     [Header("Items")]
     private Dictionary<Item, int> items = new Dictionary<Item, int>();  // 아이템 보관 딕셔너리
 
-    public Dictionary<Item, int> Items => items;
+    public Dictionary<Item, int> Items
+    {
+        set=> items = value;
+        get => items;
+    }
 
     public bool isUIOn = false;
     private int _stage = 0;     // 스테이지 수
@@ -57,10 +67,23 @@ public class GameManager : MonoBehaviour
     private int _bestKillCount = 0; // 한 게임에서 최고 처치 수
     public int WaveCount => _waveCount;
     public int KillCount => _killCount;
-    public int BestWaveCount => _bestWaveCount;
-    public int BestKillCount => _bestKillCount;
+    public int BestWaveCount
+    {
+        set => _bestWaveCount = value;
+        get => _bestWaveCount;
+    }
+    public int BestKillCount
+    {
+        set => _bestKillCount = value;
+        get => _bestKillCount;
+    }
 
-    public int Stage => _stage;
+    public int Stage
+    {
+        set => _stage = value;
+        get => _stage;
+    }
+
     private void Awake()
     {
         // 씬에 싱글톤 오브젝트가 된 다른 GameManager 오브젝트가 있다면
@@ -195,4 +218,25 @@ public class GameManager : MonoBehaviour
     {
         WaveViewer.OnWavePlus -= PlusWaveCount;
     }
+}
+
+public class GameData
+{
+    public List<GameObject> selectWeaponList;       // 무기 선택 리스트
+    public bool isFirstStage = true;                       // 첫 스테이지 진입 여부
+
+    private Dictionary<string, int> maxAmmo = new Dictionary<string, int>();  // 탄알 종류별로 최대 가지고 있는 탄알 수 보관
+    public Dictionary<string, int> MaxAmmo{ get => maxAmmo; set => maxAmmo = value; }
+
+    [Header("Items")]
+    private Dictionary<Item, int> items = new Dictionary<Item, int>();  // 아이템 보관 딕셔너리
+
+    public Dictionary<Item, int> Items { get => items; set => items = value; }
+
+    public bool isUIOn = false;
+    public int _stage = 0;     // 스테이지 수
+    public int _waveCount = 0; // 웨이브 수
+    public int _killCount = 0; // 적 처치 수
+    public int _bestWaveCount = 0; // 최고 웨이브 돌파 수
+    public int _bestKillCount = 0; // 한 게임에서 최고 처치 수
 }
