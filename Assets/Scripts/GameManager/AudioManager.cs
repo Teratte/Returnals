@@ -55,7 +55,7 @@ public class AudioManager : MonoBehaviour
         audioSource.clip = truckClip;
         audioSource.Play();
 
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(3.0f);
 
         audioSource.Stop();
     }

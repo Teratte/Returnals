@@ -222,16 +222,15 @@ public class GameManager : MonoBehaviour
 
 public class GameData
 {
-    public List<GameObject> selectWeaponList;       // 무기 선택 리스트
     public bool isFirstStage = true;                       // 첫 스테이지 진입 여부
 
     private Dictionary<string, int> maxAmmo = new Dictionary<string, int>();  // 탄알 종류별로 최대 가지고 있는 탄알 수 보관
     public Dictionary<string, int> MaxAmmo{ get => maxAmmo; set => maxAmmo = value; }
 
     [Header("Items")]
-    private Dictionary<Item, int> items = new Dictionary<Item, int>();  // 아이템 보관 딕셔너리
+    private Dictionary<string, int> items = new Dictionary<string, int>();  // 아이템 보관 딕셔너리
 
-    public Dictionary<Item, int> Items { get => items; set => items = value; }
+    public Dictionary<string, int> Items { get => items; set => items = value; }
 
     public bool isUIOn = false;
     public int _stage = 0;     // 스테이지 수
@@ -239,4 +238,9 @@ public class GameData
     public int _killCount = 0; // 적 처치 수
     public int _bestWaveCount = 0; // 최고 웨이브 돌파 수
     public int _bestKillCount = 0; // 한 게임에서 최고 처치 수
+}
+
+public class Weapon
+{
+    public List<GameObject> weapons = new List<GameObject>();
 }

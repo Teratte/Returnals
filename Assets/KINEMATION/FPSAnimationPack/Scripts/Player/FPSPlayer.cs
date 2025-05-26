@@ -50,7 +50,9 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
         private RecoilAnimation _recoilAnimation;
         private float _adsWeight;
 
+        [SerializeField]
         private List<FPSWeapon> _weapons = new List<FPSWeapon>();
+        [SerializeField]
         private List<FPSWeapon> _prefabComponents = new List<FPSWeapon>();
         private int _activeWeaponIndex = 0;
 
@@ -87,6 +89,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
         private KTransform _cachedIkMotion = KTransform.Identity;
         private IKMotion _activeMotion;
         private CharacterController _characterController;   // 캐릭터 컨트롤러
+        [SerializeField]
         private GazetBase gazet;    // 가젯
         private MovementCharacter _movementCharacter;
 
@@ -328,7 +331,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
             return _prefabComponents[_activeWeaponIndex];
         }
 
-        private void Start()
+        private void Awake()
         {
             _animator = GetComponent<Animator>();
             _recoilAnimation = GetComponent<RecoilAnimation>();

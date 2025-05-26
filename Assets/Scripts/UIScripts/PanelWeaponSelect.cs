@@ -11,13 +11,6 @@ public class PanelWeaponSelect : MonoBehaviour
 
     private void OnEnable()
     {
-        //foreach(Transform child in SubWeaponsParent.transform)
-        //    Destroy(child.gameObject);
-        //foreach (Transform child in MainWeaponsParent.transform)
-        //    Destroy(child.gameObject);
-        //foreach (Transform child in GazetParent.transform)
-        //    Destroy(child.gameObject);
-
         foreach (GameObject weapon in GameManager.instance.selectWeaponList)
         {
             UIWeapon newWeapon = weapon.GetComponent<UIWeapon>();
@@ -31,5 +24,16 @@ public class PanelWeaponSelect : MonoBehaviour
                     Instantiate(weapon, GazetParent.transform);
             }
         }
+    }
+
+    private void OnDisable()
+    {
+        foreach (Transform child in SubWeaponsParent.transform)
+            Destroy(child.gameObject);
+        foreach (Transform child in MainWeaponsParent.transform)
+            Destroy(child.gameObject);
+        foreach (Transform child in GazetParent.transform)
+            Destroy(child.gameObject);
+
     }
 }

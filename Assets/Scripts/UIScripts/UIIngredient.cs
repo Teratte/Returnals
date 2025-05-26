@@ -108,4 +108,37 @@ public class UIIngredient : MonoBehaviour, IPointerClickHandler
             GameManager.instance.MaxAmmo[weaponType.ToString()] += createAmmo;
         }
     }
+
+    public void CraftFurniture()
+    {
+        if (!HasIngredients())
+        {
+            Debug.Log("제작 불가!");
+            return;
+        }
+
+        // 재료 차감
+        foreach (Ingredient receipe in ingredientData.ingredients)
+        {
+            foreach (Slot slot in uiBaseCamp.Slots)
+            {
+                if (receipe.ingredient == slot.item)
+                {
+                    slot.SetSlotCount(-receipe.count);
+                }
+            }
+            // 게임매니저에 저장되어있던 아이템 목록에도 차감
+            if (GameManager.instance.Items.ContainsKey(receipe.ingredient))
+            {
+                GameManager.instance.Items[receipe.ingredient] -= receipe.count;
+                // 만약 0이 되면 제거
+                if (GameManager.instance.Items[receipe.ingredient] <= 0)
+                    GameManager.instance.Items.Remove(receipe.ingredient);
+            }
+        }
+        produceTable.UpdateInformation(this);
+
+        Debug.Log("가구 제작 성공!");
+        selectWeaponObject.SetActive(true);
+    }
 }

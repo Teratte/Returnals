@@ -102,6 +102,11 @@ public class ProduceTable : MonoBehaviour
         currentItemInformation.CraftAmmo();
     }
 
+    public void TryCreateFurniture()
+    {
+        currentItemInformation.CraftFurniture();
+    }
+
     // 필요한 재료 슬롯 업데이트 함수
     public void AcquireIngredient(Item _item, int _currentCount, int _maxCount)
     {
