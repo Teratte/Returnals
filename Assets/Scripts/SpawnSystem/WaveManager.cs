@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections;
 
 public class WaveManager : MonoBehaviour
@@ -6,12 +6,11 @@ public class WaveManager : MonoBehaviour
     public MonsterSpawner spawner;
     public float initialDelay = 10f;
     public float waveInterval = 60f;
-    public float totalGameTime = 900f; // 15ºĞ (ÃÊ ´ÜÀ§)
     public int firstWaveCount = 10;
 
-    private float gameTimer = 0f;
     private int currentWave = 0;
-    private int lastWaveSpawnCount = 0;
+    private int currentWaveSpawnCount = 0;
+    private int spawnCount = 0;
 
     void Start()
     {
@@ -21,25 +20,29 @@ public class WaveManager : MonoBehaviour
     IEnumerator ManageWaves()
     {
         yield return new WaitForSeconds(initialDelay);
-        gameTimer = initialDelay;
 
-        while (gameTimer < totalGameTime - 60f) // 1ºĞ ¹Ì¸¸ ³²À¸¸é ÁßÁö
+        while (GameManager.instance.Timer > 60f)
         {
             currentWave++;
-
-            int spawnCount = (currentWave == 1)
-                ? firstWaveCount
-                : Mathf.FloorToInt(lastWaveSpawnCount * 1.3f);
-
-            lastWaveSpawnCount = spawnCount;
-
+            spawnCount = Mathf.FloorToInt(firstWaveCount + Mathf.Pow(currentWave, 1.3f));
             spawner.SpawnMonsters(spawnCount);
-            Debug.Log($"[Wave {currentWave}] ¸ó½ºÅÍ {spawnCount}¸¶¸® ½ºÆùµÊ");
+            currentWaveSpawnCount += spawnCount;
+
+            Debug.Log($"[Wave {currentWave}] ëª¬ìŠ¤í„° {spawnCount}ë§ˆë¦¬ ìŠ¤í°ë¨");
 
             yield return new WaitForSeconds(waveInterval);
-            gameTimer += waveInterval;
         }
 
-        Debug.Log("Wave ½ºÆù Á¾·á (°ÔÀÓ Å¸ÀÌ¸Ó Á¾·á or 1ºĞ ¹Ì¸¸ ³²À½)");
+        // ê²Œì„ ì¢…ë£Œ ì‹œ ëª¬ìŠ¤í„° ì •ë¦¬
+        spawner.DeactivateAllMonsters();
+
+        Debug.Log("Wave ìŠ¤í° ì¢…ë£Œ (ê²Œì„ íƒ€ì´ë¨¸ ì¢…ë£Œ ë˜ëŠ” 1ë¶„ ë¯¸ë§Œ ë‚¨ìŒ)");
+    }
+
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(600, 10, 300, 20), $"[Wave {currentWave}] ëª¬ìŠ¤í„° {currentWaveSpawnCount}ë§ˆë¦¬ ìŠ¤í°ë¨");
+        GUI.Label(new Rect(600, 30, 300, 20), $"ë‚¨ì€ ì‹œê°„: {GameManager.instance.Timer:F1}ì´ˆ");
+        GUI.Label(new Rect(600, 50, 300, 20), $"[Wave {currentWave}] ëª¬ìŠ¤í„° {spawnCount}ë§ˆë¦¬ ìŠ¤í°ë¨");
     }
 }
