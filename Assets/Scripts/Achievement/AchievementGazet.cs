@@ -13,12 +13,12 @@ public class AchievementGazet : Achievement
     private int CountWeapon()
     {
         int count = 0;
-        foreach (var weapon in GameManager.instance.selectWeaponList)
+        foreach (var weapon in WeaponObjectPooling.instance.GameObjects)
         {
-            UIWeapon checkWeapon = weapon.GetComponent<UIWeapon>();
-            if (checkWeapon != null)
+            UIWeapon newWeapon = weapon.GetComponent<UIWeapon>();
+            if (weapon.activeSelf && newWeapon != null)
             {
-                if (checkWeapon.WeaponType == WeaponAttribute.Gazet)
+                if (newWeapon.WeaponType == WeaponAttribute.Gazet)
                     count++;
             }
         }

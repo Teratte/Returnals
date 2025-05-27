@@ -11,18 +11,15 @@ public class PanelWeaponSelect : MonoBehaviour
 
     private void OnEnable()
     {
-        foreach (GameObject weapon in GameManager.instance.selectWeaponList)
+        foreach (var weapon in WeaponObjectPooling.instance.GameObjects)
         {
             UIWeapon newWeapon = weapon.GetComponent<UIWeapon>();
-            if (newWeapon != null)
-            {
-                if (newWeapon.WeaponType == WeaponAttribute.Support)
-                    Instantiate(weapon, SubWeaponsParent.transform);
-                else if(newWeapon.WeaponType == WeaponAttribute.Main)
-                    Instantiate(weapon, MainWeaponsParent.transform);
-                else if(newWeapon.WeaponType == WeaponAttribute.Gazet)
-                    Instantiate(weapon, GazetParent.transform);
-            }
+            if (newWeapon.WeaponType == WeaponAttribute.Support)
+                Instantiate(weapon.gameObject, SubWeaponsParent.transform);
+            else if (newWeapon.WeaponType == WeaponAttribute.Main)
+                Instantiate(weapon.gameObject, MainWeaponsParent.transform);
+            else if (newWeapon.WeaponType == WeaponAttribute.Gazet)
+                Instantiate(newWeapon.gameObject, GazetParent.transform);
         }
     }
 
