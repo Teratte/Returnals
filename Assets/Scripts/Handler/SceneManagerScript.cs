@@ -34,6 +34,8 @@ public class SceneManagerScript : MonoBehaviour
     private GameObject PanelTitle;        // 게임 타이틀
     [SerializeField]
     private GameObject PanelSave;         // 저장 슬롯 패널
+    [SerializeField]
+    private GameObject PanelPause;        // 일시정지 패널
 
     private WaitForSeconds waitChangeDelay;// 씬 변경 지연 시간
 
@@ -52,6 +54,30 @@ public class SceneManagerScript : MonoBehaviour
             waitChangeDelay = new WaitForSeconds(0.5f);
             DontDestroyOnLoad(gameObject);
         }
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape) && !PanelPause.activeSelf && !GameManager.instance.isUIOn)
+        {
+            GameManager.instance.ActiveUI();
+            PanelPause.SetActive(true);
+        }
+    }
+
+    public void DeactivePanelPause()
+    {
+        if(GameManager.instance.isGameStart)
+        {
+            GameManager.instance.DeactiveUI();
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
+            GameManager.instance.isUIOn = false;
+        }
+
+        PanelPause.SetActive(false);
     }
 
     public void LoadRandomScene()
@@ -83,6 +109,12 @@ public class SceneManagerScript : MonoBehaviour
 
     public void LoadScene(string name)
     {
+        PanelPause.SetActive(false);
+        if(name == "BaseCamp")
+        {
+            GameManager.instance.isGameStart = false;
+            GameManager.instance.isUIOn = false;
+        }
         int index = Random.Range(0, loadingSprites.Length);
         loadingBackGround.sprite = loadingSprites[index];
         loadingProgress.value = 0.0f;
