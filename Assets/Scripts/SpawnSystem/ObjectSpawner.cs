@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using System.Collections.Generic;
 
 public class MultiBoxColliderSpawner : MonoBehaviour
 {
@@ -8,11 +7,8 @@ public class MultiBoxColliderSpawner : MonoBehaviour
     public GameObject[] items;
 
     [Header("스폰 개수 설정")]
-    public int minSpawnCount = 2;
-    public int maxSpawnCount = 5;
-
-    [Header("NavMesh 탐색 시도 횟수")]
-    public int maxSampleAttempts = 30;
+    [SerializeField] private int minSpawnCount = 2;
+    [SerializeField] private int maxSpawnCount = 5;
 
     void Start()
     {
@@ -31,12 +27,9 @@ public class MultiBoxColliderSpawner : MonoBehaviour
 
         for (int i = 0; i < spawnCount; i++)
         {
-            // 아이템 랜덤 선택
             GameObject selectedItem = items[Random.Range(0, items.Length)];
 
-            // NavMesh 위 랜덤 위치 찾기
-            Vector3 spawnPos;
-            if (TryGetRandomPointOnNavMesh(out spawnPos))
+            if (TryGetRandomPointOnNavMesh(out Vector3 spawnPos))
             {
                 Instantiate(selectedItem, spawnPos, Quaternion.identity);
             }
@@ -45,11 +38,25 @@ public class MultiBoxColliderSpawner : MonoBehaviour
 
     bool TryGetRandomPointOnNavMesh(out Vector3 result)
     {
-        // NavMesh 전체 영역에서 무작위 위치를 찾음
-        for (int i = 0; i < maxSampleAttempts; i++)
+        NavMeshTriangulation navMeshData = NavMesh.CalculateTriangulation();
+
+        if (navMeshData.vertices.Length == 0 || navMeshData.indices.Length == 0)
         {
-            Vector3 randomPos = RandomNavMeshPointInWorldBounds();
-            if (NavMesh.SamplePosition(randomPos, out NavMeshHit hit, 5.0f, NavMesh.AllAreas))
+            result = Vector3.zero;
+            return false;
+        }
+
+        for (int attempt = 0; attempt < 30; attempt++)
+        {
+            int triangleIndex = Random.Range(0, navMeshData.indices.Length / 3) * 3;
+
+            Vector3 v0 = navMeshData.vertices[navMeshData.indices[triangleIndex]];
+            Vector3 v1 = navMeshData.vertices[navMeshData.indices[triangleIndex + 1]];
+            Vector3 v2 = navMeshData.vertices[navMeshData.indices[triangleIndex + 2]];
+
+            Vector3 randomPoint = GetRandomPointInTriangle(v0, v1, v2);
+
+            if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 1.0f, NavMesh.AllAreas))
             {
                 result = hit.position;
                 return true;
@@ -60,13 +67,17 @@ public class MultiBoxColliderSpawner : MonoBehaviour
         return false;
     }
 
-    Vector3 RandomNavMeshPointInWorldBounds()
+    Vector3 GetRandomPointInTriangle(Vector3 v0, Vector3 v1, Vector3 v2)
     {
-        // NavMesh가 적용된 전체 월드 범위를 기반으로 무작위 위치 선택
-        // 바운드 수동 설정 또는 NavMeshSurface 등에서 가져와야 함
-        Bounds navBounds = new Bounds(Vector3.zero, new Vector3(100, 0, 100)); // 예시로 100x100 범위 사용
-        float x = Random.Range(navBounds.min.x, navBounds.max.x);
-        float z = Random.Range(navBounds.min.z, navBounds.max.z);
-        return new Vector3(x, 0, z);
+        float r1 = Random.value;
+        float r2 = Random.value;
+
+        if (r1 + r2 > 1f)
+        {
+            r1 = 1f - r1;
+            r2 = 1f - r2;
+        }
+
+        return v0 + r1 * (v1 - v0) + r2 * (v2 - v0);
     }
 }

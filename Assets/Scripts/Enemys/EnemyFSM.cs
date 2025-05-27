@@ -443,13 +443,13 @@ public class EnemyFSM : MonoBehaviour, IDamageable
         currentPlayingAnimation = _clip.name;               // 현재 재생중인 애니메이션 이름 저장
     }
 
-    private void OnGUI()
+    /*private void OnGUI()
     {
         if (rigid == null) return;
 
         GUI.Label(new Rect(10, 10, 300, 20), "상태 : " + currentState);
 
-    }
+    }*/
 
     private void UpdateAnimation() // 애니메이션 업데이트, 애니메이션 클립 이름으로 애니메이션 재생, 메카님으로 제어하지 않음
     {
