@@ -40,7 +40,7 @@ public class UIIngredient : MonoBehaviour, IPointerClickHandler
     // 무기 제작
     public void CraftWeapon()
     {
-        if(!HasIngredients())
+        if(!HasIngredients() || selectWeaponObject.activeSelf)
         {
             Debug.Log("제작 불가!");
             return;
@@ -69,7 +69,10 @@ public class UIIngredient : MonoBehaviour, IPointerClickHandler
 
         // 무기생성
         Debug.Log("제작 성공!");
-        GameManager.instance.selectWeaponList.Add(selectWeaponObject);  // 무기 선택 리스트에 해당 무기 선택 버튼 추가
+        if(!selectWeaponObject.activeSelf)
+        {
+            selectWeaponObject.SetActive(true);
+        }
     }
 
     public void CraftAmmo()

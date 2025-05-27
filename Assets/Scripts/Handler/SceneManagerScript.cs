@@ -32,6 +32,8 @@ public class SceneManagerScript : MonoBehaviour
     private GameObject postProcessVolume; // 게임 시작
     [SerializeField]
     private GameObject PanelTitle;        // 게임 타이틀
+    [SerializeField]
+    private GameObject PanelSave;         // 저장 슬롯 패널
 
     private WaitForSeconds waitChangeDelay;// 씬 변경 지연 시간
 
@@ -112,6 +114,21 @@ public class SceneManagerScript : MonoBehaviour
         blurVolume.SetActive(false);
         postProcessVolume.SetActive(true);
         PanelTitle.SetActive(false);
+    }
+
+    public void ShowSavePanel()
+    {
+        PanelSave.SetActive(true);
+        PanelTitle.SetActive(false);
+    }
+
+    public void LoadData()
+    {
+        DataManager.instance.LoadData();
+        GameManager.instance.isUIOn = false;
+        blurVolume.SetActive(false);
+        postProcessVolume.SetActive(true);
+        PanelSave.SetActive(false);
     }
 
     public void ExitGame()

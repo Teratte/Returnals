@@ -2,16 +2,14 @@ using UnityEngine;
 using System.IO;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using GDS.Core.Events;
 
 public class DataManager : MonoBehaviour
 {
     public static DataManager instance;
     private string gameDataPath; // 파일 경로
-    private string weaponDataPath;// 무기 파일 경로
+
     [SerializeField]
     private string gameDataName; // 파일 이름
-    private string weaponDataName = "WeaponList";
 
     [Header("Item List")]
     [SerializeField]
@@ -22,9 +20,8 @@ public class DataManager : MonoBehaviour
     private UIBaseCamp uiBaseCamp;
 
     GameData gameData = new GameData();
-    Weapon weaponList = new Weapon();
 
-    private FurnitureManager furnitureManager;
+    private FurnitureManager furnitureManager;  // 가구 매니저
 
     private void Awake()
     {
@@ -37,7 +34,6 @@ public class DataManager : MonoBehaviour
         }
         instance = this;
         gameDataPath = Path.Combine(Application.dataPath, gameDataName + ".json");   // 파일 이름 설정
-        weaponDataPath = Path.Combine(Application.dataPath, weaponDataName + ".json"); // 무기리스트 파일 이름 설정
         furnitureManager = FindAnyObjectByType<FurnitureManager>();
         Debug.Log(gameDataPath);
         DontDestroyOnLoad(gameObject);
@@ -48,19 +44,15 @@ public class DataManager : MonoBehaviour
     {
         SaveGameData();
         string data = JsonConvert.SerializeObject(gameData);
-        string weaponData = JsonUtility.ToJson(weaponList, true);
         File.WriteAllText(gameDataPath, data);
-        File.WriteAllText(weaponDataPath, weaponData);
     }
 
     public void LoadData()
     {
-        if (File.Exists(gameDataPath) && File.Exists(weaponDataPath))
+        if (File.Exists(gameDataPath))
         {
             string jsonData = File.ReadAllText(gameDataPath);
-            string weaponJsonData = File.ReadAllText(weaponDataPath);
             gameData = JsonConvert.DeserializeObject<GameData>(jsonData);
-            weaponList = JsonUtility.FromJson<Weapon>(weaponJsonData);
 
             LoadGameData();
         }
@@ -72,7 +64,7 @@ public class DataManager : MonoBehaviour
 
     public void SaveGameData()
     {
-        weaponList.weapons = GameManager.instance.selectWeaponList;
+        AddWeapon();
         gameData.isFirstStage = GameManager.instance.isFirstStage;
         gameData.MaxAmmo = GameManager.instance.MaxAmmo;
         AddItem();
@@ -84,7 +76,7 @@ public class DataManager : MonoBehaviour
 
     public void LoadGameData()
     {
-        GameManager.instance.selectWeaponList = weaponList.weapons;
+        CheckWeapon();
         GameManager.instance.isFirstStage = gameData.isFirstStage;
         GameManager.instance.MaxAmmo = gameData.MaxAmmo;
         CheckItem();
@@ -97,9 +89,22 @@ public class DataManager : MonoBehaviour
 
     public void AddItem()
     {
+        gameData.Items.Clear();
         foreach(var item in GameManager.instance.Items)
         {
             gameData.Items.Add(item.Key.itemName, item.Value);
+        }
+    }
+
+    public void AddWeapon()
+    {
+        gameData.weapons.Clear();
+        foreach(var weapon in WeaponObjectPooling.instance.ObjectPooling)
+        {
+            if(weapon.gameObject.activeSelf)
+            {
+                gameData.weapons.Add(weapon.Name);
+            }
         }
     }
 
@@ -116,5 +121,13 @@ public class DataManager : MonoBehaviour
 
         foreach (var item in GameManager.instance.Items)
             uiBaseCamp.AcquireItem(item.Key, item.Value);
+    }
+
+    public void CheckWeapon()
+    {
+        foreach(var weapon in gameData.weapons)
+        {
+            WeaponObjectPooling.instance.ActivePooling(weapon);
+        }
     }
 }

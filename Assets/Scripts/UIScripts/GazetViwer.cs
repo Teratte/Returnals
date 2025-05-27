@@ -7,7 +7,6 @@ public class GazetViwer : MonoBehaviour
     [SerializeField]
     private Image gazetImage;       // 啊连 酒捞能
     private GazetBase gazetBase;    // 家蜡茄 啊连
-    private PlayerAnimator playerAnimator;
 
     private void Awake()
     {

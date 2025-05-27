@@ -35,13 +35,10 @@ public class GameManager : MonoBehaviour
     public bool isGameOver = false;
 
     public bool isGameStart = false;
-    public List<GameObject> holdingWeaponPrefabs;   // 보유 무기 리스트
     public GameObject mainWeapon;                   // 메인 무기
     public GameObject subWeapon;                    // 보조 무기
     public GameObject holdingGazet;                 // 보유 가젯
-    public List<GameObject> selectWeaponList;       // 무기 선택 리스트
     public bool isFirstStage = true;                       // 첫 스테이지 진입 여부
-    private FPSPlayer player;
 
     private Dictionary<string, int> maxAmmo = new Dictionary<string, int>();  // 탄알 종류별로 최대 가지고 있는 탄알 수 보관
     public Dictionary<string, int> MaxAmmo
@@ -109,7 +106,6 @@ public class GameManager : MonoBehaviour
         maxAmmo.Add("SmallMachinegun", 999);
         maxAmmo.Add("HeavyWeapon", 999);
         maxAmmo.Add("Handgun", 999);
-
         DontDestroyOnLoad(gameObject);
 
         // 씬이 로드될 때 실행할 함수 등록
@@ -141,21 +137,12 @@ public class GameManager : MonoBehaviour
             _killCount = 0;
             timer = 900.0f;
             Debug.Log("인 게임 씬 로드");
-            //Slots = FindObjectOfType<InventoryUI>().Slots;
-            player = FindAnyObjectByType<FPSPlayer>();
-            if(player != null)
-            {
-                player.playerSettings.weaponPrefabs.Clear();
-                player.playerSettings.weaponPrefabs.Add(mainWeapon);
-                player.playerSettings.weaponPrefabs.Add(subWeapon);
-            }
         }
         else if(SceneManager.GetActiveScene().name == "BaseCamp")
         {
             EnemyFSM.OnKilled.RemoveListener(PlusKillCount);
             RenewalBestWaveCount();
             RenewalBestKillCount();
-            holdingWeaponPrefabs.Clear();
             mainWeapon = null;
             subWeapon = null;
             holdingGazet = null;
@@ -216,7 +203,6 @@ public class GameManager : MonoBehaviour
             _bestKillCount = _killCount;
         }
     }
-
     private void OnEnable()
     {
         WaveViewer.OnWavePlus += PlusWaveCount;
@@ -231,7 +217,7 @@ public class GameManager : MonoBehaviour
 public class GameData
 {
     public bool isFirstStage = true;                       // 첫 스테이지 진입 여부
-
+    public List<string> weapons = new List<string>();
     private Dictionary<string, int> maxAmmo = new Dictionary<string, int>();  // 탄알 종류별로 최대 가지고 있는 탄알 수 보관
     public Dictionary<string, int> MaxAmmo{ get => maxAmmo; set => maxAmmo = value; }
 
@@ -247,9 +233,4 @@ public class GameData
     public int _killCount = 0; // 적 처치 수
     public int _bestWaveCount = 0; // 최고 웨이브 돌파 수
     public int _bestKillCount = 0; // 한 게임에서 최고 처치 수
-}
-
-public class Weapon
-{
-    public List<GameObject> weapons = new List<GameObject>();
 }

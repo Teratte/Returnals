@@ -342,7 +342,12 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
             _triggerDisciplineLayerIndex = _animator.GetLayerIndex("TriggerDiscipline");
             _rightHandLayerIndex = _animator.GetLayerIndex("RightHand");
             _tacSprintLayerIndex = _animator.GetLayerIndex("TacSprint");
-            
+
+            // ¹«±â ÀåÂø
+            playerSettings.weaponPrefabs.Clear();
+            playerSettings.weaponPrefabs.Add(GameManager.instance.mainWeapon);
+            playerSettings.weaponPrefabs.Add(GameManager.instance.subWeapon);
+
             KTransform root = new KTransform(transform.root);
             var localCamera = root.GetRelativeTransform(new KTransform(cameraPoint), false);
 
