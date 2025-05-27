@@ -99,11 +99,12 @@ public class DataManager : MonoBehaviour
     public void AddWeapon()
     {
         gameData.weapons.Clear();
-        foreach(var weapon in WeaponObjectPooling.instance.ObjectPooling)
+        foreach(var weapon in WeaponObjectPooling.instance.GameObjects)
         {
-            if(weapon.gameObject.activeSelf)
+            if(weapon.activeSelf)
             {
-                gameData.weapons.Add(weapon.Name);
+                UIWeapon uiWeapon = weapon.GetComponent<UIWeapon>();
+                gameData.weapons.Add(uiWeapon.Name);
             }
         }
     }
@@ -125,6 +126,7 @@ public class DataManager : MonoBehaviour
 
     public void CheckWeapon()
     {
+        WeaponObjectPooling.instance.DeactivePooling();
         foreach(var weapon in gameData.weapons)
         {
             WeaponObjectPooling.instance.ActivePooling(weapon);
