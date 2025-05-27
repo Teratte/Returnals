@@ -37,7 +37,7 @@ public class WeaponObjectPooling : MonoBehaviour
         foreach(GameObject weapon in gameObjects)
         {
             UIWeapon uiWeapon = weapon.GetComponent<UIWeapon>();
-            if (uiWeapon.Name == weaponName)
+            if (uiWeapon.Name == weaponName && uiWeapon != null)
             {
                 weapon.gameObject.SetActive(true);
             }
