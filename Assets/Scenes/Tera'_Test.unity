@@ -419,7 +419,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -462,7 +462,7 @@ Light:
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0.05
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -483,7 +483,7 @@ Transform:
   m_GameObject: {fileID: 462212023}
   serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1108,9 +1108,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e090a9750849f49c282494b652e54999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 900
+  timer: 100
   isGameOver: 0
-  isGameStart: 0
+  isGameStart: 1
   holdingWeaponPrefabs: []
   mainWeapon: {fileID: 0}
   subWeapon: {fileID: 0}
@@ -1720,7 +1720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4446804a39fc604a82a38185a6349ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsters:
+  monsterPrefabs:
   - {fileID: 2056028228489344616, guid: 4eecfbfcf3e4e82498178ff9f906a033, type: 3}
   - {fileID: 4022663905808563727, guid: 4f665ba8fc7477a4084f9cbd342a1d14, type: 3}
   - {fileID: 4668869684965564852, guid: 4541c8cf95cf7a244b9a67f93612f221, type: 3}
@@ -1730,7 +1730,7 @@ MonoBehaviour:
   - {fileID: 7840433678593859463, guid: 9eb0a393d0e86f64d9dd51e95b339c72, type: 3}
   - {fileID: 343174607881941187, guid: 5bed2d6ca128cfd428d6bd0b10d9292b, type: 3}
   - {fileID: 4481675841218088278, guid: 517a3c62aa3153a4287c5185f6f81949, type: 3}
-  spawnCount: 10
+  poolSizePerType: 225
 --- !u!4 &1560296525
 Transform:
   m_ObjectHideFlags: 0
@@ -2137,9 +2137,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 1560296524}
   initialDelay: 10
-  waveInterval: 10
-  totalGameTime: 900
-  firstWaveCount: 10
+  waveInterval: 60
+  firstWaveCount: 7
 --- !u!4 &1897524027
 Transform:
   m_ObjectHideFlags: 0
