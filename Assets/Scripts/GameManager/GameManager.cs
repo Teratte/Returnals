@@ -143,9 +143,12 @@ public class GameManager : MonoBehaviour
             EnemyFSM.OnKilled.RemoveListener(PlusKillCount);
             RenewalBestWaveCount();
             RenewalBestKillCount();
+            Time.timeScale = 1.0f;
             mainWeapon = null;
             subWeapon = null;
             holdingGazet = null;
+            isGameStart = false;
+            isUIOn = false;
         }
     }
 
