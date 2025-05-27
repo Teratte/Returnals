@@ -111,7 +111,9 @@ public class UIIngredient : MonoBehaviour, IPointerClickHandler
 
     public void CraftFurniture()
     {
-        if (!HasIngredients())
+        var furniture = selectWeaponObject.GetComponent<Furniture>();
+
+        if (!HasIngredients() || GameManager.instance.Furnitures[furniture.FurnitureName])
         {
             Debug.Log("제작 불가!");
             return;
@@ -140,5 +142,11 @@ public class UIIngredient : MonoBehaviour, IPointerClickHandler
 
         Debug.Log("가구 제작 성공!");
         selectWeaponObject.SetActive(true);
+        
+        // 가구 딕셔너리에 포함되어 있지 않다면 추가.
+        if(!GameManager.instance.Furnitures[furniture.FurnitureName])
+        {
+            GameManager.instance.Furnitures[furniture.FurnitureName] = true;
+        }
     }
 }

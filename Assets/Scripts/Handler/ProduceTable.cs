@@ -20,10 +20,12 @@ public class ProduceTable : MonoBehaviour
     private RequireingredientSlot[] requireingredientSlots; // 필요한 재료들
 
     private UIIngredient currentItemInformation = null;   // 현재 보여지는 아이템
+    private FurnitureManager furnitureManager;            // 가구 관리자
 
     private void Awake()
     {
         requireingredientSlots = requireSlotsParent.GetComponentsInChildren<RequireingredientSlot>();
+        furnitureManager = FindAnyObjectByType<FurnitureManager>();
     }
 
     public void ActiveBulletPanel()
@@ -105,6 +107,7 @@ public class ProduceTable : MonoBehaviour
     public void TryCreateFurniture()
     {
         currentItemInformation.CraftFurniture();
+        furnitureManager.ActiveFurnitures();
     }
 
     // 필요한 재료 슬롯 업데이트 함수

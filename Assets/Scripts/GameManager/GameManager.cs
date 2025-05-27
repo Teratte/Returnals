@@ -53,10 +53,18 @@ public class GameManager : MonoBehaviour
     [Header("Items")]
     private Dictionary<Item, int> items = new Dictionary<Item, int>();  // 아이템 보관 딕셔너리
 
+    [Header("Furniture")]
+    private Dictionary<string,bool> furnitures = new Dictionary<string,bool>(); // 가구 딕셔너리(활성, 비활성 상태로 보유)
     public Dictionary<Item, int> Items
     {
         set=> items = value;
         get => items;
+    }
+
+    public Dictionary<string, bool> Furnitures
+    {
+        set => furnitures = value;
+        get => furnitures;
     }
 
     public bool isUIOn = false;
@@ -231,6 +239,7 @@ public class GameData
     private Dictionary<string, int> items = new Dictionary<string, int>();  // 아이템 보관 딕셔너리
 
     public Dictionary<string, int> Items { get => items; set => items = value; }
+    public Dictionary<string, bool> Furnitures = new Dictionary<string, bool>();
 
     public bool isUIOn = false;
     public int _stage = 0;     // 스테이지 수

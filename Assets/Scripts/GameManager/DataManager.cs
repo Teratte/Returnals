@@ -24,6 +24,8 @@ public class DataManager : MonoBehaviour
     GameData gameData = new GameData();
     Weapon weaponList = new Weapon();
 
+    private FurnitureManager furnitureManager;
+
     private void Awake()
     {
         #region 싱글톤
@@ -36,6 +38,7 @@ public class DataManager : MonoBehaviour
         instance = this;
         gameDataPath = Path.Combine(Application.dataPath, gameDataName + ".json");   // 파일 이름 설정
         weaponDataPath = Path.Combine(Application.dataPath, weaponDataName + ".json"); // 무기리스트 파일 이름 설정
+        furnitureManager = FindAnyObjectByType<FurnitureManager>();
         Debug.Log(gameDataPath);
         DontDestroyOnLoad(gameObject);
         #endregion
@@ -73,6 +76,7 @@ public class DataManager : MonoBehaviour
         gameData.isFirstStage = GameManager.instance.isFirstStage;
         gameData.MaxAmmo = GameManager.instance.MaxAmmo;
         AddItem();
+        gameData.Furnitures = GameManager.instance.Furnitures;
         gameData._stage = GameManager.instance.Stage;
         gameData._bestWaveCount = GameManager.instance.BestWaveCount;
         gameData._bestKillCount = GameManager.instance.BestKillCount;
@@ -84,6 +88,8 @@ public class DataManager : MonoBehaviour
         GameManager.instance.isFirstStage = gameData.isFirstStage;
         GameManager.instance.MaxAmmo = gameData.MaxAmmo;
         CheckItem();
+        GameManager.instance.Furnitures = gameData.Furnitures;
+        furnitureManager.ActiveFurnitures();
         GameManager.instance.Stage = gameData._stage;
         GameManager.instance.BestKillCount = gameData._bestKillCount;
         GameManager.instance.BestWaveCount = gameData._bestWaveCount;
