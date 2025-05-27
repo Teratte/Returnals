@@ -4,11 +4,11 @@ public class WeaponObjectPooling : MonoBehaviour
 {
     public static WeaponObjectPooling instance;
 
-    private UIWeapon[] objectPooling;
+    //private UIWeapon[] objectPooling;
     [SerializeField]
     private GameObject[] gameObjects;
 
-    public UIWeapon[] ObjectPooling => objectPooling;
+    //public UIWeapon[] ObjectPooling => objectPooling;
     public GameObject[] GameObjects => gameObjects;
 
     private void Awake()
@@ -19,16 +19,16 @@ public class WeaponObjectPooling : MonoBehaviour
             return;
         }
         instance = this;
-        objectPooling = transform.GetComponentsInChildren<UIWeapon>();
+        //objectPooling = transform.GetComponentsInChildren<UIWeapon>();
         DontDestroyOnLoad(gameObject);
         //DeactivePooling();
     }
 
     public void DeactivePooling()
     {
-        foreach (UIWeapon weapon in objectPooling)
+        foreach (var weapon in GameObjects)
         {
-            weapon.gameObject.SetActive(false);
+            weapon.SetActive(false);
         }
     }
 
