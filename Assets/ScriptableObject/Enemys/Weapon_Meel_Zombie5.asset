@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Weapon_Meel_Zombie5
   m_EditorClassIdentifier: 
   enemyName: "\uBB34\uAE30 \uC880\uBE445"
-  maxHealth: 100
-  moveSpeed: 2.5
-  chaseSpeed: 3
+  maxHealth: 300
+  moveSpeed: 1.5
+  chaseSpeed: 2
   rotationSpeed: 5
   attackRange: 3
   defense: 2
-  monsterDamage: 50
+  monsterDamage: 90
   attackDelay: 4
   enemyAttackType: 0
   idleAnimation: {fileID: 7400000, guid: a19a3d55cfbf7f24dabe3b7fd6459196, type: 2}

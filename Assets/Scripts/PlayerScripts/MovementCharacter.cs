@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MovementCharacter : MonoBehaviour, IDamageable
 {
-    public static Action OnDie; 
+    public static Action OnDie;
+
     [SerializeField]
     private InventoryUI inventoryUI;
 
@@ -23,6 +25,8 @@ public class MovementCharacter : MonoBehaviour, IDamageable
     private bool isRecoveryMode = false;
     public bool IsRecoveryMode => isRecoveryMode;
 
+    // 인 게임 중에 획득한 아이템
+    private Dictionary<Item, int> acquiredItems = new Dictionary<Item, int>();
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
@@ -92,7 +96,7 @@ public class MovementCharacter : MonoBehaviour, IDamageable
         if(collision.gameObject.CompareTag("Eatable"))
         {
             inventoryUI.AcquireItem(collision.gameObject.GetComponent<EatableObject>().item);
-            GameManager.instance.AddItem(collision.gameObject.GetComponent<EatableObject>().item);
+            AddItem(collision.GetComponent<EatableObject>().item);
 
             Destroy(collision.gameObject);
             Debug.Log(collision.gameObject.name);
@@ -125,20 +129,55 @@ public class MovementCharacter : MonoBehaviour, IDamageable
         }
     }
 
+    private void AddItem(Item item, int count =1)
+    {
+        if (!acquiredItems.ContainsKey(item))
+            acquiredItems.Add(item, count);
+        else
+            acquiredItems[item] += count;
+    }
+
+    public void ClearStage()
+    {
+        // 게임매니저에 있는 아이템 목록에 추가
+        foreach(var item in acquiredItems)
+        {
+            if (GameManager.instance.Items.ContainsKey(item.Key))
+                GameManager.instance.Items[item.Key] += item.Value;
+            else
+                GameManager.instance.Items.Add(item.Key, item.Value);
+        }
+
+        //// 인벤토리UI에 지금까지 얻었던 아이템 목록 추가
+        //foreach(var item in acquiredItems)
+        //{
+        //    inventoryUI.AcquireItem(item.Key, item.Value);
+        //}
+    }
+
     // 플레이어 데미지 처리
     public void OnDamage(float damage)
     {
         // 데미지 입을 시
         status.isNotAttack = true;
-        //animator.SetTrigger("onHit");
         float final = 100 / (100 + status.Defense);
         bool isDie = status.DecreaseHP(damage * final);
 
         if(isDie)
         {
-            //animator.SetBool("isDie", true);
+            acquiredItems.Clear();
             GameManager.instance.isGameOver = true;
             OnDie?.Invoke();
         }
+    }
+
+    private void OnEnable()
+    {
+        InventoryUI.OnClearStage += ClearStage;
+    }
+
+    private void OnDisable()
+    {
+        InventoryUI.OnClearStage -= ClearStage;
     }
 }

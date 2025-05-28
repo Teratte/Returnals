@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -29,6 +30,8 @@ public class Status : MonoBehaviour
     private float defense = 50.0f;         // 방어력
     [SerializeField]
     private float recoverAbleTime = 3.0f;   // 회복가능 시간
+    [SerializeField]
+    private float unionPercent = 1.05f;
 
     public bool OnAdrenaline = false;
 
@@ -69,6 +72,7 @@ public class Status : MonoBehaviour
 
     private void Awake()
     {
+        OnUnion();
         playerHP = maxHP;
         playerStamina = maxStamina;
     }
@@ -117,5 +121,32 @@ public class Status : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void OnUnion()
+    {
+        int count = 0;
+        foreach(KeyValuePair<string, bool>pair in GameManager.instance.Furnitures)
+        {
+            if(pair.Value)
+            {
+                count++;
+            }
+        }
+
+        if(count >= 3)
+        {
+            maxHP *= unionPercent;
+            maxStamina *= unionPercent;
+        }
+        if(count >= 6)
+        {
+            walkSpeed *= unionPercent;
+            runSpeed *= unionPercent;
+        }
+        if(count >= 8)
+        {
+            defense *= unionPercent;
+        }
     }
 }

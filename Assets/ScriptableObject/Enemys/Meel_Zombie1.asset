@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Meel_Zombie1
   m_EditorClassIdentifier: 
   enemyName: "\uC880\uBE441"
-  maxHealth: 100
+  maxHealth: 130
   moveSpeed: 3.5
-  chaseSpeed: 5
+  chaseSpeed: 3.5
   rotationSpeed: 5
   attackRange: 1.2
   defense: 1.5
