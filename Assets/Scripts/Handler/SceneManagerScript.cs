@@ -148,6 +148,15 @@ public class SceneManagerScript : MonoBehaviour
         PanelTitle.SetActive(false);
     }
 
+    public void GoToTitle()
+    {
+        LoadScene("BaseCamp");
+        GameManager.instance.isUIOn = true;
+        blurVolume.SetActive(true);
+        postProcessVolume.SetActive(false);
+        PanelTitle.SetActive(true);
+    }
+
     public void ShowSavePanel()
     {
         PanelSave.SetActive(true);
