@@ -1,4 +1,5 @@
 using KINEMATION.FPSAnimationPack.Scripts.Player;
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
+    public static Action OnClearStage;
     [SerializeField]
     private GameObject InventoryObject; // 인벤토리 창
     [SerializeField]
@@ -182,7 +184,8 @@ public class InventoryUI : MonoBehaviour
     }
 
     public void ActiveClosingPanel()
-    { 
+    {
+        OnClearStage?.Invoke();
         GameManager.instance.ActiveUI();
         Closing();
         PanelClosing.SetActive(true);
