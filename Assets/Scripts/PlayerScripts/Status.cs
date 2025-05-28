@@ -144,7 +144,7 @@ public class Status : MonoBehaviour
             walkSpeed *= unionPercent;
             runSpeed *= unionPercent;
         }
-        if(count >= 9)
+        if(count >= 8)
         {
             defense *= unionPercent;
         }
