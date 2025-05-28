@@ -120,7 +120,11 @@ public class SceneManagerScript : MonoBehaviour
         int index = Random.Range(0, loadingSprites.Length);
         loadingBackGround.sprite = loadingSprites[index];
         loadingProgress.value = 0.0f;
-        loadingScreen.SetActive(true);
+        
+        if(name != "BaseCamp")
+        {
+            loadingScreen.SetActive(true);
+        }
 
         StartCoroutine(LoadSceneAsync(name));
     }
@@ -154,6 +158,8 @@ public class SceneManagerScript : MonoBehaviour
     {
         LoadScene("BaseCamp");
         GameManager.instance.isUIOn = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         blurVolume.SetActive(true);
         postProcessVolume.SetActive(false);
         PanelTitle.SetActive(true);
