@@ -68,6 +68,7 @@ public class DialogSystem : MonoBehaviour
                 // 엔딩
                 arrow.SetActive(false);
                 speakText.text = "The End";
+                StartCoroutine("OnBaseCamp");
                 return true;
             }
         }
@@ -110,5 +111,12 @@ public class DialogSystem : MonoBehaviour
 
         // 대사가 완료되었을 때 출력되는 커서 활성화
         arrow.SetActive(true);
+    }
+
+    private IEnumerator OnBaseCamp()
+    {
+        yield return new WaitForSeconds(3.0f);
+
+        SceneManagerScript.Instance.GoToTitle();
     }
 }
