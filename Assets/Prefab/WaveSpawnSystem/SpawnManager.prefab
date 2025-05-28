@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &538267589548912853
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3112077750477507975}
+  - component: {fileID: 8924649807075316608}
+  - component: {fileID: 6842013249389768544}
+  m_Layer: 0
+  m_Name: SpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3112077750477507975
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538267589548912853}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8924649807075316608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538267589548912853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4446804a39fc604a82a38185a6349ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterPrefabs:
+  - {fileID: 2056028228489344616, guid: 4eecfbfcf3e4e82498178ff9f906a033, type: 3}
+  - {fileID: 4022663905808563727, guid: 4f665ba8fc7477a4084f9cbd342a1d14, type: 3}
+  - {fileID: 4668869684965564852, guid: 4541c8cf95cf7a244b9a67f93612f221, type: 3}
+  - {fileID: 6256583199356865944, guid: 9835130baecfe2a49a5d1c05a2a9ef17, type: 3}
+  - {fileID: 1135728509634986, guid: 7b67982c68796b4479bb18e4b17415e6, type: 3}
+  - {fileID: 1054712327344656, guid: 6755316da485286478bcd0b70d47140a, type: 3}
+  - {fileID: 7840433678593859463, guid: 9eb0a393d0e86f64d9dd51e95b339c72, type: 3}
+  - {fileID: 343174607881941187, guid: 5bed2d6ca128cfd428d6bd0b10d9292b, type: 3}
+  - {fileID: 4481675841218088278, guid: 517a3c62aa3153a4287c5185f6f81949, type: 3}
+  poolSizePerType: 225
+--- !u!114 &6842013249389768544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538267589548912853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d59878f0ba2c84f4db5d1ced131f8fc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 8224386420795891188, guid: b502745a1b818554c92e15c893282aca, type: 3}
+  - {fileID: 6668517971469723275, guid: aba0dc59aef0e6347a1e1dabb237a896, type: 3}
+  - {fileID: 7474319304864936533, guid: 4d45f4752a3ea3e4a9fd9c087b3ca70b, type: 3}
+  - {fileID: 4486039636450778972, guid: e13b90d94107cab4f9978cbbbfa5429a, type: 3}
+  minSpawnCount: 3
+  maxSpawnCount: 5

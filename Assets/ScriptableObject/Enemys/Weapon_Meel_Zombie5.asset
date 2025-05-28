@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6097477d0dc6e664a8c527aed202c0d4, type: 3}
+  m_Name: Weapon_Meel_Zombie5
+  m_EditorClassIdentifier: 
+  enemyName: "\uBB34\uAE30 \uC880\uBE445"
+  maxHealth: 100
+  moveSpeed: 2.5
+  chaseSpeed: 3
+  rotationSpeed: 5
+  attackRange: 3
+  defense: 2
+  monsterDamage: 50
+  attackDelay: 4
+  enemyAttackType: 0
+  idleAnimation: {fileID: 7400000, guid: a19a3d55cfbf7f24dabe3b7fd6459196, type: 2}
+  patrolAnimation: {fileID: 7400000, guid: 75780bbac5506c3439663a5bcc58a816, type: 2}
+  chaseAnimation: {fileID: 7400000, guid: 678e0ef5e4b421f41a71622d113f0392, type: 2}
+  attackAnimation: {fileID: 7400000, guid: 6a4b95f2a4c4a9f40ad29ca7385bca71, type: 2}
+  dieAnimation: {fileID: 7400000, guid: cc592635c78d6bf48b0c57aa7c25a3bc, type: 2}
+  searchAnimation: {fileID: 7400000, guid: aca23cd08e63b48418ed0f3caa6f1f40, type: 2}
+  selfDestructDelay: 0
+  selfDestructRadius: 0
+  selfDestructDamage: 0
+  detectionAngle: 180
+  rearDetectionAngle: 120
+  rearDetectionRange: 5
+  detectionRange: 10
+  idleWaitTimeMin: 3
+  idleWaitTimeMax: 5
+  patrolTimeMin: 3
+  patrolTimeMax: 5
+  zombieSound: {fileID: 0}
+  attackSound: {fileID: 0}
+  dieSound: {fileID: 0}
+  itemList: []
+  DropPercent: 0

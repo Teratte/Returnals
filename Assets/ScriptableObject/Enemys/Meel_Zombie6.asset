@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6097477d0dc6e664a8c527aed202c0d4, type: 3}
+  m_Name: Meel_Zombie6
+  m_EditorClassIdentifier: 
+  enemyName: "\uBB34\uAE30 \uC880\uBE446"
+  maxHealth: 100
+  moveSpeed: 3
+  chaseSpeed: 4
+  rotationSpeed: 5
+  attackRange: 1.5
+  defense: 1.3
+  monsterDamage: 25
+  attackDelay: 2
+  enemyAttackType: 0
+  idleAnimation: {fileID: 7400000, guid: 278e75402f012704e855564043abc1a7, type: 2}
+  patrolAnimation: {fileID: 7400000, guid: 87e3f21db6137b245b076aa44ff7680e, type: 2}
+  chaseAnimation: {fileID: 7400000, guid: 522b15b411aae954f91a8cd63c042a13, type: 2}
+  attackAnimation: {fileID: 7400000, guid: 55c35cb36db29334aa52fa08dd286fab, type: 2}
+  dieAnimation: {fileID: 7400000, guid: 04490b9de24f281439b3a200eb7d102f, type: 2}
+  searchAnimation: {fileID: 7400000, guid: 2366dd973d6ae22448bac7823fbe4006, type: 2}
+  selfDestructDelay: 0
+  selfDestructRadius: 0
+  selfDestructDamage: 0
+  detectionAngle: 180
+  rearDetectionAngle: 120
+  rearDetectionRange: 5
+  detectionRange: 10
+  idleWaitTimeMin: 3
+  idleWaitTimeMax: 5
+  patrolTimeMin: 3
+  patrolTimeMax: 5
+  zombieSound: {fileID: 0}
+  attackSound: {fileID: 0}
+  dieSound: {fileID: 0}
+  itemList: []
+  DropPercent: 0

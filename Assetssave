@@ -1,0 +1,61 @@
+{
+    "timer": 900.0,
+    "isGameOver": false,
+    "isGameStart": false,
+    "holdingWeaponPrefabs": [],
+    "mainWeapon": {
+        "instanceID": 0
+    },
+    "subWeapon": {
+        "instanceID": 0
+    },
+    "holdingGazet": {
+        "instanceID": 0
+    },
+    "selectWeaponList": [
+        {
+            "instanceID": 85258
+        },
+        {
+            "instanceID": 85260
+        },
+        {
+            "instanceID": 85262
+        },
+        {
+            "instanceID": 34758
+        },
+        {
+            "instanceID": 85264
+        },
+        {
+            "instanceID": 34724
+        },
+        {
+            "instanceID": 34752
+        },
+        {
+            "instanceID": 34768
+        },
+        {
+            "instanceID": 85266
+        },
+        {
+            "instanceID": 85268
+        },
+        {
+            "instanceID": 34732
+        },
+        {
+            "instanceID": 34720
+        },
+        {
+            "instanceID": 34738
+        },
+        {
+            "instanceID": 34704
+        }
+    ],
+    "isFirstStage": true,
+    "isUIOn": true
+}
