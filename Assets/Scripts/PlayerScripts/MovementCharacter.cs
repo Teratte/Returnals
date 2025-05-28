@@ -26,7 +26,7 @@ public class MovementCharacter : MonoBehaviour, IDamageable
     public bool IsRecoveryMode => isRecoveryMode;
 
     // 인 게임 중에 획득한 아이템
-    private Dictionary<Item, int> acquiredItems;
+    private Dictionary<Item, int> acquiredItems = new Dictionary<Item, int>();
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
@@ -96,7 +96,7 @@ public class MovementCharacter : MonoBehaviour, IDamageable
         if(collision.gameObject.CompareTag("Eatable"))
         {
             inventoryUI.AcquireItem(collision.gameObject.GetComponent<EatableObject>().item);
-            GameManager.instance.AddItem(collision.gameObject.GetComponent<EatableObject>().item);
+            AddItem(collision.GetComponent<EatableObject>().item);
 
             Destroy(collision.gameObject);
             Debug.Log(collision.gameObject.name);
@@ -148,11 +148,11 @@ public class MovementCharacter : MonoBehaviour, IDamageable
                 GameManager.instance.Items.Add(item.Key, item.Value);
         }
 
-        // 인벤토리UI에 지금까지 얻었던 아이템 목록 추가
-        foreach(var item in acquiredItems)
-        {
-            inventoryUI.AcquireItem(item.Key, item.Value);
-        }
+        //// 인벤토리UI에 지금까지 얻었던 아이템 목록 추가
+        //foreach(var item in acquiredItems)
+        //{
+        //    inventoryUI.AcquireItem(item.Key, item.Value);
+        //}
     }
 
     // 플레이어 데미지 처리

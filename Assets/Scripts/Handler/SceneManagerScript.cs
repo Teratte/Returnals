@@ -114,7 +114,7 @@ public class SceneManagerScript : MonoBehaviour
         {
             GameManager.instance.isGameStart = false;
             GameManager.instance.isUIOn = false;
-
+            postProcessVolume.SetActive(true);
             visitedScenes.Clear();
         }
         int index = Random.Range(0, loadingSprites.Length);
@@ -123,6 +123,7 @@ public class SceneManagerScript : MonoBehaviour
         
         if(name != "BaseCamp")
         {
+            postProcessVolume.SetActive(false);
             loadingScreen.SetActive(true);
         }
 

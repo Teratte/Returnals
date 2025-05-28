@@ -56,7 +56,7 @@ public class UIBaseCamp : MonoBehaviour
         {
             inventoryActivated = true;
             InventoryObject.SetActive(true);
-            GameManager.instance.ActiveUI();
+            GameManager.instance.isUIOn = true;
         }
         else if(Input.GetKeyUp(KeyCode.Tab) && InventoryObject.activeSelf)
         {

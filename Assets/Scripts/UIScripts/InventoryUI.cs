@@ -87,7 +87,7 @@ public class InventoryUI : MonoBehaviour
             gazetCoolTime += Time.deltaTime;
             gazetCoolTimeSlider.value = gazetCoolTime / player.Gazet.Rate;
             waveCountText.text = $"웨이브 {waveManager.CurrentWave}";
-            enemyCountText.text = $"남은 적 수 : {waveManager.CurrentWaveSpawnCount}";
+            enemyCountText.text = $"{waveManager.CurrentWaveSpawnCount}";
             if (Input.GetKeyDown(KeyCode.Q) && gazetCoolTimeSlider.value >= 1 && player.Gazet.canUse)
             {
                 gazetCoolTime = 0.0f;
@@ -162,6 +162,10 @@ public class InventoryUI : MonoBehaviour
 
     private void AddResultItem()
     {
+        // 게임 오버라면 아이템 추가X
+        if (GameManager.instance.isGameOver)
+            return;
+
         foreach(Slot slot in slots)
         {
             if(slot.item != null)
