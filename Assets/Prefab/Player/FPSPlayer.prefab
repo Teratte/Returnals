@@ -457,12 +457,12 @@ MonoBehaviour:
   maxHP: 150
   playerStamina: 50
   maxStamina: 50
-  recoverRateHP: 5
-  recoverRateStamina: 5
+  recoverRateHP: 0.5
+  recoverRateStamina: 2.5
   walkSpeed: 2
-  runSpeed: 5
-  moveSpeed: 4
-  defense: 50
+  runSpeed: 4.5
+  moveSpeed: 3.5
+  defense: 30
   recoverAbleTime: 3
   OnAdrenaline: 0
   isNotAttack: 1
@@ -1793,6 +1793,9 @@ MonoBehaviour:
     root: {fileID: 2388657348215203215}
   backPack: {fileID: 4195114977640302784}
   grenadeTransform: {fileID: 2423525785670457946}
+  _weapons: []
+  _prefabComponents: []
+  gazet: {fileID: 0}
 --- !u!114 &8013084981800634017
 MonoBehaviour:
   m_ObjectHideFlags: 0

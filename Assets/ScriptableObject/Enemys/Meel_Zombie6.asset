@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: "\uBB34\uAE30 \uC880\uBE446"
   maxHealth: 100
   moveSpeed: 3
-  chaseSpeed: 4
+  chaseSpeed: 5.2
   rotationSpeed: 5
   attackRange: 1.5
   defense: 1.3
