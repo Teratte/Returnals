@@ -48,7 +48,6 @@ public class InventoryUI : MonoBehaviour
         player = FindAnyObjectByType<FPSPlayer>();
         InventoryObject.SetActive(false);
         status.onHPEvent.AddListener(UpdateHPHUD);
-        //EnemyFSM.OnKilled.AddListener(PlusKillCount);
     }
 
     private void Start()
