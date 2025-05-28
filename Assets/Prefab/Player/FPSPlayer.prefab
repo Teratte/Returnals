@@ -464,6 +464,7 @@ MonoBehaviour:
   moveSpeed: 4
   defense: 50
   recoverAbleTime: 3
+  unionPercent: 1.05
   OnAdrenaline: 0
   isNotAttack: 1
 --- !u!114 &6874889205618226757
@@ -1793,6 +1794,9 @@ MonoBehaviour:
     root: {fileID: 2388657348215203215}
   backPack: {fileID: 4195114977640302784}
   grenadeTransform: {fileID: 2423525785670457946}
+  _weapons: []
+  _prefabComponents: []
+  gazet: {fileID: 0}
 --- !u!114 &8013084981800634017
 MonoBehaviour:
   m_ObjectHideFlags: 0
