@@ -12,9 +12,13 @@ public class WaveManager : MonoBehaviour
     private int currentWaveSpawnCount = 0;
     private int spawnCount = 0;
 
+    public int CurrentWave => currentWave;
+    public int CurrentWaveSpawnCount => currentWaveSpawnCount;
+
     void Start()
     {
         StartCoroutine(ManageWaves());
+        EnemyFSM.OnKilled.AddListener(DecreaseCurrentWaveSpawnCount);
     }
 
     IEnumerator ManageWaves()
@@ -37,6 +41,11 @@ public class WaveManager : MonoBehaviour
         spawner.DeactivateAllMonsters();
 
         Debug.Log("Wave 스폰 종료 (게임 타이머 종료 또는 1분 미만 남음)");
+    }
+
+    public void DecreaseCurrentWaveSpawnCount()
+    {
+        currentWaveSpawnCount--;
     }
 
     private void OnGUI()

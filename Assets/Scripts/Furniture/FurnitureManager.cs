@@ -2,14 +2,16 @@ using UnityEngine;
 
 public class FurnitureManager : MonoBehaviour
 {
-    private Furniture[] furnitures;
+    public static  FurnitureManager instance;
+
+    public GameObject[] furnitureObjects;
 
     private void Awake()
     {
-        furnitures = transform.GetComponentsInChildren<Furniture>();
-
-        foreach(var furniture in furnitures)
+        instance = this;
+        foreach(var furnitureObject in furnitureObjects)
         {
+            Furniture furniture = furnitureObject.GetComponent<Furniture>();
             if(!GameManager.instance.Furnitures.ContainsKey(furniture.FurnitureName))
                 GameManager.instance.Furnitures.Add(furniture.FurnitureName, false);
         }
@@ -19,8 +21,9 @@ public class FurnitureManager : MonoBehaviour
 
     public void ActiveFurnitures()
     {
-        foreach(var furniture in furnitures)
+        foreach(var furnitureObject in furnitureObjects)
         {
+            Furniture furniture = furnitureObject.GetComponent<Furniture>();
             if(GameManager.instance.Furnitures.ContainsKey(furniture.FurnitureName))
             {
                 furniture.SetActive(GameManager.instance.Furnitures[furniture.FurnitureName]);
