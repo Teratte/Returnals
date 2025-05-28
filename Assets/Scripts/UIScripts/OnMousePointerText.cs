@@ -22,4 +22,15 @@ public class OnMousePointerText : MonoBehaviour, IPointerEnterHandler, IPointerE
     {
         text.color = currentColor;
     }
+
+    void OnEnable()
+    {
+        text = GetComponent<TextMeshProUGUI>();
+        currentColor = text.color;
+    }
+
+    void OnDisable()
+    {
+        text.color = currentColor;
+    }
 }

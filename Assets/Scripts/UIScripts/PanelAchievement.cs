@@ -85,6 +85,9 @@ public class PanelAchievement : MonoBehaviour
         }
 
         if(percent > 2.0f)
+        {
             SceneManagerScript.Instance.LoadScene("EndingScene");
+            AudioManager.instance.PlayEndingSound();
+        }
     }
 }

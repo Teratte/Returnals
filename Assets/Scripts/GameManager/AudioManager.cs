@@ -8,13 +8,15 @@ public class AudioManager : MonoBehaviour
     private AudioSource audioSource;
 
     [SerializeField]
-    private AudioClip explosionClip;
+    private AudioClip explosionClip;// 폭발 사운드
     [SerializeField]
-    private AudioClip truckClip;
+    private AudioClip truckClip;    // 출발 사운드
     [SerializeField]
-    private AudioClip workBenchClip;
+    private AudioClip workBenchClip;// 제작대 클릭 사운드
     [SerializeField]
-    private AudioClip tentClip;
+    private AudioClip tentClip;     // 텐트 클릭 사운드
+    [SerializeField]
+    private AudioClip endingClip;   // 엔딩 라디오 사운드
 
     private void Awake()
     {
@@ -50,6 +52,11 @@ public class AudioManager : MonoBehaviour
         audioSource.PlayOneShot(workBenchClip);
     }
 
+    public void PlayEndingSound()
+    {
+        audioSource.clip = endingClip;
+        audioSource.Play();
+    }
     private IEnumerator TruckSound()
     {
         audioSource.clip = truckClip;
