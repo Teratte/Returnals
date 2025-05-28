@@ -39,6 +39,14 @@ public class InventoryUI : MonoBehaviour
     [SerializeField]
     private GameObject closingParent;       // 지금까지 획득한 아이템을 보여줄 슬롯의 부모 객체
 
+    [Header("WaveUI")]
+    [SerializeField]
+    private WaveManager waveManager;        // 웨이브 관련 정보들
+    [SerializeField]
+    private TextMeshProUGUI waveCountText;  // 웨이브 수
+    [SerializeField]
+    private TextMeshProUGUI enemyCountText;     // 남아있는 적 수
+
     public Slot[] Slots => slots;       // 획득 아이템 리스트
 
     private int _killCount = 0; // 몬스터 처치 수
@@ -48,7 +56,6 @@ public class InventoryUI : MonoBehaviour
         player = FindAnyObjectByType<FPSPlayer>();
         InventoryObject.SetActive(false);
         status.onHPEvent.AddListener(UpdateHPHUD);
-        //EnemyFSM.OnKilled.AddListener(PlusKillCount);
     }
 
     private void Start()
@@ -77,6 +84,8 @@ public class InventoryUI : MonoBehaviour
             gazetAbleCount.text = $"{player.Gazet.CurrentAbleCount}";
             gazetCoolTime += Time.deltaTime;
             gazetCoolTimeSlider.value = gazetCoolTime / player.Gazet.Rate;
+            waveCountText.text = $"웨이브 {waveManager.CurrentWave}";
+            enemyCountText.text = $"남은 적 수 : {waveManager.CurrentWaveSpawnCount}";
             if (Input.GetKeyDown(KeyCode.Q) && gazetCoolTimeSlider.value >= 1 && player.Gazet.canUse)
             {
                 gazetCoolTime = 0.0f;

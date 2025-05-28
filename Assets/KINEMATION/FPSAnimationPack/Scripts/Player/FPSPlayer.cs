@@ -306,7 +306,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Player
             if (Input.GetKeyDown(KeyCode.I)) OnInspect();
             if (Input.GetKeyDown(KeyCode.Q)) OnGazetAction();
             
-            if (Input.GetKeyDown(KeyCode.Mouse0) && _canFire) GetActiveWeapon().OnFirePressed();
+            if (Input.GetKeyDown(KeyCode.Mouse0) && _canFire && !Input.GetKey(KeyCode.LeftShift)) GetActiveWeapon().OnFirePressed();
             if (Input.GetKeyUp(KeyCode.Mouse0)) GetActiveWeapon().OnFireReleased();
 
             OnAimLegacy(Input.GetKey(KeyCode.Mouse1));

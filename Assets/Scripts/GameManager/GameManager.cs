@@ -89,6 +89,10 @@ public class GameManager : MonoBehaviour
         get => _stage;
     }
 
+    [Header("InventoryUI")]
+    [SerializeField]
+    private InventoryUI _inventoryUI;
+
     private void Awake()
     {
         // 씬에 싱글톤 오브젝트가 된 다른 GameManager 오브젝트가 있다면
@@ -121,8 +125,14 @@ public class GameManager : MonoBehaviour
             if(Timer <= 0)
             {
                 isGameOver = true;
+                // 게임 종료 패널 출력
+                _inventoryUI.ActiveClosingPanel();
                 timer = 900.0f;
             }
+        }
+        else
+        {
+            return;
         }
     }
 
@@ -131,6 +141,7 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         if (isGameStart)
         {
+            _inventoryUI = FindAnyObjectByType<InventoryUI>();
             EnemyFSM.OnKilled.AddListener(PlusKillCount);
             _stage++;
             _waveCount = 0;
@@ -143,9 +154,12 @@ public class GameManager : MonoBehaviour
             EnemyFSM.OnKilled.RemoveListener(PlusKillCount);
             RenewalBestWaveCount();
             RenewalBestKillCount();
+            Time.timeScale = 1.0f;
             mainWeapon = null;
             subWeapon = null;
             holdingGazet = null;
+            isGameStart = false;
+            //isUIOn = false;
         }
     }
 

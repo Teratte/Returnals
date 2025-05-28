@@ -464,6 +464,7 @@ MonoBehaviour:
   moveSpeed: 3.5
   defense: 30
   recoverAbleTime: 3
+  unionPercent: 1.05
   OnAdrenaline: 0
   isNotAttack: 1
 --- !u!114 &6874889205618226757

@@ -23,11 +23,7 @@ public class ReturnTruckHandler : KeyPressHandler
 
     public void ReturnToBaseCamp()
     {
-        //GameManager.instance.DeactiveUI();
         // 결과 환산창 출력
-        GameManager.instance.subWeapon = null;
-        GameManager.instance.holdingGazet = null;
-        GameManager.instance.mainWeapon = null;
         SceneManagerScript.Instance.LoadScene("BaseCamp");
         GameManager.instance.isGameStart = false;
         GameManager.instance.isUIOn = false;

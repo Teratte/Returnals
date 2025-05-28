@@ -21,8 +21,6 @@ public class DataManager : MonoBehaviour
 
     GameData gameData = new GameData();
 
-    private FurnitureManager furnitureManager;  // 가구 매니저
-
     private void Awake()
     {
         #region 싱글톤
@@ -34,7 +32,6 @@ public class DataManager : MonoBehaviour
         }
         instance = this;
         gameDataPath = Path.Combine(Application.dataPath, gameDataName + ".json");   // 파일 이름 설정
-        furnitureManager = FindAnyObjectByType<FurnitureManager>();
         Debug.Log(gameDataPath);
         DontDestroyOnLoad(gameObject);
         #endregion
@@ -81,7 +78,7 @@ public class DataManager : MonoBehaviour
         GameManager.instance.MaxAmmo = gameData.MaxAmmo;
         CheckItem();
         GameManager.instance.Furnitures = gameData.Furnitures;
-        furnitureManager.ActiveFurnitures();
+        FurnitureManager.instance.ActiveFurnitures();
         GameManager.instance.Stage = gameData._stage;
         GameManager.instance.BestKillCount = gameData._bestKillCount;
         GameManager.instance.BestWaveCount = gameData._bestWaveCount;
@@ -99,11 +96,12 @@ public class DataManager : MonoBehaviour
     public void AddWeapon()
     {
         gameData.weapons.Clear();
-        foreach(var weapon in WeaponObjectPooling.instance.ObjectPooling)
+        foreach(var weapon in WeaponObjectPooling.instance.GameObjects)
         {
-            if(weapon.gameObject.activeSelf)
+            if(weapon.activeSelf)
             {
-                gameData.weapons.Add(weapon.Name);
+                UIWeapon uiWeapon = weapon.GetComponent<UIWeapon>();
+                gameData.weapons.Add(uiWeapon.Name);
             }
         }
     }
@@ -125,6 +123,7 @@ public class DataManager : MonoBehaviour
 
     public void CheckWeapon()
     {
+        WeaponObjectPooling.instance.DeactivePooling();
         foreach(var weapon in gameData.weapons)
         {
             WeaponObjectPooling.instance.ActivePooling(weapon);
