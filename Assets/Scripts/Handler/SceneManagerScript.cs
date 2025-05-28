@@ -110,10 +110,12 @@ public class SceneManagerScript : MonoBehaviour
     public void LoadScene(string name)
     {
         PanelPause.SetActive(false);
-        if(name == "BaseCamp")
+        if (name == "BaseCamp")
         {
             GameManager.instance.isGameStart = false;
             GameManager.instance.isUIOn = false;
+
+            visitedScenes.Clear();
         }
         int index = Random.Range(0, loadingSprites.Length);
         loadingBackGround.sprite = loadingSprites[index];
