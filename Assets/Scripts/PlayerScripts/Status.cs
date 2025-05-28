@@ -105,7 +105,7 @@ public class Status : MonoBehaviour
 
     public bool DecreaseHP(float damage)
     {
-        float previousHP = PlayerHP;
+        float previousHP = playerHP;
 
         playerHP = playerHP - damage > 0 ? playerHP - damage : 0;
 

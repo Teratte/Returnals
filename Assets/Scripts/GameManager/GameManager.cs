@@ -159,7 +159,7 @@ public class GameManager : MonoBehaviour
             subWeapon = null;
             holdingGazet = null;
             isGameStart = false;
-            isUIOn = false;
+            //isUIOn = false;
         }
     }
 

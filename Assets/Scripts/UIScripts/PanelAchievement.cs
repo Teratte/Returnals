@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,6 +20,12 @@ public class PanelAchievement : MonoBehaviour
     private Achievement[] achievements;
     private float percent = 0.0f;
 
+    [Header("¿£µù¾À")]
+    [SerializeField]
+    private AnimationCurve currentEndingCurtain;
+    [SerializeField]
+    private Image endingCurtain;
+
     private void OnEnable()
     {
         achievements = AchieveParent.GetComponentsInChildren<Achievement>();
@@ -34,6 +41,8 @@ public class PanelAchievement : MonoBehaviour
 
             if(sliderProgress.value >= 1)
                 buttonEnding.SetActive(true);
+            else
+                buttonEnding.SetActive(false);
         }
     }
 
@@ -50,5 +59,32 @@ public class PanelAchievement : MonoBehaviour
         }
 
         return clearCount;
+    }
+
+    public void GoToEnding()
+    {
+        GameManager.instance.DeactiveUI();
+        endingCurtain.enabled = true;
+        StopCoroutine("OnEndingCurtain");
+        StartCoroutine("OnEndingCurtain");
+    }
+
+    private IEnumerator OnEndingCurtain()
+    {
+        float percent = 0.0f;
+
+        while(percent < 2.0f)
+        {
+            percent += Time.deltaTime;
+
+            Color color = endingCurtain.color;
+            color.a = Mathf.Lerp(0, 1, currentEndingCurtain.Evaluate(percent));  
+            endingCurtain.color = color;
+
+            yield return null;
+        }
+
+        if(percent > 2.0f)
+            SceneManagerScript.Instance.LoadScene("EndingScene");
     }
 }
