@@ -31,10 +31,10 @@ MonoBehaviour:
   selfDestructDelay: 0
   selfDestructRadius: 0
   selfDestructDamage: 0
-  detectionAngle: 360
+  detectionAngle: 220
   rearDetectionAngle: 120
   rearDetectionRange: 5
-  detectionRange: 10
+  detectionRange: 13
   idleWaitTimeMin: 3
   idleWaitTimeMax: 5
   patrolTimeMin: 3
