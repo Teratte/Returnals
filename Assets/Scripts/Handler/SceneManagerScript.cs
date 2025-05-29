@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
 using System.Collections;
+using System.IO;
 
 public class SceneManagerScript : MonoBehaviour
 {
@@ -39,21 +40,31 @@ public class SceneManagerScript : MonoBehaviour
 
     private WaitForSeconds waitChangeDelay;// 씬 변경 지연 시간
 
+    [Header("SaveSlots")]
+    [SerializeField]
+    private Transform saveSlotsParent;  // 데이터 저장 슬롯들의 부모 오브젝트
+    private bool _isSavePanel = false;  // 현재 슬롯은 데이터 저장 패널인가
+    private bool _isLoadPanel = false;  // 현재 슬롯은 데이터 로드 패널인가
+    private SaveSlot[] slots;           // 데이터 저장 슬롯들
+
+    public bool IsSavePanel => _isSavePanel;
+    public bool IsLoadPanel => _isLoadPanel;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
+            return;
         }
-        else
-        {
-            blurVolume.SetActive(true);
-            postProcessVolume.SetActive(false);
-            PanelTitle.SetActive(true);
-            Instance = this;
-            waitChangeDelay = new WaitForSeconds(0.5f);
-            DontDestroyOnLoad(gameObject);
-        }
+        Instance = this;
+        blurVolume.SetActive(true);
+        postProcessVolume.SetActive(false);
+        PanelTitle.SetActive(true);
+        Instance = this;
+        waitChangeDelay = new WaitForSeconds(0.5f);
+        slots = saveSlotsParent.GetComponentsInChildren<SaveSlot>();
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
@@ -112,6 +123,8 @@ public class SceneManagerScript : MonoBehaviour
         PanelPause.SetActive(false);
         if (name == "BaseCamp")
         {
+            if (GameManager.instance.isGameOver)
+                GameManager.instance.Stage = 0;
             GameManager.instance.isGameStart = false;
             GameManager.instance.isUIOn = false;
             postProcessVolume.SetActive(true);
@@ -166,19 +179,83 @@ public class SceneManagerScript : MonoBehaviour
         PanelTitle.SetActive(true);
     }
 
-    public void ShowSavePanel()
+    // 저장하기 위한 패널 활성화
+    public void ShowSaveDataSlot()
     {
+        _isSavePanel = true;
+        _isLoadPanel = false;
         PanelSave.SetActive(true);
+        PanelPause.SetActive(false);
+        ReadAllSavedFile();
+    }
+
+
+    // 데이터 불러오기를 위한 패널 활성화
+    public void ShowLoadDataSlot()
+    {
+        _isSavePanel = false;
+        _isLoadPanel = true;
         PanelTitle.SetActive(false);
+        PanelSave.SetActive(true);
+        ReadAllSavedFile();
+    }
+
+    public void DeactiveSaveDataSlot()
+    {
+        if(_isSavePanel)
+        {
+            PanelSave.SetActive(false);
+            PanelPause.SetActive(true);
+        }
+        else if(_isLoadPanel)
+        {
+            PanelSave.SetActive(false);
+            PanelTitle.SetActive(true);
+        }
     }
 
     public void LoadData()
     {
-        DataManager.instance.LoadData();
         GameManager.instance.isUIOn = false;
         blurVolume.SetActive(false);
         postProcessVolume.SetActive(true);
         PanelSave.SetActive(false);
+    }
+
+    public void ReadAllSavedFile()
+    {
+        string targetPath = Application.dataPath;
+
+        string[] files = Directory.GetFiles(targetPath, "*.json");
+
+        for(int i = 0;i < files.Length; i++)
+        {
+            files[i] = Path.GetFileNameWithoutExtension(files[i]);
+        }
+
+        for(int i = 0, j = 0;i < slots.Length && j < files.Length; i++, j++)
+        {
+            slots[i].FileName = files[j];
+            slots[i].UpdateSlotName();
+        }
+    }
+
+    public void DeleteAllData()
+    {
+        string targetPath = Application.dataPath;
+        string[] files = Directory.GetFiles(targetPath, "*.json");
+
+        foreach(string file in files)
+        {
+            File.Delete(file);
+            Debug.Log("파일 삭제됨.");
+        }
+
+        foreach(SaveSlot slot in slots)
+        {
+            slot.FileName = "Empty";
+            slot.UpdateSlotName();
+        }
     }
 
     public void ExitGame()

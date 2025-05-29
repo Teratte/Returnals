@@ -46,13 +46,14 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
 
         public override void OnReload()
         {
-            if (_activeAmmo == weaponSettings.ammo) return;
+            if (_activeAmmo == weaponSettings.ammo || _isReloading) return;
             
             var reloadHash = _activeAmmo == 0 ? RELOAD_EMPTY : _activeAmmo > gunTape.Count ? RELOAD_TAC : RELOAD_TAPE;
             characterAnimator.Play(reloadHash, -1, 0f);
             weaponAnimator.Play(reloadHash, -1, 0f);
 
-            float delay = _activeAmmo > gunTape.Count ? tacReloadDelay : tapeResetTime;
+            //float delay = _activeAmmo > gunTape.Count ? tacReloadDelay : tapeResetTime;
+            float delay = tacReloadDelay;
             Invoke(nameof(ResetActiveAmmo), delay * weaponSettings.ammoResetTimeScale);
             _isReloading = true;
         }

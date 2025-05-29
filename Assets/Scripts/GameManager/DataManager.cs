@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class DataManager : MonoBehaviour
 {
-    public static DataManager instance;
+    public static DataManager instance { get; private set; }
     private string gameDataPath; // 파일 경로
 
     [SerializeField]
@@ -37,15 +37,21 @@ public class DataManager : MonoBehaviour
         #endregion
     }
 
-    public void SaveData()
+    // 데이터 저장
+    public string SaveData()
     {
         SaveGameData();
         string data = JsonConvert.SerializeObject(gameData);
+        string fileName = System.DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+        gameDataPath = Path.Combine(Application.dataPath, fileName + ".json");
         File.WriteAllText(gameDataPath, data);
+
+        return fileName;
     }
 
-    public void LoadData()
+    public void LoadData(string fileName)
     {
+        gameDataPath = Path.Combine(Application.dataPath, fileName + ".json");  // 파일 이름 추적
         if (File.Exists(gameDataPath))
         {
             string jsonData = File.ReadAllText(gameDataPath);
@@ -84,6 +90,20 @@ public class DataManager : MonoBehaviour
         GameManager.instance.BestWaveCount = gameData._bestWaveCount;
     }
 
+    public void DeleteData(string fileName)
+    {
+        string path = Path.Combine(Application.dataPath, fileName + ".json");
+
+        if(File.Exists(path))
+        {
+            File.Delete(path);
+            Debug.Log("파일 삭제 완료");
+        }
+        else
+        {
+            Debug.Log("해당 파일이 없으므로 삭제 불가");
+        }
+    }
     public void AddItem()
     {
         gameData.Items.Clear();

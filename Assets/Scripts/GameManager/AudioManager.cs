@@ -57,6 +57,12 @@ public class AudioManager : MonoBehaviour
         audioSource.clip = endingClip;
         audioSource.Play();
     }
+
+    public void StopAudioSource()
+    {
+        audioSource.Stop();
+    }
+
     private IEnumerator TruckSound()
     {
         audioSource.clip = truckClip;

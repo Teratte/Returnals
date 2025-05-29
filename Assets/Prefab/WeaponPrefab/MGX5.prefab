@@ -66,6 +66,7 @@ MonoBehaviour:
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 0}
     scale: {x: 0, y: 0, z: 0}
+  _isRevolver: 1
   gunTape:
   - {fileID: 5300023777197045081}
   - {fileID: 1149738122570079547}
