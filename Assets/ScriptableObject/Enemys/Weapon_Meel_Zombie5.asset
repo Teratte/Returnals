@@ -31,7 +31,7 @@ MonoBehaviour:
   selfDestructDelay: 0
   selfDestructRadius: 0
   selfDestructDamage: 0
-  detectionAngle: 180
+  detectionAngle: 360
   rearDetectionAngle: 120
   rearDetectionRange: 5
   detectionRange: 10

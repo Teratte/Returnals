@@ -13,8 +13,6 @@ public class DialogSystem : MonoBehaviour
     private bool isFirst = true; // 최초 1회만 호출
     [SerializeField]
     private bool isAutoStart = true; // 자동 시작 여부
-    [SerializeField]
-    private GameObject arrow;        // 화살표 오브젝트
 
     private int currentDialogIndex = -1; // 현재 대사 순번
     private float typingSpeed = 0.1f;   // 텍스트 타이핑 효과의 재생 속도
@@ -53,7 +51,7 @@ public class DialogSystem : MonoBehaviour
                 StopCoroutine("OnTypingText");
                 speakText.text = dialogs[currentDialogIndex];
                 // 대사가 완료되었을 때 출력되는 커서 활성화
-                arrow.SetActive(true);
+                //arrow.SetActive(true);
 
                 return false;
             }
@@ -66,7 +64,7 @@ public class DialogSystem : MonoBehaviour
             else
             {
                 // 엔딩
-                arrow.SetActive(false);
+                //arrow.SetActive(false);
                 speakText.text = "The End";
                 StartCoroutine("OnBaseCamp");
                 return true;
@@ -79,16 +77,7 @@ public class DialogSystem : MonoBehaviour
     public void SetNextDialog()
     {
         currentDialogIndex++;
-
-        SetActive();
-        // 현재 텍스트 설정
-        //speakText.text = dialogs[currentDialogIndex];
         StartCoroutine("OnTypingText");
-    }
-    
-    public void SetActive()
-    {
-        arrow.SetActive(false);
     }
 
     private IEnumerator OnTypingText()
@@ -108,15 +97,13 @@ public class DialogSystem : MonoBehaviour
         }
 
         isTypingEffect = false;
-
-        // 대사가 완료되었을 때 출력되는 커서 활성화
-        arrow.SetActive(true);
     }
 
     private IEnumerator OnBaseCamp()
     {
         yield return new WaitForSeconds(3.0f);
 
+        AudioManager.instance.StopAudioSource();
         SceneManagerScript.Instance.GoToTitle();
     }
 }
