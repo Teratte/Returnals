@@ -42,5 +42,9 @@ MonoBehaviour:
   zombieSound: {fileID: 0}
   attackSound: {fileID: 0}
   dieSound: {fileID: 0}
-  itemList: []
-  DropPercent: 0
+  itemList:
+  - {fileID: 11400000, guid: 45c650bd4aa72b2429c79c5d0012a40b, type: 2}
+  - {fileID: 11400000, guid: 6f4c8952190b4d74096846f9e3ee8adf, type: 2}
+  - {fileID: 11400000, guid: 55c0ed34d899af74babba8dc45eb92ad, type: 2}
+  - {fileID: 11400000, guid: fdafd319e7a4d0948a9cf0c08039c404, type: 2}
+  DropPercent: 50
