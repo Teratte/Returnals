@@ -2912,7 +2912,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4578779289340146699}
   - component: {fileID: 890437160142026058}
-  - component: {fileID: 5098807012515087753}
   - component: {fileID: 3013481621251408863}
   - component: {fileID: 2260971304876560318}
   - component: {fileID: 802721546467223934}
@@ -2977,42 +2976,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!205 &5098807012515087753
-LODGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7840433678593859463}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: -0.000195086, y: 0.8690252, z: -0.020020053}
-  m_Size: 1.9731361
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
-  m_LastLODIsBillboard: 0
-  m_LODs:
-  - screenRelativeHeight: 0.6
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 1507392945629157657}
-    - renderer: {fileID: 8989980380232863403}
-    - renderer: {fileID: 4633079201493456796}
-    - renderer: {fileID: 5921687791622649054}
-  - screenRelativeHeight: 0.3
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 8854222929251828722}
-    - renderer: {fileID: 4306283945920065459}
-    - renderer: {fileID: 7840394868722394677}
-    - renderer: {fileID: 7379547420591610589}
-  - screenRelativeHeight: 0.1
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 638256921242828613}
-    - renderer: {fileID: 7678851778362329914}
-    - renderer: {fileID: 7087441310249335921}
-    - renderer: {fileID: 2431312776171976345}
-  m_Enabled: 1
 --- !u!54 &3013481621251408863
 Rigidbody:
   m_ObjectHideFlags: 0

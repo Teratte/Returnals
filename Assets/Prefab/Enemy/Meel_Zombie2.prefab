@@ -2258,7 +2258,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2892915312003099428}
   - component: {fileID: 916992486602565904}
-  - component: {fileID: 7249892158109527997}
   - component: {fileID: 6523258228579818469}
   - component: {fileID: 1652490325515073941}
   - component: {fileID: 9176646773254416483}
@@ -2332,51 +2331,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!205 &7249892158109527997
-LODGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4022663905808563727}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: 0.0000019073486, y: 0.7912758, z: 0.06952107}
-  m_Size: 1.9269556
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
-  m_LastLODIsBillboard: 0
-  m_LODs:
-  - screenRelativeHeight: 0.6
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 484422011471893772}
-    - renderer: {fileID: 3718409767091961022}
-    - renderer: {fileID: 7380279642788589186}
-    - renderer: {fileID: 4455999780648321075}
-    - renderer: {fileID: 1276786505868168106}
-    - renderer: {fileID: 7302649561748296273}
-    - renderer: {fileID: 234389621800102970}
-  - screenRelativeHeight: 0.3
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 5897073624232044658}
-    - renderer: {fileID: 6246396888680187814}
-    - renderer: {fileID: 8967459716023084396}
-    - renderer: {fileID: 4483788958868371421}
-    - renderer: {fileID: 5412290037383720505}
-    - renderer: {fileID: 5125761808256489028}
-    - renderer: {fileID: 744521683512418674}
-  - screenRelativeHeight: 0.1
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 6296230472502670463}
-    - renderer: {fileID: 6482863807781167140}
-    - renderer: {fileID: 7836593348662508200}
-    - renderer: {fileID: 3582491940342242782}
-    - renderer: {fileID: 7722100592475476159}
-    - renderer: {fileID: 7854585052845804959}
-    - renderer: {fileID: 8554403752950445899}
-  m_Enabled: 1
 --- !u!54 &6523258228579818469
 Rigidbody:
   m_ObjectHideFlags: 0
