@@ -51,8 +51,8 @@ MonoBehaviour:
   weaponIcon: {fileID: 21300000, guid: 8919affa83c9da141bf2f65b6d2b62bb, type: 3}
   fireTransform: {fileID: 3790023387587251567}
   shotEffect: {fileID: 11400000, guid: 7e8621033e9924b4b92fcf1bfc385ff9, type: 2}
-  damage: 8
-  bulletsPerShot: 8
+  damage: 25
+  bulletsPerShot: 10
   inaccuracyDitance: 6
   weaponSettings: {fileID: 11400000, guid: c30b40f589bcef34ba3253dcb9ede8c4, type: 2}
   aimPoint: {fileID: 7573577964910029030}
@@ -65,6 +65,7 @@ MonoBehaviour:
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 0}
     scale: {x: 0, y: 0, z: 0}
+  _isRevolver: 0
 --- !u!1 &2622391798868847543
 GameObject:
   m_ObjectHideFlags: 0
