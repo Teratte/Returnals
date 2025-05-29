@@ -57,7 +57,7 @@ public class Slot : MonoBehaviour
     }
 
     // ΩΩ∑‘ √ ±‚»≠
-    private void ClearSlot()
+    public void ClearSlot()
     {
         item = null;
         itemCount = 0;

@@ -9,7 +9,7 @@ namespace KINEMATION.FPSAnimationPack.Scripts.Weapon
     public class FPSMachineGun : FPSWeapon
     {
         [SerializeField] private List<Transform> gunTape;
-        [SerializeField, Min(0f)] private float tapeResetTime = 0f;
+        //[SerializeField, Min(0f)] private float tapeResetTime = 0f;
         
         private static int RELOAD_TAPE = Animator.StringToHash("Reload_Extra");
         private static int GAIT = Animator.StringToHash("Gait");

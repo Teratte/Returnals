@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class UIBaseCamp : MonoBehaviour
 {
+    public static UIBaseCamp instance { get; private set; }
     public static bool inventoryActivated = false;
 
     [SerializeField]
@@ -41,6 +42,7 @@ public class UIBaseCamp : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         slots = slotsParent.GetComponentsInChildren<Slot>();
         InventoryObject.SetActive(false);
         panelDetail.SetActive(false);
@@ -122,6 +124,14 @@ public class UIBaseCamp : MonoBehaviour
                 slots[i].AddItem(_item, _count);
                 return;
             }
+        }
+    }
+
+    public void InitialSlots()
+    {
+        foreach(var slot in slots)
+        {
+            slot.ClearSlot();
         }
     }
 }

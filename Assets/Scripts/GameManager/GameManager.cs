@@ -64,12 +64,16 @@ public class GameManager : MonoBehaviour
         get => furnitures;
     }
 
+    [Header("Weapons & Gazet")]
+    public Dictionary<string, bool> Weapons = new Dictionary<string,bool>();    // 무기 딕셔너리(활성, 비활성 상태로 보유)
+
     public bool isUIOn = false;
     private int _stage = 0;     // 스테이지 수
     private int _waveCount = 0; // 웨이브 수
     private int _killCount = 0; // 적 처치 수
     private int _bestWaveCount = 0; // 최고 웨이브 돌파 수
     private int _bestKillCount = 0; // 한 게임에서 최고 처치 수
+    private float _playTime = 0.0f; // 총 플레이 타임
     public int WaveCount => _waveCount;
     public int KillCount => _killCount;
     public int BestWaveCount
@@ -88,6 +92,8 @@ public class GameManager : MonoBehaviour
         set => _stage = value;
         get => _stage;
     }
+
+    public float PlayTime => _playTime;
 
     [Header("InventoryUI")]
     [SerializeField]
@@ -121,11 +127,12 @@ public class GameManager : MonoBehaviour
         if (isGameStart && !isGameOver)
         {
             timer -= Time.deltaTime;
-
-            if(Timer <= 0)
+            _playTime += Time.deltaTime;
+            if (Timer <= 0)
             {
                 isGameOver = true;
                 // 게임 종료 패널 출력
+                ItemManager.Instance.ClearItem();   // 시간이 종료되어도 아이템 전부 잃기
                 _inventoryUI.ActiveClosingPanel();
                 timer = 900.0f;
             }
@@ -144,7 +151,6 @@ public class GameManager : MonoBehaviour
             _inventoryUI = FindAnyObjectByType<InventoryUI>();
             EnemyFSM.OnKilled.AddListener(PlusKillCount);
             _stage++;
-            _waveCount = 0;
             _killCount = 0;
             timer = 900.0f;
             Debug.Log("인 게임 씬 로드");
@@ -159,7 +165,8 @@ public class GameManager : MonoBehaviour
             subWeapon = null;
             holdingGazet = null;
             isGameStart = false;
-            //isUIOn = false;
+            _playTime = 0.0f;   // 플레이 타임 초기화
+            _waveCount = 0;     // 웨이브 초기화
         }
     }
 
@@ -231,7 +238,7 @@ public class GameManager : MonoBehaviour
 public class GameData
 {
     public bool isFirstStage = true;                       // 첫 스테이지 진입 여부
-    public List<string> weapons = new List<string>();
+    public Dictionary<string, bool> weapons = new Dictionary<string, bool>(); // 무기 보관 딕셔너리
     private Dictionary<string, int> maxAmmo = new Dictionary<string, int>();  // 탄알 종류별로 최대 가지고 있는 탄알 수 보관
     public Dictionary<string, int> MaxAmmo{ get => maxAmmo; set => maxAmmo = value; }
 
@@ -242,9 +249,6 @@ public class GameData
     public Dictionary<string, bool> Furnitures = new Dictionary<string, bool>();
 
     public bool isUIOn = false;
-    public int _stage = 0;     // 스테이지 수
-    public int _waveCount = 0; // 웨이브 수
-    public int _killCount = 0; // 적 처치 수
     public int _bestWaveCount = 0; // 최고 웨이브 돌파 수
     public int _bestKillCount = 0; // 한 게임에서 최고 처치 수
 }

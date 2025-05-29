@@ -11,7 +11,8 @@ public class PanelWeaponSelect : MonoBehaviour
 
     private void OnEnable()
     {
-        foreach (var weapon in WeaponObjectPooling.instance.GameObjects)
+        WeaponObjectPooling.instance.SetActiveSelf();
+        foreach (var weapon in WeaponObjectPooling.instance.weaponObjects)
         {
             UIWeapon newWeapon = weapon.GetComponent<UIWeapon>();
             if (newWeapon.WeaponType == WeaponAttribute.Support)
@@ -31,6 +32,5 @@ public class PanelWeaponSelect : MonoBehaviour
             Destroy(child.gameObject);
         foreach (Transform child in GazetParent.transform)
             Destroy(child.gameObject);
-
     }
 }

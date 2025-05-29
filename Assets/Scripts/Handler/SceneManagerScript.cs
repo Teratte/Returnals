@@ -49,6 +49,7 @@ public class SceneManagerScript : MonoBehaviour
 
     public bool IsSavePanel => _isSavePanel;
     public bool IsLoadPanel => _isLoadPanel;
+    public int VisitedSceneCount => visitedScenes.Count;
 
     private void Awake()
     {
@@ -74,6 +75,17 @@ public class SceneManagerScript : MonoBehaviour
             GameManager.instance.ActiveUI();
             PanelPause.SetActive(true);
         }
+    }
+
+    private void ResetGame()
+    {
+        GameManager.instance.Weapons.Clear();           // 무기 초기화
+        GameManager.instance.Items.Clear();             // 아이템 초기화
+        GameManager.instance.Furnitures.Clear();        // 가구 초기화
+        WeaponObjectPooling.instance.SetUp();           // 기본 무기를 제외한 다른 무기 비활성화
+        WeaponObjectPooling.instance.SetActiveSelf();   // 무기 액티브
+        UIBaseCamp.instance.InitialSlots();             // 베이스캠프 아이템 초기화
+        FurnitureManager.instance.ResetFurnitures();    // 가구 재배치
     }
 
     public void DeactivePanelPause()
@@ -123,8 +135,7 @@ public class SceneManagerScript : MonoBehaviour
         PanelPause.SetActive(false);
         if (name == "BaseCamp")
         {
-            if (GameManager.instance.isGameOver)
-                GameManager.instance.Stage = 0;
+            GameManager.instance.Stage = 0;
             GameManager.instance.isGameStart = false;
             GameManager.instance.isUIOn = false;
             postProcessVolume.SetActive(true);
@@ -162,6 +173,7 @@ public class SceneManagerScript : MonoBehaviour
 
     public void StartNewGame()
     {
+        ResetGame();
         GameManager.instance.isUIOn = false;
         blurVolume.SetActive(false);
         postProcessVolume.SetActive(true);
