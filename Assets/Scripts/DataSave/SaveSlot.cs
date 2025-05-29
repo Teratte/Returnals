@@ -21,6 +21,7 @@ public class SaveSlot : MonoBehaviour
             if (fileName == "Empty")
                 return;
             DataManager.instance.LoadData(fileName);    // 해당 슬롯에 데이터가 저장되어있으면 해당 이름의 파일 불러오기
+            WeaponObjectPooling.instance.SetActiveSelf();   // 무기 초기화
             SceneManagerScript.Instance.LoadData();     // 슬롯 비활성화 및 로드된 데이터로 게임 시작
         }
         else if(SceneManagerScript.Instance.IsSavePanel)

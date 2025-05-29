@@ -95,8 +95,13 @@ public class MovementCharacter : MonoBehaviour, IDamageable
         // 드랍되어있는 아이템 획득
         if(collision.gameObject.CompareTag("Eatable"))
         {
-            inventoryUI.AcquireItem(collision.gameObject.GetComponent<EatableObject>().item);
-            AddItem(collision.GetComponent<EatableObject>().item);
+            //AddItem(collision.GetComponent<EatableObject>().item);
+            ItemManager.Instance.AddItem(collision.GetComponent<EatableObject>().item);
+            foreach(var item in ItemManager.Instance.items)
+            {
+                inventoryUI.ClearItems();
+                inventoryUI.AcquireItem(item.Key, item.Value);
+            }
 
             Destroy(collision.gameObject);
             Debug.Log(collision.gameObject.name);
@@ -129,30 +134,18 @@ public class MovementCharacter : MonoBehaviour, IDamageable
         }
     }
 
-    private void AddItem(Item item, int count =1)
-    {
-        if (!acquiredItems.ContainsKey(item))
-            acquiredItems.Add(item, count);
-        else
-            acquiredItems[item] += count;
-    }
-
     public void ClearStage()
     {
-        // 게임매니저에 있는 아이템 목록에 추가
-        foreach(var item in acquiredItems)
+        // 게임매니저에 있는 아이템 목록에 추가(가방에 있는 아이템들을 베이스캠프에 넣는 개념)
+        foreach(var item in ItemManager.Instance.items)
         {
             if (GameManager.instance.Items.ContainsKey(item.Key))
                 GameManager.instance.Items[item.Key] += item.Value;
             else
                 GameManager.instance.Items.Add(item.Key, item.Value);
         }
-
-        //// 인벤토리UI에 지금까지 얻었던 아이템 목록 추가
-        //foreach(var item in acquiredItems)
-        //{
-        //    inventoryUI.AcquireItem(item.Key, item.Value);
-        //}
+        // 다 넣었으면 가방 비우기
+        ItemManager.Instance.ClearItem();
     }
 
     // 플레이어 데미지 처리
@@ -165,7 +158,8 @@ public class MovementCharacter : MonoBehaviour, IDamageable
 
         if(isDie)
         {
-            acquiredItems.Clear();
+            // 죽었을 때 지금까지 얻었던 아이템 잃기
+            ItemManager.Instance.ClearItem();
             GameManager.instance.isGameOver = true;
             OnDie?.Invoke();
         }

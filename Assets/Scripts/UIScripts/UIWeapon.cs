@@ -11,6 +11,8 @@ public class UIWeapon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
 
     private UIBaseCamp uiBaseCamp;
 
+    public bool isBaseWeapon = false;   // 기본으로 제공되는 무기인가
+
     public Sprite Icon => weaponData.icon;
     public string Name => weaponData.name;
     public string Details => weaponData.details;
@@ -36,7 +38,6 @@ public class UIWeapon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
         if(Icon != null)
         {
             uiBaseCamp.AddWeapon(this);
-            //Destroy(gameObject);
         }
     }
 }

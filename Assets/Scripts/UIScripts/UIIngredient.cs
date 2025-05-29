@@ -71,10 +71,12 @@ public class UIIngredient : MonoBehaviour, IPointerClickHandler
         Debug.Log("제작 성공!");
         if(!selectWeaponObject.activeSelf)
         {
-            selectWeaponObject.SetActive(true);
+            UIWeapon weapon = selectWeaponObject.GetComponent<UIWeapon>();
+            if(weapon != null)
+            {
+                WeaponObjectPooling.instance.ActiveObject(weapon.Name);
+            }
         }
-        // 제작 슬롯 삭제
-        Destroy(gameObject);
     }
 
     public void CraftAmmo()
@@ -112,8 +114,6 @@ public class UIIngredient : MonoBehaviour, IPointerClickHandler
         {
             GameManager.instance.MaxAmmo[weaponType.ToString()] += createAmmo;
         }
-        // 버튼 슬롯 삭제
-        Destroy(gameObject);
     }
 
     public void CraftFurniture()
@@ -155,7 +155,5 @@ public class UIIngredient : MonoBehaviour, IPointerClickHandler
         {
             GameManager.instance.Furnitures[furniture.FurnitureName] = true;
         }
-        // 제작 슬롯 삭제
-        Destroy(gameObject);
     }
 }

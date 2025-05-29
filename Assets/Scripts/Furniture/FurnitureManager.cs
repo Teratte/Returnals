@@ -9,10 +9,22 @@ public class FurnitureManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        foreach(var furnitureObject in furnitureObjects)
+        foreach (var furnitureObject in furnitureObjects)
         {
             Furniture furniture = furnitureObject.GetComponent<Furniture>();
-            if(!GameManager.instance.Furnitures.ContainsKey(furniture.FurnitureName))
+            if (!GameManager.instance.Furnitures.ContainsKey(furniture.FurnitureName))
+                GameManager.instance.Furnitures.Add(furniture.FurnitureName, false);
+        }
+
+        ActiveFurnitures();
+    }
+
+    public void ResetFurnitures()
+    {
+        foreach (var furnitureObject in furnitureObjects)
+        {
+            Furniture furniture = furnitureObject.GetComponent<Furniture>();
+            if (!GameManager.instance.Furnitures.ContainsKey(furniture.FurnitureName))
                 GameManager.instance.Furnitures.Add(furniture.FurnitureName, false);
         }
 

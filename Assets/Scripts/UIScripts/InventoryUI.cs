@@ -58,6 +58,13 @@ public class InventoryUI : MonoBehaviour
         player = FindAnyObjectByType<FPSPlayer>();
         InventoryObject.SetActive(false);
         status.onHPEvent.AddListener(UpdateHPHUD);
+
+        // 가방에 있는 아이템들 인벤토리에 보이게
+        foreach (var item in ItemManager.Instance.items)
+        {
+            ClearItems();
+            AcquireItem(item.Key, item.Value);
+        }
     }
 
     private void Start()
@@ -122,6 +129,14 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
+    public void ClearItems()
+    {
+        foreach(Slot slot in slots)
+        {
+            slot.ClearSlot();
+        }
+    }
+
     private void UpdateHPHUD(float previous, float current)
     {   
         if(previous - current > 0)
@@ -150,11 +165,14 @@ public class InventoryUI : MonoBehaviour
     private int ItemCount()
     {
         int result = 0;
-        foreach(Slot slot in slots)
+        if(!GameManager.instance.isGameOver)
         {
-            if(slot.item != null)
+            foreach (Slot slot in slots)
             {
-                result += slot.itemCount;
+                if (slot.item != null)
+                {
+                    result += slot.itemCount;
+                }
             }
         }
         return result;
@@ -177,7 +195,7 @@ public class InventoryUI : MonoBehaviour
 
     private void Closing()
     {
-        float playingTime = 900 - GameManager.instance.Timer;
+        float playingTime = GameManager.instance.PlayTime;
         closingText.text = $"플레이 시간 : {(int)playingTime / 60}:{(int)playingTime % 60}\n" +
             $"도달한 스테이지 : {GameManager.instance.Stage}\n" +
             $"처치한 적 : {GameManager.instance.KillCount} \n" +
@@ -198,6 +216,18 @@ public class InventoryUI : MonoBehaviour
     private void PlusKillCount()
     {
         _killCount++;
+    }
+
+    public void OnNextStage()
+    {
+        if(SceneManagerScript.Instance.VisitedSceneCount >= SceneManagerScript.Instance.availableScenes.Count)
+        {
+            ActiveClosingPanel();
+            return;
+        }
+        SceneManagerScript.Instance.LoadRandomScene();
+        AudioManager.instance.PlayTruckSound();
+        GameManager.instance.DeactiveUI();
     }
 
     private void OnEnable()

@@ -13,7 +13,7 @@ public class AchievementWeapon : Achievement
     private int CountWeapon()
     {
         int count = 0;
-        foreach(var weapon in WeaponObjectPooling.instance.GameObjects)
+        foreach(var weapon in WeaponObjectPooling.instance.weaponObjects)
         {
             UIWeapon newWeapon = weapon.GetComponent<UIWeapon>();
             if (weapon.activeSelf && newWeapon != null)

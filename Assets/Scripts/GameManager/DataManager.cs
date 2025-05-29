@@ -15,10 +15,6 @@ public class DataManager : MonoBehaviour
     [SerializeField]
     private Item[] items;
 
-    [Header("UI BaseCamp")]
-    [SerializeField]
-    private UIBaseCamp uiBaseCamp;
-
     GameData gameData = new GameData();
 
     private void Awake()
@@ -67,25 +63,23 @@ public class DataManager : MonoBehaviour
 
     public void SaveGameData()
     {
-        AddWeapon();
+        gameData.weapons = GameManager.instance.Weapons;
         gameData.isFirstStage = GameManager.instance.isFirstStage;
         gameData.MaxAmmo = GameManager.instance.MaxAmmo;
         AddItem();
         gameData.Furnitures = GameManager.instance.Furnitures;
-        gameData._stage = GameManager.instance.Stage;
         gameData._bestWaveCount = GameManager.instance.BestWaveCount;
         gameData._bestKillCount = GameManager.instance.BestKillCount;
     }
 
     public void LoadGameData()
     {
-        CheckWeapon();
+        GameManager.instance.Weapons = gameData.weapons;
         GameManager.instance.isFirstStage = gameData.isFirstStage;
         GameManager.instance.MaxAmmo = gameData.MaxAmmo;
         CheckItem();
         GameManager.instance.Furnitures = gameData.Furnitures;
         FurnitureManager.instance.ActiveFurnitures();
-        GameManager.instance.Stage = gameData._stage;
         GameManager.instance.BestKillCount = gameData._bestKillCount;
         GameManager.instance.BestWaveCount = gameData._bestWaveCount;
     }
@@ -113,21 +107,9 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    public void AddWeapon()
-    {
-        gameData.weapons.Clear();
-        foreach(var weapon in WeaponObjectPooling.instance.GameObjects)
-        {
-            if(weapon.activeSelf)
-            {
-                UIWeapon uiWeapon = weapon.GetComponent<UIWeapon>();
-                gameData.weapons.Add(uiWeapon.Name);
-            }
-        }
-    }
-
     public void CheckItem()
     {
+        GameManager.instance.Items.Clear();
         foreach(var item in items)
         {
             if(gameData.Items.ContainsKey(item.itemName))
@@ -137,16 +119,10 @@ public class DataManager : MonoBehaviour
             }
         }
 
+        // 베이스캠프에 남아있던 아이템 목록들 초기화
+        UIBaseCamp.instance.InitialSlots();
+        // 게임 매니저에 들어있는 아이템으로 채우기
         foreach (var item in GameManager.instance.Items)
-            uiBaseCamp.AcquireItem(item.Key, item.Value);
-    }
-
-    public void CheckWeapon()
-    {
-        WeaponObjectPooling.instance.DeactivePooling();
-        foreach(var weapon in gameData.weapons)
-        {
-            WeaponObjectPooling.instance.ActivePooling(weapon);
-        }
+            UIBaseCamp.instance.AcquireItem(item.Key, item.Value);
     }
 }
