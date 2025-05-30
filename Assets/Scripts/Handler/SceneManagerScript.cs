@@ -86,6 +86,9 @@ public class SceneManagerScript : MonoBehaviour
         WeaponObjectPooling.instance.SetActiveSelf();   // 무기 액티브
         UIBaseCamp.instance.InitialSlots();             // 베이스캠프 아이템 초기화
         FurnitureManager.instance.ResetFurnitures();    // 가구 재배치
+        GameManager.instance.BestKillCount = 0;         // 최고 킬 수 초기화
+        GameManager.instance.BestWaveCount = 0;         // 최고 웨이브 수 초기화
+        GameManager.instance.BestItemCount = 0;         // 최고 아이템 획득 수 초기화
     }
 
     public void DeactivePanelPause()

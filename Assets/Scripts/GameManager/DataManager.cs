@@ -70,6 +70,7 @@ public class DataManager : MonoBehaviour
         gameData.Furnitures = GameManager.instance.Furnitures;
         gameData._bestWaveCount = GameManager.instance.BestWaveCount;
         gameData._bestKillCount = GameManager.instance.BestKillCount;
+        gameData._bestItemCount = GameManager.instance.BestItemCount;
     }
 
     public void LoadGameData()
@@ -82,6 +83,7 @@ public class DataManager : MonoBehaviour
         FurnitureManager.instance.ActiveFurnitures();
         GameManager.instance.BestKillCount = gameData._bestKillCount;
         GameManager.instance.BestWaveCount = gameData._bestWaveCount;
+        GameManager.instance.BestItemCount = gameData._bestItemCount;
     }
 
     public void DeleteData(string fileName)
