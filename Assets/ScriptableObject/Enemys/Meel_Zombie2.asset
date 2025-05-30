@@ -42,9 +42,18 @@ MonoBehaviour:
   zombieSound: {fileID: 0}
   attackSound: {fileID: 0}
   dieSound: {fileID: 0}
-  itemList:
+  monsterItemList:
   - {fileID: 11400000, guid: 45c650bd4aa72b2429c79c5d0012a40b, type: 2}
-  - {fileID: 11400000, guid: 6f4c8952190b4d74096846f9e3ee8adf, type: 2}
-  - {fileID: 11400000, guid: 55c0ed34d899af74babba8dc45eb92ad, type: 2}
   - {fileID: 11400000, guid: fdafd319e7a4d0948a9cf0c08039c404, type: 2}
+  - {fileID: 11400000, guid: 55c0ed34d899af74babba8dc45eb92ad, type: 2}
+  ItemList:
+  - {fileID: 11400000, guid: 26116470bbce97849815c367669f30fd, type: 2}
+  - {fileID: 11400000, guid: 0201509f17a7c7c4b887bc62ed8a2deb, type: 2}
+  - {fileID: 11400000, guid: aae455a04e5786940bc1fcf1f4c33c09, type: 2}
+  - {fileID: 11400000, guid: a3fc3e2159412c84b9ddb8b0b9d622ac, type: 2}
+  - {fileID: 11400000, guid: 478d7314f4520b349ae86719520ad13b, type: 2}
+  - {fileID: 11400000, guid: dc118ca82c72c734694f7a419fb23c3e, type: 2}
+  - {fileID: 11400000, guid: 45c550ae11cd28b43ac65ab75e57afa2, type: 2}
+  - {fileID: 11400000, guid: e1163b7e622effb41ab748abc009b12e, type: 2}
+  - {fileID: 11400000, guid: 3ad089d1954ddc143b7311bd71592516, type: 2}
   DropPercent: 50

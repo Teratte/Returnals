@@ -2,19 +2,17 @@ using UnityEngine;
 
 public class HealingPack : GazetBase
 {
-    //private Status status;
-
     private void Awake()
     {
         base.SetUp();
-        //status = FindAnyObjectByType<Status>();
     }
 
     private void Update()
     {
         if(Status.Instance.PlayerHP < Status.Instance.MaxHP)
             canUse = true;
-        else
+        // 풀피이면서 쿨타임이 찼을 경우,
+        else if (Status.Instance.PlayerHP >= Status.Instance.MaxHP && Time.time >= lastUseTime + Rate)
             canUse = false;
     }
 

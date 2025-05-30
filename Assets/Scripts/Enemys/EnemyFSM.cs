@@ -406,11 +406,19 @@ public class EnemyFSM : MonoBehaviour, IDamageable
 
     private void DropItem()
     {
+        // 몬스터 고유 아이템 드랍
         float percent = Random.Range(0, 100);
         if (percent >= 100 - enemyData.DropPercent)
         {
-            int itemIndex = Random.Range(0, enemyData.itemList.Count);
-            Instantiate(enemyData.itemList[itemIndex].itemPrefab, transform.position, Quaternion.identity);
+            int itemIndex = Random.Range(0, enemyData.monsterItemList.Count);
+            Instantiate(enemyData.monsterItemList[itemIndex].itemPrefab, transform.position, Quaternion.identity);
+        }
+        // 일반 아이템 드랍
+        percent = Random.Range(0, 100);
+        if (percent >= 100 - enemyData.DropPercent)
+        {
+            int itemIndex = Random.Range(0, enemyData.ItemList.Count);
+            Instantiate(enemyData.ItemList[itemIndex].itemPrefab, transform.position, Quaternion.identity);
         }
     }
 

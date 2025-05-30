@@ -57,6 +57,7 @@ public class EnemyData : ScriptableObject
     */
 
     [Header("드랍 아이템 리스트")][Tooltip("몬스터 아이템 드랍")]
-    public List<Item> itemList; // 드롭할 아이템 리스트
+    public List<Item> monsterItemList; // 드롭할 몬스터 아이템 리스트
+    public List<Item> ItemList;        // 드롭할 일반 아이템 리스트
     public float DropPercent;      // 드롭 확률
 }
