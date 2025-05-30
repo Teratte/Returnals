@@ -140,6 +140,7 @@ public class MovementCharacter : MonoBehaviour, IDamageable
                 GameManager.instance.Items[item.Key] += item.Value;
             else
                 GameManager.instance.Items.Add(item.Key, item.Value);
+            GameManager.instance.BestItemCount += item.Value;       // 현재 담은 아이템의 개수만큼 최고 아이템 개수 증가
         }
         // 다 넣었으면 가방 비우기
         ItemManager.Instance.ClearItem();

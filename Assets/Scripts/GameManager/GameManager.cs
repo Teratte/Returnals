@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
     private int _bestWaveCount = 0; // 최고 웨이브 돌파 수
     private int _bestKillCount = 0; // 한 게임에서 최고 처치 수
     private float _playTime = 0.0f; // 총 플레이 타임
+    private int _bestItemCount = 0; // 총 얻었던 아이템 개수
     public int WaveCount => _waveCount;
     public int KillCount => _killCount;
     public int BestWaveCount
@@ -85,6 +86,12 @@ public class GameManager : MonoBehaviour
     {
         set => _bestKillCount = value;
         get => _bestKillCount;
+    }
+
+    public int BestItemCount
+    {
+        set => _bestItemCount = value;
+        get => _bestItemCount;
     }
 
     public int Stage
@@ -251,4 +258,5 @@ public class GameData
     public bool isUIOn = false;
     public int _bestWaveCount = 0; // 최고 웨이브 돌파 수
     public int _bestKillCount = 0; // 한 게임에서 최고 처치 수
+    public int _bestItemCount = 0; // 최고 아이템 개수
 }
