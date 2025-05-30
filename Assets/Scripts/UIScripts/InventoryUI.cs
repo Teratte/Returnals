@@ -62,7 +62,6 @@ public class InventoryUI : MonoBehaviour
         // 가방에 있는 아이템들 인벤토리에 보이게
         foreach (var item in ItemManager.Instance.items)
         {
-            ClearItems();
             AcquireItem(item.Key, item.Value);
         }
     }

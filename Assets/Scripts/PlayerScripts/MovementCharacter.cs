@@ -97,11 +97,8 @@ public class MovementCharacter : MonoBehaviour, IDamageable
         {
             //AddItem(collision.GetComponent<EatableObject>().item);
             ItemManager.Instance.AddItem(collision.GetComponent<EatableObject>().item);
-            foreach(var item in ItemManager.Instance.items)
-            {
-                inventoryUI.ClearItems();
-                inventoryUI.AcquireItem(item.Key, item.Value);
-            }
+            // 인벤토리에도 보이게
+            inventoryUI.AcquireItem(collision.GetComponent<EatableObject>().item);
 
             Destroy(collision.gameObject);
             Debug.Log(collision.gameObject.name);

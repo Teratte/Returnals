@@ -429,9 +429,8 @@ public class EnemyFSM : MonoBehaviour, IDamageable
 
     public void EndDie()
     {
-
-        Destroy(gameObject);
         OnKilled?.Invoke();
+        Destroy(gameObject);
         DropItem();
     }
  

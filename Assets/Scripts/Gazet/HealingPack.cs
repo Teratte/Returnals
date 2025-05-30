@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class HealingPack : GazetBase
 {
-    private Status status;
+    //private Status status;
 
     private void Awake()
     {
         base.SetUp();
-        status = FindAnyObjectByType<Status>();
+        //status = FindAnyObjectByType<Status>();
     }
 
     private void Update()
     {
-        if(status.PlayerHP < status.MaxHP)
+        if(Status.Instance.PlayerHP < Status.Instance.MaxHP)
             canUse = true;
         else
             canUse = false;
@@ -21,14 +21,14 @@ public class HealingPack : GazetBase
     public override void StartGazetAction()
     {
         Debug.Log("°¡Á¬ »ç¿ë °¡´É È½¼ö: " + gazetSetting.currentAbleCount);
-        if (status != null && canUse)
+        if (Status.Instance != null && canUse)
         {
             if(isFirstTimeUse)
             {
                 UseHealingPack();
                 isFirstTimeUse=false;
             }
-            else if (Time.time >= lastUseTime + Rate && status.PlayerHP < status.MaxHP)
+            else if (Time.time >= lastUseTime + Rate && Status.Instance.PlayerHP < Status.Instance.MaxHP)
             {
                 UseHealingPack();
             }
@@ -41,8 +41,8 @@ public class HealingPack : GazetBase
         lastUseTime = Time.time;
         if (gazetSetting.currentAbleCount <= 0)
             return;
-        Damage = status.MaxHP * 0.3f;
-        status.PlayerHP += Damage;
+        Damage = Status.Instance.MaxHP * 0.3f;
+        Status.Instance.PlayerHP += Damage;
         gazetSetting.currentAbleCount--;
         Debug.Log("heal");
     }

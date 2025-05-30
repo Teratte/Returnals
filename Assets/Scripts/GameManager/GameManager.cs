@@ -151,7 +151,6 @@ public class GameManager : MonoBehaviour
             _inventoryUI = FindAnyObjectByType<InventoryUI>();
             EnemyFSM.OnKilled.AddListener(PlusKillCount);
             _stage++;
-            _killCount = 0;
             timer = 900.0f;
             Debug.Log("인 게임 씬 로드");
         }
@@ -167,6 +166,7 @@ public class GameManager : MonoBehaviour
             isGameStart = false;
             _playTime = 0.0f;   // 플레이 타임 초기화
             _waveCount = 0;     // 웨이브 초기화
+            _killCount = 0;     // 킬 카운트 0으로 초기화
         }
     }
 
@@ -226,12 +226,12 @@ public class GameManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        WaveViewer.OnWavePlus += PlusWaveCount;
+        WaveManager.OnWavePlus += PlusWaveCount;
     }
 
     private void OnDisable()
     {
-        WaveViewer.OnWavePlus -= PlusWaveCount;
+        WaveManager.OnWavePlus -= PlusWaveCount;
     }
 }
 

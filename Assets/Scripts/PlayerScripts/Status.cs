@@ -5,6 +5,8 @@ using UnityEngine;
 public class HPEvent : UnityEngine.Events.UnityEvent<float, float> { }
 public class Status : MonoBehaviour
 {
+    public static Status Instance { get; private set; }
+
     [HideInInspector]
     public HPEvent onHPEvent = new HPEvent();
 
@@ -72,6 +74,7 @@ public class Status : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
         OnUnion();
         playerHP = maxHP;
         playerStamina = maxStamina;

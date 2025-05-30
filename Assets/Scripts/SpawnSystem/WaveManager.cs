@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class WaveManager : MonoBehaviour
 {
+    public static Action OnWavePlus;
     public MonsterSpawner spawner;
     public float initialDelay = 10f;
     public float waveInterval = 60f;
@@ -31,7 +33,7 @@ public class WaveManager : MonoBehaviour
             spawnCount = Mathf.FloorToInt(firstWaveCount + Mathf.Pow(currentWave, 1.3f));
             spawner.SpawnMonsters(spawnCount);
             currentWaveSpawnCount += spawnCount;
-
+            OnWavePlus?.Invoke();   // GameManager의 웨이브 카운터 1증가
             Debug.Log($"[Wave {currentWave}] 몬스터 {spawnCount}마리 스폰됨");
 
             yield return new WaitForSeconds(waveInterval);

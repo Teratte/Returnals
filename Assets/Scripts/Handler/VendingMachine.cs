@@ -6,11 +6,8 @@ public class VendingMachine : KeyPressHandler
     [SerializeField]
     private float heal = 30.0f; // 힐량
 
-    private Status status;  // 플레이어의 스테이터스
-
     private void Awake()
     {
-        status = FindAnyObjectByType<Status>();
         textInteract = GameObject.Find("InteractionText").GetComponent<TextMeshProUGUI>();
     }
 
@@ -43,15 +40,19 @@ public class VendingMachine : KeyPressHandler
 
     public override void Interact()
     {
-        if(!isUsed)
+        if(!isUsed && Status.Instance.PlayerHP < Status.Instance.MaxHP)
         {
-            status.PlayerHP += heal;
+            Status.Instance.PlayerHP += heal;
             textInteract.text = $"플레이어의 체력 {heal}회복";
             isUsed = true;
         }
-        else
+        else if(isUsed)
         {
             textInteract.text = "이미 사용됨";
+        }
+        else if(Status.Instance.PlayerHP >= Status.Instance.MaxHP)
+        {
+            textInteract.text = "체력이 꽉 차있음.";
         }
     }
 }
