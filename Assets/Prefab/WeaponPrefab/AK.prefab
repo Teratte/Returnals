@@ -57,7 +57,7 @@ MonoBehaviour:
   inaccuracyDitance: 0
   weaponSettings: {fileID: 11400000, guid: d532f7fdf156db44eb1203f75a5bc17e, type: 2}
   aimPoint: {fileID: 6761303484154453305}
-  fireMode: 0
+  fireMode: 2
   rightHandPose:
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 0}

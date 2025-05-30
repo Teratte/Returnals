@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.IO;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 
 public class DataManager : MonoBehaviour
 {
@@ -27,7 +26,11 @@ public class DataManager : MonoBehaviour
             return;
         }
         instance = this;
+#if UNITY_EDITOR
         gameDataPath = Path.Combine(Application.dataPath, gameDataName + ".json");   // 파일 이름 설정
+#else
+        gameDataPath = Path.Combine(Application.persistentDataPath, gameDataName + ".json");   // 파일 이름 설정
+#endif
         Debug.Log(gameDataPath);
         DontDestroyOnLoad(gameObject);
         #endregion
@@ -39,7 +42,11 @@ public class DataManager : MonoBehaviour
         SaveGameData();
         string data = JsonConvert.SerializeObject(gameData);
         string fileName = System.DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+#if UNITY_EDITOR
         gameDataPath = Path.Combine(Application.dataPath, fileName + ".json");
+#else
+        gameDataPath = Path.Combine(Application.persistentDataPath, fileName + ".json");
+#endif
         File.WriteAllText(gameDataPath, data);
 
         return fileName;
@@ -47,7 +54,11 @@ public class DataManager : MonoBehaviour
 
     public void LoadData(string fileName)
     {
-        gameDataPath = Path.Combine(Application.dataPath, fileName + ".json");  // 파일 이름 추적
+#if UNITY_EDITOR
+        gameDataPath = Path.Combine(Application.dataPath, fileName + ".json");          // 파일 이름 추적
+#else
+        gameDataPath = Path.Combine(Application.persistentDataPath, fileName + ".json");
+#endif
         if (File.Exists(gameDataPath))
         {
             string jsonData = File.ReadAllText(gameDataPath);
@@ -88,9 +99,12 @@ public class DataManager : MonoBehaviour
 
     public void DeleteData(string fileName)
     {
+#if UNITY_EDITOR
         string path = Path.Combine(Application.dataPath, fileName + ".json");
-
-        if(File.Exists(path))
+#else
+        string path = Path.Combine(Application.persistentDataPath, fileName + ".json");
+#endif
+        if (File.Exists(path))
         {
             File.Delete(path);
             Debug.Log("파일 삭제 완료");

@@ -239,8 +239,11 @@ public class SceneManagerScript : MonoBehaviour
 
     public void ReadAllSavedFile()
     {
+#if UNITY_EDITOR
         string targetPath = Application.dataPath;
-
+#else
+        string targetPath = Application.persistentDataPath;
+#endif
         string[] files = Directory.GetFiles(targetPath, "*.json");
 
         for(int i = 0;i < files.Length; i++)
@@ -257,7 +260,11 @@ public class SceneManagerScript : MonoBehaviour
 
     public void DeleteAllData()
     {
+#if UNITY_EDITOR
         string targetPath = Application.dataPath;
+#else
+        string targetPath = Application.persistentDataPath;
+#endif
         string[] files = Directory.GetFiles(targetPath, "*.json");
 
         foreach(string file in files)
