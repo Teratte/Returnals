@@ -10,7 +10,7 @@ public class AchievementKillCount : Achievement
 
     private void OnEnable()
     {
-        textKillCount.text += $" (현재 누적 킬 수: {GameManager.instance.BestKillCount})";
+        textKillCount.text = $" (현재 누적 킬 수: {GameManager.instance.BestKillCount})";
     }
 
     public override bool Assignment()

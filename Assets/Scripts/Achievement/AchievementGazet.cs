@@ -10,7 +10,7 @@ public class AchievementGazet : Achievement
 
     private void OnEnable()
     {
-        textGadgetCount.text += $" (현재 보유 가젯 수 : {CountWeapon()})";
+        textGadgetCount.text = $" (현재 보유 가젯 수 : {CountWeapon()})";
     }
 
     public override bool Assignment()
