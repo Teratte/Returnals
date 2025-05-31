@@ -50,10 +50,10 @@ public class WaveManager : MonoBehaviour
         currentWaveSpawnCount--;
     }
 
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(600, 10, 300, 20), $"[Wave {currentWave}] 몬스터 {currentWaveSpawnCount}마리 스폰됨");
-        GUI.Label(new Rect(600, 30, 300, 20), $"남은 시간: {GameManager.instance.Timer:F1}초");
-        GUI.Label(new Rect(600, 50, 300, 20), $"[Wave {currentWave}] 몬스터 {spawnCount}마리 스폰됨");
-    }
+    //private void OnGUI()
+    //{
+    //    GUI.Label(new Rect(600, 10, 300, 20), $"[Wave {currentWave}] 몬스터 {currentWaveSpawnCount}마리 스폰됨");
+    //    GUI.Label(new Rect(600, 30, 300, 20), $"남은 시간: {GameManager.instance.Timer:F1}초");
+    //    GUI.Label(new Rect(600, 50, 300, 20), $"[Wave {currentWave}] 몬스터 {spawnCount}마리 스폰됨");
+    //}
 }
