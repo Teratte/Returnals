@@ -51,7 +51,7 @@ MonoBehaviour:
     maxAbleCount: 5
     currentAbleCount: 5
     rate: 30
-    damage: 80
+    damage: 800
   gazetIcon: {fileID: 21300000, guid: 21007b9a1ee3fff4abb7b450737babce, type: 3}
   canUse: 1
   throwAudio: {fileID: 8300000, guid: 961723c87966ba142b8faee5ddc23742, type: 3}

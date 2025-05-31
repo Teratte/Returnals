@@ -1,9 +1,17 @@
+using TMPro;
 using UnityEngine;
 
 public class AchievementWeapon : Achievement
 {
     [SerializeField]
     private int requiredWeaponCount = 0;
+    [SerializeField]
+    private TextMeshProUGUI textWeaponCount;
+
+    private void OnEnable()
+    {
+        textWeaponCount.text += $" (현재 보유 무기 수 : {CountWeapon()})";
+    }
 
     public override bool Assignment()
     {
