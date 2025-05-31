@@ -10,7 +10,7 @@ public class AchievementItem : Achievement
 
     private void OnEnable()
     {
-        textItemCount.text += $" (현재 누적 아이템 수 : {GameManager.instance.BestItemCount})";
+        textItemCount.text = $" (현재 누적 아이템 수 : {GameManager.instance.BestItemCount})";
     }
 
     public override bool Assignment()

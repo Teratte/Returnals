@@ -10,7 +10,7 @@ public class AchievementWeapon : Achievement
 
     private void OnEnable()
     {
-        textWeaponCount.text += $" (현재 보유 무기 수 : {CountWeapon()})";
+        textWeaponCount.text = $" (현재 보유 무기 수 : {CountWeapon()})";
     }
 
     public override bool Assignment()

@@ -10,7 +10,7 @@ public class AchievementWave : Achievement
 
     private void OnEnable()
     {
-        textWaveCount.text += $" (현재 최고 웨이브 수 : {GameManager.instance.BestWaveCount})";
+        textWaveCount.text = $" (현재 최고 웨이브 수 : {GameManager.instance.BestWaveCount})";
     }
     public override bool Assignment()
     {
