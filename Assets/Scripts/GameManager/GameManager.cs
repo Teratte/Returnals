@@ -226,10 +226,7 @@ public class GameManager : MonoBehaviour
 
     public void RenewalBestKillCount()
     {
-        if(_killCount > _bestKillCount)
-        {
-            _bestKillCount = _killCount;
-        }
+        _bestKillCount += _killCount;
     }
     private void OnEnable()
     {

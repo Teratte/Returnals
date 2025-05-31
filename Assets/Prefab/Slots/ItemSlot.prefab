@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 6e09d31dea0978e4ba90ee042921acb3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -165,11 +165,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientData:
-    ingredients: []
-    icon: {fileID: 0}
-    information: 
+    ingredients:
+    - ingredient: {fileID: 11400000, guid: 6f4c8952190b4d74096846f9e3ee8adf, type: 2}
+      count: 5
+    - ingredient: {fileID: 11400000, guid: 45c650bd4aa72b2429c79c5d0012a40b, type: 2}
+      count: 5
+    - ingredient: {fileID: 11400000, guid: 55c0ed34d899af74babba8dc45eb92ad, type: 2}
+      count: 5
+    icon: {fileID: 21300000, guid: 6e09d31dea0978e4ba90ee042921acb3, type: 3}
+    information: "\uC7AC\uC7A5\uC804\uC740 \uC624\uB798 \uAC78\uB9AC\uC9C0\uB9CC
+      \uAC15\uB825\uD55C \uD55C \uBC29\uC744 \uB178\uB9B4 \uC218 \uC788\uB2E4."
   produceTable: {fileID: 0}
   uiBaseCamp: {fileID: 0}
   selectWeaponObject: {fileID: 0}
-  weaponType: 0
+  weaponType: 5
   createAmmo: 10

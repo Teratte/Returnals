@@ -30,11 +30,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: weaponData.details
-      value: "\uBA39\uC73C\uBA74 \uAE30\uB825\uC774 \uD68C\uBCF5\uD55C\uB2E4."
+      value: "\uBD88\uBA78"
       objectReference: {fileID: 0}
     - target: {fileID: 1266273336465081563, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: weaponData.weaponStatus
-      value: "\uCCB4\uB825+10"
+      value: "\uCD5C\uB300 \uCCB4\uB825\uC758 30%\uB9CC\uD07C \uD68C\uBCF5"
       objectReference: {fileID: 0}
     - target: {fileID: 1797818868158212996, guid: 9966d7e0fc5cd014da2fab22047a7224, type: 3}
       propertyPath: m_Name
