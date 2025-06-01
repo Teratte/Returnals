@@ -171,6 +171,10 @@ public class EnemyFSM : MonoBehaviour, IDamageable
 
         if (curHealth <= 0)
         {
+            nav.isStopped = true;   // NavMeshAgent 정지
+            nav.enabled = false;    // NavMeshAgent 비활성화
+            nav.speed = 0f; // NavMeshAgent 속도 0으로 설정
+
             currentState = EnemyState.Die; // 사망 상태로 전환
         }
     }
@@ -343,14 +347,7 @@ public class EnemyFSM : MonoBehaviour, IDamageable
         {
             // 몬스터 무기 별로 콜라이더가 존재하고 있음 EnemyAttact.cs -> 플레이어에게 데미지를 처리하고, 중복 데미지 방지하는게 들어있음
             case EnemyAttackType.Melee:
-                // 근접 공격 처리
-                /*
-                [근접 공격 규칙]
-                 - 이미 공격 세부 처리는 애니메이션 이벤트에서 처리
-                 - 공격 후 만약 플레이어가 여전히 공격사거리(감지 범위, 정면 및 후면 시야각도 충족 필요) 안에 있으면 공격, 만약 이때 좀비가 바라보는 곳은 플레이어 방향으로 회전후 공격
-                 - 공격 후 플레이어가 공격 사거리 밖으로 나가고 감지 범위 이내에 있으면 Chase 상태로 전환
-                 - 공격 후 플레이어가 감지 범위 밖으로 나가면 Idle 상태로 전환 
-                */
+                // 애니메이션 이벤트에서 처리 중
                 break;
 
             case EnemyAttackType.Ranged:
@@ -426,10 +423,7 @@ public class EnemyFSM : MonoBehaviour, IDamageable
     void Die()
     {
         // currentState가 Die가 되면 더이상 다른 State로 전환되면 안됨
-        nav.speed = 0f; // NavMeshAgent 속도 0으로 설정
         gameObject.layer = 15;  // 죽은 오브젝트 레이어
-        nav.isStopped = true;   // NavMeshAgent 정지
-        nav.enabled = false;    // NavMeshAgent 비활성화
         capsuleCollider.enabled = false;    // 콜라이더 비활성화
         rigid.isKinematic = true;   // Rigidbody 비활성화
 
